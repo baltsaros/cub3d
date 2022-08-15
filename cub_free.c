@@ -17,5 +17,5 @@ void	cub_free(char *str[])
 
 void	cub_free_all(t_input *data)
 {
-	return ;
+	cub_free(data->map.raw);
 }

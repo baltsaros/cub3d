@@ -71,8 +71,8 @@ int		key_hook(int keycode, t_input *data);
 int		mouse_hook(int keycode, int x, int y, t_input *data);
 
 //	init
-int		init_map(t_input *data, char *arg);
-t_map	read_map(t_input *data, char *arg);
+int		init_map(t_input *data, char *file);
+t_map	read_map(t_input *data, char *file);
 
 //	free
 void	cub_free(char *str[]);

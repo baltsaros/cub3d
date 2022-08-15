@@ -6,76 +6,47 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/15 14:56:33 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/15 15:52:26 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// int	**init_empty_map(char **args_map, int row, int col)
-// {
-// 	int	i;
-// 	int	**map;
+char	*find_param(char **raw, char *param)
+{
+	size_t	i;
+	size_t	len;
 
-// 	i = 0;
-// 	map = (int **) malloc (row * sizeof(int *));
-// 	if (!map)
-// 		free_strarray_error_and_exit(args_map, strerror(errno));
-// 	while (i < row)
-// 	{
-// 		map[i] = (int *) malloc (col * sizeof(int));
-// 		if (!map)
-// 		{
-// 			free_all_int_array(map, row);
-// 			free_strarray_error_and_exit(args_map, strerror(errno));
-// 		}
-// 		i++;
-// 	}
-// 	return (map);
-// }
+	i = 0;
+	len = ft_strlen(param);
+	while (raw[i] && ft_strncmp(raw[i], param, len))
+		++i;
+	if (!raw[i])
+		return (NULL);
+	return (raw[i]);
+}
 
-// int	*init_line(char **tmp, int *line, int col)
-// {
-// 	int	i;
+void	check_param(t_map *map, t_input *data)
+{
+	map->no = find_param(map->raw, "NO");
+	map->so = find_param(map->raw, "SO");
+	map->we = find_param(map->raw, "WE");
+	map->ea = find_param(map->raw, "EA");
+	map->f = find_param(map->raw, "F");
+	map->c = find_param(map->raw, "C");
+	if (!map->no || !map->so || !map->we
+		|| !map->ea || !map->f || !map->c)
+		error_exit(data, "Invalid parameter(s)");
+}
 
-// 	i = 0;
-// 	while (tmp[i] && i < col)
-// 	{
-// 		line[i] = ft_atoi(tmp[i]);
-// 		i++;
-// 	}
-// 	return (line);
-// }
-
-// int	**fill_map(char **args_map, int **map, int row, int col)
-// {
-// 	int		i;
-// 	char	**tmp;
-
-// 	i = 0;
-// 	while (args_map[i] && i < row)
-// 	{
-// 		tmp = ft_split(args_map[i], ' ');
-// 		if (!tmp)
-// 		{
-// 			free_all_int_array(map, row);
-// 			free_strarray_error_and_exit(args_map, strerror(errno));
-// 		}
-// 		map[i] = init_line(tmp, map[i], col);
-// 		free_all_array(tmp);
-// 		i++;
-// 	}
-// 	return (map);
-// }
-
-t_map	read_map(t_input *data, char *arg)
+t_map	read_map(t_input *data, char *file)
 {
 	t_map	map;
 	char	*buf;
 	char	*line;
 
 	buf = cub_strdup("", data);
-	data->fd = open(arg, O_RDONLY);
+	data->fd = open(file, O_RDONLY);
 	error_check_exit(data->fd, "open", data);
 	while (19)
 	{
@@ -87,19 +58,27 @@ t_map	read_map(t_input *data, char *arg)
 	}
 	map.raw = ft_split(buf, '\n');
 	alloc_check_big(map.raw, data);
-	printf("%s\n", buf);
 	free(buf);
+	close(data->fd);
 	return (map);
 }
 
-int	init_map(t_input *data, char *arg)
+void	check_extension(t_input *data, char *file)
 {
-	data->map = read_map(data, arg);
-	// args_map = get_args_map(args);
-	// map.row = get_row(args_map);
-	// map.col = get_col(args_map);
-	// map.map = init_empty_map(args_map, map.row, map.col);
-	// map.map = fill_map(args_map, map.map, map.row, map.col);
-	// free_all_array(args_map);
+	size_t	len;
+
+	len = ft_strlen(file);
+	if (len < 5)
+		error_exit(data, "Invalid map extension");
+	if (ft_strcmp(file + len - 4, ".cub"))
+		error_exit(data, "Invalid map extension");
+}
+
+int	init_map(t_input *data, char *file)
+{
+	data->map.raw = NULL;
+	check_extension(data, file);
+	data->map = read_map(data, file);
+	check_param(&(data->map), data);
 	return (0);
 }
