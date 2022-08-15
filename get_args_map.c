@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_args_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: baltsaros <abuzdin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 11:42:07 by mthiry            #+#    #+#             */
-/*   Updated: 2022/05/16 11:18:30 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/15 11:49:00 by baltsaros        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "cub3d.h"
 
 char	*get_line_args(char	*args)
 {
@@ -19,11 +19,9 @@ char	*get_line_args(char	*args)
 	char	*line;
 
 	fd = open(args, O_RDONLY);
-	if (fd == -1)
-		print_error_and_exit(strerror(errno));
+	error_check_exit(fd, "open", NULL);
 	tmp = get_next_line(fd);
-	line = ft_strdup(tmp);
-	free(tmp);
+	line = cub_strdup(tmp, NULL);
 	while (tmp != NULL)
 	{
 		tmp = get_next_line(fd);

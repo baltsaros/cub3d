@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: baltsaros <abuzdin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/05/16 12:09:55 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/15 11:49:27 by baltsaros        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "cub3d.h"
 
 int	**init_empty_map(char **args_map, int row, int col)
 {
@@ -68,7 +68,7 @@ int	**fill_map(char **args_map, int **map, int row, int col)
 	return (map);
 }
 
-t_map	init_map(char	*args)
+t_map	init_map(char *args)
 {
 	t_map	map;
 	char	**args_map;

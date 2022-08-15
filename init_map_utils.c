@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: baltsaros <abuzdin@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 19:34:21 by mthiry            #+#    #+#             */
-/*   Updated: 2022/05/16 11:44:43 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/15 11:26:30 by baltsaros        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "cub3d.h"
 
 int	get_row(char	**args_map)
 {
