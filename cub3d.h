@@ -58,6 +58,7 @@ void	*cub_malloc(size_t n, t_input *data);
 int		ft_strcmp(char *s1, char *s2);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 char	*get_next_line(int fd, t_input *data);
+int		check_charset(char c, char *charset);
 
 //	error_messages
 int		error_check_exit(int input, char *str, t_input *data);
@@ -72,7 +73,7 @@ int		mouse_hook(int keycode, int x, int y, t_input *data);
 
 //	init
 int		init_map(t_input *data, char *file);
-t_map	read_map(t_input *data, char *file);
+t_map	read_param(t_input *data, char *file);
 
 //	free
 void	cub_free(char *str[]);

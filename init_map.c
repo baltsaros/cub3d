@@ -6,11 +6,22 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/15 16:22:36 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/15 18:07:19 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_vars(t_input *data)
+{
+	data->map.raw = NULL;
+	data->map.no = NULL;
+	data->map.so = NULL;
+	data->map.we = NULL;
+	data->map.ea = NULL;
+	data->map.f = NULL;
+	data->map.c = NULL;
+}
 
 char	*find_param(char **raw, char *param, t_input *data)
 {
@@ -25,6 +36,8 @@ char	*find_param(char **raw, char *param, t_input *data)
 		++i;
 	if (!raw[i])
 		return (NULL);
+	if (i > data->j)
+		data->j = i;
 	tmp = ft_split(raw[i], ' ');
 	alloc_check_big(tmp, data);
 	ret = cub_strdup(tmp[1], data);
@@ -32,8 +45,65 @@ char	*find_param(char **raw, char *param, t_input *data)
 	return (ret);
 }
 
+void	check_chars(char **raw, t_input *data)
+{
+	size_t	j;
+	size_t	i;
+
+	j = data->j;
+	while (raw[j])
+	{
+		i = 0;
+		while (raw[j][i])
+		{
+			if (!check_charset(raw[j][i], "10NSEW "))
+				error_exit(data, "Ivalid character on the map", 1);
+			++i;
+		}
+		++j;
+	}
+}
+
+void	check_lines(char **raw, t_input *data)
+{
+	size_t	j;
+	size_t	i;
+	int		closed;
+
+	j = data->j;
+	closed = 1;
+	while (raw[j])
+	{
+		i = 0;
+		while (raw[j][i] && raw[j][i] == ' ')
+			++i;
+		if (raw[j][i] && raw[j][i] != '1')
+			error_exit(data, "Unclosed map 1", 1);
+		while (raw[j][i])
+		{
+			if (raw[j][i] == '1')
+				closed = 1;
+			else if (raw[j][i] == '0')
+				closed = 0;
+			i++;
+		}
+		if (!closed)
+			error_exit(data, "Unclosed map", 1);
+		++j;
+	}
+}
+
+void	check_map(t_map *map, t_input *data)
+{
+	data->j++;
+	check_chars(map->raw, data);
+	check_lines(map->raw, data);
+	printf("closed\n");
+}
+
 void	check_param(t_map *map, t_input *data)
 {
+	data->j = 0;
 	map->no = find_param(map->raw, "NO", data);
 	map->so = find_param(map->raw, "SO", data);
 	map->we = find_param(map->raw, "WE", data);
@@ -43,9 +113,12 @@ void	check_param(t_map *map, t_input *data)
 	if (!map->no || !map->so || !map->we
 		|| !map->ea || !map->f || !map->c)
 		error_exit(data, "Invalid parameter(s)", 1);
+	// for (int i = 0; map->raw[i]; ++i)
+	// 	printf("raw[%d] is %s\n", i, map->raw[i]);
+	check_map(map, data);
 }
 
-t_map	read_map(t_input *data, char *file)
+t_map	read_param(t_input *data, char *file)
 {
 	t_map	map;
 	char	*buf;
@@ -53,8 +126,9 @@ t_map	read_map(t_input *data, char *file)
 
 	buf = cub_strdup("", data);
 	data->fd = open(file, O_RDONLY);
-	error_check_exit(data->fd, "open", data);
-	while (19)
+	error_check_exit(data->fd, "open: ", data);
+	data->i = 19;
+	while (data->i)
 	{
 		line = get_next_line(data->fd, data);
 		if (!line)
@@ -63,9 +137,9 @@ t_map	read_map(t_input *data, char *file)
 		free(line);
 	}
 	map.raw = ft_split(buf, '\n');
-	alloc_check_big(map.raw, data);
 	free(buf);
 	close(data->fd);
+	alloc_check_big(map.raw, data);
 	return (map);
 }
 
@@ -82,8 +156,11 @@ void	check_extension(t_input *data, char *file)
 
 int	init_map(t_input *data, char *file)
 {
+	init_vars(data);
 	check_extension(data, file);
-	data->map = read_map(data, file);
+	data->map = read_param(data, file);
 	check_param(&(data->map), data);
 	return (0);
 }
+ 
+ // gcc cub3d.c alloc_check.c cub_free.c cub_utils_1.c error_messages.c init_map.c libft.a
