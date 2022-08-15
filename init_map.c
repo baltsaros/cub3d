@@ -6,16 +6,18 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/15 15:52:26 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/15 16:22:36 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*find_param(char **raw, char *param)
+char	*find_param(char **raw, char *param, t_input *data)
 {
 	size_t	i;
 	size_t	len;
+	char	**tmp;
+	char	*ret;
 
 	i = 0;
 	len = ft_strlen(param);
@@ -23,20 +25,24 @@ char	*find_param(char **raw, char *param)
 		++i;
 	if (!raw[i])
 		return (NULL);
-	return (raw[i]);
+	tmp = ft_split(raw[i], ' ');
+	alloc_check_big(tmp, data);
+	ret = cub_strdup(tmp[1], data);
+	cub_free(tmp);
+	return (ret);
 }
 
 void	check_param(t_map *map, t_input *data)
 {
-	map->no = find_param(map->raw, "NO");
-	map->so = find_param(map->raw, "SO");
-	map->we = find_param(map->raw, "WE");
-	map->ea = find_param(map->raw, "EA");
-	map->f = find_param(map->raw, "F");
-	map->c = find_param(map->raw, "C");
+	map->no = find_param(map->raw, "NO", data);
+	map->so = find_param(map->raw, "SO", data);
+	map->we = find_param(map->raw, "WE", data);
+	map->ea = find_param(map->raw, "EA", data);
+	map->f = find_param(map->raw, "F", data);
+	map->c = find_param(map->raw, "C", data);
 	if (!map->no || !map->so || !map->we
 		|| !map->ea || !map->f || !map->c)
-		error_exit(data, "Invalid parameter(s)");
+		error_exit(data, "Invalid parameter(s)", 1);
 }
 
 t_map	read_map(t_input *data, char *file)
@@ -69,14 +75,13 @@ void	check_extension(t_input *data, char *file)
 
 	len = ft_strlen(file);
 	if (len < 5)
-		error_exit(data, "Invalid map extension");
+		error_exit(data, "Invalid map extension", 0);
 	if (ft_strcmp(file + len - 4, ".cub"))
-		error_exit(data, "Invalid map extension");
+		error_exit(data, "Invalid map extension", 0);
 }
 
 int	init_map(t_input *data, char *file)
 {
-	data->map.raw = NULL;
 	check_extension(data, file);
 	data->map = read_map(data, file);
 	check_param(&(data->map), data);

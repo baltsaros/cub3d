@@ -32,7 +32,7 @@ int	error_check_noexit(int input, char *str, t_input *data)
 	return (input);
 }
 
-void	error_exit(t_input *data, char *msg)
+void	error_exit(t_input *data, char *msg, int param)
 {
 	size_t	len;
 
@@ -40,7 +40,8 @@ void	error_exit(t_input *data, char *msg)
 	write(2, "Cub3d: ", 7);
 	write(2, msg, len);
 	write(2, "\n", 1);
-	cub_free_all(data);
+	if (param)
+		cub_free_all(data);
 	exit(EXIT_FAILURE);
 }
 

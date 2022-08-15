@@ -5,7 +5,7 @@ int	main(int argc, char *argv[])
 	t_input	data;
 
 	if (argc != 2)
-		error_exit(&data, "Ivalid amout of arguments");
+		error_exit(&data, "Ivalid amout of arguments", 0);
 	init_map(&data, argv[1]);
 	// data.mlx = mlx_init();
 	// check_mlx(data.mlx);

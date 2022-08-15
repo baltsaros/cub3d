@@ -62,7 +62,7 @@ char	*get_next_line(int fd, t_input *data);
 //	error_messages
 int		error_check_exit(int input, char *str, t_input *data);
 int		error_check_noexit(int input, char *str, t_input *data);
-void	error_exit(t_input *data, char *msg);
+void	error_exit(t_input *data, char *msg, int param);
 void	check_mlx(void *mlx);
 void	check_win(t_input *data);
 
@@ -77,5 +77,6 @@ t_map	read_map(t_input *data, char *file);
 //	free
 void	cub_free(char *str[]);
 void	cub_free_all(t_input *data);
+void	cub_free_params(t_input *data);
 
 #endif
