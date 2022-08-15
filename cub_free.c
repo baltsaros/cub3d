@@ -14,3 +14,8 @@ void	cub_free(char *str[])
 	}
 	free(str);
 }
+
+void	cub_free_all(t_input *data)
+{
+	return ;
+}

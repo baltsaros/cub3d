@@ -107,3 +107,45 @@ char	*cub_strdup(const char *s, t_input *data)
 	dest[i] = '\0';
 	return (dest);
 }
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+	int		i;
+
+	i = img ->bpp - 8;
+	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
+	while (i >= 0)
+	{
+		if (img->endian != 0)
+			*dst++ = (color >> i) & 0xFF;
+		else
+			*dst++ = (color >> (img->bpp - 8 - i)) & 0xFF;
+		i -= 8;
+	}
+}
+
+char	*get_next_line(int fd, t_input *data)
+{
+	char	buf[1];
+	char	*line;
+	ssize_t	r_bytes;
+
+	line = ft_calloc(1, sizeof(char));
+	alloc_check_small(line, data);
+	r_bytes = 1;
+	buf[0] = '\0';
+	while (r_bytes > 0 && buf[0] != '\n')
+	{
+		r_bytes = read(fd, buf, 1);
+		if (r_bytes <= 0)
+		{
+			free(line);
+			return (NULL);
+		}
+		line = cub_charjoin_free(line, buf[0], data);
+		alloc_check_small(line, data);
+	}
+	return (line);
+}
