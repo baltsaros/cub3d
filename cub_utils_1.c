@@ -78,6 +78,7 @@ void	*cub_malloc(size_t n, t_data *data)
 {
 	void	*ptr;
 
+	(void)data;
 	ptr = malloc(n);
 	if (!ptr)
 	{

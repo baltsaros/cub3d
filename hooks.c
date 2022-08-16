@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/16 11:49:53 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/16 12:02:10 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	key_hook(int keycode, t_data *data)
 {
+	(void)keycode;
+	(void)data;
 	if (keycode == 53)
 	{
 		mlx_destroy_image(data->mlx, data->img.mlx_img);
@@ -41,6 +43,10 @@ int	key_hook(int keycode, t_data *data)
 
 int	mouse_hook(int keycode, int x, int y, t_data *data)
 {
+	(void)keycode;
+	(void)x;
+	(void)y;
+	(void)data;
 	// if (keycode == 4)
 	// 	data->set.zoom *= 1.1;
 	// else if (keycode == 5)
