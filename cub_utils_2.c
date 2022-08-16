@@ -28,7 +28,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	}
 }
 
-char	*get_next_line(int fd, t_input *data)
+char	*get_next_line(int fd, t_data *data)
 {
 	char	buf[1];
 	char	*line;
@@ -71,7 +71,7 @@ int	check_charset(char c, char *charset)
 	return (0);
 }
 
-int	ft_exit(t_input *data)
+int	ft_exit(t_data *data)
 {
 	mlx_destroy_image(data->mlx, data->img.mlx_img);
 	mlx_destroy_window(data->mlx, data->win);

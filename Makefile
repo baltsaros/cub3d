@@ -16,6 +16,7 @@ LIBFT       = ./libft/libft.a
 MLX			= ./mlx/libmlx.a
 SRCS		=	cub3d.c \
 				cub_utils_1.c \
+				cub_utils_2.c \
 				cub_free.c \
 				alloc_check.c \
 				error_messages.c \
