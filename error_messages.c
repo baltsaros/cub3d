@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	error_check_exit(int input, char *str, t_input *data)
+int	error_check_exit(int input, char *str, t_data *data)
 {
 	size_t	len;
 
@@ -17,7 +17,7 @@ int	error_check_exit(int input, char *str, t_input *data)
 	return (input);
 }
 
-int	error_check_noexit(int input, char *str, t_input *data)
+int	error_check_noexit(int input, char *str, t_data *data)
 {
 	size_t	len;
 
@@ -32,7 +32,7 @@ int	error_check_noexit(int input, char *str, t_input *data)
 	return (input);
 }
 
-void	error_exit(t_input *data, char *msg, int param)
+void	error_exit(t_data *data, char *msg, int param)
 {
 	size_t	len;
 
@@ -55,7 +55,7 @@ void	check_mlx(void *mlx)
 	}
 }
 
-void	check_win(t_input *data)
+void	check_win(t_data *data)
 {
 	if (!data->win)
 	{

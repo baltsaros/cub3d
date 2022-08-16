@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-char	*cub_strjoin_free(char *rest, char *buf, t_input *data)
+char	*cub_strjoin_free(char *rest, char *buf, t_data *data)
 {
 	char	*unis;
 	size_t	i;
@@ -27,7 +27,7 @@ char	*cub_strjoin_free(char *rest, char *buf, t_input *data)
 	return (unis);
 }
 
-char	*cub_charjoin_free(char *line, char b, t_input *data)
+char	*cub_charjoin_free(char *line, char b, t_data *data)
 {
 	size_t	i;
 	char	*unis;
@@ -48,7 +48,7 @@ char	*cub_charjoin_free(char *line, char b, t_input *data)
 	return (unis);
 }
 
-char	*cub_strndup(char const *str, size_t size, t_input *data)
+char	*cub_strndup(char const *str, size_t size, t_data *data)
 {
 	char	*dest;
 	size_t	i;
@@ -74,7 +74,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-void	*cub_malloc(size_t n, t_input *data)
+void	*cub_malloc(size_t n, t_data *data)
 {
 	void	*ptr;
 
@@ -88,7 +88,7 @@ void	*cub_malloc(size_t n, t_input *data)
 	return (ptr);
 }
 
-char	*cub_strdup(const char *s, t_input *data)
+char	*cub_strdup(const char *s, t_data *data)
 {
 	char	*dest;
 	size_t	i;
@@ -126,7 +126,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	}
 }
 
-char	*get_next_line(int fd, t_input *data)
+char	*get_next_line(int fd, t_data *data)
 {
 	char	buf[1];
 	char	*line;

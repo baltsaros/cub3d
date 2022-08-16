@@ -2,7 +2,7 @@
 
 int	main(int argc, char *argv[])
 {
-	t_input	data;
+	t_data	data;
 
 	if (argc != 2)
 		error_exit(&data, "Ivalid amout of arguments", 0);

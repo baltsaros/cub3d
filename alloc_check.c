@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 09:29:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/15 14:28:20 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/16 11:52:28 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 // allocation check for ft functions from libft
-void	alloc_check_big(char **str, t_input *data)
+void	alloc_check_big(char **str, t_data *data)
 {
 	if (!str)
 	{
@@ -23,7 +23,7 @@ void	alloc_check_big(char **str, t_input *data)
 	}
 }
 
-void	alloc_check_small(void *str, t_input *data)
+void	alloc_check_small(void *str, t_data *data)
 {
 	if (!str)
 	{

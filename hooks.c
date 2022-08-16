@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/15 13:54:38 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/16 11:49:53 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	key_hook(int keycode, t_input *data)
+int	key_hook(int keycode, t_data *data)
 {
 	if (keycode == 53)
 	{
@@ -39,7 +39,7 @@ int	key_hook(int keycode, t_input *data)
 	return (0);
 }
 
-int	mouse_hook(int keycode, int x, int y, t_input *data)
+int	mouse_hook(int keycode, int x, int y, t_data *data)
 {
 	// if (keycode == 4)
 	// 	data->set.zoom *= 1.1;
