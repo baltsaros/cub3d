@@ -41,6 +41,9 @@ $(NAME):	$(OBJS)
 libft:
 			@make -C ./libft
 
+$(MLX):
+			@make -C mlx/
+
 norm:
 			@echo "$(C_PURPLE_B)Let's test the Norm!$(C_RESET)";
 			@norminette
