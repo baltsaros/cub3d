@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/16 11:04:48 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/16 12:08:53 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_vars(t_input *data)
 	data->map.ea = NULL;
 	data->map.f = NULL;
 	data->map.c = NULL;
+	data->map.map = NULL;
 }
 
 char	*find_param(char **raw, char *param, t_input *data)
@@ -50,7 +51,7 @@ void	check_chars(char **raw, t_input *data)
 	size_t	j;
 	size_t	i;
 
-	j = data->j;
+	j = 0;
 	while (raw[j])
 	{
 		i = 0;
@@ -64,26 +65,26 @@ void	check_chars(char **raw, t_input *data)
 	}
 }
 
-void	check_lines(char **raw, t_input *data)
+void	check_lines(char **map, t_input *data)
 {
 	size_t	j;
 	size_t	i;
 	int		closed;
 
-	j = data->j;
+	j = 0;
 	closed = 1;
-	while (raw[j])
+	while (map[j])
 	{
 		i = 0;
-		while (raw[j][i] && raw[j][i] == ' ')
+		while (map[j][i] && map[j][i] == ' ')
 			++i;
-		if (raw[j][i] && raw[j][i] != '1')
+		if (map[j][i] && map[j][i] != '1')
 			error_exit(data, "Unclosed map", 1);
-		while (raw[j][i])
+		while (map[j][i])
 		{
-			if (raw[j][i] == '1')
+			if (map[j][i] == '1')
 				closed = 1;
-			else if (raw[j][i] == '0')
+			else if (map[j][i] == '0')
 				closed = 0;
 			i++;
 		}
@@ -93,67 +94,106 @@ void	check_lines(char **raw, t_input *data)
 	}
 }
 
-void	check_length(char **raw, size_t i, t_input *data)
+size_t	check_length(char **map, size_t i, t_input *data)
 {
 	size_t	j;
 	size_t	len;
 
 	j = data->j;
-	while (raw[j])
+	while (map[j])
 	{
-		len = ft_strlen(raw[j]);
+		len = ft_strlen(map[j]);
 		if (i < len)
 			break ;
 		++j;
 	}
 	data->j = j;
+	return (j);
 }
 
-void	check_rows(char **raw, t_input *data)
+void	check_rows(char **map, t_input *data)
 {
 	size_t	j;
 	size_t	i;
 	int		closed;
 
-	j = data->j;
+	j = 0;
+	data->j = 0;
 	closed = 1;
 	i = 0;
-	while (raw[j])
+	while (map[j])
 	{
-		while (raw[j][i] && raw[j][i] == ' ')
+		while (map[j][i] && map[j][i] == ' ')
 			++j;
-		if (raw[j][i] && raw[j][i] != '1')
+		if (map[j][i] && map[j][i] != '1')
 			error_exit(data, "Unclosed map 2", 1);
-		while (raw[j] && raw[j][i])
+		while (map[j] && map[j][i])
 		{
-			if (raw[j][i] == '1')
+			if (map[j][i] == '1')
 				closed = 1;
-			else if (raw[j][i] == '0')
+			else if (map[j][i] == '0')
 				closed = 0;
 			j++;
 		}
 		if (!closed)
 			error_exit(data, "Unclosed map", 1);
 		++i;
-		check_length(raw, i, data);
-		j = data->j;
+		j = check_length(map, i, data);
 	}
 }
 
 void	check_map(t_map *map, t_input *data)
 {
-	data->j++;
-	check_chars(map->raw, data);
+	check_chars(map->map, data);
 	printf("checking lines\n");
-	check_lines(map->raw, data);
+	check_lines(map->map, data);
 	printf("checking rows\n");
-	check_rows(map->raw, data);
+	check_rows(map->map, data);
 	printf("closed\n");
+}
+
+size_t	find_mapsize(char **raw, int j)
+{
+	size_t	size;
+
+	size = 0;
+	while (raw[j])
+	{
+		++size;
+		++j;
+	}
+	return (size);
+}
+
+void	copy_map(char **raw, t_input *data)
+{
+	size_t	j;
+	size_t	i;
+	size_t	size;
+
+	data->j++;
+	j = data->j;
+	if (!raw[j])
+		error_exit(data, "There is no map!", 1);
+	while (raw[j] && !ft_strchr(raw[j], '1'))
+		++j;
+	if (!raw[j])
+		error_exit(data, "Invalid map!", 1);
+	i = 0;
+	size = find_mapsize(raw, j);
+	data->map.map = cub_malloc(sizeof(char*) * (size + 1), data);
+	while (raw[j + i])
+	{
+		data->map.map[i] = cub_strdup(raw[j + i], data);
+		++i;
+	}
+	data->map.map[i] = NULL;
 }
 
 void	check_param(t_map *map, t_input *data)
 {
 	data->j = 0;
+	data->map.map = NULL;
 	map->no = find_param(map->raw, "NO", data);
 	map->so = find_param(map->raw, "SO", data);
 	map->we = find_param(map->raw, "WE", data);
@@ -163,8 +203,9 @@ void	check_param(t_map *map, t_input *data)
 	if (!map->no || !map->so || !map->we
 		|| !map->ea || !map->f || !map->c)
 		error_exit(data, "Invalid parameter(s)", 1);
-	// for (int i = 0; map->raw[i]; ++i)
-	// 	printf("raw[%d] is %s\n", i, map->raw[i]);
+	copy_map(map->raw, data);
+	// for (int i = 0; map->map[i]; ++i)
+	// 	printf("map[%d] is %s\n", i, map->map[i]);
 	check_map(map, data);
 }
 

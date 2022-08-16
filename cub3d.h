@@ -31,6 +31,7 @@ typedef struct s_map
 	char	*ea;
 	char	*f;
 	char	*c;
+	char	**map;
 }	t_map;
 
 typedef struct s_input
