@@ -10,7 +10,7 @@
 # include "mlx/mlx.h"
 # include "libft/libft.h"
 
-#define WIDTH 1000
+#define WIDTH 1500
 #define HEIGHT 1000
 
 typedef struct s_img
@@ -35,12 +35,12 @@ typedef struct s_map
 
 typedef struct s_data
 {
+	void	*mlx;
+	void	*win;
 	size_t	i;
 	size_t	j;
 	char	*s_tmp;
 	int		fd;
-	void	*mlx;
-	void	*win;
 	t_img	img;
 	t_map	map;
 }	t_data;
@@ -79,5 +79,9 @@ t_map	read_param(t_data *data, char *file);
 void	cub_free(char *str[]);
 void	cub_free_all(t_data *data);
 void	cub_free_params(t_data *data);
+
+// MLX Init
+void    init_mlx_and_window(t_data *data);
+int 	launcher(t_data *data);
 
 #endif

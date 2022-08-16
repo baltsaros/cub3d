@@ -20,7 +20,8 @@ SRCS		=	cub3d.c \
 				alloc_check.c \
 				error_messages.c \
 				hooks.c \
-				init_map.c
+				init_map.c \
+				launcher.c
 
 OBJ_DIR		= objs
 OBJ_FILES	= $(SRCS:.c=.o)
