@@ -14,7 +14,7 @@
 #define HEIGHT 			1000
 
 #define SQUARE_SIZE		10
-#define FIELD_OF_VIEW 	100
+#define FIELD_OF_VIEW 	2 * atan(0.66 / 1.0) = 66
 
 typedef struct s_img
 {
