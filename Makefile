@@ -6,8 +6,14 @@ C_GREEN			=\033[0;32m
 C_GREEN_B		=\033[1;32m
 C_RESET			=\033[0m
 
-NAME		= cub3d
+GCC			= gcc
+RM			= rm -f
+RMF			= rm -rf
+CFLAGS		= -Wall -Wextra -Werror
 
+NAME		= cub3d
+LIBFT       = ./libft/libft.a
+MLX			= ./mlx/libmlx.a
 SRCS		=	cub3d.c \
 				cub_utils_1.c \
 				cub_free.c \
@@ -20,21 +26,16 @@ OBJ_DIR		= objs
 OBJ_FILES	= $(SRCS:.c=.o)
 OBJS		= $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))
 
-INCS		= -Ilibft
-
-GCC			= gcc
-RM			= rm -f
-RMF			= rm -rf
-CFLAGS		= -Wall -Wextra -Werror
+INCS		= -Ilibft -Imlx
 
 all:		libft $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 			@mkdir -p $(OBJ_DIR)
 			@printf "$(C_GREEN).$(C_RESET)";
-			@$(GCC) $(CFLAGS) -Imlx -c $< $(INCS) -o $@
+			@$(GCC) $(CFLAGS) -c $< $(INCS) -o $@
 
-$(NAME):	$(OBJS) 
+$(NAME):	$(OBJS) $(MLX)
 			@$(GCC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit ${INCS} libft/libft.a -o $(NAME)
 			@printf "\n$(C_GREEN_B)Finished!$(C_RESET)\n";
 
@@ -42,7 +43,7 @@ libft:
 			@make -C ./libft
 
 $(MLX):
-			@make -C mlx/
+			@make -C ./mlx/
 
 norm:
 			@echo "$(C_PURPLE_B)Let's test the Norm!$(C_RESET)";
@@ -54,12 +55,13 @@ clean:
 			@make -C ./libft clean
 			@$(RM) $(OBJS)
 			@$(RMF) $(OBJ_DIR)
+			@$(RM) ./mlx/*.o
 			@echo "$(C_RED_B)Cub3d o-files have been deleted!$(C_RESET)";
 
 fclean:		clean
 			@make -C ./libft fclean
 			@echo "$(C_RED_B)Deleting cub3d program...$(C_RESET)";
-			@$(RM) $(NAME)
+			@$(RM) $(NAME) $(MLX)
 			@echo "$(C_RED_B)Cub3d program has been deleted!$(C_RESET)";
 
 re:			fclean all
@@ -67,4 +69,4 @@ re:			fclean all
 val:		${NAME}
 			valgrind --leak-check=full ./$(NAME)
 
-.PHONY:		all clean fclean libft re .c.o norm brew val
+.PHONY:		all clean fclean libft re .c.o norm brew val mlx
