@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/16 16:10:39 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/16 17:05:04 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,26 @@ int	key_hook(int keycode, t_data *data)
 		data->win = NULL;
 		// cub_free_all(data);
 		exit(EXIT_SUCCESS);
+	}
+	else if (keycode == 13)
+	{
+		// w
+		data->pos_y -= 5;
+	}
+	else if (keycode == 1)
+	{
+		// s
+		data->pos_y += 5;
+	}
+	else if (keycode == 0)
+	{
+		// a
+		data->pos_x -= 5;
+	}
+	else if (keycode == 2)
+	{
+		// d
+		data->pos_x += 5;
 	}
 	// else if (keycode == 65361)
 	// 	data->set.move_x *= 1.1;

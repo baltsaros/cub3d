@@ -74,6 +74,8 @@ typedef struct s_data
 	int		fd;
 	t_img	img;
 	t_map	map;
+	int		pos_x;
+	int		pos_y;
 }	t_data;
 
 //	alloc_check
