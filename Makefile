@@ -25,6 +25,7 @@ SRCS		=	cub3d.c \
 				bresenham.c \
 				launcher.c \
 				launcher_utils.c \
+				draw_all.c \
 				init_map_utils_1.c \
 				init_map_utils_2.c
 

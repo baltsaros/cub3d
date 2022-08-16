@@ -73,6 +73,7 @@ typedef struct s_data
 	char	*s_tmp;
 	int		fd;
 	t_img	img;
+	t_img	player;
 	t_map	map;
 	int		pos_x;
 	int		pos_y;
@@ -106,6 +107,7 @@ void	check_win(t_data *data);
 //	hooks
 int		key_hook(int keycode, t_data *data);
 int		mouse_hook(int keycode, int x, int y, t_data *data);
+int		infinite_hook(int keycode, t_data *data);
 
 //	init
 void	init_vars(t_data *data);
@@ -137,6 +139,11 @@ int 	launcher(t_data *data);
 
 // Launcher Utils
 int		create_trgb(int t, int r, int g, int b);
+
+// Draw All
+void    init_background(t_data *data);
+void    draw_player(t_data *data);
+void    draw_all(t_data *data);
 
 // Bresenham
 void	bresenham(t_point begin, t_point end, t_img *img);
