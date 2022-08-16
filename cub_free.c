@@ -17,8 +17,7 @@ void	cub_free(char *str[])
 
 void	cub_free_params(t_data *data)
 {
-	if (data->map.raw)
-		cub_free(data->map.raw);
+	cub_free(data->map.raw);
 	if (data->map.no)
 		free(data->map.no);
 	if (data->map.so)
@@ -31,6 +30,7 @@ void	cub_free_params(t_data *data)
 		free(data->map.f);
 	if (data->map.c)
 		free(data->map.c);
+	cub_free(data->map.map);
 }
 
 void	cub_free_all(t_data *data)

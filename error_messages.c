@@ -45,12 +45,13 @@ void	error_exit(t_data *data, char *msg, int param)
 	exit(EXIT_FAILURE);
 }
 
-void	check_mlx(void *mlx)
+void	check_mlx(void *mlx, t_input *data)
 {
 	if (!mlx)
 	{
 		write(2, "Cub3d: ", 7);
 		write(2, "Mlx init error\n", 15);
+		cub_free_all(data);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -61,7 +62,8 @@ void	check_win(t_data *data)
 	{
 		write(2, "Cub3d: ", 7);
 		write(2, "Windoes is broken!\n", 19);
-		// mlx_destroy_image(data->mlx, data->img.mlx_img);
+		mlx_destroy_image(data->mlx, data->img.mlx_img);
+		cub_free_all(data);
 		exit(EXIT_FAILURE);
 	}
 }

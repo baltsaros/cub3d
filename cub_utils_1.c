@@ -64,6 +64,7 @@ char	*cub_strndup(char const *str, size_t size, t_data *data)
 	return (dest);
 }
 
+<<<<<<< HEAD
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -75,6 +76,9 @@ int	ft_strcmp(char *s1, char *s2)
 }
 
 void	*cub_malloc(size_t n, t_data *data)
+=======
+void	*cub_malloc(size_t n, t_input *data)
+>>>>>>> parsing
 {
 	void	*ptr;
 
@@ -84,6 +88,7 @@ void	*cub_malloc(size_t n, t_data *data)
 	{
 		write(2, "Cub3d: ", 7);
 		write(2, "allocation failed\n", 18);
+		cub_free_all(data);
 		exit(1);
 	}
 	return (ptr);
@@ -107,65 +112,4 @@ char	*cub_strdup(const char *s, t_data *data)
 	}
 	dest[i] = '\0';
 	return (dest);
-}
-
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-	int		i;
-
-	i = img ->bpp - 8;
-	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
-	while (i >= 0)
-	{
-		if (img->endian != 0)
-			*dst++ = (color >> i) & 0xFF;
-		else
-			*dst++ = (color >> (img->bpp - 8 - i)) & 0xFF;
-		i -= 8;
-	}
-}
-
-char	*get_next_line(int fd, t_data *data)
-{
-	char	buf[1];
-	char	*line;
-	ssize_t	r_bytes;
-
-	line = ft_calloc(1, sizeof(char));
-	alloc_check_small(line, data);
-	r_bytes = 1;
-	buf[0] = '\0';
-	while (r_bytes > 0)
-	{
-		r_bytes = read(fd, buf, 1);
-		if (r_bytes < 0)
-		{
-			free(line);
-			close(data->fd);
-			error_check_exit(r_bytes, "read: ", data);
-		}
-		if (!r_bytes)
-			data->i = 0;
-		line = cub_charjoin_free(line, buf[0], data);
-		alloc_check_small(line, data);
-	}
-	return (line);
-}
-
-int	check_charset(char c, char *charset)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (!charset)
-		return (0);
-	while (charset[i])
-	{
-		if (charset[i] == c)
-			return (charset[i]);
-		++i;
-	}
-	return (0);
 }

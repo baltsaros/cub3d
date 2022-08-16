@@ -22,7 +22,9 @@ SRCS		=	cub3d.c \
 				hooks.c \
 				init_map.c \
 				bresenham.c \
-				launcher.c
+				launcher.c \
+				init_map_utils_1.c \
+				init_map_utils_2.c
 
 OBJ_DIR		= objs
 OBJ_FILES	= $(SRCS:.c=.o)
