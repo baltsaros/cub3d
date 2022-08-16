@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/15 18:07:19 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/16 11:04:48 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	check_lines(char **raw, t_input *data)
 		while (raw[j][i] && raw[j][i] == ' ')
 			++i;
 		if (raw[j][i] && raw[j][i] != '1')
-			error_exit(data, "Unclosed map 1", 1);
+			error_exit(data, "Unclosed map", 1);
 		while (raw[j][i])
 		{
 			if (raw[j][i] == '1')
@@ -93,11 +93,61 @@ void	check_lines(char **raw, t_input *data)
 	}
 }
 
+void	check_length(char **raw, size_t i, t_input *data)
+{
+	size_t	j;
+	size_t	len;
+
+	j = data->j;
+	while (raw[j])
+	{
+		len = ft_strlen(raw[j]);
+		if (i < len)
+			break ;
+		++j;
+	}
+	data->j = j;
+}
+
+void	check_rows(char **raw, t_input *data)
+{
+	size_t	j;
+	size_t	i;
+	int		closed;
+
+	j = data->j;
+	closed = 1;
+	i = 0;
+	while (raw[j])
+	{
+		while (raw[j][i] && raw[j][i] == ' ')
+			++j;
+		if (raw[j][i] && raw[j][i] != '1')
+			error_exit(data, "Unclosed map 2", 1);
+		while (raw[j] && raw[j][i])
+		{
+			if (raw[j][i] == '1')
+				closed = 1;
+			else if (raw[j][i] == '0')
+				closed = 0;
+			j++;
+		}
+		if (!closed)
+			error_exit(data, "Unclosed map", 1);
+		++i;
+		check_length(raw, i, data);
+		j = data->j;
+	}
+}
+
 void	check_map(t_map *map, t_input *data)
 {
 	data->j++;
 	check_chars(map->raw, data);
+	printf("checking lines\n");
 	check_lines(map->raw, data);
+	printf("checking rows\n");
+	check_rows(map->raw, data);
 	printf("closed\n");
 }
 
