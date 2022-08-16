@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/16 13:09:57 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/16 15:47:03 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	mouse_hook(int keycode, int x, int y, t_input *data)
 	(void)x;
 	(void)y;
 	(void)keycode;
-	cub_free_all(data);
+	(void)data;
+	// cub_free_all(data);
 	// if (keycode == 4)
 	// 	data->set.zoom *= 1.1;
 	// else if (keycode == 5)
