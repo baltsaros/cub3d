@@ -10,9 +10,11 @@
 # include "mlx_linux/mlx.h"
 # include "libft/libft.h"
 
+//	default window size
 #define WIDTH 1000
 #define HEIGHT 1000
 
+//	struct to store mlx data
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -22,6 +24,7 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+//	struct to store map data
 typedef struct s_map
 {
 	char	**raw;
@@ -34,6 +37,7 @@ typedef struct s_map
 	char	**map;
 }	t_map;
 
+//	global(integral) struct to store all data
 typedef struct s_input
 {
 	size_t	i;
@@ -68,13 +72,28 @@ void	error_exit(t_input *data, char *msg, int param);
 void	check_mlx(void *mlx);
 void	check_win(t_input *data);
 
-//	hoosk
+//	hooks
 int		key_hook(int keycode, t_input *data);
 int		mouse_hook(int keycode, int x, int y, t_input *data);
 
 //	init
-int		init_map(t_input *data, char *file);
+void	init_vars(t_input *data);
+void	check_extension(t_input *data, char *file);
 t_map	read_param(t_input *data, char *file);
+void	check_param(t_map *map, t_input *data);
+int		init_map(t_input *data, char *file);
+
+//	init_utils_1 - for check_param
+char	*find_param(char **raw, char *param, t_input *data);
+size_t	find_mapsize(char **raw, int j);
+void	copy_map(char **raw, t_input *data);
+
+//	init_utils_2 - for check_map
+void	check_chars(char **raw, t_input *data);
+void	check_rows(char **map, t_input *data);
+size_t	check_length(char **map, size_t i, t_input *data);
+void	check_columns(char **map, t_input *data);
+void	check_map(t_map *map, t_input *data);
 
 //	free
 void	cub_free(char *str[]);
