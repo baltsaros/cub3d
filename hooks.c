@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/16 15:43:59 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/16 16:10:39 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	key_hook(int keycode, t_data *data)
 {
 	if (keycode == 53)
 	{
-		// mlx_destroy_image(data->mlx, data->img.mlx_img);
+		mlx_destroy_image(data->mlx, data->img.img_ptr);
 		mlx_destroy_window(data->mlx, data->win);
 		data->win = NULL;
-		cub_free_all(data);
+		// cub_free_all(data);
 		exit(EXIT_SUCCESS);
 	}
 	// else if (keycode == 65361)

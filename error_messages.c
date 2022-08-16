@@ -62,7 +62,7 @@ void	check_win(t_data *data)
 	{
 		write(2, "Cub3d: ", 7);
 		write(2, "Windoes is broken!\n", 19);
-		mlx_destroy_image(data->mlx, data->img.mlx_img);
+		mlx_destroy_image(data->mlx, data->img.img_ptr);
 		cub_free_all(data);
 		exit(EXIT_FAILURE);
 	}

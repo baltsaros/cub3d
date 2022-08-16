@@ -73,7 +73,7 @@ int	check_charset(char c, char *charset)
 
 int	ft_exit(t_data *data)
 {
-	mlx_destroy_image(data->mlx, data->img.mlx_img);
+	mlx_destroy_image(data->mlx, data->img.img_ptr);
 	mlx_destroy_window(data->mlx, data->win);
 	cub_free_all(data);
 	exit(EXIT_SUCCESS);

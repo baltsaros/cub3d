@@ -132,11 +132,11 @@ void	check_player(char **map, t_data *data)
 void	check_map(t_map *map, t_data *data)
 {
 	check_chars(map->map, data);
-	printf("checking rows\n");
+	// printf("checking rows\n");
 	check_rows(map->map, data);
-	printf("checking columns\n");
+	// printf("checking columns\n");
 	check_columns(map->map, data);
-	printf("closed\n");
-	printf("checking player\n");
+	// printf("closed\n");
+	// printf("checking player\n");
 	check_player(map->map, data);
 }

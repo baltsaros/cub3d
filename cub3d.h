@@ -21,7 +21,7 @@
 //	struct to store mlx data
 typedef struct s_img
 {
-	void	*mlx_img;
+	void	*img_ptr;
 	char	*addr;
 	int		bpp;
 	int		line_length;
@@ -129,9 +129,12 @@ void	cub_free(char *str[]);
 void	cub_free_all(t_data *data);
 void	cub_free_params(t_data *data);
 
-// MLX Init
+// Launcher
 void    init_mlx_and_window(t_data *data);
 int 	launcher(t_data *data);
+
+// Launcher Utils
+int		create_trgb(int t, int r, int g, int b);
 
 // Bresenham
 void	bresenham(t_point begin, t_point end, t_img *img);
