@@ -84,4 +84,6 @@ void	cub_free_params(t_data *data);
 void    init_mlx_and_window(t_data *data);
 int 	launcher(t_data *data);
 
+// Bresenham
+
 #endif

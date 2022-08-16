@@ -21,6 +21,7 @@ SRCS		=	cub3d.c \
 				error_messages.c \
 				hooks.c \
 				init_map.c \
+				bresenham.c \
 				launcher.c
 
 OBJ_DIR		= objs
