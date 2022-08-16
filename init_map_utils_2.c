@@ -4,7 +4,7 @@
 // utils for check_map //
 /////////////////////////
 // check the map for invalid characters
-void	check_chars(char **raw, t_input *data)
+void	check_chars(char **raw, t_data *data)
 {
 	size_t	j;
 	size_t	i;
@@ -24,7 +24,7 @@ void	check_chars(char **raw, t_input *data)
 }
 
 // check that all rows are closed
-void	check_rows(char **map, t_input *data)
+void	check_rows(char **map, t_data *data)
 {
 	size_t	j;
 	size_t	i;
@@ -54,7 +54,7 @@ void	check_rows(char **map, t_input *data)
 }
 
 // check whether a line was fully checked; if so, go to another one
-size_t	check_length(char **map, size_t i, t_input *data)
+size_t	check_length(char **map, size_t i, t_data *data)
 {
 	size_t	j;
 	size_t	len;
@@ -72,7 +72,7 @@ size_t	check_length(char **map, size_t i, t_input *data)
 }
 
 // check that all columns are closed
-void	check_columns(char **map, t_input *data)
+void	check_columns(char **map, t_data *data)
 {
 	size_t	j;
 	size_t	i;
@@ -103,7 +103,7 @@ void	check_columns(char **map, t_input *data)
 	}
 }
 
-void	check_player(char **map, t_input *data)
+void	check_player(char **map, t_data *data)
 {
 	size_t	j;
 	size_t	i;
@@ -129,7 +129,7 @@ void	check_player(char **map, t_input *data)
 		error_exit(data, "There is no player on the map!", 1);
 }
 
-void	check_map(t_map *map, t_input *data)
+void	check_map(t_map *map, t_data *data)
 {
 	check_chars(map->map, data);
 	printf("checking rows\n");

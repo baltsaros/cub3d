@@ -45,7 +45,7 @@ void	error_exit(t_data *data, char *msg, int param)
 	exit(EXIT_FAILURE);
 }
 
-void	check_mlx(void *mlx, t_input *data)
+void	check_mlx(void *mlx, t_data *data)
 {
 	if (!mlx)
 	{

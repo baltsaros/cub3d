@@ -4,7 +4,7 @@
 // utils for check_param //
 ///////////////////////////
 // find a certain parameter from map input
-char	*find_param(char **raw, char *param, t_input *data)
+char	*find_param(char **raw, char *param, t_data *data)
 {
 	size_t	i;
 	size_t	len;
@@ -41,7 +41,7 @@ size_t	find_mapsize(char **raw, int j)
 }
 
 // copying map form raw data
-void	copy_map(char **raw, t_input *data)
+void	copy_map(char **raw, t_data *data)
 {
 	size_t	j;
 	size_t	i;

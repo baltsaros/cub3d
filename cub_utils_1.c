@@ -64,7 +64,7 @@ char	*cub_strndup(char const *str, size_t size, t_data *data)
 	return (dest);
 }
 
-void	*cub_malloc(size_t n, t_input *data)
+void	*cub_malloc(size_t n, t_data *data)
 {
 	void	*ptr;
 
