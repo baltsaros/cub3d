@@ -10,8 +10,11 @@
 # include "mlx/mlx.h"
 # include "libft/libft.h"
 
-#define WIDTH 1500
-#define HEIGHT 1000
+#define WIDTH 			1500
+#define HEIGHT 			1000
+
+#define SQUARE_SIZE		10
+#define FIELD_OF_VIEW 	100
 
 typedef struct s_img
 {
@@ -21,6 +24,29 @@ typedef struct s_img
 	int		line_length;
 	int		endian;
 }	t_img;
+
+typedef struct s_bre
+{
+	int	dx;
+	int	sx;
+	int	dy;
+	int	sy;
+	int	err;
+}	t_bre;
+
+typedef struct s_seg
+{
+	int x0;
+	int y0;
+	int	x1;
+	int	y1;
+}	t_seg;
+
+typedef struct s_point
+{
+	int x;
+	int y;
+}	t_point;
 
 typedef struct s_map
 {
@@ -85,5 +111,6 @@ void    init_mlx_and_window(t_data *data);
 int 	launcher(t_data *data);
 
 // Bresenham
+void	bresenham(t_point begin, t_point end, t_img *img);
 
 #endif
