@@ -103,6 +103,32 @@ void	check_columns(char **map, t_input *data)
 	}
 }
 
+void	check_player(char **map, t_input *data)
+{
+	size_t	j;
+	size_t	i;
+	int		player;
+
+	j = 0;
+	player = 0;
+	while (map[j])
+	{
+		i = 0;
+		while(map[j][i])
+		{
+			if (check_charset(map[j][i], "NEWS"))
+			{
+				player = 1;
+				break ;
+			}
+			++i;
+		}
+		++j;
+	}
+	if (!player)
+		error_exit(data, "There is no player on the map!", 1);
+}
+
 void	check_map(t_map *map, t_input *data)
 {
 	check_chars(map->map, data);
@@ -111,4 +137,6 @@ void	check_map(t_map *map, t_input *data)
 	printf("checking columns\n");
 	check_columns(map->map, data);
 	printf("closed\n");
+	printf("checking player\n");
+	check_player(map->map, data);
 }
