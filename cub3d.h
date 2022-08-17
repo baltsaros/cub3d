@@ -61,6 +61,8 @@ typedef struct s_map
 	char	*ea;
 	char	*f;
 	char	*c;
+	char	**f_spl;
+	char	**c_spl;
 	char	**map;
 }	t_map;
 

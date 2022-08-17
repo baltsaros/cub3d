@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/16 15:07:57 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/17 11:44:13 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	init_vars(t_data *data)
 	data->map.f = NULL;
 	data->map.c = NULL;
 	data->map.map = NULL;
+	data->map.f_spl = NULL;
+	data->map.c_spl = NULL;
 }
 
 void	check_extension(t_data *data, char *file)
@@ -39,6 +41,8 @@ void	check_param(t_map *map, t_data *data)
 {
 	data->j = 0;
 	data->map.map = NULL;
+	data->map.f_spl = NULL;
+	data->map.c_spl = NULL;
 	map->no = find_param(map->raw, "NO", data);
 	map->so = find_param(map->raw, "SO", data);
 	map->we = find_param(map->raw, "WE", data);
@@ -48,6 +52,10 @@ void	check_param(t_map *map, t_data *data)
 	if (!map->no || !map->so || !map->we
 		|| !map->ea || !map->f || !map->c)
 		error_exit(data, "Invalid parameter(s)", 1);
+	map->f_spl = ft_split(map->f, ',');
+	map->c_spl = ft_split(map->c, ',');
+	alloc_check_big(map->f_spl, data);
+	alloc_check_big(map->c_spl, data);
 	copy_map(map->raw, data);
 	// for (int i = 0; map->map[i]; ++i)
 	// 	printf("map[%d] is %s\n", i, map->map[i]);
