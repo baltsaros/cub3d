@@ -6,17 +6,35 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/17 18:25:34 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/17 18:46:38 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void    draw_square_test(t_img img, int color, int end_i, int end_j)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (i != end_i)
+    {
+        j = 0;
+        while (j != end_j)
+        {
+            my_mlx_pixel_put(&img, j, i, color);
+            j++;
+        }
+        i++;
+    }
+}
+
 int	infinite_hook(int keycode, t_data *data)
 {
 	(void)keycode;
 	mlx_clear_window(data->mlx, data->win);
-	draw_square(data->img, data->img.basic_color, HEIGHT, WIDTH);
+	draw_square_test(data->img, data->img.basic_color, HEIGHT, WIDTH);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
 	return (0);
 }
