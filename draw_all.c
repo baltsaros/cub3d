@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/17 11:43:37 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/17 11:46:51 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 
 void    init_background(t_data *data)
 {
-    char **cell = ft_split(data->map.c, ',');
     int color;
     int i;
     int j;
     
     i = 0;
-    color = create_trgb(0, ft_atoi(cell[0]), ft_atoi(cell[1]), ft_atoi(cell[2]));
+    color = create_trgb(0, 
+        ft_atoi(data->map.c_spl[0]),
+        ft_atoi(data->map.c_spl[1]),
+        ft_atoi(data->map.c_spl[2]));
     while (i != HEIGHT)
     {
         j = 0;
         while (j != WIDTH)
         {
-             my_mlx_pixel_put(&data->img, j, i, color);
+            my_mlx_pixel_put(&data->img, j, i, color);
             j++;
         }
         i++;
