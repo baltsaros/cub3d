@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/16 18:51:56 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/17 11:37:39 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,7 @@ int	infinite_hook(int keycode, t_data *data)
 {
 	(void)keycode;
 	(void)data;
-	// printf("Par ici\n");
-	mlx_clear_window(data->mlx, data->win);
-	// printf("Je suis la\n");
-	init_background(data);
-	// printf("Je passe ici\n");	
-	// draw_player(data);
+	// mlx_clear_window(data->mlx, data->win);
 	return (0);
 }
 
