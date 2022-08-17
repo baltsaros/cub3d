@@ -37,6 +37,8 @@ typedef struct s_map
 	char	**f_spl;
 	char	**c_spl;
 	char	**map;
+	size_t	width;
+	size_t	height;
 }	t_map;
 
 //	global(integral) struct to store all data

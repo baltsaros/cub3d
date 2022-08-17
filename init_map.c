@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/16 16:40:43 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/17 16:01:58 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	init_vars(t_input *data)
 	data->map.map = NULL;
 	data->map.f_spl = NULL;
 	data->map.c_spl = NULL;
+	data->map.width = 0;
+	data->map.height = 0;
 }
 
 void	check_extension(t_input *data, char *file)

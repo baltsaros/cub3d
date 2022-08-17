@@ -51,6 +51,7 @@ void	check_rows(char **map, t_input *data)
 			error_exit(data, "Unclosed map: rows", 1);
 		++j;
 	}
+	data->map.height = j;
 }
 
 // check whether a line was fully checked; if so, go to another one
@@ -68,6 +69,8 @@ size_t	check_length(char **map, size_t i, t_input *data)
 		++j;
 	}
 	data->j = j;
+	if (len > data->map.width)
+		data->map.width = len;
 	return (j);
 }
 
@@ -82,6 +85,7 @@ void	check_columns(char **map, t_input *data)
 	data->j = 0;
 	closed = 1;
 	i = 0;
+	data->map.width = 0;
 	while (map[j])
 	{
 		while (map[j][i] && map[j][i] == ' ')
@@ -138,5 +142,6 @@ void	check_map(t_map *map, t_input *data)
 	check_columns(map->map, data);
 	printf("closed\n");
 	printf("checking player\n");
+	printf("width is %ld\nheight is %ld\n", data->map.width, data->map.height);
 	check_player(map->map, data);
 }
