@@ -28,6 +28,8 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+// structs to store values for drawing
+
 typedef struct s_bre
 {
 	int	dx;
@@ -76,6 +78,7 @@ typedef struct s_data
 	int		fd;
 	t_img	img;
 	t_img	player;
+	t_img	minimap;
 	t_map	map;
 	int		pos_x;
 	int		pos_y;
@@ -143,8 +146,7 @@ int 	launcher(t_data *data);
 int		create_trgb(int t, int r, int g, int b);
 
 // Draw All
-void    init_background(t_data *data);
-void    draw_player(t_data *data);
+void    draw_square(t_img img, int color, int end_i, int end_j);
 void    draw_all(t_data *data);
 
 // Bresenham
