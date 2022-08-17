@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:11:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/17 13:53:37 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/17 17:34:06 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void    init_mlx_and_window(t_data *data)
     check_mlx(data->mlx, data);
     data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
     check_win(data);
-    data->pos_x = 20;
-    data->pos_y = 20;
+    data->pos_x_minimap = (WIDTH / 2) - ((data->map.width * 50) / 2);
+    data->pos_y_minimap = (HEIGHT / 2) - ((data->map.height * 50) / 2);
+    data->size_player = 10;
+    data->size_square = 50;
 }
 
 int launcher(t_data *data)

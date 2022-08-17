@@ -85,6 +85,10 @@ typedef struct s_data
 	t_map	map;
 	int		pos_x;
 	int		pos_y;
+	int		pos_x_minimap;
+	int		pos_y_minimap;
+	int		size_player;
+	int		size_square;
 }	t_data;
 
 //	alloc_check

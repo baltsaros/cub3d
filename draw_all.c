@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/17 16:50:15 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/17 17:39:52 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void    init_player(t_data *data)
     data->player.basic_color = 0x0FAE2;
     data->player.addr = mlx_get_data_addr(data->player.img_ptr, &data->player.bpp,
 		&data->player.line_length, &data->player.endian);
-    draw_square(data->player, data->player.basic_color, 10, 10);
-    mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->pos_x, data->pos_y);
+    draw_square(data->player, data->player.basic_color, data->size_player, data->size_player);
+    mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, (data->pos_x_minimap + data->pos_x), (data->pos_y_minimap + data->pos_y));
 }
 
 void    init_map_img(t_data *data)
@@ -55,9 +55,9 @@ void    init_map_img(t_data *data)
     color = 0x000000;
     data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr, &data->minimap.bpp,
         &data->minimap.line_length, &data->minimap.endian);
-    draw_square(data->minimap, data->img.basic_color, data->map.height * 50, data->map.width * 50);
+    draw_square(data->minimap, data->img.basic_color, data->map.height * data->size_square, data->map.width * data->size_square);
     draw_map(data, color, data->map.height, data->map.width);
-    mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, 1, 1);
+    mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->pos_x_minimap, data->pos_y_minimap);
 }
 
 void    draw_all(t_data *data)
@@ -67,14 +67,12 @@ void    draw_all(t_data *data)
         init_background(data);
     //else
         // put error here
-    printf("Width: %lu\n", data->map.width * 50);
-    printf("Height: %lu\n", data->map.height * 50);
-    data->minimap.img_ptr = mlx_new_image(data->mlx, data->map.width * 50, data->map.height * 50);
+    data->minimap.img_ptr = mlx_new_image(data->mlx, data->map.width * data->size_square, data->map.height * data->size_square);
     if (data->minimap.img_ptr != NULL)
         init_map_img(data);
     // else
         // put error here
-    data->player.img_ptr = mlx_new_image(data->mlx, 10, 10);
+    data->player.img_ptr = mlx_new_image(data->mlx, data->size_player, data->size_player);
     if (data->player.img_ptr != NULL)
         init_player(data);
     //else
