@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/17 11:46:51 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/17 11:53:00 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void    init_background(t_data *data)
         }
         i++;
     }
-    // mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
 }
 
 void    draw_player(t_data *data)
@@ -52,13 +51,11 @@ void    draw_player(t_data *data)
         }
         i++;
     }
-    // mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->pos_x, data->pos_y);
 }
 
 void    draw_all(t_data *data)
 {
     data->img.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-    data->player.img_ptr = mlx_new_image(data->mlx, 10, 10);
     if (data->img.img_ptr != NULL)
     {
         data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
@@ -66,6 +63,9 @@ void    draw_all(t_data *data)
         init_background(data);
         mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
     }
+    //else
+        // put error here
+    data->player.img_ptr = mlx_new_image(data->mlx, 10, 10);
     if (data->player.img_ptr != NULL)
     {
         data->player.addr = mlx_get_data_addr(data->player.img_ptr, &data->player.bpp,
@@ -73,4 +73,6 @@ void    draw_all(t_data *data)
         draw_player(data);
         mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->pos_x, data->pos_y);
     }
+    //else
+        // put error here
 }
