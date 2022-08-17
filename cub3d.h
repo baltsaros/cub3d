@@ -77,8 +77,8 @@ typedef struct s_data
 	char	*s_tmp;
 	int		fd;
 	t_img	img;
-	t_img	player;
 	t_img	minimap;
+	t_img	player;
 	t_map	map;
 	int		pos_x;
 	int		pos_y;

@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/17 14:05:53 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/17 16:13:13 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void    init_background(t_data *data)
 {
     int color;
     
+    color = create_trgb(0, ft_atoi(data->map.c_spl[0]), ft_atoi(data->map.c_spl[1]), ft_atoi(data->map.c_spl[2]));
     data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
 		&data->img.line_length, &data->img.endian);
-    color = create_trgb(0, ft_atoi(data->map.c_spl[0]), ft_atoi(data->map.c_spl[1]), ft_atoi(data->map.c_spl[2]));
     draw_square(data->img, color, HEIGHT, WIDTH);
     mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
 }
@@ -45,21 +45,50 @@ void    init_player(t_data *data)
 {
     int color;
 
+    color = 0x0FAE2;
     data->player.addr = mlx_get_data_addr(data->player.img_ptr, &data->player.bpp,
 		&data->player.line_length, &data->player.endian);
-    color = 0X000000;
     draw_square(data->player, color, 10, 10);
     mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->pos_x, data->pos_y);
 }
 
-// void    draw_map(t_data *data)
-// {
-//     int x0;
-//     int y0;
-//     int x1;
-//     int y1;
-//     (void)data;
-// }
+int get_col(char **str)
+{
+    int res;
+
+    res = 0;
+    while (str[0][res])
+        res++;
+    return (res);
+}
+
+int get_row(char **str)
+{
+    int res;
+
+    res = 0;
+    while (str[res])
+        res++;
+    return (res);
+}
+
+void    draw_map(t_data *data, int color)
+{
+    my_mlx_pixel_put(&data->minimap, 0, 0, color);
+}
+
+void    init_map_img(t_data *data)
+{
+    int color;
+
+    color = create_trgb(0, ft_atoi(data->map.c_spl[0]), ft_atoi(data->map.c_spl[1]), ft_atoi(data->map.c_spl[2]));
+    data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr, &data->minimap.bpp,
+        &data->minimap.line_length, &data->minimap.endian);
+    draw_square(data->minimap, color, 0, 0);
+    color = 0x0FAE1;
+    draw_map(data, color);
+    mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, 1, 1);
+}
 
 void    draw_all(t_data *data)
 {
@@ -67,6 +96,14 @@ void    draw_all(t_data *data)
     if (data->img.img_ptr != NULL)
         init_background(data);
     //else
+        // put error here
+    data->minimap.img_ptr = mlx_new_image(data->mlx, (get_col(data->map.map) * 50), (get_row(data->map.map) * 50));
+    if (data->minimap.img_ptr != NULL)
+    {
+        printf("We did it\n");
+        init_map_img(data);
+    }
+    // else
         // put error here
     data->player.img_ptr = mlx_new_image(data->mlx, 10, 10);
     if (data->player.img_ptr != NULL)

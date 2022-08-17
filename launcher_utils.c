@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:28:44 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/17 13:50:14 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/17 14:45:59 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 int	create_trgb(int t, int r, int g, int b)
 {
-	printf("Rentree ici\n");
 	return (t << 24 | r << 16 | g << 8 | b);
 }
