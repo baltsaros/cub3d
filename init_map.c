@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/17 11:44:13 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/17 16:14:02 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	init_vars(t_data *data)
 	data->map.map = NULL;
 	data->map.f_spl = NULL;
 	data->map.c_spl = NULL;
+	data->map.width = 0;
+	data->map.height = 0;
 }
 
 void	check_extension(t_data *data, char *file)
