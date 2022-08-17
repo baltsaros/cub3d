@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:11:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/17 17:34:06 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/17 18:25:44 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ void    init_mlx_and_window(t_data *data)
 int launcher(t_data *data)
 {
     init_mlx_and_window(data);
-
-    // for (int i = 0; data->map.c_spl[i]; i++)
-    //         printf("test: %s\n", data->map.c_spl[i]);
-
     draw_all(data);
 
     mlx_key_hook(data->win, key_hook, data);

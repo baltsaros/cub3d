@@ -54,6 +54,13 @@ typedef struct s_point
 	int y;
 }	t_point;
 
+// 	struct for positions
+typedef struct s_player
+{
+	int		pos_x;
+	int		pos_y;
+}	t_player;
+
 //	struct to store map data
 typedef struct s_map
 {
@@ -73,22 +80,21 @@ typedef struct s_map
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
-	size_t	i;
-	size_t	j;
-	char	*s_tmp;
-	int		fd;
-	t_img	img;
-	t_img	minimap;
-	t_img	player;
-	t_map	map;
-	int		pos_x;
-	int		pos_y;
-	int		pos_x_minimap;
-	int		pos_y_minimap;
-	int		size_player;
-	int		size_square;
+	void		*mlx;
+	void		*win;
+	size_t		i;
+	size_t		j;
+	char		*s_tmp;
+	int			fd;
+	t_img		img;
+	t_img		minimap;
+	t_img		player;
+	t_map		map;
+	int			pos_x_minimap;
+	int			pos_y_minimap;
+	int			size_player;
+	int			size_square;
+	t_player	player_s;
 }	t_data;
 
 //	alloc_check

@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/17 13:48:35 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/17 18:25:34 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 int	infinite_hook(int keycode, t_data *data)
 {
 	(void)keycode;
-	(void)data;
 	mlx_clear_window(data->mlx, data->win);
-	// Couleur a remettre
-	// init_background(data, 0XFF0000);
-	// mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
+	draw_square(data->img, data->img.basic_color, HEIGHT, WIDTH);
+	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
 	return (0);
 }
 
@@ -35,27 +33,27 @@ int	key_hook(int keycode, t_data *data)
 	}
 	else if (keycode == 13)
 	{
-		data->pos_y -= 5;
-		if (data->pos_y < 0)
-			data->pos_y = 0;
+		data->player_s.pos_y -= 5;
+		if (data->player_s.pos_y < 0)
+			data->player_s.pos_y = 0;
 	}
 	else if (keycode == 1)
 	{
-		data->pos_y += 5;
-		if (data->pos_y > HEIGHT)
-			data->pos_y = HEIGHT;
+		data->player_s.pos_y += 5;
+		if (data->player_s.pos_y > HEIGHT)
+			data->player_s.pos_y = HEIGHT;
 	}
 	else if (keycode == 0)
 	{
-		data->pos_x -= 5;
-		if (data->pos_y < 0)
-			data->pos_y = 0;
+		data->player_s.pos_x -= 5;
+		if (data->player_s.pos_y < 0)
+			data->player_s.pos_y = 0;
 	}
 	else if (keycode == 2)
 	{
-		data->pos_x += 5;
-		if (data->pos_y > WIDTH)
-			data->pos_y = WIDTH;
+		data->player_s.pos_x += 5;
+		if (data->player_s.pos_y > WIDTH)
+			data->player_s.pos_y = WIDTH;
 	}
 	// else if (keycode == 65361)
 	// 	data->set.move_x *= 1.1;
