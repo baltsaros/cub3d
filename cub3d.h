@@ -26,6 +26,7 @@ typedef struct s_img
 	int		bpp;
 	int		line_length;
 	int		endian;
+	int		basic_color;
 }	t_img;
 
 // structs to store values for drawing
@@ -153,5 +154,8 @@ void    draw_all(t_data *data);
 
 // Bresenham
 void	bresenham(t_point begin, t_point end, t_img *img);
+
+// Minimap
+void    draw_map(t_data *data, int color, int height, int width);
 
 #endif
