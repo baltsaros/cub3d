@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/18 14:53:45 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/18 17:32:23 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,36 @@ void	move(int keycode, t_data *data)
 	if (keycode == 13)
 	{
 		data->player_s.pos_win_y -= 5;
+		data->player_s.pos_y -= 5;
+		// if (!is_not_in_wall(data))
+		// 	printf("Walled\n");
 		if (data->player_s.pos_win_y < 0)
 			data->player_s.pos_win_y = 0;
 	}
 	else if (keycode == 1)
 	{
 		data->player_s.pos_win_y += 5;
+		data->player_s.pos_y += 5;
+		// if (!is_not_in_wall(data))
+		// 	printf("Walled\n");
 		if (data->player_s.pos_win_y > HEIGHT - data->size_player)
 			data->player_s.pos_win_y = HEIGHT - data->size_player;
 	}
 	else if (keycode == 0)
 	{
 		data->player_s.pos_win_x -= 5;
+		data->player_s.pos_x -= 5;
+		// if (!is_not_in_wall(data))
+		// 	printf("Walled\n");
 		if (data->player_s.pos_win_x < 0)
 			data->player_s.pos_win_x = 0;
 	}
 	else if (keycode == 2)
 	{
 		data->player_s.pos_win_x += 5;
+		data->player_s.pos_x += 5;
+		// if (!is_not_in_wall(data))
+		// 	printf("Walled\n");
 		if (data->player_s.pos_win_x > WIDTH - data->size_player)
 			data->player_s.pos_win_x = WIDTH - data->size_player;
 	}
@@ -103,6 +115,22 @@ void	move(int keycode, t_data *data)
     	draw_square(data->player, data->player.basic_color, data->size_player, data->size_player);
     	mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
 	}
+	data->ray.img_ptr = mlx_new_image(data->mlx, data->map.width * data->size_square, data->map.height * data->size_square);
+    if (data->ray.img_ptr != NULL)
+	{
+		data->ray.basic_color = 0xFFFFFF;
+    	data->ray.addr = mlx_get_data_addr(data->ray.img_ptr, &data->ray.bpp,
+			&data->ray.line_length, &data->ray.endian);
+		draw_square(data->ray, create_trgb(255, 255, 255, 255), data->map.height * data->size_square, data->map.width * data->size_square);
+    	draw_ray(data);
+    	mlx_put_image_to_window(data->mlx, data->win, data->ray.img_ptr, data->pos_x_minimap, data->pos_y_minimap);
+	}
+}
+
+void	rotate_fov(int keycode, t_data *data)
+{
+	(void)keycode;
+	(void)data;
 }
 
 int	key_hook_manager(int keycode, t_data *data)
@@ -111,6 +139,8 @@ int	key_hook_manager(int keycode, t_data *data)
 		leave(data);
 	else if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
 		move(keycode, data);
+	else if (keycode == 123 || keycode == 124)
+		rotate_fov(keycode, data);
 	else
 		printf("Key %d was pressed!\n", keycode);
 	return (0);

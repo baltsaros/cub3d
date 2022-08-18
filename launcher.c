@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:11:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/18 14:26:02 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/18 16:30:04 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,16 @@ void    init_mlx_and_window(t_data *data)
     check_win(data);
     data->pos_x_minimap = (WIDTH / 2) - ((data->map.width * 50) / 2);
     data->pos_y_minimap = (HEIGHT / 2) - ((data->map.height * 50) / 2);
-    data->size_player = 10;
-    data->size_square = 50;
+    data->size_player = 11;
+    data->size_square = 55;
 }
 
 int launcher(t_data *data)
 {
     init_mlx_and_window(data);
     draw_all(data);
-
-    // mlx_key_hook(data->win, key_hook_manager, data);
-    mlx_hook(data->win, 2, (1L << 0), key_hook_manager, data);
     
+    mlx_hook(data->win, 2, (1L << 0), key_hook_manager, data);
 	mlx_mouse_hook(data->win, mouse_hook, data);
 	mlx_hook(data->win, 17, 1L << 17, ft_exit, data);
     mlx_loop_hook(data->mlx, infinite_hook, &data);

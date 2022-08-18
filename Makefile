@@ -27,6 +27,8 @@ SRCS		=	cub3d.c \
 				launcher_utils.c \
 				draw_all.c \
 				minimap.c \
+				is_not_in_wall.c \
+				player_and_ray.c \
 				init_map_utils_1.c \
 				init_map_utils_2.c
 

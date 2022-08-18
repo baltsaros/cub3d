@@ -17,6 +17,7 @@
 // some default values
 #define SQUARE_SIZE		10
 #define FIELD_OF_VIEW 	2 * atan(0.66 / 1.0) = 66
+#define	PI				3.141592653
 
 //	struct to store mlx data
 typedef struct s_img
@@ -91,6 +92,7 @@ typedef struct s_data
 	t_img		img;
 	t_img		minimap;
 	t_img		player;
+	t_img		ray;
 	t_map		map;
 	int			pos_x_minimap;
 	int			pos_y_minimap;
@@ -163,7 +165,6 @@ int		create_trgb(int t, int r, int g, int b);
 // Draw All
 void    draw_square(t_img img, int color, int end_i, int end_j);
 void    init_background(t_data *data);
-void    init_player(t_data *data);
 void    init_map_img(t_data *data);
 void    draw_all(t_data *data);
 
@@ -173,5 +174,12 @@ void	bresenham(t_point begin, t_point end, t_img *img);
 // Minimap
 void    draw_map(t_data *data, int color, int height, int width);
 void    redraw_map(t_data *data, int color, int height, int width);
+
+// Is Not In Wall
+int 	is_not_in_wall(t_data *data, int height, int width);
+
+// Player and Ray
+void  	draw_ray(t_data *data);
+void    init_player(t_data *data);
 
 #endif

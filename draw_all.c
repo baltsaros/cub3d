@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/18 14:46:43 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/18 16:17:01 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,6 @@ void    init_background(t_data *data)
 		&data->img.line_length, &data->img.endian);
     draw_square(data->img, data->img.basic_color, HEIGHT, WIDTH);
     mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
-}
-
-void    init_player(t_data *data)
-{
-    data->player.basic_color = 0x0FAE2;
-    data->player.addr = mlx_get_data_addr(data->player.img_ptr, &data->player.bpp,
-		&data->player.line_length, &data->player.endian);
-    draw_square(data->player, data->player.basic_color, data->size_player, data->size_player);
-    data->player_s.pos_win_x = data->pos_x_minimap + data->player_s.pos_x;
-    data->player_s.pos_win_y = data->pos_y_minimap + data->player_s.pos_y;
-    mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
 }
 
 void    init_map_img(t_data *data)
