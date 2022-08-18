@@ -62,6 +62,9 @@ typedef struct s_player
 	int		pos_y;
 	int		pos_win_x;
 	int		pos_win_y;
+	float	delta_x;
+	float	delta_y;
+	float	p_ang;
 }	t_player;
 
 //	struct to store map data
@@ -169,7 +172,7 @@ void    init_map_img(t_data *data);
 void    draw_all(t_data *data);
 
 // Bresenham
-void	bresenham(t_point begin, t_point end, t_img *img);
+void	bresenham(t_data *data, t_point begin, t_point end, t_img *img);
 
 // Minimap
 void    draw_map(t_data *data, int color, int height, int width);

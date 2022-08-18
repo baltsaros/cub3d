@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:47:55 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/18 16:34:36 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/18 18:06:14 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,17 @@ void	init_bre_values(t_bre	*values, t_seg *seg)
 	values->err = values->dx + values->dy;
 }
 
-void	ft_put_pixel(t_seg *seg, t_img *img, int color)
+void	ft_put_pixel(t_data *data, t_seg *seg, t_img *img, int color)
 {
 	if ((seg->x0 < WIDTH && seg->y0 < HEIGHT)
 		&& (seg->x0 >= 0 && seg->y0 >= 0))
-		mlx_pixel_put_img(img, seg->x0, seg->y0, color);
+	{
+		if ((seg->x0 < (int)(data->map.width * data->size_square) && seg->y0 < (int)(data->map.height * data->size_square)))
+		{
+			if ((seg->x0 >= 0) && (seg->y0 >= 0))
+				mlx_pixel_put_img(img, seg->x0, seg->y0, color);
+		}
+	}
 }
 
 void	init_seg_values(t_seg *seg, t_point *begin, t_point *end)
@@ -50,7 +56,7 @@ void	init_seg_values(t_seg *seg, t_point *begin, t_point *end)
 	seg->y1 = end->y;
 }
 
-void	bresenham(t_point begin, t_point end, t_img *img)
+void	bresenham(t_data *data, t_point begin, t_point end, t_img *img)
 {
 	t_bre	values;
 	t_seg	seg;
@@ -60,7 +66,7 @@ void	bresenham(t_point begin, t_point end, t_img *img)
 	init_bre_values(&values, &seg);
 	while (1)
 	{
-		ft_put_pixel(&seg, img, img->basic_color);
+		ft_put_pixel(data, &seg, img, img->basic_color);
 		if (seg.x0 == seg.x1 && seg.y0 == seg.y1)
 			break ;
 		e2 = 2 * values.err;
