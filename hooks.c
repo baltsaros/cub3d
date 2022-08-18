@@ -6,50 +6,53 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/17 18:46:38 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/18 14:24:06 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    draw_square_test(t_img img, int color, int end_i, int end_j)
-{
-    int i;
-    int j;
-
-    i = 0;
-    while (i != end_i)
-    {
-        j = 0;
-        while (j != end_j)
-        {
-            my_mlx_pixel_put(&img, j, i, color);
-            j++;
-        }
-        i++;
-    }
-}
-
 int	infinite_hook(int keycode, t_data *data)
 {
 	(void)keycode;
-	mlx_clear_window(data->mlx, data->win);
-	draw_square_test(data->img, data->img.basic_color, HEIGHT, WIDTH);
-	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
+	(void)data;
+	// mlx_clear_window(data->mlx, data->win);
+	// draw_square_test(data->img, data->img.basic_color, HEIGHT, WIDTH);
+	// mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
 	return (0);
 }
 
-int	key_hook(int keycode, t_data *data)
+void	leave(t_data *data)
 {
-	if (keycode == 53)
-	{
-		mlx_destroy_image(data->mlx, data->img.img_ptr);
-		mlx_destroy_window(data->mlx, data->win);
-		data->win = NULL;
-		// cub_free_all(data);
-		exit(EXIT_SUCCESS);
-	}
-	else if (keycode == 13)
+	mlx_destroy_image(data->mlx, data->img.img_ptr);
+	mlx_destroy_window(data->mlx, data->win);
+	data->win = NULL;
+	// cub_free_all(data);
+	exit(EXIT_SUCCESS);
+}
+
+int	mouse_hook(int keycode, int x, int y, t_data *data)
+{
+	(void)x;
+	(void)y;
+	(void)keycode;
+	(void)data;
+	// cub_free_all(data);
+	// if (keycode == 4)
+	// 	data->set.zoom *= 1.1;
+	// else if (keycode == 5)
+	// 	data->set.zoom *= 0.9;
+	// data->set.move_x = (x - WIDTH / 2) / (data->set.zoom * WIDTH)
+	// 	+ data->set.move_x;
+	// data->set.move_y = (y - HEIGHT / 2) / (data->set.zoom * HEIGHT)
+	// 	+ data->set.move_y;
+	// render(data);
+	return (0);
+}
+
+void	move(int keycode, t_data *data)
+{
+	if (keycode == 13)
 	{
 		data->player_s.pos_y -= 5;
 		if (data->player_s.pos_y < 0)
@@ -73,39 +76,38 @@ int	key_hook(int keycode, t_data *data)
 		if (data->player_s.pos_y > WIDTH)
 			data->player_s.pos_y = WIDTH;
 	}
-	// else if (keycode == 65361)
-	// 	data->set.move_x *= 1.1;
-	// else if (keycode == 65363)
-	// 	data->set.move_x *= 0.9;
-	// else if (keycode == 65362)
-	// 	data->set.move_y *= 1.1;
-	// else if (keycode == 65364)
-	// 	data->set.move_y *= 0.9;
-	// else if (keycode == 45)
-	// 	data->set.zoom *= 1.5;
-	// else if (keycode == 61)
-	// 	data->set.zoom *= 0.9;
-	else
-		printf("Key %d was pressed!\n", keycode);
-	// render(data);
-	return (0);
+	// Temporary solution
+	mlx_destroy_image(data->mlx, data->img.img_ptr);
+	mlx_destroy_image(data->mlx, data->minimap.img_ptr);
+	mlx_destroy_image(data->mlx, data->player.img_ptr);
+	mlx_clear_window(data->mlx, data->win);
+	data->img.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+    if (data->img.img_ptr != NULL)
+        init_background(data);
+	data->minimap.img_ptr = mlx_new_image(data->mlx, data->map.width * data->size_square, data->map.height * data->size_square);
+    if (data->minimap.img_ptr != NULL)
+	{
+		int color;
+
+    	color = 0x000000;
+    	data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr, &data->minimap.bpp,
+        	&data->minimap.line_length, &data->minimap.endian);
+    	draw_square(data->minimap, data->img.basic_color, data->map.height * data->size_square, data->map.width * data->size_square);
+		redraw_map(data, color, data->map.height, data->map.width);
+    	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->pos_x_minimap, data->pos_y_minimap);
+	}
+	data->player.img_ptr = mlx_new_image(data->mlx, data->size_player, data->size_player);
+    if (data->player.img_ptr != NULL)
+        init_player(data);
 }
 
-int	mouse_hook(int keycode, int x, int y, t_data *data)
+int	key_hook_manager(int keycode, t_data *data)
 {
-	(void)x;
-	(void)y;
-	(void)keycode;
-	(void)data;
-	// cub_free_all(data);
-	// if (keycode == 4)
-	// 	data->set.zoom *= 1.1;
-	// else if (keycode == 5)
-	// 	data->set.zoom *= 0.9;
-	// data->set.move_x = (x - WIDTH / 2) / (data->set.zoom * WIDTH)
-	// 	+ data->set.move_x;
-	// data->set.move_y = (y - HEIGHT / 2) / (data->set.zoom * HEIGHT)
-	// 	+ data->set.move_y;
-	// render(data);
+	if (keycode == 53)
+		leave(data);
+	else if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
+		move(keycode, data);
+	else
+		printf("Key %d was pressed!\n", keycode);
 	return (0);
 }

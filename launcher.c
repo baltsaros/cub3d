@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:11:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/17 18:40:45 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/18 14:26:02 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ int launcher(t_data *data)
     init_mlx_and_window(data);
     draw_all(data);
 
-    mlx_key_hook(data->win, key_hook, data);
+    // mlx_key_hook(data->win, key_hook_manager, data);
+    mlx_hook(data->win, 2, (1L << 0), key_hook_manager, data);
+    
 	mlx_mouse_hook(data->win, mouse_hook, data);
 	mlx_hook(data->win, 17, 1L << 17, ft_exit, data);
     mlx_loop_hook(data->mlx, infinite_hook, &data);

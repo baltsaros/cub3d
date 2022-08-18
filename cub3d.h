@@ -123,7 +123,7 @@ void	check_mlx(void *mlx, t_data *data);
 void	check_win(t_data *data);
 
 //	hooks
-int		key_hook(int keycode, t_data *data);
+int		key_hook_manager(int keycode, t_data *data);
 int		mouse_hook(int keycode, int x, int y, t_data *data);
 int		infinite_hook(int keycode, t_data *data);
 
@@ -160,6 +160,9 @@ int		create_trgb(int t, int r, int g, int b);
 
 // Draw All
 void    draw_square(t_img img, int color, int end_i, int end_j);
+void    init_background(t_data *data);
+void    init_player(t_data *data);
+void    init_map_img(t_data *data);
 void    draw_all(t_data *data);
 
 // Bresenham
@@ -167,5 +170,6 @@ void	bresenham(t_point begin, t_point end, t_img *img);
 
 // Minimap
 void    draw_map(t_data *data, int color, int height, int width);
+void    redraw_map(t_data *data, int color, int height, int width);
 
 #endif
