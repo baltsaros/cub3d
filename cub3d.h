@@ -59,6 +59,8 @@ typedef struct s_player
 {
 	int		pos_x;
 	int		pos_y;
+	int		pos_win_x;
+	int		pos_win_y;
 }	t_player;
 
 //	struct to store map data

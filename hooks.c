@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/18 14:24:06 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/18 14:53:45 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ int	infinite_hook(int keycode, t_data *data)
 {
 	(void)keycode;
 	(void)data;
-	// mlx_clear_window(data->mlx, data->win);
-	// draw_square_test(data->img, data->img.basic_color, HEIGHT, WIDTH);
-	// mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
+	// Temporary solution
 	return (0);
 }
 
@@ -54,27 +52,27 @@ void	move(int keycode, t_data *data)
 {
 	if (keycode == 13)
 	{
-		data->player_s.pos_y -= 5;
-		if (data->player_s.pos_y < 0)
-			data->player_s.pos_y = 0;
+		data->player_s.pos_win_y -= 5;
+		if (data->player_s.pos_win_y < 0)
+			data->player_s.pos_win_y = 0;
 	}
 	else if (keycode == 1)
 	{
-		data->player_s.pos_y += 5;
-		if (data->player_s.pos_y > HEIGHT)
-			data->player_s.pos_y = HEIGHT;
+		data->player_s.pos_win_y += 5;
+		if (data->player_s.pos_win_y > HEIGHT - data->size_player)
+			data->player_s.pos_win_y = HEIGHT - data->size_player;
 	}
 	else if (keycode == 0)
 	{
-		data->player_s.pos_x -= 5;
-		if (data->player_s.pos_y < 0)
-			data->player_s.pos_y = 0;
+		data->player_s.pos_win_x -= 5;
+		if (data->player_s.pos_win_x < 0)
+			data->player_s.pos_win_x = 0;
 	}
 	else if (keycode == 2)
 	{
-		data->player_s.pos_x += 5;
-		if (data->player_s.pos_y > WIDTH)
-			data->player_s.pos_y = WIDTH;
+		data->player_s.pos_win_x += 5;
+		if (data->player_s.pos_win_x > WIDTH - data->size_player)
+			data->player_s.pos_win_x = WIDTH - data->size_player;
 	}
 	// Temporary solution
 	mlx_destroy_image(data->mlx, data->img.img_ptr);
@@ -98,7 +96,13 @@ void	move(int keycode, t_data *data)
 	}
 	data->player.img_ptr = mlx_new_image(data->mlx, data->size_player, data->size_player);
     if (data->player.img_ptr != NULL)
-        init_player(data);
+	{
+		data->player.basic_color = 0x0FAE2;
+    	data->player.addr = mlx_get_data_addr(data->player.img_ptr, &data->player.bpp,
+			&data->player.line_length, &data->player.endian);
+    	draw_square(data->player, data->player.basic_color, data->size_player, data->size_player);
+    	mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
+	}
 }
 
 int	key_hook_manager(int keycode, t_data *data)
