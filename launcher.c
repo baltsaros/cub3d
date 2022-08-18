@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:11:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/18 17:56:41 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/18 18:24:02 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void    init_mlx_and_window(t_data *data)
     data->size_player = 11;
     data->size_square = 55;
     data->player_s.p_ang = 0;
-    data->player_s.delta_x = cos(data->player_s.p_ang) * 5;
-    data->player_s.delta_y = sin(data->player_s.p_ang) * 5;
+    data->player_s.delta_x = cos(data->player_s.p_ang) * 50;
+	data->player_s.delta_y = sin(data->player_s.p_ang) * 50;
 }
 
 int launcher(t_data *data)
