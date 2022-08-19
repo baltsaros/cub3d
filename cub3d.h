@@ -62,13 +62,11 @@ typedef struct s_player
 	float	p_ang;
 	float	delta_x;
 	float	delta_y;
-	t_img	player;
 }	t_player;
 
 typedef struct s_ray
 {
 	int test;
-	t_img		ray;
 }	t_ray;
 
 typedef struct s_minimap
@@ -76,7 +74,6 @@ typedef struct s_minimap
 	t_point		position;
 	int			width;
 	int			height;
-	t_img		minimap;
 }	t_minimap;
 
 //	struct to store map data
@@ -109,8 +106,11 @@ typedef struct s_data
 	t_img		ceiling;
 	t_map		map;
 	t_player	player_s;
+	t_img		player;
 	t_ray		ray_s;
+	t_img		ray;
 	t_minimap	minimap_s;
+	t_img		minimap;
 }	t_data;
 
 //	alloc_check

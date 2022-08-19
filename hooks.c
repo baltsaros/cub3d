@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/19 16:26:35 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/19 17:49:28 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	render(t_data *data)
 {
 	// Temporary solution
 	mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
-	mlx_destroy_image(data->mlx, data->minimap_s.minimap.img_ptr);
-	mlx_destroy_image(data->mlx, data->player_s.player.img_ptr);
-	mlx_destroy_image(data->mlx, data->ray_s.ray.img_ptr);
+	mlx_destroy_image(data->mlx, data->minimap.img_ptr);
+	mlx_destroy_image(data->mlx, data->player.img_ptr);
+	mlx_destroy_image(data->mlx, data->ray.img_ptr);
 	mlx_clear_window(data->mlx, data->win);
 }
 
