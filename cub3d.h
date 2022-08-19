@@ -17,7 +17,6 @@
 // some default values
 #define SQUARE_SIZE		10
 #define FIELD_OF_VIEW 	2 * atan(0.66 / 1.0) = 66
-#define	PI				3.141592653
 
 //	struct to store mlx data
 typedef struct s_img
@@ -187,5 +186,9 @@ int 	is_not_in_wall(t_data *data, int height, int width);
 // Player and Ray
 void  	draw_ray(t_data *data);
 void    init_player(t_data *data);
+
+// Calculs Utils
+float   degToRad(int a);
+int 	FixAng(int a);
 
 #endif

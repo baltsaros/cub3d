@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/18 18:44:33 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/19 15:26:52 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,23 +134,17 @@ void	move(int keycode, t_data *data)
 
 void	rotate_fov(int keycode, t_data *data)
 {
-	(void)keycode;
-	(void)data;
 	if (keycode == 123)
 	{
-		data->player_s.p_ang -= 0.1;
-		if (data->player_s.p_ang < 0)
-			data->player_s.p_ang += 2 * PI;
-		data->player_s.delta_x = cos(data->player_s.p_ang) * 10;
-		data->player_s.delta_y = sin(data->player_s.p_ang) * 10;
+		data->player_s.p_ang += 5;
+		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang)) * 10;
+		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang)) * 10;
 	}
 	else if (keycode == 124)
 	{
-		data->player_s.p_ang += 0.1;
-		if (data->player_s.p_ang > 2 * PI)
-			data->player_s.p_ang -= 2 * PI;
-		data->player_s.delta_x = cos(data->player_s.p_ang) * 10;
-		data->player_s.delta_y = sin(data->player_s.p_ang) * 10;
+		data->player_s.p_ang -= 5;
+		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang)) * 10;
+		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang)) * 10;
 	}
 	render(data);
 }

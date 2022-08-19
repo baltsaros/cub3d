@@ -30,7 +30,8 @@ SRCS		=	cub3d.c \
 				is_not_in_wall.c \
 				player_and_ray.c \
 				init_map_utils_1.c \
-				init_map_utils_2.c
+				init_map_utils_2.c\
+				calculs_utils.c \
 
 OBJ_DIR		= objs
 OBJ_FILES	= $(SRCS:.c=.o)
