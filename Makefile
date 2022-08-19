@@ -22,16 +22,15 @@ SRCS		=	cub3d.c \
 				error_messages.c \
 				hooks.c \
 				init_map.c \
-				bresenham.c \
+				init_map_utils_1.c \
+				init_map_utils_2.c \
 				launcher.c \
-				launcher_utils.c \
 				draw_all.c \
 				minimap.c \
-				is_not_in_wall.c \
-				player_and_ray.c \
-				init_map_utils_1.c \
-				init_map_utils_2.c\
-				calculs_utils.c \
+				player.c \
+				ray.c \
+				bresenham.c \
+				calculs_utils.c
 
 OBJ_DIR		= objs
 OBJ_FILES	= $(SRCS:.c=.o)

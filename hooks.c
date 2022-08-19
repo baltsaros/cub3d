@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/19 15:41:58 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/19 16:26:35 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,11 @@
 void	render(t_data *data)
 {
 	// Temporary solution
-	mlx_destroy_image(data->mlx, data->img.img_ptr);
-	mlx_destroy_image(data->mlx, data->minimap.img_ptr);
-	mlx_destroy_image(data->mlx, data->player.img_ptr);
+	mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
+	mlx_destroy_image(data->mlx, data->minimap_s.minimap.img_ptr);
+	mlx_destroy_image(data->mlx, data->player_s.player.img_ptr);
+	mlx_destroy_image(data->mlx, data->ray_s.ray.img_ptr);
 	mlx_clear_window(data->mlx, data->win);
-	data->img.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-    if (data->img.img_ptr != NULL)
-        init_background(data);
-	data->minimap.img_ptr = mlx_new_image(data->mlx, data->map.width * data->size_square, data->map.height * data->size_square);
-    if (data->minimap.img_ptr != NULL)
-	{
-		int color;
-
-    	color = 0x000000;
-    	data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr, &data->minimap.bpp,
-        	&data->minimap.line_length, &data->minimap.endian);
-    	draw_square(data->minimap, data->img.basic_color, data->map.height * data->size_square, data->map.width * data->size_square);
-		redraw_map(data, color, data->map.height, data->map.width);
-    	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->pos_x_minimap, data->pos_y_minimap);
-	}
-	data->player.img_ptr = mlx_new_image(data->mlx, data->size_player, data->size_player);
-    if (data->player.img_ptr != NULL)
-	{
-		data->player.basic_color = 0x0FAE2;
-    	data->player.addr = mlx_get_data_addr(data->player.img_ptr, &data->player.bpp,
-			&data->player.line_length, &data->player.endian);
-    	draw_square(data->player, data->player.basic_color, data->size_player, data->size_player);
-    	mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
-	}
-	data->ray.img_ptr = mlx_new_image(data->mlx, data->map.width * data->size_square, data->map.height * data->size_square);
-    if (data->ray.img_ptr != NULL)
-	{
-		data->ray.basic_color = 0xFFFFFF;
-    	data->ray.addr = mlx_get_data_addr(data->ray.img_ptr, &data->ray.bpp,
-			&data->ray.line_length, &data->ray.endian);
-		draw_square(data->ray, create_trgb(255, 255, 255, 255), data->map.height * data->size_square, data->map.width * data->size_square);
-    	draw_ray(data);
-    	mlx_put_image_to_window(data->mlx, data->win, data->ray.img_ptr, data->pos_x_minimap, data->pos_y_minimap);
-	}
 }
 
 int	infinite_hook(int keycode, t_data *data)
@@ -65,7 +32,7 @@ int	infinite_hook(int keycode, t_data *data)
 
 void	leave(t_data *data)
 {
-	mlx_destroy_image(data->mlx, data->img.img_ptr);
+	mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
 	mlx_destroy_window(data->mlx, data->win);
 	data->win = NULL;
 	// cub_free_all(data);
@@ -129,7 +96,7 @@ void	move(int keycode, t_data *data)
 		if (data->player_s.pos_win_x > WIDTH - data->size_player)
 			data->player_s.pos_win_x = WIDTH - data->size_player;
 	}
-	render(data);
+	// render(data);
 }
 
 void	rotate_fov(int keycode, t_data *data)
@@ -146,7 +113,7 @@ void	rotate_fov(int keycode, t_data *data)
 		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
 	}
-	render(data);
+	// render(data);
 }
 
 int	key_hook_manager(int keycode, t_data *data)

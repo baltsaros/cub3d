@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/18 16:17:01 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/19 16:26:43 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,42 +30,28 @@ void    draw_square(t_img img, int color, int end_i, int end_j)
     }
 }
 
-void    init_background(t_data *data)
+void    init_ceiling(t_data *data)
 {
-    data->img.basic_color = create_trgb(0, ft_atoi(data->map.c_spl[0]), ft_atoi(data->map.c_spl[1]), ft_atoi(data->map.c_spl[2]));
-    data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
-		&data->img.line_length, &data->img.endian);
-    draw_square(data->img, data->img.basic_color, HEIGHT, WIDTH);
-    mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
-}
-
-void    init_map_img(t_data *data)
-{
-    int color;
-
-    color = 0x000000;
-    data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr, &data->minimap.bpp,
-        &data->minimap.line_length, &data->minimap.endian);
-    draw_square(data->minimap, data->img.basic_color, data->map.height * data->size_square, data->map.width * data->size_square);
-    draw_map(data, color, data->map.height, data->map.width);
-    mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->pos_x_minimap, data->pos_y_minimap);
+    data->ceiling.basic_color = create_trgb(0,
+        ft_atoi(data->map.c_spl[0]),
+        ft_atoi(data->map.c_spl[1]),
+        ft_atoi(data->map.c_spl[2]));
+    data->ceiling.addr = mlx_get_data_addr(data->ceiling.img_ptr, &data->ceiling.bpp,
+		&data->ceiling.line_length, &data->ceiling.endian);
+    draw_square(data->ceiling, data->ceiling.basic_color, HEIGHT, WIDTH);
+    mlx_put_image_to_window(data->mlx, data->win, data->ceiling.img_ptr, 0, 0);
 }
 
 void    draw_all(t_data *data)
 {
-    data->img.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-    if (data->img.img_ptr != NULL)
-        init_background(data);
+    // Ceiling
+    data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+    if (data->ceiling.img_ptr != NULL)
+        init_ceiling(data);
     //else
         // put error here
-    data->minimap.img_ptr = mlx_new_image(data->mlx, data->map.width * data->size_square, data->map.height * data->size_square);
-    if (data->minimap.img_ptr != NULL)
-        init_map_img(data);
-    // else
-        // put error here
-    data->player.img_ptr = mlx_new_image(data->mlx, data->size_player, data->size_player);
-    if (data->player.img_ptr != NULL)
-        init_player(data);
-    //else
-        // put error here
+    // Minimap
+    init_minimap(data, data->minimap_s);
+    // Player then
+    // Ray then
 }

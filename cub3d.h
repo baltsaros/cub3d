@@ -59,15 +59,25 @@ typedef struct s_player
 	float	pos_y;
 	float	pos_win_x;
 	float	pos_win_y;
+	float	p_ang;
 	float	delta_x;
 	float	delta_y;
-	float	p_ang;
+	t_img	player;
 }	t_player;
 
 typedef struct s_ray
 {
 	int test;
+	t_img		ray;
 }	t_ray;
+
+typedef struct s_minimap
+{
+	t_point		position;
+	int			width;
+	int			height;
+	t_img		minimap;
+}	t_minimap;
 
 //	struct to store map data
 typedef struct s_map
@@ -94,16 +104,13 @@ typedef struct s_data
 	size_t		j;
 	char		*s_tmp;
 	int			fd;
-	t_img		img;
-	t_img		minimap;
-	t_img		player;
-	t_img		ray;
-	t_map		map;
-	int			pos_x_minimap;
-	int			pos_y_minimap;
 	int			size_player;
 	int			size_square;
+	t_img		ceiling;
+	t_map		map;
 	t_player	player_s;
+	t_ray		ray_s;
+	t_minimap	minimap_s;
 }	t_data;
 
 //	alloc_check
@@ -161,33 +168,39 @@ void	cub_free_all(t_data *data);
 void	cub_free_params(t_data *data);
 
 // Launcher
-void    init_mlx_and_window(t_data *data);
+void    hook_manager(t_data *data);
 int 	launcher(t_data *data);
-
-// Launcher Utils
-int		create_trgb(int t, int r, int g, int b);
 
 // Draw All
 void    draw_square(t_img img, int color, int end_i, int end_j);
-void    init_background(t_data *data);
-void    init_map_img(t_data *data);
+void    init_ceiling(t_data *data);
 void    draw_all(t_data *data);
 
-// Bresenham
-void	bresenham(t_data *data, t_point begin, t_point end, t_img *img);
-
 // Minimap
+void    draw_square_coord(t_data *data, int color, int x, int y);
+void    draw_empty_square_coord(t_data *data, int color, int x, int y);
 void    draw_map(t_data *data, int color, int height, int width);
 void    redraw_map(t_data *data, int color, int height, int width);
+void    init_minimap(t_data *data, t_minimap minimap);
+void    init_minimap_values(t_data *data);
 
-// Is Not In Wall
-int 	is_not_in_wall(t_data *data, int height, int width);
-
-// Player and Ray
-void  	draw_ray(t_data *data);
+// Player
 void    init_player(t_data *data);
+void    init_player_values(t_data *data);
+
+// Ray
+void  draw_ray(t_data *data);
+void  init_ray(t_data *data);
+
+// Bresenham
+void	mlx_pixel_put_img(t_img	*img, int x, int y, int color);
+void	init_bre_values(t_bre	*values, t_seg *seg);
+void	ft_put_pixel(t_data *data, t_seg *seg, t_img *img, int color);
+void	init_seg_values(t_seg *seg, t_point *begin, t_point *end);
+void	bresenham(t_data *data, t_point begin, t_point end, t_img *img);
 
 // Calculs Utils
+int		create_trgb(int t, int r, int g, int b);
 float   degToRad(int a);
 int 	FixAng(int a);
 
