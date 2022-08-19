@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/19 16:55:17 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/19 17:31:03 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void    draw_empty_square_coord(t_data *data, int color, int x, int y)
 
 void    draw_map(t_data *data, int color, int height, int width)
 {
+    (void)data;
+    (void)color;
     int i;
     int j;
 
@@ -60,19 +62,20 @@ void    draw_map(t_data *data, int color, int height, int width)
         j = 0;
         while (j != width)
         {
-            if (data->map.map[i][j] == '1')
-                draw_square_coord(data, color, (j * data->size_square), (i * data->size_square));
-            else if (data->map.map[i][j] == '0' || data->map.map[i][j] == 'N')
-                draw_empty_square_coord(data, color, (j * data->size_square), (i * data->size_square));
-            if (data->map.map[i][j] == 'N')
-            {
-                data->player_s.pos_x = (j * (data->size_square)) + (data->size_square / 2) - (data->size_player / 2);
-                data->player_s.pos_y = (i * (data->size_square)) + (data->size_square / 2) - (data->size_player / 2);
-            }
+            // if (data->map.map[i][j] == '1')
+                // draw_square_coord(data, color, (j * data->size_square), (i * data->size_square));
+            // else if (data->map.map[i][j] == '0' || data->map.map[i][j] == 'N')
+                // draw_empty_square_coord(data, color, (j * data->size_square), (i * data->size_square));
+            // if (data->map.map[i][j] == 'N')
+            // {
+                // data->player_s.pos_x = (j * (data->size_square)) + (data->size_square / 2) - (data->size_player / 2);
+                // data->player_s.pos_y = (i * (data->size_square)) + (data->size_square / 2) - (data->size_player / 2);
+            // }
             j++;
         }
         i++;
     }
+    mlx_pixel_put_img(&data->minimap_s.minimap, data->minimap_s.position.x + 100, data->minimap_s.position.y + 100, color);
 }
 
 void    init_minimap(t_data *data, t_minimap minimap)
@@ -80,8 +83,14 @@ void    init_minimap(t_data *data, t_minimap minimap)
     minimap.minimap.basic_color = 0x000000;
     minimap.minimap.addr = mlx_get_data_addr(minimap.minimap.img_ptr, &minimap.minimap.bpp,
         &minimap.minimap.line_length, &minimap.minimap.endian);
+
+    printf("minimap.height: %d\n", minimap.height);
+    printf("minimap.width: %d\n", minimap.width);
+    printf("minimap.position.x: %d\n", minimap.position.x);
+    printf("minimap.position.y: %d\n", minimap.position.y);
+
     draw_square(minimap.minimap, create_trgb(255, 255, 255, 255), minimap.height, minimap.width);
-    // draw_map(data, minimap.minimap.basic_color, data->map.height, data->map.width);
+    draw_map(data, minimap.minimap.basic_color, data->map.height, data->map.width);
     mlx_put_image_to_window(data->mlx, data->win, minimap.minimap.img_ptr, minimap.position.x, minimap.position.y);
 }
 
