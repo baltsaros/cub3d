@@ -126,7 +126,6 @@ void	*cub_malloc(size_t n, t_data *data);
 
 //	utils_2
 int		ft_strcmp(char *s1, char *s2);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 char	*get_next_line(int fd, t_data *data);
 int		check_charset(char c, char *charset);
 int		ft_exit(t_data *data);

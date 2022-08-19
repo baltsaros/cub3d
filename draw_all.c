@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/19 16:26:43 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/19 16:55:06 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    draw_square(t_img img, int color, int end_i, int end_j)
         j = 0;
         while (j != end_j)
         {
-            my_mlx_pixel_put(&img, j, i, color);
+            mlx_pixel_put_img(&img, j, i, color);
             j++;
         }
         i++;
