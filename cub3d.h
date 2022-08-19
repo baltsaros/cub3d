@@ -41,31 +41,34 @@ typedef struct s_bre
 	int	err;
 }	t_bre;
 
-typedef struct s_seg
-{
-	int x0;
-	int y0;
-	int	x1;
-	int	y1;
-}	t_seg;
-
 typedef struct s_point
 {
 	int x;
 	int y;
 }	t_point;
 
+typedef struct s_seg
+{
+	t_point	p0;
+	t_point	p1;
+}	t_seg;
+
 // 	struct for positions
 typedef struct s_player
 {
-	int		pos_x;
-	int		pos_y;
-	int		pos_win_x;
-	int		pos_win_y;
+	float	pos_x;
+	float	pos_y;
+	float	pos_win_x;
+	float	pos_win_y;
 	float	delta_x;
 	float	delta_y;
 	float	p_ang;
 }	t_player;
+
+typedef struct s_ray
+{
+	int test;
+}	t_ray;
 
 //	struct to store map data
 typedef struct s_map
