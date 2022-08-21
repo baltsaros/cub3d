@@ -43,10 +43,10 @@ void	render_elem(t_input *data, int color, int j, int i)
 	float	y;
 
 	y = data->sy * j;
-	while (y < data->sy * (j + 1))
+	while (y < data->sy * (j + 1) - 1)
 	{
 		x = data->sx * i;
-		while (x < data->sx * (i + 1))
+		while (x < data->sx * (i + 1) - 1)
 		{
 			my_mlx_pixel_put(&data->img, x, y, color);
 			++x;

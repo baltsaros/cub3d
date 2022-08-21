@@ -21,6 +21,8 @@
 # define BLACK 0x000000
 # define GRAY 0x808080
 
+# define PI 3.1415926535
+
 //	struct to store mlx data
 typedef struct s_img
 {
@@ -60,6 +62,9 @@ typedef struct s_input
 	void	*win;
 	float	px;
 	float	py;
+	float	pdx;
+	float	pdy;
+	float	pa;
 	float	sx;
 	float	sy;
 	int		color;

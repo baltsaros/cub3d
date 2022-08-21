@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/21 15:40:54 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/21 15:50:21 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	key_hook(int keycode, t_input *data)
 		cub_free_all(data);
 		exit(EXIT_SUCCESS);
 	}
-	else if (keycode == 119 && map[y - 1][x] && map[y - 1][x] == '0')
+	else if (keycode == 119 && map[y - 1][x] && map[y - 1][x] != '1')
 		data->map.player[1] -= 1;
-	else if (keycode == 115 && map[y + 1][x] && map[y + 1][x] == '0')
+	else if (keycode == 115 && map[y + 1][x] && map[y + 1][x] != '1')
 		data->map.player[1] += 1;
-	else if (keycode == 97 && map[y][x - 1] && map[y][x - 1] == '0')
+	else if (keycode == 97 && map[y][x - 1] && map[y][x - 1] != '1')
 		data->map.player[0] -= 1;
-	else if (keycode == 100 && map[y][x + 1] && map[y][x + 1] == '0')
+	else if (keycode == 100 && map[y][x + 1] && map[y][x + 1] != '1')
 		data->map.player[0] += 1;
 	else
 		printf("Key %d was pressed!\n", keycode);
