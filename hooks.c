@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/16 15:47:03 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/21 12:54:56 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,17 @@ int	key_hook(int keycode, t_input *data)
 		cub_free_all(data);
 		exit(EXIT_SUCCESS);
 	}
-	// else if (keycode == 65361)
-	// 	data->set.move_x *= 1.1;
-	// else if (keycode == 65363)
-	// 	data->set.move_x *= 0.9;
-	// else if (keycode == 65362)
-	// 	data->set.move_y *= 1.1;
-	// else if (keycode == 65364)
-	// 	data->set.move_y *= 0.9;
-	// else if (keycode == 45)
-	// 	data->set.zoom *= 1.5;
-	// else if (keycode == 61)
-	// 	data->set.zoom *= 0.9;
+	else if (keycode == 119)
+		data->py -= 1;
+	else if (keycode == 115)
+		data->py += 1;
+	else if (keycode == 97)
+		data->px -= 1;
+	else if (keycode == 100)
+		data->px += 1;
 	else
 		printf("Key %d was pressed!\n", keycode);
-	// render(data);
+	render(data);
 	return (0);
 }
 
@@ -55,6 +51,6 @@ int	mouse_hook(int keycode, int x, int y, t_input *data)
 	// 	+ data->set.move_x;
 	// data->set.move_y = (y - HEIGHT / 2) / (data->set.zoom * HEIGHT)
 	// 	+ data->set.move_y;
-	// render(data);
+	render(data);
 	return (0);
 }

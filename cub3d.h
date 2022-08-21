@@ -7,6 +7,7 @@
 # include <stdlib.h>
 # include <errno.h>
 # include <math.h>
+# include <stdint.h>
 # include "mlx_linux/mlx.h"
 # include "libft/libft.h"
 
@@ -50,6 +51,9 @@ typedef struct s_input
 	int		fd;
 	void	*mlx;
 	void	*win;
+	float	px;
+	float	py;
+	int		color;
 	t_img	img;
 	t_map	map;
 }	t_input;
@@ -106,5 +110,11 @@ void	check_map(t_map *map, t_input *data);
 void	cub_free(char *str[]);
 void	cub_free_all(t_input *data);
 void	cub_free_params(t_input *data);
+
+//	drawing
+int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
+void	render(t_input *data);
+void	render_background(t_input *data, t_img *img);
+void	render_player(t_input *data, t_img *img);
 
 #endif

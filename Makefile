@@ -16,9 +16,11 @@ SRCS		= cub3d.c \
 				alloc_check.c \
 				error_messages.c \
 				hooks.c \
+				drawing.c \
 				init_map.c \
 				init_map_utils_1.c \
 				init_map_utils_2.c
+
 # SRCS		= $(notdir $(SRC_FILES))
 
 OBJ_DIR		= objs
@@ -42,6 +44,7 @@ $(OBJ_DIR)/%.o: %.c
 $(NAME):	$(OBJS) 
 			@$(GCC) $(OBJS) -Lmlx_linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz libft/libft.a -o $(NAME)
 			@printf "\n$(C_GREEN_B)Finished!$(C_RESET)\n";
+
 
 libft:
 			@make -C ./libft
