@@ -33,16 +33,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-//	struct to store mlx data for player
-typedef struct s_pl
-{
-	void	*mlx_img;
-	char	*addr;
-	int		bpp;
-	int		line_length;
-	int		endian;
-}	t_pl;
-
 //	struct to store map data
 typedef struct s_map
 {
@@ -78,7 +68,6 @@ typedef struct s_input
 	float	sy;
 	int		color;
 	t_img	img;
-	t_pl	pl;
 	t_map	map;
 }	t_input;
 
