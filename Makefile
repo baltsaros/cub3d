@@ -16,7 +16,7 @@ SRCS		= cub3d.c \
 				alloc_check.c \
 				error_messages.c \
 				hooks.c \
-				drawing.c \
+				render.c \
 				init_map.c \
 				init_map_utils_1.c \
 				init_map_utils_2.c

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/21 17:01:12 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/21 20:33:01 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	key_hook(int keycode, t_input *data)
 		data->px += 1;
 	else
 		printf("Key %d was pressed!\n", keycode);
-	render(data);
+	render_player(data, &data->pl);
 	return (0);
 }
 
@@ -58,6 +58,6 @@ int	mouse_hook(int keycode, int x, int y, t_input *data)
 	// 	+ data->set.move_x;
 	// data->set.move_y = (y - HEIGHT / 2) / (data->set.zoom * HEIGHT)
 	// 	+ data->set.move_y;
-	render(data);
+	render_player(data, &data->pl);
 	return (0);
 }

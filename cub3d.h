@@ -68,6 +68,7 @@ typedef struct s_input
 	float	sy;
 	int		color;
 	t_img	img;
+	t_img	pl;
 	t_map	map;
 }	t_input;
 

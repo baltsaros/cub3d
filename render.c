@@ -5,35 +5,12 @@ int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
 	return (red << 16 | green << 8 | blue);
 }
 
-void	render_blok(t_input *data, t_img *img)
-{
-	float	x;
-	float	y;
-
-	(void)data;
-	y = 100;
-	while (y < 110)
-	{
-		x = 100;
-		while (x < 110)
-		{
-			printf("%f\n", x);
-			my_mlx_pixel_put(img, x, y, GREEN);
-			++x;
-		}
-		++y;
-	}
-}
 
 int	render(t_input *data)
 {
-	// render_background(data, &data->img);
 	render_map(data, data->map.map);
-	render_player(data, &data->img);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
-	render_blok(data, &data->blok);
-	printf("blok\n");
-	mlx_put_image_to_window(data->mlx, data->win, data->blok.mlx_img, 10, 10);
+	render_player(data, &data->pl);
 	return (0);
 }
 
@@ -83,16 +60,17 @@ void	render_player(t_input *data, t_img *img)
 	float	x;
 	float	y;
 
-	y = data->py * data->sy;
+	y = 0;
 	data->color = encode_rgb(100, 0, 50);
-	while (y < data->sy * (data->py + 1))
+	while (y < data->sy)
 	{
-		x = data->px * data->sx;
-		while (x < data->sx * (data->px + 1))
+		x = 0;
+		while (x < data->sx)
 		{
 			my_mlx_pixel_put(img, x, y, data->color);
 			++x;
 		}
 		++y;
 	}
+	mlx_put_image_to_window(data->mlx, data->win, img->mlx_img, data->sx * data->px, data->sy * data->py);
 }
