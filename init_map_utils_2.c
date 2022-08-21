@@ -70,7 +70,7 @@ size_t	check_length(char **map, size_t i, t_input *data)
 	}
 	data->j = j;
 	if (len > data->map.width)
-		data->map.width = len;
+		data->map.width = len - 1;
 	return (j);
 }
 
@@ -123,6 +123,8 @@ void	check_player(char **map, t_input *data)
 			if (check_charset(map[j][i], "NEWS"))
 			{
 				player = 1;
+				data->map.player[0] = i;
+				data->map.player[1] = j;
 				break ;
 			}
 			++i;

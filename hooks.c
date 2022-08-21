@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/21 13:39:17 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/21 15:40:54 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 int	key_hook(int keycode, t_input *data)
 {
+	int		x;
+	int		y;
+	char	**map;
+
+	x = data->map.player[0];
+	y = data->map.player[1];
+	map = data->map.map;
 	if (keycode == 65307)
 	{
 		mlx_destroy_image(data->mlx, data->img.mlx_img);
@@ -22,14 +29,14 @@ int	key_hook(int keycode, t_input *data)
 		cub_free_all(data);
 		exit(EXIT_SUCCESS);
 	}
-	// else if (keycode == 119)
-	// 	data->py -= 1;
-	// else if (keycode == 115)
-	// 	data->py += 1;
-	// else if (keycode == 97)
-	// 	data->px -= 1;
-	// else if (keycode == 100)
-	// 	data->px += 1;
+	else if (keycode == 119 && map[y - 1][x] && map[y - 1][x] == '0')
+		data->map.player[1] -= 1;
+	else if (keycode == 115 && map[y + 1][x] && map[y + 1][x] == '0')
+		data->map.player[1] += 1;
+	else if (keycode == 97 && map[y][x - 1] && map[y][x - 1] == '0')
+		data->map.player[0] -= 1;
+	else if (keycode == 100 && map[y][x + 1] && map[y][x + 1] == '0')
+		data->map.player[0] += 1;
 	else
 		printf("Key %d was pressed!\n", keycode);
 	render(data);

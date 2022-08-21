@@ -9,8 +9,8 @@ int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
 void	render(t_input *data)
 {
 	// render_background(data, &data->img);
-	// data->color = encode_rgb(100, 0, 50);
 	render_map(data, data->map.map);
+	render_player(data, &data->img);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 }
 
@@ -27,10 +27,8 @@ void	render_map(t_input *data, char **map)
 		{
 			if (map[j][i] == '1')
 				render_elem(data, GRAY, j, i);
-			else if (map[j][i] == '0')
+			else if (map[j][i] == '0' || check_charset(map[j][i], "NEWS"))
 				render_elem(data, WHITE, j, i);
-			else if (check_charset(map[j][i], "NEWS"))
-				render_elem(data, RED, j, i);
 			else
 				render_elem(data, BLACK, j, i);
 			++i;
@@ -45,10 +43,10 @@ void	render_elem(t_input *data, int color, int j, int i)
 	float	y;
 
 	y = data->sy * j;
-	while (y < HEIGHT && y < y + data->sy)
+	while (y < data->sy * (j + 1))
 	{
 		x = data->sx * i;
-		while (x < WIDTH && x < x + data->sx)
+		while (x < data->sx * (i + 1))
 		{
 			my_mlx_pixel_put(&data->img, x, y, color);
 			++x;
@@ -59,20 +57,19 @@ void	render_elem(t_input *data, int color, int j, int i)
 
 void	render_player(t_input *data, t_img *img)
 {
-	// float	x;
-	// float	y;
+	float	x;
+	float	y;
 
-	// y = 200;
-	// data->color = encode_rgb(100, 0, 50);
-	// while (y < data->py)
-	// {
-	// 	x = 200;
-	// 	while (x < data->px)
-	// 	{
-	// 		my_mlx_pixel_put(img, x, y, 0xFF00);
-	// 		++x;
-	// 	}
-	// 	++y;
-	// }
-	my_mlx_pixel_put(img, data->px, data->py, 0xFF00);
+	y = data->map.player[1] * data->sy;
+	data->color = encode_rgb(100, 0, 50);
+	while (y < data->sy * (data->map.player[1] + 1))
+	{
+		x = data->map.player[0] * data->sx;
+		while (x < data->sx * (data->map.player[0] + 1))
+		{
+			my_mlx_pixel_put(img, x, y, data->color);
+			++x;
+		}
+		++y;
+	}
 }
