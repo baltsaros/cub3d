@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/21 15:50:21 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/21 16:30:19 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	key_hook(int keycode, t_input *data)
 	int		y;
 	char	**map;
 
-	x = data->map.player[0];
-	y = data->map.player[1];
+	x = data->px;
+	y = data->py;
 	map = data->map.map;
 	if (keycode == 65307)
 	{
@@ -30,13 +30,13 @@ int	key_hook(int keycode, t_input *data)
 		exit(EXIT_SUCCESS);
 	}
 	else if (keycode == 119 && map[y - 1][x] && map[y - 1][x] != '1')
-		data->map.player[1] -= 1;
+		data->py -= 1;
 	else if (keycode == 115 && map[y + 1][x] && map[y + 1][x] != '1')
-		data->map.player[1] += 1;
+		data->py += 1;
 	else if (keycode == 97 && map[y][x - 1] && map[y][x - 1] != '1')
-		data->map.player[0] -= 1;
+		data->px -= 1;
 	else if (keycode == 100 && map[y][x + 1] && map[y][x + 1] != '1')
-		data->map.player[0] += 1;
+		data->px += 1;
 	else
 		printf("Key %d was pressed!\n", keycode);
 	render(data);

@@ -48,7 +48,6 @@ typedef struct s_map
 	char	**map;
 	size_t	width;
 	size_t	height;
-	int		player[2];
 }	t_map;
 
 //	global(integral) struct to store all data

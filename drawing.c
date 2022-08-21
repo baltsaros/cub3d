@@ -60,12 +60,12 @@ void	render_player(t_input *data, t_img *img)
 	float	x;
 	float	y;
 
-	y = data->map.player[1] * data->sy;
+	y = data->py * data->sy;
 	data->color = encode_rgb(100, 0, 50);
-	while (y < data->sy * (data->map.player[1] + 1))
+	while (y < data->sy * (data->py + 1))
 	{
-		x = data->map.player[0] * data->sx;
-		while (x < data->sx * (data->map.player[0] + 1))
+		x = data->px * data->sx;
+		while (x < data->sx * (data->px + 1))
 		{
 			my_mlx_pixel_put(img, x, y, data->color);
 			++x;

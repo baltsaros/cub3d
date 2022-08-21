@@ -15,8 +15,6 @@ int	main(int argc, char *argv[])
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp,
 			&data.img.line_length, &data.img.endian);
 	// mlx_loop_hook(data.mlx, &render, &data);
-	data.px = 300;
-	data.py = 300;
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_mouse_hook(data.win, mouse_hook, &data);
 	mlx_hook(data.win, 17, 1L << 17, ft_exit, &data);
