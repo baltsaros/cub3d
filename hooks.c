@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/21 12:54:56 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/21 13:39:17 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int	key_hook(int keycode, t_input *data)
 		cub_free_all(data);
 		exit(EXIT_SUCCESS);
 	}
-	else if (keycode == 119)
-		data->py -= 1;
-	else if (keycode == 115)
-		data->py += 1;
-	else if (keycode == 97)
-		data->px -= 1;
-	else if (keycode == 100)
-		data->px += 1;
+	// else if (keycode == 119)
+	// 	data->py -= 1;
+	// else if (keycode == 115)
+	// 	data->py += 1;
+	// else if (keycode == 97)
+	// 	data->px -= 1;
+	// else if (keycode == 100)
+	// 	data->px += 1;
 	else
 		printf("Key %d was pressed!\n", keycode);
 	render(data);

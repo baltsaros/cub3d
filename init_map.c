@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/17 16:01:58 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/21 13:15:07 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,8 @@ int	init_map(t_input *data, char *file)
 	check_extension(data, file);
 	data->map = read_param(data, file);
 	check_param(&(data->map), data);
+	data->sx = WIDTH / data->map.width;
+	data->sy = HEIGHT / data->map.height;
+	printf("sx is %f\nsy is %f\n", data->sx, data->sy);
 	return (0);
 }

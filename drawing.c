@@ -8,24 +8,49 @@ int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
 
 void	render(t_input *data)
 {
-	render_background(data, &data->img);
-	render_player(data, &data->img);
+	// render_background(data, &data->img);
+	// data->color = encode_rgb(100, 0, 50);
+	render_map(data, data->map.map);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 }
 
-void	render_background(t_input *data, t_img *img)
+void	render_map(t_input *data, char **map)
 {
-	int	x;
-	int	y;
+	int	i;
+	int	j;
 
-	y = 0;
-	data->color = encode_rgb(100, 0, 50);
-	while (y < HEIGHT)
+	j = 0;
+	while(map[j])
 	{
-		x = 0;
-		while (x < WIDTH)
+		i = 0;
+		while (map[j][i])
 		{
-			my_mlx_pixel_put(img, x, y, data->color);
+			if (map[j][i] == '1')
+				render_elem(data, GRAY, j, i);
+			else if (map[j][i] == '0')
+				render_elem(data, WHITE, j, i);
+			else if (check_charset(map[j][i], "NEWS"))
+				render_elem(data, RED, j, i);
+			else
+				render_elem(data, BLACK, j, i);
+			++i;
+		}
+		++j;
+	}
+}
+
+void	render_elem(t_input *data, int color, int j, int i)
+{
+	float	x;
+	float	y;
+
+	y = data->sy * j;
+	while (y < HEIGHT && y < y + data->sy)
+	{
+		x = data->sx * i;
+		while (x < WIDTH && x < x + data->sx)
+		{
+			my_mlx_pixel_put(&data->img, x, y, color);
 			++x;
 		}
 		++y;

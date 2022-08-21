@@ -12,8 +12,14 @@
 # include "libft/libft.h"
 
 //	default window size
-#define WIDTH 1000
-#define HEIGHT 1000
+# define WIDTH 800
+# define HEIGHT 600
+
+# define RED 0xFF0000
+# define GREEN 0xFF00
+# define WHITE 0xFFFFFF
+# define BLACK 0x000000
+# define GRAY 0x808080
 
 //	struct to store mlx data
 typedef struct s_img
@@ -46,13 +52,15 @@ typedef struct s_map
 typedef struct s_input
 {
 	size_t	i;
-	size_t	j;
+	size_t	j; 
 	char	*s_tmp;
 	int		fd;
 	void	*mlx;
 	void	*win;
 	float	px;
 	float	py;
+	float	sx;
+	float	sy;
 	int		color;
 	t_img	img;
 	t_map	map;
@@ -114,7 +122,8 @@ void	cub_free_params(t_input *data);
 //	drawing
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 void	render(t_input *data);
-void	render_background(t_input *data, t_img *img);
+void	render_map(t_input *data, char **map);
+void	render_elem(t_input *data, int color, int j, int i);
 void	render_player(t_input *data, t_img *img);
 
 #endif
