@@ -6,12 +6,13 @@ int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
 }
 
 
-void	render(t_input *data)
+int	render(t_input *data)
 {
 	// render_background(data, &data->img);
 	render_map(data, data->map.map);
 	render_player(data, &data->img);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
+	return (0);
 }
 
 void	render_map(t_input *data, char **map)

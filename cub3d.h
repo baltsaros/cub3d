@@ -23,7 +23,7 @@
 
 # define PI 3.1415926535
 
-//	struct to store mlx data
+//	struct to store mlx data for map
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -32,6 +32,16 @@ typedef struct s_img
 	int		line_length;
 	int		endian;
 }	t_img;
+
+//	struct to store mlx data for player
+typedef struct s_pl
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}	t_pl;
 
 //	struct to store map data
 typedef struct s_map
@@ -68,6 +78,7 @@ typedef struct s_input
 	float	sy;
 	int		color;
 	t_img	img;
+	t_pl	pl;
 	t_map	map;
 }	t_input;
 
@@ -126,7 +137,7 @@ void	cub_free_params(t_input *data);
 
 //	drawing
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
-void	render(t_input *data);
+int		render(t_input *data);
 void	render_map(t_input *data, char **map);
 void	render_elem(t_input *data, int color, int j, int i);
 void	render_player(t_input *data, t_img *img);
