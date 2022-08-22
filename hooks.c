@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/22 14:13:12 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/22 15:50:49 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ void	render(t_data *data)
     	redraw_map(data, data->minimap.basic_color, data->map.height, data->map.width);
     	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
 	}
-	data->player.img_ptr = mlx_new_image(data->mlx, data->size_player, data->size_player);
+	data->player.img_ptr = mlx_new_image(data->mlx, PLAYER_SIZE, PLAYER_SIZE);
 	if (data->player.img_ptr != NULL)
 	{
 		data->player.basic_color = 0x0FAE2;
     	data->player.addr = mlx_get_data_addr(data->player.img_ptr, &data->player.bpp,
 			&data->player.line_length, &data->player.endian);
-    	draw_square(data->player, data->player.basic_color, data->size_player, data->size_player);
+    	draw_square(data->player, data->player.basic_color, PLAYER_SIZE, PLAYER_SIZE);
 		mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
 	}
     init_ray(data);
@@ -97,8 +97,8 @@ void	move(int keycode, t_data *data)
 		printf("Before data->player_s.y: %f\n", data->player_s.pos_win_y);
 		data->player_s.pos_win_y += 5;
 		data->player_s.pos_y += 5;
-		if (data->player_s.pos_win_y > HEIGHT - data->size_player)
-			data->player_s.pos_win_y = HEIGHT - data->size_player;
+		if (data->player_s.pos_win_y > HEIGHT - PLAYER_SIZE)
+			data->player_s.pos_win_y = HEIGHT - PLAYER_SIZE;
 		printf("Data->player_s.y: %f\n", data->player_s.pos_win_y);
 	}
 	else if (keycode == 0)
@@ -115,8 +115,8 @@ void	move(int keycode, t_data *data)
 		printf("Before data->player_s.x: %f\n", data->player_s.pos_win_x);
 		data->player_s.pos_win_x += 5;
 		data->player_s.pos_x += 5;
-		if (data->player_s.pos_win_x > WIDTH - data->size_player)
-			data->player_s.pos_win_x = WIDTH - data->size_player;
+		if (data->player_s.pos_win_x > WIDTH - PLAYER_SIZE)
+			data->player_s.pos_win_x = WIDTH - PLAYER_SIZE;
 		printf("Data->player_s.x: %f\n", data->player_s.pos_win_x);
 	}
 	render(data);

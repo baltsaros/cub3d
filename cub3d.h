@@ -15,8 +15,9 @@
 #define HEIGHT 			1000
 
 // some default values
-#define SQUARE_SIZE		10
-#define FIELD_OF_VIEW 	2 * atan(0.66 / 1.0) = 66
+#define SQUARE_SIZE		64
+#define	PLAYER_SIZE		11
+#define FIELD_OF_VIEW 	66
 
 //	struct to store mlx data
 typedef struct s_img
@@ -101,8 +102,6 @@ typedef struct s_data
 	size_t		j;
 	char		*s_tmp;
 	int			fd;
-	int			size_player;
-	int			size_square;
 	t_img		ceiling;
 	t_map		map;
 	t_player	player_s;

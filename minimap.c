@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/22 14:11:49 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/22 15:52:00 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void    draw_square_coord(t_data *data, int color, int x, int y)
     int j;
 
     i = 0;
-    while (i != data->size_square)
+    while (i != SQUARE_SIZE)
     {
         j = 0;
-        while (j != data->size_square)
+        while (j != SQUARE_SIZE)
         {
             mlx_pixel_put_img(&data->minimap, x + j, y + i, color);
             j++;
@@ -36,10 +36,10 @@ void    draw_empty_square_coord(t_data *data, int color, int x, int y)
     int j;
 
     i = 0;
-    while (i != data->size_square)
+    while (i != SQUARE_SIZE)
     {
         j = 0;
-        while (j != data->size_square)
+        while (j != SQUARE_SIZE)
         {
             if (i == 0 || j == 0)
                 mlx_pixel_put_img(&data->minimap, x + j, y + i, color);
@@ -63,13 +63,13 @@ void    draw_map(t_data *data, int color, int height, int width)
         while (j != width)
         {
             if (data->map.map[i][j] == '1')
-                draw_square_coord(data, color, (j * data->size_square), (i * data->size_square));
+                draw_square_coord(data, color, (j * SQUARE_SIZE), (i * SQUARE_SIZE));
             else if (data->map.map[i][j] == '0' || data->map.map[i][j] == 'N')
-                draw_empty_square_coord(data, color, (j * data->size_square), (i * data->size_square));
+                draw_empty_square_coord(data, color, (j * SQUARE_SIZE), (i * SQUARE_SIZE));
             if (data->map.map[i][j] == 'N')
             {
-                data->player_s.pos_x = (j * (data->size_square)) + (data->size_square / 2) - (data->size_player / 2);
-                data->player_s.pos_y = (i * (data->size_square)) + (data->size_square / 2) - (data->size_player / 2);
+                data->player_s.pos_x = (j * SQUARE_SIZE) + (SQUARE_SIZE / 2) - (PLAYER_SIZE / 2);
+                data->player_s.pos_y = (i * SQUARE_SIZE) + (SQUARE_SIZE / 2) - (PLAYER_SIZE / 2);
             }
             j++;
         }
@@ -91,9 +91,9 @@ void    redraw_map(t_data *data, int color, int height, int width)
         while (j != width)
         {
             if (data->map.map[i][j] == '1')
-                draw_square_coord(data, color, (j * data->size_square), (i * data->size_square));
+                draw_square_coord(data, color, (j * SQUARE_SIZE), (i * SQUARE_SIZE));
             else if (data->map.map[i][j] == '0' || data->map.map[i][j] == 'N')
-                draw_empty_square_coord(data, color, (j * data->size_square), (i * data->size_square));
+                draw_empty_square_coord(data, color, (j * SQUARE_SIZE), (i * SQUARE_SIZE));
             j++;
         }
         i++;
@@ -114,8 +114,8 @@ void    init_minimap_values(t_data *data)
 {
     data->minimap_s.position.x = 10;
     data->minimap_s.position.y = 10;
-    data->minimap_s.width = data->map.width * data->size_square;
-    data->minimap_s.height = data->map.height * data->size_square;
+    data->minimap_s.width = data->map.width * SQUARE_SIZE;
+    data->minimap_s.height = data->map.height * SQUARE_SIZE;
     data->minimap.img_ptr = mlx_new_image(data->mlx, data->minimap_s.width, data->minimap_s.height);
     // if (!data->minimap_s.minimap.img_ptr)
     // Do Error here

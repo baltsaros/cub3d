@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/22 14:10:56 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/22 15:49:35 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void  draw_ray(t_data *data)
     t_point begin;
     t_point end;
 
-    begin.x = data->player_s.pos_x + (data->size_player / 2);
-    begin.y = data->player_s.pos_y + (data->size_player / 2);
+    begin.x = data->player_s.pos_x + (PLAYER_SIZE / 2);
+    begin.y = data->player_s.pos_y + (PLAYER_SIZE / 2);
     end.x = data->player_s.pos_x + data->player_s.delta_x * 10;
     end.y = data->player_s.pos_y + data->player_s.delta_y * 10;
     bresenham(data, begin, end, &data->ray);
