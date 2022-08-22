@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/22 16:43:36 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/22 17:28:44 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,39 +85,31 @@ void	move(int keycode, t_data *data)
 {
 	if (keycode == 13)
 	{
-		printf("Before data->player_s.y: %f\n", data->player_s.pos_win_y);
 		data->player_s.pos_win_y -= 5;
 		data->player_s.pos_y -= 5;
 		if (data->player_s.pos_win_y < 0)
 			data->player_s.pos_win_y = 0;
-		printf("Data->player_s.y: %f\n", data->player_s.pos_win_y);
 	}
 	else if (keycode == 1)
 	{
-		printf("Before data->player_s.y: %f\n", data->player_s.pos_win_y);
 		data->player_s.pos_win_y += 5;
 		data->player_s.pos_y += 5;
 		if (data->player_s.pos_win_y > HEIGHT - PLAYER_SIZE)
 			data->player_s.pos_win_y = HEIGHT - PLAYER_SIZE;
-		printf("Data->player_s.y: %f\n", data->player_s.pos_win_y);
 	}
 	else if (keycode == 0)
 	{
-		printf("Before data->player_s.x: %f\n", data->player_s.pos_win_x);
 		data->player_s.pos_win_x -= 5;
 		data->player_s.pos_x -= 5;
 		if (data->player_s.pos_win_x < 0)
 			data->player_s.pos_win_x = 0;
-		printf("Data->player_s.x: %f\n", data->player_s.pos_win_x);
 	}
 	else if (keycode == 2)
 	{
-		printf("Before data->player_s.x: %f\n", data->player_s.pos_win_x);
 		data->player_s.pos_win_x += 5;
 		data->player_s.pos_x += 5;
 		if (data->player_s.pos_win_x > WIDTH - PLAYER_SIZE)
 			data->player_s.pos_win_x = WIDTH - PLAYER_SIZE;
-		printf("Data->player_s.x: %f\n", data->player_s.pos_win_x);
 	}
 	render(data);
 }
@@ -126,15 +118,22 @@ void	rotate_fov(int keycode, t_data *data)
 {
 	if (keycode == 123)
 	{
+		// gauche ou a
 		data->player_s.p_ang += 5;
-		data->player_s.delta_x = cos(data->player_s.p_ang) * 5;
-		data->player_s.delta_y = -sin(data->player_s.p_ang) * 5;
+		data->player_s.p_ang = FixAng(data->player_s.p_ang);
+		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
+		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
+		printf("123\n");
+		printf("Angle 1: %f\n", data->player_s.p_ang);
 	}
 	else if (keycode == 124)
 	{
+		// droite ou d
 		data->player_s.p_ang -= 5;
-		data->player_s.delta_x = cos(data->player_s.p_ang) * 5;
-		data->player_s.delta_y = -sin(data->player_s.p_ang) * 5;
+		data->player_s.p_ang = FixAng(data->player_s.p_ang);
+		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
+		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
+		printf("Angle 2: %f\n", data->player_s.p_ang);
 	}
 	render(data);
 }
