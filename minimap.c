@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/19 17:51:52 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/22 14:11:49 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,29 @@ void    draw_map(t_data *data, int color, int height, int width)
                 data->player_s.pos_x = (j * (data->size_square)) + (data->size_square / 2) - (data->size_player / 2);
                 data->player_s.pos_y = (i * (data->size_square)) + (data->size_square / 2) - (data->size_player / 2);
             }
+            j++;
+        }
+        i++;
+    }
+}
+
+void    redraw_map(t_data *data, int color, int height, int width)
+{
+    (void)data;
+    (void)color;
+    int i;
+    int j;
+
+    i = 0;
+    while (i != height)
+    {
+        j = 0;
+        while (j != width)
+        {
+            if (data->map.map[i][j] == '1')
+                draw_square_coord(data, color, (j * data->size_square), (i * data->size_square));
+            else if (data->map.map[i][j] == '0' || data->map.map[i][j] == 'N')
+                draw_empty_square_coord(data, color, (j * data->size_square), (i * data->size_square));
             j++;
         }
         i++;
