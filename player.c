@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/22 15:49:17 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/22 16:42:55 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void    init_player_values(t_data *data)
     data->player_s.pos_win_x = 0;
     data->player_s.pos_win_y = 0;
     data->player_s.p_ang = 60;
-    data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
-	data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
+    data->player_s.delta_x = cos(data->player_s.p_ang) * 5;
+	data->player_s.delta_y = -sin(data->player_s.p_ang) * 5;
     data->player.img_ptr = mlx_new_image(data->mlx, PLAYER_SIZE, PLAYER_SIZE);
     // Put check and error here
 }

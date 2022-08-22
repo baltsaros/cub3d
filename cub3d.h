@@ -16,7 +16,7 @@
 
 // some default values
 #define SQUARE_SIZE		64
-#define	PLAYER_SIZE		11
+#define	PLAYER_SIZE		8
 #define FIELD_OF_VIEW 	66
 
 //	struct to store mlx data
