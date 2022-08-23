@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/23 12:33:27 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/23 13:36:11 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void    calculate_ray(t_data *data)
 {
+    printf("Casting en cours\n");
     int     r;
     int     mx;
     int     my;
@@ -33,8 +34,9 @@ void    calculate_ray(t_data *data)
 
     r = 0;
     ra = FixAng(data->player_s.p_ang + 30);
-    while (r < 1)
+    while (r < 60)
     {
+        printf("%dth rays launch\n", r);
         // First calcul
         Tan = tan(degToRad(ra));
         side = 0;
@@ -63,10 +65,16 @@ void    calculate_ray(t_data *data)
         }
         while (dof < 8)
         {
-            mx=(int)(rx) / 64;
-            my=(int)(ry) / 64;                 
+            printf("Dof vertical = %d\n", dof);
+            mx = (int)(rx) / 64;
+            my = (int)(ry) / 64;
+            printf("RX V: %d\n", (int)rx);
+            printf("RY V: %d\n", (int)ry);
+            printf("MX V: %d\n", (int)mx);
+            printf("MY V: %d\n", (int)my);               
             if (my >= 0 && mx >= 0 && data->map.map[my][mx] == '1')
             {
+                printf("Hit vertical\n");
                 dof = 8;
                 disV = cos(degToRad(ra)) * (rx - data->player_s.pos_x) - sin(degToRad(ra)) * (ry - data->player_s.pos_y);
             }         
@@ -75,7 +83,7 @@ void    calculate_ray(t_data *data)
                 rx += xo;
                 ry += yo;
                 dof++;
-            }     
+            }
         }
         vx = rx;
         vy = ry;
@@ -105,10 +113,16 @@ void    calculate_ray(t_data *data)
         }
         while (dof < 8)
         {
+            printf("Dof horizontal = %d\n", dof);
             mx = ((int)(rx) / 64); // >> 6
             my = ((int)(ry) / 64);
+            printf("RX H: %d\n", (int)rx);
+            printf("RY H: %d\n", (int)ry);
+            printf("MX H: %d\n", (int)mx);
+            printf("MY H: %d\n", (int)my);
             if (my >= 0 && mx >= 0 && data->map.map[my][mx] == '1')
             {
+                printf("Hit horizontal\n");
                 dof = 8;
                 disH = cos(degToRad(ra)) * (rx - data->player_s.pos_x) - sin(degToRad(ra)) * (ry - data->player_s.pos_y);
             }
@@ -126,6 +140,7 @@ void    calculate_ray(t_data *data)
             disH = disV;
         }
         // Draw Rays
+        printf("Launching rays\n");
         t_point begin;
         t_point end;
 
