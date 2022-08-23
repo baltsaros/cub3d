@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/23 12:20:23 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/23 12:33:27 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@ void    calculate_ray(t_data *data)
     float   ra;
     float   xo;
     float   yo;
-    // float   vx;
-    // float   vy;
+    // Others values
+    int     side;
+    float   disV;
+    float   disH;
+    float   vx;
+    float   vy;
     float   Tan;
 
     r = 0;
@@ -33,9 +37,52 @@ void    calculate_ray(t_data *data)
     {
         // First calcul
         Tan = tan(degToRad(ra));
+        side = 0;
+        // Vertical
+        dof = 0;
+        disV = 100000;
+        if (cos(degToRad(ra)) > 0.001)
+        {
+            rx = (((int)data->player_s.pos_x / 64) * 64) + 64;
+            ry = (data->player_s.pos_x - rx) * Tan + data->player_s.pos_y;
+            xo = 64;
+            yo = -xo * Tan;
+        }
+        else if (cos(degToRad(ra)) <- 0.001)
+        {
+            rx = (((int)data->player_s.pos_x / 64) * 64) - 0.0001;
+            ry = (data->player_s.pos_x - rx) * Tan + data->player_s.pos_y;
+            xo = -64;
+            yo = -xo * Tan;
+        }
+        else
+        {
+            rx = data->player_s.pos_x;
+            ry = data->player_s.pos_y;
+            dof = 8;
+        }
+        while (dof < 8)
+        {
+            mx=(int)(rx) / 64;
+            my=(int)(ry) / 64;                 
+            if (my >= 0 && mx >= 0 && data->map.map[my][mx] == '1')
+            {
+                dof = 8;
+                disV = cos(degToRad(ra)) * (rx - data->player_s.pos_x) - sin(degToRad(ra)) * (ry - data->player_s.pos_y);
+            }         
+            else
+            {
+                rx += xo;
+                ry += yo;
+                dof++;
+            }     
+        }
+        vx = rx;
+        vy = ry;
         // Horizontal 
         dof = 0;
-        Tan = 1.0/Tan;
+        disH = 100000;
+        Tan = 1.0 / Tan;
         if (sin(degToRad(ra)) > 0.001)
         {
             ry = (((int)data->player_s.pos_y / 64) * 64) - 0.0001;
@@ -63,6 +110,7 @@ void    calculate_ray(t_data *data)
             if (my >= 0 && mx >= 0 && data->map.map[my][mx] == '1')
             {
                 dof = 8;
+                disH = cos(degToRad(ra)) * (rx - data->player_s.pos_x) - sin(degToRad(ra)) * (ry - data->player_s.pos_y);
             }
             else
             {
@@ -70,6 +118,12 @@ void    calculate_ray(t_data *data)
                 ry += yo;
                 dof++;
             }
+        }
+        if (disV < disH)
+        {
+            rx = vx;
+            ry = vy;
+            disH = disV;
         }
         // Draw Rays
         t_point begin;
