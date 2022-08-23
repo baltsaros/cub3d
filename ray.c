@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/22 18:45:09 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/23 12:20:23 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void    calculate_ray(t_data *data)
     int     r;
     int     mx;
     int     my;
-    int     mp;
     int     dof;
     float   rx;
     float   ry;
@@ -27,26 +26,16 @@ void    calculate_ray(t_data *data)
     // float   vx;
     // float   vy;
     float   Tan;
-    char    *map_line;
-
-    map_line = ft_strdup("");
-    for (int i = 0; data->map.map[i]; i++)
-        map_line = ft_strjoin(map_line, data->map.map[i]);
-    for (int i = 0; map_line[i]; i++)
-    {
-        printf("[%d]: %c\n", i, map_line[i]);
-    }
 
     r = 0;
     ra = FixAng(data->player_s.p_ang + 30);
     while (r < 1)
     {
+        // First calcul
         Tan = tan(degToRad(ra));
-        // Check Horizontal Lines
+        // Horizontal 
         dof = 0;
         Tan = 1.0/Tan;
-        // Hit the first line
-        // Looking up
         if (sin(degToRad(ra)) > 0.001)
         {
             ry = (((int)data->player_s.pos_y / 64) * 64) - 0.0001;
@@ -56,32 +45,25 @@ void    calculate_ray(t_data *data)
         }
         else if (sin(degToRad(ra)) < -0.001)
         {
-            ry = (((int)data->player_s.pos_y / 64) * 64) + 64; // /64 * 64
+            ry = (((int)data->player_s.pos_y / 64) * 64) + 64;
             rx = (data->player_s.pos_y - ry) * Tan + data->player_s.pos_x;
             yo = 64;
             xo = -yo * Tan;
         }
-        else // looking straight left or right
+        else
         {
             rx = data->player_s.pos_x;
             ry = data->player_s.pos_y;
             dof = 8;
         }
-        // pas bon
         while (dof < 8)
         {
-            printf("RX int: %d\n", (int)rx);
-            printf("RY int: %d\n", (int)ry);
             mx = ((int)(rx) / 64); // >> 6
             my = ((int)(ry) / 64);
-            mp = my * data->map.width + mx;
-            printf("Width: %zu\n", data->map.width);
-            printf("Height: %zu\n", data->map.height);
-            printf("MX: %d\n", mx);
-            printf("MY: %d\n", my);
-            printf("MP: %d\n", mp);
-            if (mp > 0 && mp < (int)data->map.width * (int)data->map.height && map_line[mp] == '1') // hit wall
+            if (my >= 0 && mx >= 0 && data->map.map[my][mx] == '1')
+            {
                 dof = 8;
+            }
             else
             {
                 rx += xo;
@@ -90,8 +72,6 @@ void    calculate_ray(t_data *data)
             }
         }
         // Draw Rays
-        printf("RX: %f\n", rx);
-        printf("RY: %f\n", ry);
         t_point begin;
         t_point end;
 
@@ -100,6 +80,8 @@ void    calculate_ray(t_data *data)
         end.x = rx;
         end.y = ry;
         bresenham(data, begin, end, &data->ray);
+        
+        ra = FixAng(ra - 1);
         r++;
     }
 }
