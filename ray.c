@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/23 16:25:02 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/23 16:56:17 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void    draw_vertical_line(t_data *data, t_point begin, t_point end)
 {
     while (begin.y != end.y + 1)
-    {        
-        mlx_pixel_put_img(&data->walls, begin.x, begin.y, data->walls.basic_color);
+    {   
+        if (begin.x >= 0 && begin.x <= WIDTH && begin.y >= 0 && begin.y <= HEIGHT)     
+            mlx_pixel_put_img(&data->walls, begin.x, begin.y, data->walls.basic_color);
         begin.y++;
     }
 }
@@ -143,17 +144,17 @@ void    calculate_ray(t_data *data)
         end.y = ry;
         bresenham(data, begin, end, &data->ray);
 
-        int ca = FixAng(data->player_s.p_ang - ra);
-        disH = disH * cos(degToRad(ca));
+        // int ca = FixAng(data->player_s.p_ang - ra);
+        // disH = disH * cos(degToRad(ca));
         
         printf("disH: %f\n", disH);
         
-        int lineH = (SQUARE_SIZE * HEIGHT) / (disH);
-        if (lineH > HEIGHT)
+        int lineH = (SQUARE_SIZE * 320) / (disH);
+        if (lineH > 320)
         {
-            lineH = HEIGHT;
+            lineH = 320;
         }                     //line height and limit
-        int lineOff = (HEIGHT / 2) - (lineH / 2);  
+        int lineOff = (160) - (lineH / 2);  
 
         printf("LineH: %d\n", lineH);
         printf("LineOff: %d\n", lineOff);
