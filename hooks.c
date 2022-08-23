@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/23 14:32:34 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/23 14:45:27 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	render(t_data *data)
 	mlx_destroy_image(data->mlx, data->minimap.img_ptr);
 	mlx_destroy_image(data->mlx, data->player.img_ptr);
 	mlx_destroy_image(data->mlx, data->ray.img_ptr);
+	mlx_destroy_image(data->mlx, data->walls.img_ptr);
 	mlx_clear_window(data->mlx, data->win);
 	data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
     if (data->ceiling.img_ptr != NULL)
@@ -31,7 +32,7 @@ void	render(t_data *data)
         	&data->minimap.line_length, &data->minimap.endian);
    		draw_square(data->minimap, create_trgb(255, 255, 255, 255), data->minimap_s.height, data->minimap_s.width);
     	redraw_map(data, data->minimap.basic_color, data->map.height, data->map.width - 1);
-    	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
+    	// mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
 	}
 	data->player.img_ptr = mlx_new_image(data->mlx, PLAYER_SIZE, PLAYER_SIZE);
 	if (data->player.img_ptr != NULL)
@@ -40,7 +41,7 @@ void	render(t_data *data)
     	data->player.addr = mlx_get_data_addr(data->player.img_ptr, &data->player.bpp,
 			&data->player.line_length, &data->player.endian);
     	draw_square(data->player, data->player.basic_color, PLAYER_SIZE, PLAYER_SIZE);
-		mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
+		// mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
 	}
     init_ray(data);
 }

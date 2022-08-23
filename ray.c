@@ -6,11 +6,20 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/23 14:31:45 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/23 16:25:02 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void    draw_vertical_line(t_data *data, t_point begin, t_point end)
+{
+    while (begin.y != end.y + 1)
+    {        
+        mlx_pixel_put_img(&data->walls, begin.x, begin.y, data->walls.basic_color);
+        begin.y++;
+    }
+}
 
 void    calculate_ray(t_data *data)
 {
@@ -136,17 +145,20 @@ void    calculate_ray(t_data *data)
 
         int ca = FixAng(data->player_s.p_ang - ra);
         disH = disH * cos(degToRad(ca));
-        int lineH = (((data->map.width - 1) * data->map.height) * 320) / disH;
-        if (lineH > 320)
-            lineH = 320;
-        int lineOff = 160 - (lineH >> 1);
+        
+        printf("disH: %f\n", disH);
+        
+        int lineH = (SQUARE_SIZE * HEIGHT) / (disH);
+        if (lineH > HEIGHT)
+        {
+            lineH = HEIGHT;
+        }                     //line height and limit
+        int lineOff = (HEIGHT / 2) - (lineH / 2);  
 
-        (void)lineOff;
-        begin.x = 8 * r;
-        begin.y = lineOff;
-        end.x = 8 * r;
-        end.y = (lineH + lineOff);
-        bresenham(data, begin, end, &data->walls);
+        printf("LineH: %d\n", lineH);
+        printf("LineOff: %d\n", lineOff);
+        
+        draw_vertical_line(data, begin, end);
         
         ra = FixAng(ra - 1);
         r++;
@@ -170,14 +182,12 @@ void  init_ray(t_data *data)
 
     // walls
     data->walls.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-    if (data->walls.img_ptr != NULL)
-    {
-        data->walls.basic_color = 0x777777;
-        data->walls.addr = mlx_get_data_addr(data->walls.img_ptr, &data->walls.bpp,
-            &data->walls.line_length, &data->walls.endian);
-        draw_square(data->walls, create_trgb(255, 255, 255, 255), HEIGHT, WIDTH);
-    }
+    data->walls.basic_color = 0x777777;
+    data->walls.addr = mlx_get_data_addr(data->walls.img_ptr, &data->walls.bpp,
+        &data->walls.line_length, &data->walls.endian);
+    draw_square(data->walls, create_trgb(255, 255, 255, 255), HEIGHT, WIDTH);
     draw_ray(data);
-    mlx_put_image_to_window(data->mlx, data->win, data->ray.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
+    
+    // mlx_put_image_to_window(data->mlx, data->win, data->ray.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
     mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/23 14:32:15 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/23 14:44:43 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void    init_minimap(t_data *data, t_minimap minimap)
         &data->minimap.line_length, &data->minimap.endian);
     draw_square(data->minimap, create_trgb(255, 255, 255, 255), minimap.height, minimap.width - 1);
     draw_map(data, data->minimap.basic_color, data->map.height, data->map.width - 1);
-    mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, minimap.position.x, minimap.position.y);
+    // mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, minimap.position.x, minimap.position.y);
 }
 
 void    init_minimap_values(t_data *data)
