@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/23 13:50:43 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/23 14:31:45 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void    calculate_ray(t_data *data)
 {
+    t_point begin;
+    t_point end;
     int     r;
     int     mx;
     int     my;
@@ -33,7 +35,7 @@ void    calculate_ray(t_data *data)
 
     r = 0;
     ra = FixAng(data->player_s.p_ang + 30);
-    while (r < 60)
+    while (r < FIELD_OF_VIEW)
     {
         // First calcul
         Tan = tan(degToRad(ra));
@@ -126,14 +128,25 @@ void    calculate_ray(t_data *data)
             disH = disV;
         }
         // Draw Rays
-        t_point begin;
-        t_point end;
-
         begin.x = data->player_s.pos_x + (PLAYER_SIZE / 2);
         begin.y = data->player_s.pos_y + (PLAYER_SIZE / 2);
         end.x = rx;
         end.y = ry;
         bresenham(data, begin, end, &data->ray);
+
+        int ca = FixAng(data->player_s.p_ang - ra);
+        disH = disH * cos(degToRad(ca));
+        int lineH = (((data->map.width - 1) * data->map.height) * 320) / disH;
+        if (lineH > 320)
+            lineH = 320;
+        int lineOff = 160 - (lineH >> 1);
+
+        (void)lineOff;
+        begin.x = 8 * r;
+        begin.y = lineOff;
+        end.x = 8 * r;
+        end.y = (lineH + lineOff);
+        bresenham(data, begin, end, &data->walls);
         
         ra = FixAng(ra - 1);
         r++;
@@ -154,6 +167,17 @@ void  init_ray(t_data *data)
     data->ray.addr = mlx_get_data_addr(data->ray.img_ptr, &data->ray.bpp,
 		  &data->ray.line_length, &data->ray.endian);
     draw_square(data->ray, create_trgb(255, 255, 255, 255), data->minimap_s.height, data->minimap_s.width);
+
+    // walls
+    data->walls.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+    if (data->walls.img_ptr != NULL)
+    {
+        data->walls.basic_color = 0x777777;
+        data->walls.addr = mlx_get_data_addr(data->walls.img_ptr, &data->walls.bpp,
+            &data->walls.line_length, &data->walls.endian);
+        draw_square(data->walls, create_trgb(255, 255, 255, 255), HEIGHT, WIDTH);
+    }
     draw_ray(data);
     mlx_put_image_to_window(data->mlx, data->win, data->ray.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
+    mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
 }

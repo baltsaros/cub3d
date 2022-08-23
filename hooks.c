@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/23 13:23:29 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/23 14:32:34 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	render(t_data *data)
 	data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
     if (data->ceiling.img_ptr != NULL)
         init_ceiling(data);
-	data->minimap.img_ptr = mlx_new_image(data->mlx, data->minimap_s.width, data->minimap_s.height);
+	data->minimap.img_ptr = mlx_new_image(data->mlx, data->minimap_s.width - 1, data->minimap_s.height);
 	if (data->minimap.img_ptr != NULL)
 	{
 		data->minimap.basic_color = 0x000000;
     	data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr, &data->minimap.bpp,
         	&data->minimap.line_length, &data->minimap.endian);
    		draw_square(data->minimap, create_trgb(255, 255, 255, 255), data->minimap_s.height, data->minimap_s.width);
-    	redraw_map(data, data->minimap.basic_color, data->map.height, data->map.width);
+    	redraw_map(data, data->minimap.basic_color, data->map.height, data->map.width - 1);
     	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
 	}
 	data->player.img_ptr = mlx_new_image(data->mlx, PLAYER_SIZE, PLAYER_SIZE);

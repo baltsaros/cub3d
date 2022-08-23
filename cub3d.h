@@ -110,6 +110,7 @@ typedef struct s_data
 	t_img		ray;
 	t_minimap	minimap_s;
 	t_img		minimap;
+	t_img		walls;
 }	t_data;
 
 //	alloc_check
