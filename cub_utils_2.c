@@ -48,7 +48,10 @@ char	*get_next_line(int fd, t_input *data)
 			error_check_exit(r_bytes, "read: ", data);
 		}
 		if (!r_bytes)
+		{
 			data->i = 0;
+			break ;
+		}
 		line = cub_charjoin_free(line, buf[0], data);
 		alloc_check_small(line, data);
 	}
