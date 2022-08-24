@@ -6,40 +6,92 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/21 20:33:01 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/24 09:57:19 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	is_wall(t_input *data, char **map)
+{
+	int	rx;
+	int	ry;
+
+	(void)map;
+	// printf("py is %f\n", data->py);
+	ry = data->py / data->sy;
+	rx = data->px / data->sx;
+	printf("rx is %d, ry is %d\n", rx, ry);
+	printf("map[%d][%d] is %c\n", ry, rx, map[ry][rx]);
+	printf("px is %f, py is %f\n", data->px, data->py);
+	if (map[ry][rx] && map[ry][rx] != '1')
+		return (1);
+	return (0);
+}
+
 int	key_hook(int keycode, t_input *data)
 {
-	int		x;
-	int		y;
-	char	**map;
+	float	step;
 
-	x = data->px;
-	y = data->py;
-	map = data->map.map;
+	step = 5;
+	// is_wall(data, data->map.map);
 	if (keycode == 65307)
 	{
 		mlx_destroy_image(data->mlx, data->img.mlx_img);
+		mlx_destroy_image(data->mlx, data->pl.mlx_img);
+		// mlx_destroy_image(data->mlx, data->ray.mlx_img);
 		mlx_destroy_window(data->mlx, data->win);
 		data->win = NULL;
 		cub_free_all(data);
 		exit(EXIT_SUCCESS);
 	}
-	else if (keycode == 119 && map[y - 1][x] && map[y - 1][x] != '1')
-		data->py -= 1;
-	else if (keycode == 115 && map[y + 1][x] && map[y + 1][x] != '1')
-		data->py += 1;
-	else if (keycode == 97 && map[y][x - 1] && map[y][x - 1] != '1')
-		data->px -= 1;
-	else if (keycode == 100 && map[y][x + 1] && map[y][x + 1] != '1')
-		data->px += 1;
+	// else if (keycode == 119 && map[y - 1][x] && map[y - 1][x] != '1')
+	else if (keycode == 119)
+	{
+		data->py -= step;
+		if (!is_wall(data, data->map.map))
+			data->py += step;
+	}
+	else if (keycode == 115)
+	{
+		data->py += step;
+		if (!is_wall(data, data->map.map))
+			data->py -= step;
+	}
+	else if (keycode == 97)
+	{
+		data->px -= step;
+		if (!is_wall(data, data->map.map))
+			data->px += step;
+	}
+	else if (keycode == 100)
+	{
+		data->px += step;
+		if (!is_wall(data, data->map.map))
+			data->px -= step;
+	}
+	else if (keycode == 65361)
+	{
+		data->pa -= 0.1;
+		if (data->pa < 0)
+			data->pa += 2 * PI;
+		data->pdx = cos(data->pa);
+		data->pdy = sin(data->pa);
+		printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
+	}
+	else if (keycode == 65363)
+	{
+		data->pa += 0.1;
+		if (data->pa > 2 * PI)
+			data->pa -= 2 * PI;
+		data->pdx = cos(data->pa);
+		data->pdy = sin(data->pa);
+		printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
+	}
 	else
 		printf("Key %d was pressed!\n", keycode);
-	render_player(data, &data->pl);
+	// render_player(data, &data->pl);
+	render(data);
 	return (0);
 }
 

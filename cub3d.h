@@ -22,6 +22,7 @@
 # define GRAY 0x808080
 
 # define PI 3.1415926535
+# define FOV 60
 
 //	struct to store mlx data for map
 typedef struct s_img
@@ -46,6 +47,7 @@ typedef struct s_map
 	char	**f_spl;
 	char	**c_spl;
 	char	**map;
+	int		dir;
 	size_t	width;
 	size_t	height;
 }	t_map;
@@ -59,16 +61,19 @@ typedef struct s_input
 	int		fd;
 	void	*mlx;
 	void	*win;
+	int		pcoord[2];
 	float	px;
 	float	py;
 	float	pdx;
 	float	pdy;
 	float	pa;
+	int		psize;
 	float	sx;
 	float	sy;
 	int		color;
 	t_img	img;
 	t_img	pl;
+	t_img	ray;
 	t_map	map;
 }	t_input;
 
@@ -98,6 +103,7 @@ void	check_mlx(void *mlx, t_input *data);
 void	check_win(t_input *data);
 
 //	hooks
+int		is_wall(t_input *data, char **map);
 int		key_hook(int keycode, t_input *data);
 int		mouse_hook(int keycode, int x, int y, t_input *data);
 
@@ -131,5 +137,6 @@ int		render(t_input *data);
 void	render_map(t_input *data, char **map);
 void	render_elem(t_input *data, int color, int j, int i);
 void	render_player(t_input *data, t_img *img);
+void	render_ray(t_input *data, int color);
 
 #endif

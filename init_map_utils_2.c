@@ -123,6 +123,7 @@ void	check_player(char **map, t_input *data)
 			if (check_charset(map[j][i], "NEWS"))
 			{
 				player = 1;
+				data->map.dir = map[j][i];
 				data->px = i;
 				data->py = j;
 				break ;

@@ -14,9 +14,26 @@ int	main(int argc, char *argv[])
 	data.img.mlx_img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp,
 			&data.img.line_length, &data.img.endian);
-	data.pl.mlx_img = mlx_new_image(data.mlx, data.sx, data.sy);
+	data.pcoord[0] = data.px;
+	data.pcoord[1] = data.py;
+	data.px = data.px * data.sx;
+	data.py = data.py * data.sy;
+	if (data.map.dir == 'N')
+		data.pa = (90 * PI) / 180;
+	else if (data.map.dir == 'E')
+		data.pa = (0 * PI) / 180;
+	else if (data.map.dir == 'W')
+		data.pa = (180 * PI) / 180;
+	else if (data.map.dir == 'S')
+		data.pa = (270 * PI) / 180;
+	data.pdx = cos(data.pa);
+	data.pdy = sin(data.pa);
+	data.psize = 6;
+	data.pl.mlx_img = mlx_new_image(data.mlx, data.psize, data.psize);
 	data.pl.addr = mlx_get_data_addr(data.pl.mlx_img, &data.pl.bpp,
 			&data.pl.line_length, &data.pl.endian);
+	printf("dir is %c\n", data.map.dir);
+	printf("pa is %f\npdx is %f\npdy is %f\n", data.pa, data.pdx, data.pdy);
 	mlx_loop_hook(data.mlx, &render, &data);
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_mouse_hook(data.win, mouse_hook, &data);
