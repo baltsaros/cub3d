@@ -68,6 +68,16 @@ typedef struct s_input
 	float	pdy;
 	float	pa;
 	int		psize;
+	float	ra;
+	float	rx;
+	float	ry;
+	float	rdx;
+	float	rdy;
+	float	la;
+	float	lx;
+	float	ly;
+	float	ldx;
+	float	ldy;
 	float	sx;
 	float	sy;
 	int		color;

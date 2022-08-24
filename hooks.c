@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/24 09:57:19 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/25 01:08:53 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ int	is_wall(t_input *data, char **map)
 	int	rx;
 	int	ry;
 
-	(void)map;
 	// printf("py is %f\n", data->py);
 	ry = data->py / data->sy;
 	rx = data->px / data->sx;
-	printf("rx is %d, ry is %d\n", rx, ry);
-	printf("map[%d][%d] is %c\n", ry, rx, map[ry][rx]);
-	printf("px is %f, py is %f\n", data->px, data->py);
+	// printf("rx is %d, ry is %d\n", rx, ry);
+	// printf("map[%d][%d] is %c\n", ry, rx, map[ry][rx]);
+	// printf("px is %f, py is %f\n", data->px, data->py);
 	if (map[ry][rx] && map[ry][rx] != '1')
 		return (1);
 	return (0);
@@ -32,8 +31,10 @@ int	is_wall(t_input *data, char **map)
 int	key_hook(int keycode, t_input *data)
 {
 	float	step;
+	float	turn;
 
 	step = 5;
+	turn = 0.2;
 	// is_wall(data, data->map.map);
 	if (keycode == 65307)
 	{
@@ -72,21 +73,41 @@ int	key_hook(int keycode, t_input *data)
 	}
 	else if (keycode == 65361)
 	{
-		data->pa -= 0.1;
+		data->pa -= turn;
 		if (data->pa < 0)
 			data->pa += 2 * PI;
 		data->pdx = cos(data->pa);
 		data->pdy = sin(data->pa);
-		printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
+		data->ra -= turn;
+		if (data->ra < 0)
+			data->ra += 2 * PI;
+		data->rdx = cos(data->ra);
+		data->rdy = sin(data->ra);
+		data->la -= turn;
+		if (data->la < 0)
+			data->la += 2 * PI;
+		data->ldx = cos(data->la);
+		data->ldy = sin(data->la);
+		// printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
 	}
 	else if (keycode == 65363)
 	{
-		data->pa += 0.1;
+		data->pa += turn;
 		if (data->pa > 2 * PI)
 			data->pa -= 2 * PI;
 		data->pdx = cos(data->pa);
 		data->pdy = sin(data->pa);
-		printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
+		data->ra += turn;
+		if (data->ra > 2 * PI)
+			data->ra -= 2 * PI;
+		data->rdx = cos(data->ra);
+		data->rdy = sin(data->ra);
+		data->la += turn;
+		if (data->la > 2 * PI)
+			data->la -= 2 * PI;
+		data->ldx = cos(data->la);
+		data->ldy = sin(data->la);
+		// printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
 	}
 	else
 		printf("Key %d was pressed!\n", keycode);

@@ -26,6 +26,12 @@ int	main(int argc, char *argv[])
 		data.pa = (180 * PI) / 180;
 	else if (data.map.dir == 'S')
 		data.pa = (270 * PI) / 180;
+	data.ra = (60 * PI) / 180;
+	data.rdx = cos(data.ra);
+	data.rdy = sin(data.ra);
+	data.la = (120 * PI) / 180;
+	data.ldx = cos(data.la);
+	data.ldy = sin(data.la);
 	data.pdx = cos(data.pa);
 	data.pdy = sin(data.pa);
 	data.psize = 6;
