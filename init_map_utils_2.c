@@ -70,7 +70,7 @@ size_t	check_length(char **map, size_t i, t_input *data)
 	}
 	data->j = j;
 	if (len > data->map.width)
-		data->map.width = len - 1;
+		data->map.width = len;
 	return (j);
 }
 
