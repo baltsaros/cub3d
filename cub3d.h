@@ -113,7 +113,7 @@ void	check_mlx(void *mlx, t_input *data);
 void	check_win(t_input *data);
 
 //	hooks
-int		is_wall(t_input *data, char **map);
+int		is_wall(t_input *data, char **map, float x, float y);
 int		key_hook(int keycode, t_input *data);
 int		mouse_hook(int keycode, int x, int y, t_input *data);
 

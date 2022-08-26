@@ -78,21 +78,6 @@ void	render_player(t_input *data, t_img *img)
 	mlx_put_image_to_window(data->mlx, data->win, img->mlx_img, data->px, data->py);
 }
 
-int	iss_wall(t_input *data, char **map, float x, float y)
-{
-	int	rx;
-	int	ry;
-
-	ry = y / data->sy;
-	rx = x / data->sx;
-	// printf("rx is %d, ry is %d\n", rx, ry);
-	// printf("map[%d][%d] is %c\n", ry, rx, map[ry][rx]);
-	// printf("px is %f, py is %f\n", data->px, data->py);
-	if (map[ry][rx] && map[ry][rx] != '1')
-		return (1);
-	return (0);
-}
-
 void	render_ray(t_input *data, int color)
 {
 	float	x;
@@ -116,7 +101,7 @@ void	render_lray(t_input *data, int color)
 {
 	data->ly = data->py + data->psize / 2;
 	data->lx = data->px + data->psize / 2;
-	while (iss_wall(data, data->map.map, data->lx, data->ly))
+	while (is_wall(data, data->map.map, data->lx, data->ly))
 	{
 		my_mlx_pixel_put(&data->img, data->lx, data->ly, color);
 		data->lx += data->ldx;
@@ -128,7 +113,7 @@ void	render_rray(t_input *data, int color)
 {
 	data->ry = data->py + data->psize / 2;
 	data->rx = data->px + data->psize / 2;
-	while (iss_wall(data, data->map.map, data->rx, data->ry))
+	while (is_wall(data, data->map.map, data->rx, data->ry))
 	{
 		my_mlx_pixel_put(&data->img, data->rx, data->ry, color);
 		data->rx += data->rdx;

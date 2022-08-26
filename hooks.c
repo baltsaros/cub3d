@@ -6,20 +6,20 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/25 01:08:53 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/26 11:27:16 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_wall(t_input *data, char **map)
+int	is_wall(t_input *data, char **map, float x, float y)
 {
 	int	rx;
 	int	ry;
 
 	// printf("py is %f\n", data->py);
-	ry = data->py / data->sy;
-	rx = data->px / data->sx;
+	ry = y / data->sy;
+	rx = x / data->sx;
 	// printf("rx is %d, ry is %d\n", rx, ry);
 	// printf("map[%d][%d] is %c\n", ry, rx, map[ry][rx]);
 	// printf("px is %f, py is %f\n", data->px, data->py);
@@ -50,25 +50,25 @@ int	key_hook(int keycode, t_input *data)
 	else if (keycode == 119)
 	{
 		data->py -= step;
-		if (!is_wall(data, data->map.map))
+		if (!is_wall(data, data->map.map, data->px, data->py))
 			data->py += step;
 	}
 	else if (keycode == 115)
 	{
 		data->py += step;
-		if (!is_wall(data, data->map.map))
+		if (!is_wall(data, data->map.map, data->px, data->py))
 			data->py -= step;
 	}
 	else if (keycode == 97)
 	{
 		data->px -= step;
-		if (!is_wall(data, data->map.map))
+		if (!is_wall(data, data->map.map, data->px, data->py))
 			data->px += step;
 	}
 	else if (keycode == 100)
 	{
 		data->px += step;
-		if (!is_wall(data, data->map.map))
+		if (!is_wall(data, data->map.map, data->px, data->py))
 			data->px -= step;
 	}
 	else if (keycode == 65361)
