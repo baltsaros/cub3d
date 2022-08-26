@@ -53,6 +53,23 @@ typedef struct s_seg
 	t_point	p1;
 }	t_seg;
 
+typedef struct s_ray_calcul
+{
+	int     r;
+    int     mx;
+    int     my;
+    int     dof;
+    float   rx;
+    float   ry;
+    float   ra;
+    float   xo;
+    float   yo;
+    float   disV;
+    float   disH;
+    float   vx;
+    float   vy;
+} t_ray_calcul;
+
 // 	struct for positions
 typedef struct s_player
 {
@@ -96,22 +113,23 @@ typedef struct s_map
 
 typedef struct s_data
 {
-	void		*mlx;
-	void		*win;
-	size_t		i;
-	size_t		j;
-	char		*s_tmp;
-	int			fd;
-	t_img		ceiling;
-	t_img		floor;
-	t_map		map;
-	t_player	player_s;
-	t_img		player;
-	t_ray		ray_s;
-	t_img		ray;
-	t_minimap	minimap_s;
-	t_img		minimap;
-	t_img		walls;
+	void			*mlx;
+	void			*win;
+	size_t			i;
+	size_t			j;
+	char			*s_tmp;
+	int				fd;
+	t_img			ceiling;
+	t_img			floor;
+	t_map			map;
+	t_player		player_s;
+	t_img			player;
+	t_ray			ray_s;
+	t_img			ray;
+	t_minimap		minimap_s;
+	t_img			minimap;
+	t_img			walls;
+	t_ray_calcul	ray_calcul;
 }	t_data;
 
 //	alloc_check
@@ -190,7 +208,7 @@ void    init_player(t_data *data);
 void    init_player_values(t_data *data);
 
 // Ray
-void  draw_ray(t_data *data);
+void  draw_ray(t_data *data, t_ray_calcul ray);
 void  init_ray(t_data *data);
 
 // Bresenham
