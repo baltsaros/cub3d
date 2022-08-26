@@ -103,6 +103,7 @@ typedef struct s_data
 	char		*s_tmp;
 	int			fd;
 	t_img		ceiling;
+	t_img		floor;
 	t_map		map;
 	t_player	player_s;
 	t_img		player;
@@ -173,6 +174,7 @@ int 	launcher(t_data *data);
 // Draw All
 void    draw_square(t_img img, int color, int end_i, int end_j);
 void    init_ceiling(t_data *data);
+void    init_floor(t_data *data);
 void    draw_all(t_data *data);
 
 // Minimap

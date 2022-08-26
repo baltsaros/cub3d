@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/26 14:43:46 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/26 15:27:30 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,18 @@ void	render(t_data *data)
 {
 	// Temporary solution
 	mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
+	mlx_destroy_image(data->mlx, data->floor.img_ptr);
 	mlx_destroy_image(data->mlx, data->minimap.img_ptr);
 	mlx_destroy_image(data->mlx, data->player.img_ptr);
 	mlx_destroy_image(data->mlx, data->ray.img_ptr);
 	mlx_destroy_image(data->mlx, data->walls.img_ptr);
 	mlx_clear_window(data->mlx, data->win);
-	data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
     if (data->ceiling.img_ptr != NULL)
         init_ceiling(data);
+	data->floor.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
+    if (data->floor.img_ptr != NULL)
+        init_floor(data);
 	data->minimap.img_ptr = mlx_new_image(data->mlx, data->minimap_s.width - 1, data->minimap_s.height);
 	if (data->minimap.img_ptr != NULL)
 	{
