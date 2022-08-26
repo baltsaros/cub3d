@@ -31,6 +31,7 @@ SRCS		=	cub3d.c \
 				ray.c \
 				vertical_wall.c \
 				horizontal_wall.c \
+				draw_wall.c \
 				bresenham.c \
 				calculs_utils.c
 

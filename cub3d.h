@@ -207,14 +207,30 @@ void    init_player(t_data *data);
 void    init_player_values(t_data *data);
 
 // Ray
-void  calculate_ray(t_data *data, t_ray_calcul ray);
-void  init_ray(t_data *data);
+void    fisheye_fix(t_data *data, t_ray_calcul *ray);
+void    draw_ray(t_data *data, t_ray_calcul *ray);
+void	adapt_distance(t_ray_calcul *ray);
+void  	raycast(t_data *data, t_ray_calcul ray);
+void  	init_ray(t_data *data);
 
 // Vertical wall
+float	disV_calcul(t_data *data, float ra, float ry, float rx);
+void    calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof);
+void    check_right(t_data *data, t_ray_calcul *ray, float Tan);
+void    check_left(t_data *data, t_ray_calcul *ray, float Tan);
 void    check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan);
 
 // Horizontal wall
+float   disH_calcul(t_data *data, float ra, float ry, float rx);
+void    calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof);
+void    check_up(t_data *data, t_ray_calcul *ray, float Tan);
+void    check_down(t_data *data, t_ray_calcul *ray, float Tan);
 void    check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
+
+// Draw Wall
+void    draw_vertical_line(t_data *data, t_point begin, t_point end);
+void    init_calculate_wall(t_data *data, t_ray_calcul *ray);
+void    init_wall(t_data *data);
 
 // Bresenham
 void	mlx_pixel_put_img(t_img	*img, int x, int y, int color);
