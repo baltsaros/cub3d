@@ -207,9 +207,9 @@ void    init_player(t_data *data);
 void    init_player_values(t_data *data);
 
 // Ray
-void    fisheye_fix(t_data *data, t_ray_calcul *ray);
-void    draw_ray(t_data *data, t_ray_calcul *ray);
 void	adapt_distance(t_ray_calcul *ray);
+void    draw_ray(t_data *data, t_ray_calcul *ray);
+void    fisheye_fix(t_data *data, t_ray_calcul *ray);
 void  	raycast(t_data *data, t_ray_calcul ray);
 void  	init_ray(t_data *data);
 
