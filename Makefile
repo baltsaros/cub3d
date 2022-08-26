@@ -29,6 +29,8 @@ SRCS		=	cub3d.c \
 				minimap.c \
 				player.c \
 				ray.c \
+				vertical_wall.c \
+				horizontal_wall.c \
 				bresenham.c \
 				calculs_utils.c
 

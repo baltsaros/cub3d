@@ -58,7 +58,6 @@ typedef struct s_ray_calcul
 	int     r;
     int     mx;
     int     my;
-    int     dof;
     float   rx;
     float   ry;
     float   ra;
@@ -208,8 +207,14 @@ void    init_player(t_data *data);
 void    init_player_values(t_data *data);
 
 // Ray
-void  draw_ray(t_data *data, t_ray_calcul ray);
+void  calculate_ray(t_data *data, t_ray_calcul ray);
 void  init_ray(t_data *data);
+
+// Vertical wall
+void    check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan);
+
+// Horizontal wall
+void    check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
 
 // Bresenham
 void	mlx_pixel_put_img(t_img	*img, int x, int y, int color);
