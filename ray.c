@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/23 16:56:17 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/26 15:22:00 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void    calculate_ray(t_data *data)
             {
                 dof = 8;
                 disV = cos(degToRad(ra)) * (rx - data->player_s.pos_x) - sin(degToRad(ra)) * (ry - data->player_s.pos_y);
+
+                // disV = sqrt(pow((data->player_s.pos_x + rx), 2) + pow((data->player_s.pos_y + ry), 2));
             }         
             else
             {
@@ -123,6 +125,7 @@ void    calculate_ray(t_data *data)
             {
                 dof = 8;
                 disH = cos(degToRad(ra)) * (rx - data->player_s.pos_x) - sin(degToRad(ra)) * (ry - data->player_s.pos_y);
+                // disH = sqrt(pow((data->player_s.pos_x + rx), 2) + pow((data->player_s.pos_y + ry), 2));
             }
             else
             {
@@ -144,21 +147,31 @@ void    calculate_ray(t_data *data)
         end.y = ry;
         bresenham(data, begin, end, &data->ray);
 
-        // int ca = FixAng(data->player_s.p_ang - ra);
-        // disH = disH * cos(degToRad(ca));
-        
-        printf("disH: %f\n", disH);
-        
-        int lineH = (SQUARE_SIZE * 320) / (disH);
-        if (lineH > 320)
-        {
-            lineH = 320;
-        }                     //line height and limit
-        int lineOff = (160) - (lineH / 2);  
 
-        printf("LineH: %d\n", lineH);
-        printf("LineOff: %d\n", lineOff);
+        printf("Dist: %f\n", disH);
+
+        int ca = FixAng(data->player_s.p_ang - ra); // need more fix
+        disH = disH * cos(degToRad(ca)); 
+
+        // Plan de projection: WIDTHxHEIGHT -> Ecran
+        // Distance du plan de projection: (WIDTH / 2) / tan(FIELD_OF_VIEW / 2)
+        int distProj;
+        distProj = (WIDTH / 2) / tan(degToRad(FIELD_OF_VIEW / 2));
+
+        printf("distProj: %d\n", distProj);
+
+        int wallHeight;
+        wallHeight = (SQUARE_SIZE / disH) * distProj;
+
+        printf("wallHeight: %d\n", wallHeight);
         
+        printf("Field of view: %d\n", FIELD_OF_VIEW);
+
+        begin.x = r * (WIDTH / FIELD_OF_VIEW);
+        begin.y = (HEIGHT / 2) - (wallHeight / 2);
+        end.x = begin.x;
+        end.y = begin.y + wallHeight;
+
         draw_vertical_line(data, begin, end);
         
         ra = FixAng(ra - 1);
@@ -189,6 +202,6 @@ void  init_ray(t_data *data)
     draw_square(data->walls, create_trgb(255, 255, 255, 255), HEIGHT, WIDTH);
     draw_ray(data);
     
-    // mlx_put_image_to_window(data->mlx, data->win, data->ray.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
+    mlx_put_image_to_window(data->mlx, data->win, data->ray.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
     mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
 }
