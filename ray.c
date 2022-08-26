@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/26 15:22:00 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/26 15:32:56 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,12 @@ void    calculate_ray(t_data *data)
         end.x = begin.x;
         end.y = begin.y + wallHeight;
 
-        draw_vertical_line(data, begin, end);
+        for (int i = 0; i != ((r + 1) * (WIDTH / FIELD_OF_VIEW)); i++)
+        {
+            draw_vertical_line(data, begin, end);
+            begin.x = (r * (WIDTH / FIELD_OF_VIEW)) + i;
+            end.x = begin.x;
+        }
         
         ra = FixAng(ra - 1);
         r++;
