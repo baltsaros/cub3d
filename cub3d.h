@@ -148,5 +148,7 @@ void	render_map(t_input *data, char **map);
 void	render_elem(t_input *data, int color, int j, int i);
 void	render_player(t_input *data, t_img *img);
 void	render_ray(t_input *data, int color);
+void	render_lray(t_input *data, int color);
+void	render_rray(t_input *data, int color);
 
 #endif

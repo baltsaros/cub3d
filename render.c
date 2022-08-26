@@ -10,6 +10,8 @@ int	render(t_input *data)
 {
 	render_map(data, data->map.map);
 	render_ray(data, RED);
+	render_lray(data, RED);
+	render_rray(data, RED);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 	render_player(data, &data->pl);
 	return (0);
@@ -100,24 +102,36 @@ void	render_ray(t_input *data, int color)
 	j = 0;
 	y = data->py + data->psize / 2;
 	x = data->px + data->psize / 2;
-	data->ry = y;
-	data->rx = x;
-	data->ly = y;
-	data->lx = x;
 	while (j < 40)
 	{
 		my_mlx_pixel_put(&data->img, x, y, color);
-		if (iss_wall(data, data->map.map, data->rx, data->ry))
-			my_mlx_pixel_put(&data->img, data->rx, data->ry, RED);
-		if (iss_wall(data, data->map.map, data->lx, data->ly))
-			my_mlx_pixel_put(&data->img, data->lx, data->ly, RED);
-		data->lx += data->ldx;
-		data->ly += data->ldy;
-		data->rx += data->rdx;
-		data->ry += data->rdy;
 		x += data->pdx;
 		y += data->pdy;
 		++j;
 	}
 
+}
+
+void	render_lray(t_input *data, int color)
+{
+	data->ly = data->py + data->psize / 2;
+	data->lx = data->px + data->psize / 2;
+	while (iss_wall(data, data->map.map, data->lx, data->ly))
+	{
+		my_mlx_pixel_put(&data->img, data->lx, data->ly, color);
+		data->lx += data->ldx;
+		data->ly += data->ldy;
+	}
+}
+
+void	render_rray(t_input *data, int color)
+{
+	data->ry = data->py + data->psize / 2;
+	data->rx = data->px + data->psize / 2;
+	while (iss_wall(data, data->map.map, data->rx, data->ry))
+	{
+		my_mlx_pixel_put(&data->img, data->rx, data->ry, color);
+		data->rx += data->rdx;
+		data->ry += data->rdy;
+	}
 }
