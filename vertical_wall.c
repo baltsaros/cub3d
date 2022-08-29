@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:35:14 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/29 13:29:49 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/29 15:09:49 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void    check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan)
     ray->disV = 100000;
     if (cos(degToRad(ray->ra)) > 0.001)
         check_right(data, ray, Tan);
-    else if (cos(degToRad(ray->ra)) <- 0.001)
+    else if (cos(degToRad(ray->ra)) < -0.001)
         check_left(data, ray, Tan);
     else
     {
