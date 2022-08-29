@@ -140,6 +140,7 @@ void	check_player(char **map, t_input *data);
 
 //	init_utils_3 - other functions
 void	check_direction(t_input *data);
+void	squarification(t_input *data, char **map);
 
 //	free
 void	cub_free(char *str[]);

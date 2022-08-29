@@ -78,4 +78,5 @@ void	check_map(t_map *map, t_input *data)
 	printf("width is %ld\nheight is %ld\n", data->map.width, data->map.height);
 	check_player(map->map, data);
 	check_direction(data);
+	// squarification(data, map->map);
 }

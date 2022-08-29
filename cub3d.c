@@ -34,7 +34,7 @@ int	main(int argc, char *argv[])
 	// data.ldy = sin(data.la);
 	// data.pdx = cos(data.pa);
 	// data.pdy = sin(data.pa);
-	data.psize = 6;
+	data.psize = 8;
 	data.pl.mlx_img = mlx_new_image(data.mlx, data.psize, data.psize);
 	data.pl.addr = mlx_get_data_addr(data.pl.mlx_img, &data.pl.bpp,
 			&data.pl.line_length, &data.pl.endian);
