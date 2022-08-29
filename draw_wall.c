@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/29 19:06:19 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/29 19:43:53 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,30 @@ void    draw_vertical_line(t_data *data, t_ray_calcul *ray, t_point begin, t_poi
 
 void    init_calculate_wall(t_data *data, t_ray_calcul *ray)
 {
-    t_point begin;
-    t_point end;
     int     distProj;
     int     wallHeight;
 
     distProj = (WIDTH / 2) / tan(degToRad(FIELD_OF_VIEW / 2));
     wallHeight = (SQUARE_SIZE / ray->disH) * distProj;
-    begin.x = (ray->r * (WIDTH / NB_RAYS));
-    printf("Begin.x: %d\n", begin.x);
-    begin.y = (HEIGHT / 2) - (wallHeight / 2);
-    end.x = begin.x;
-    end.y = begin.y + wallHeight;
+    data->wall_drawing.begin.x = ((ray->r) * (WIDTH / NB_RAYS));
+    data->wall_drawing.begin.y = (HEIGHT / 2) - (wallHeight / 2);
+    data->wall_drawing.end.x = data->wall_drawing.begin.x;
+    data->wall_drawing.end.y = data->wall_drawing.begin.y + wallHeight;
     // for (int i = ray->r; i != (ray->r + 1) * (WIDTH / FIELD_OF_VIEW); i++)
     // {
-        draw_vertical_line(data, ray, begin, end);
+        draw_vertical_line(data, ray, data->wall_drawing.begin, data->wall_drawing.end);
         // begin.x = i;
         // end.x = begin.x;    
     // }
+    if (ray->r != 0)
+    {
+        bresenham(data, data->wall_drawing.begin, data->wall_drawing.old_begin, &data->walls);
+        bresenham(data, data->wall_drawing.end, data->wall_drawing.old_end, &data->walls);
+    }
+    data->wall_drawing.old_begin.x = data->wall_drawing.begin.x;
+    data->wall_drawing.old_begin.y = data->wall_drawing.begin.y;
+    data->wall_drawing.old_end.x = data->wall_drawing.end.x;
+    data->wall_drawing.old_end.y = data->wall_drawing.end.y;
 }
 
 void    init_wall(t_data *data)

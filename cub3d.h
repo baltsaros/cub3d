@@ -18,7 +18,7 @@
 #define SQUARE_SIZE		64
 #define	PLAYER_SIZE		8
 #define FIELD_OF_VIEW 	60
-#define	NB_RAYS			1500
+#define	NB_RAYS			150
 
 // North south east west
 #define NORTH			1
@@ -77,6 +77,14 @@ typedef struct s_ray_calcul
     float   vx;
     float   vy;
 } t_ray_calcul;
+
+typedef struct s_wall_drawing
+{
+	t_point	begin;
+	t_point	end;
+	t_point	old_begin;
+	t_point	old_end;
+}	t_wall_drawing;
 
 // 	struct for positions
 typedef struct s_player
@@ -138,6 +146,7 @@ typedef struct s_data
 	t_img			minimap;
 	t_img			walls;
 	t_ray_calcul	ray_calcul;
+	t_wall_drawing	wall_drawing;
 }	t_data;
 
 //	alloc_check
