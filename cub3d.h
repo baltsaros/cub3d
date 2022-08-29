@@ -48,6 +48,7 @@ typedef struct s_map
 	char	**c_spl;
 	char	**map;
 	int		dir;
+	int		angle;
 	size_t	width;
 	size_t	height;
 }	t_map;
@@ -128,13 +129,17 @@ int		init_map(t_input *data, char *file);
 char	*find_param(char **raw, char *param, t_input *data);
 size_t	find_mapsize(char **raw, int j);
 void	copy_map(char **raw, t_input *data);
+void	check_map(t_map *map, t_input *data);
 
 //	init_utils_2 - for check_map
 void	check_chars(char **raw, t_input *data);
 void	check_rows(char **map, t_input *data);
 size_t	check_length(char **map, size_t i, t_input *data);
 void	check_columns(char **map, t_input *data);
-void	check_map(t_map *map, t_input *data);
+void	check_player(char **map, t_input *data);
+
+//	init_utils_3 - other functions
+void	check_direction(t_input *data);
 
 //	free
 void	cub_free(char *str[]);

@@ -19,7 +19,8 @@ SRCS		= cub3d.c \
 				render.c \
 				init_map.c \
 				init_map_utils_1.c \
-				init_map_utils_2.c
+				init_map_utils_2.c \
+				init_map_utils_3.c
 
 # SRCS		= $(notdir $(SRC_FILES))
 
