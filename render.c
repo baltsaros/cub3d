@@ -8,13 +8,33 @@ int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
 
 int	render(t_input *data)
 {
+	render_background(data);
 	render_map(data, data->map.map);
-	// render_ray(data, RED);
-	render_lray(data, RED);
+	render_rays(data, RED);
+	// render_mray(data, RED);
+	// render_lray(data, RED);
 	// render_rray(data, RED);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 	render_player(data, &data->pl);
 	return (0);
+}
+
+void	render_background(t_input *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while(y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			my_mlx_pixel_put(&data->img, x, y, BLACK);
+			++x;
+		}
+		++y;
+	}
 }
 
 void	render_map(t_input *data, char **map)
@@ -78,26 +98,7 @@ void	render_player(t_input *data, t_img *img)
 	mlx_put_image_to_window(data->mlx, data->win, img->mlx_img, data->px, data->py);
 }
 
-void	render_ray(t_input *data, int color)
-{
-	float	x;
-	float	y;
-	int		j;
-
-	j = 0;
-	y = data->py + data->psize / 2;
-	x = data->px + data->psize / 2;
-	while (j < 40)
-	{
-		my_mlx_pixel_put(&data->img, x, y, color);
-		x += data->pdx;
-		y += data->pdy;
-		++j;
-	}
-
-}
-
-void	render_lray(t_input *data, int color)
+void	render_rays(t_input *data, int color)
 {
 	int	angle;
 
@@ -115,6 +116,39 @@ void	render_lray(t_input *data, int color)
 			data->ly += data->ldy;
 		}
 		angle++;
+	}
+}
+
+
+
+
+void	rendle_mray(t_input *data, int color)
+{
+	float	x;
+	float	y;
+	int		j;
+
+	j = 0;
+	y = data->py + data->psize / 2;
+	x = data->px + data->psize / 2;
+	while (j < 40)
+	{
+		my_mlx_pixel_put(&data->img, x, y, color);
+		x += data->pdx;
+		y += data->pdy;
+		++j;
+	}
+}
+
+void	render_lray(t_input *data, int color)
+{
+	data->ly = data->py + data->psize / 2;
+	data->lx = data->px + data->psize / 2;
+	while (is_wall(data, data->map.map, data->lx, data->ly))
+	{
+		my_mlx_pixel_put(&data->img, data->lx, data->ly, color);
+		data->lx += data->ldx;
+		data->ly += data->ldy;
 	}
 }
 

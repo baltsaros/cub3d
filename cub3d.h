@@ -152,10 +152,12 @@ void	cub_free_params(t_input *data);
 //	drawing
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 int		render(t_input *data);
+void	render_background(t_input *data);
 void	render_map(t_input *data, char **map);
 void	render_elem(t_input *data, int color, int j, int i);
 void	render_player(t_input *data, t_img *img);
-void	render_ray(t_input *data, int color);
+void	render_rays(t_input *data, int color);
+void	render_mray(t_input *data, int color);
 void	render_lray(t_input *data, int color);
 void	render_rray(t_input *data, int color);
 
