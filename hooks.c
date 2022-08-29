@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/26 11:27:16 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/29 12:25:32 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	key_hook(int keycode, t_input *data)
 	step = 5;
 	turn = 0.2;
 	// is_wall(data, data->map.map);
-	if (keycode == 65307)
+	if (keycode == 53)
 	{
 		mlx_destroy_image(data->mlx, data->img.mlx_img);
 		mlx_destroy_image(data->mlx, data->pl.mlx_img);
@@ -47,31 +47,31 @@ int	key_hook(int keycode, t_input *data)
 		exit(EXIT_SUCCESS);
 	}
 	// else if (keycode == 119 && map[y - 1][x] && map[y - 1][x] != '1')
-	else if (keycode == 119)
+	else if (keycode == 13)
 	{
 		data->py -= step;
 		if (!is_wall(data, data->map.map, data->px, data->py))
 			data->py += step;
 	}
-	else if (keycode == 115)
+	else if (keycode == 1)
 	{
 		data->py += step;
 		if (!is_wall(data, data->map.map, data->px, data->py))
 			data->py -= step;
 	}
-	else if (keycode == 97)
+	else if (keycode == 0)
 	{
 		data->px -= step;
 		if (!is_wall(data, data->map.map, data->px, data->py))
 			data->px += step;
 	}
-	else if (keycode == 100)
+	else if (keycode == 2)
 	{
 		data->px += step;
 		if (!is_wall(data, data->map.map, data->px, data->py))
 			data->px -= step;
 	}
-	else if (keycode == 65361)
+	else if (keycode == 123)
 	{
 		data->pa -= turn;
 		if (data->pa < 0)
@@ -90,7 +90,7 @@ int	key_hook(int keycode, t_input *data)
 		data->ldy = sin(data->la);
 		// printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
 	}
-	else if (keycode == 65363)
+	else if (keycode == 124)
 	{
 		data->pa += turn;
 		if (data->pa > 2 * PI)
