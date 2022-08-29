@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/26 17:31:13 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/29 13:38:32 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void    raycast(t_data *data, t_ray_calcul ray)
     ray.r = 0;
     ray.ra = FixAng(data->player_s.p_ang + 30);
     while (ray.r < FIELD_OF_VIEW)
+    // while (ray.r < WIDTH)
     {
         Tan = tan(degToRad(ray.ra));
         check_vertical_wall(data, &ray, Tan);
@@ -59,6 +60,9 @@ void    raycast(t_data *data, t_ray_calcul ray)
         adapt_distance(&ray);
         draw_ray(data, &ray);
         fisheye_fix(data, &ray);
+
+        printf("Distance: %f\n", ray.disH);
+
         init_calculate_wall(data, &ray);
         ray.ra = FixAng(ray.ra - 1);
         ray.r++;
