@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/29 17:01:54 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/29 19:06:19 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void    init_calculate_wall(t_data *data, t_ray_calcul *ray)
 
     distProj = (WIDTH / 2) / tan(degToRad(FIELD_OF_VIEW / 2));
     wallHeight = (SQUARE_SIZE / ray->disH) * distProj;
-    begin.x = ray->r * (WIDTH / FIELD_OF_VIEW);
+    begin.x = (ray->r * (WIDTH / NB_RAYS));
+    printf("Begin.x: %d\n", begin.x);
     begin.y = (HEIGHT / 2) - (wallHeight / 2);
     end.x = begin.x;
     end.y = begin.y + wallHeight;
