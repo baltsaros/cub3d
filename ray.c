@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/29 13:38:32 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/29 14:54:50 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ void    raycast(t_data *data, t_ray_calcul ray)
     float Tan;
     
     ray.r = 0;
-    ray.ra = FixAng(data->player_s.p_ang + 30);
-    while (ray.r < FIELD_OF_VIEW)
-    // while (ray.r < WIDTH)
+    // ray.ra = FixAng(data->player_s.p_ang + 30);
+
+    ray.ra = ((float)1 - (WIDTH / 2)) * 33 / (WIDTH / 2);
+
+    // while (ray.r < FIELD_OF_VIEW)
+    while (ray.r < WIDTH)
     {
         Tan = tan(degToRad(ray.ra));
         check_vertical_wall(data, &ray, Tan);
@@ -63,9 +66,13 @@ void    raycast(t_data *data, t_ray_calcul ray)
 
         printf("Distance: %f\n", ray.disH);
 
-        init_calculate_wall(data, &ray);
-        ray.ra = FixAng(ray.ra - 1);
+        // init_calculate_wall(data, &ray);
+        // ray.ra = FixAng(ray.ra - 1);
+
+        ray.ra = ((float)ray.r - (WIDTH / 2)) * 33 / (WIDTH / 2);
+        
         ray.r++;
+        printf("Ray %dth launch\n", ray.r);
     }
 }
 
