@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:36:36 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/29 16:24:34 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/29 18:39:20 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void    calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof)
         ray->my = ((int)(ray->ry) / SQUARE_SIZE);
         if (ray->my >= 0 && ray->mx >= 0
             && ray->my < (int)data->map.height
-            && ray->mx < (int)data->map.width - 1
+            && ray->mx < (int)data->map.width
             && data->map.map[ray->my][ray->mx] == '1')
         {
             dof = 8;

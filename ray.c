@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/29 18:30:16 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/29 18:40:36 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void    raycast(t_data *data, t_ray_calcul ray)
     float Tan;
     
     ray.r = 0;
-    ray.ra = FixAng(data->player_s.p_ang - 30);
+    ray.ra = FixAng(data->player_s.p_ang + 30);
     while (ray.r < NB_RAYS)
     {
         Tan = tan(degToRad(ray.ra));
@@ -61,7 +61,7 @@ void    raycast(t_data *data, t_ray_calcul ray)
         draw_ray(data, &ray);
         fisheye_fix(data, &ray);
         init_calculate_wall(data, &ray);
-        ray.ra = FixAng(ray.ra + ((float)FIELD_OF_VIEW / (float)NB_RAYS));
+        ray.ra = FixAng(ray.ra - ((float)FIELD_OF_VIEW / (float)NB_RAYS));
         printf("RX: %f\n", ray.rx);
         printf("RY: %f\n", ray.ry);
         printf("ray.ra: %f\n", ray.ra);
