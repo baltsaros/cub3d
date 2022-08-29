@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/29 15:07:17 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/29 18:30:16 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void   adapt_distance(t_ray_calcul *ray)
         ray->rx = ray->vx;
         ray->ry = ray->vy;
         ray->disH = ray->disV;
+        ray->posH = ray->posV;
     }
 }
 
@@ -47,12 +48,8 @@ void    raycast(t_data *data, t_ray_calcul ray)
     float Tan;
     
     ray.r = 0;
-    ray.ra = FixAng(data->player_s.p_ang + 30);
-
-    // ray.ra = ((float)1 - (WIDTH / 2)) * 33 / (WIDTH / 2);
-
-    while (ray.r < FIELD_OF_VIEW)
-    // while (ray.r < WIDTH)
+    ray.ra = FixAng(data->player_s.p_ang - 30);
+    while (ray.r < NB_RAYS)
     {
         Tan = tan(degToRad(ray.ra));
         check_vertical_wall(data, &ray, Tan);
@@ -63,16 +60,13 @@ void    raycast(t_data *data, t_ray_calcul ray)
         adapt_distance(&ray);
         draw_ray(data, &ray);
         fisheye_fix(data, &ray);
-
-        printf("Distance: %f\n", ray.disH);
-
         init_calculate_wall(data, &ray);
-        ray.ra = FixAng(ray.ra - 1);
-
-        // ray.ra = ((float)ray.r - (WIDTH / 2)) * 33 / (WIDTH / 2);
-        
+        ray.ra = FixAng(ray.ra + ((float)FIELD_OF_VIEW / (float)NB_RAYS));
+        printf("RX: %f\n", ray.rx);
+        printf("RY: %f\n", ray.ry);
+        printf("ray.ra: %f\n", ray.ra);
+        printf("%dth ray launched\n", ray.r);
         ray.r++;
-        printf("Ray %dth launch\n", ray.r);
     }
 }
 

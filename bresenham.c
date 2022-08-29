@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:47:55 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/22 15:49:57 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/29 16:39:00 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,15 @@ void	init_bre_values(t_bre	*values, t_seg *seg)
 
 void	ft_put_pixel(t_data *data, t_seg *seg, t_img *img, int color)
 {
+	(void)data;
 	if ((seg->p0.x < WIDTH && seg->p0.y < HEIGHT)
 		&& (seg->p0.x >= 0 && seg->p0.y >= 0))
 	{
-		if ((seg->p0.x < (int)(data->map.width * SQUARE_SIZE) && seg->p0.y < (int)(data->map.height * SQUARE_SIZE)))
-		{
-			if ((seg->p0.x >= 0) && (seg->p0.y >= 0))
+		// if ((seg->p0.x < (int)(data->map.width * SQUARE_SIZE) && seg->p0.y < (int)(data->map.height * SQUARE_SIZE)))
+		// {
+			// if ((seg->p0.x >= 0) && (seg->p0.y >= 0))
 				mlx_pixel_put_img(img, seg->p0.x, seg->p0.y, color);
-		}
+		// }
 	}
 }
 

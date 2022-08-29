@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:30:54 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/19 16:14:52 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/29 18:02:21 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ float   degToRad(int a)
     return (a * M_PI / 180.0);
 }
 
-int FixAng(int a)
+float FixAng(float a)
 { 
     if(a > 359)
         a -= 360;

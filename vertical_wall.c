@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:35:14 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/29 15:09:49 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/29 16:24:24 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void    check_right(t_data *data, t_ray_calcul *ray, float Tan)
     ray->ry = (data->player_s.pos_x - ray->rx) * Tan + data->player_s.pos_y;
     ray->xo = SQUARE_SIZE;
     ray->yo = -ray->xo * Tan;
+    // printf("EAST\n");
+    ray->posV = EAST;
 }
 
 void    check_left(t_data *data, t_ray_calcul *ray, float Tan)
@@ -61,6 +63,8 @@ void    check_left(t_data *data, t_ray_calcul *ray, float Tan)
     ray->ry = (data->player_s.pos_x - ray->rx) * Tan + data->player_s.pos_y;
     ray->xo = -SQUARE_SIZE;
     ray->yo = -ray->xo * Tan;
+    // printf("WEST\n");
+    ray->posV = WEST;
 }
 
 void    check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan)

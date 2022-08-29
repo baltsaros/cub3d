@@ -18,6 +18,13 @@
 #define SQUARE_SIZE		64
 #define	PLAYER_SIZE		8
 #define FIELD_OF_VIEW 	60
+#define	NB_RAYS			120
+
+// North south east west
+#define NORTH			1
+#define SOUTH			2
+#define	EAST			3
+#define	WEST			4
 
 //	struct to store mlx data
 typedef struct s_img
@@ -65,6 +72,8 @@ typedef struct s_ray_calcul
     float   yo;
     float   disV;
     float   disH;
+	int		posV;
+	int		posH;
     float   vx;
     float   vy;
 } t_ray_calcul;
@@ -228,7 +237,7 @@ void    check_down(t_data *data, t_ray_calcul *ray, float Tan);
 void    check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
 
 // Draw Wall
-void    draw_vertical_line(t_data *data, t_point begin, t_point end);
+void    draw_vertical_line(t_data *data, t_ray_calcul *ray, t_point begin, t_point end);
 void    init_calculate_wall(t_data *data, t_ray_calcul *ray);
 void    init_wall(t_data *data);
 
@@ -242,6 +251,6 @@ void	bresenham(t_data *data, t_point begin, t_point end, t_img *img);
 // Calculs Utils
 int		create_trgb(int t, int r, int g, int b);
 float   degToRad(int a);
-int 	FixAng(int a);
+float 	FixAng(float a);
 
 #endif

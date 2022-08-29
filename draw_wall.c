@@ -6,18 +6,28 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/29 15:18:53 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/29 17:01:54 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    draw_vertical_line(t_data *data, t_point begin, t_point end)
+void    draw_vertical_line(t_data *data, t_ray_calcul *ray, t_point begin, t_point end)
 {
+    (void)ray;
+    int color;
+
+    color = 0x1E90FF;
+    // printf("ray->pos: %d\n", ray->posH);
     while (begin.y != end.y + 1)
-    {   
-        if (begin.x >= 0 && begin.x <= WIDTH && begin.y >= 0 && begin.y <= HEIGHT)     
-            mlx_pixel_put_img(&data->walls, begin.x, begin.y, data->walls.basic_color);
+    {
+        if (begin.x >= 0 && begin.x <= WIDTH && begin.y >= 0 && begin.y <= HEIGHT)
+        {
+            // if (ray->posH == NORTH || ray->posH == WEST)
+                mlx_pixel_put_img(&data->walls, begin.x, begin.y, data->walls.basic_color);
+            // else if (ray->posH == SOUTH || ray->posH == EAST)
+                // mlx_pixel_put_img(&data->walls, begin.x, begin.y, color);
+        }    
         begin.y++;
     }
 }
@@ -35,14 +45,18 @@ void    init_calculate_wall(t_data *data, t_ray_calcul *ray)
     begin.y = (HEIGHT / 2) - (wallHeight / 2);
     end.x = begin.x;
     end.y = begin.y + wallHeight;
-    
-    draw_vertical_line(data, begin, end);
+    // for (int i = ray->r; i != (ray->r + 1) * (WIDTH / FIELD_OF_VIEW); i++)
+    // {
+        draw_vertical_line(data, ray, begin, end);
+        // begin.x = i;
+        // end.x = begin.x;    
+    // }
 }
 
 void    init_wall(t_data *data)
 {
     data->walls.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-    data->walls.basic_color = 0x777777;
+    data->walls.basic_color = 0x00BFFF;
     data->walls.addr = mlx_get_data_addr(data->walls.img_ptr, &data->walls.bpp,
         &data->walls.line_length, &data->walls.endian);
     draw_square(data->walls, create_trgb(255, 255, 255, 255), HEIGHT, WIDTH);
