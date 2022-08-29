@@ -35,11 +35,13 @@ int	main(int argc, char *argv[])
 	// data.pdx = cos(data.pa);
 	// data.pdy = sin(data.pa);
 	data.psize = 8;
+	data.angle = data.map.angle % 360 - 30;
 	data.pl.mlx_img = mlx_new_image(data.mlx, data.psize, data.psize);
 	data.pl.addr = mlx_get_data_addr(data.pl.mlx_img, &data.pl.bpp,
 			&data.pl.line_length, &data.pl.endian);
 	// printf("dir is %c\n", data.map.dir);
 	// printf("pa is %f\npdx is %f\npdy is %f\n", data.pa, data.pdx, data.pdy);
+	printf("la is %f, ra is %f\n", data.la, data.ra);
 	mlx_loop_hook(data.mlx, &render, &data);
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_mouse_hook(data.win, mouse_hook, &data);

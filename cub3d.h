@@ -12,7 +12,7 @@
 # include "libft/libft.h"
 
 //	default window size
-# define WIDTH 800
+# define WIDTH 600
 # define HEIGHT 600
 
 # define RED 0xFF0000
@@ -22,6 +22,7 @@
 # define GRAY 0x808080
 
 # define PI 3.1415926535
+# define RAD 0.0174533
 # define FOV 60
 
 //	struct to store mlx data for map
@@ -82,6 +83,7 @@ typedef struct s_input
 	float	sx;
 	float	sy;
 	int		color;
+	int		angle;
 	t_img	img;
 	t_img	pl;
 	t_img	ray;

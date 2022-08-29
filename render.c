@@ -9,9 +9,9 @@ int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
 int	render(t_input *data)
 {
 	render_map(data, data->map.map);
-	render_ray(data, RED);
+	// render_ray(data, RED);
 	render_lray(data, RED);
-	render_rray(data, RED);
+	// render_rray(data, RED);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 	render_player(data, &data->pl);
 	return (0);
@@ -99,13 +99,22 @@ void	render_ray(t_input *data, int color)
 
 void	render_lray(t_input *data, int color)
 {
-	data->ly = data->py + data->psize / 2;
-	data->lx = data->px + data->psize / 2;
-	while (is_wall(data, data->map.map, data->lx, data->ly))
+	int	angle;
+
+	angle = 0;
+	while (angle < 60)
 	{
-		my_mlx_pixel_put(&data->img, data->lx, data->ly, color);
-		data->lx += data->ldx;
-		data->ly += data->ldy;
+		data->ly = data->py + data->psize / 2;
+		data->lx = data->px + data->psize / 2;
+		data->ldx = cos(data->la + (angle * PI / 180));
+		data->ldy = sin(data->la + (angle * PI / 180));
+		while (is_wall(data, data->map.map, data->lx, data->ly))
+		{
+			my_mlx_pixel_put(&data->img, data->lx, data->ly, color);
+			data->lx += data->ldx;
+			data->ly += data->ldy;
+		}
+		angle++;
 	}
 }
 
