@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/30 14:59:18 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/30 15:27:14 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	key_hook(int keycode, t_input *data)
 	float	step;
 	float	turn;
 
-	step = 5;
+	step = 7;
 	turn = 0.2;
 	// is_wall(data, data->map.map);
 	if (keycode == 53)
@@ -49,25 +49,39 @@ int	key_hook(int keycode, t_input *data)
 	// else if (keycode == 119 && map[y - 1][x] && map[y - 1][x] != '1')
 	else if (keycode == 13)
 	{
-		data->py -= step;
+		data->px += step * data->pdx;
+		data->py += step * data->pdy;
+		// data->px += data->pdx;
+		// data->py += data->pdy;
 		if (!is_wall(data, data->map.map, data->px, data->py))
-			data->py += step;
+		{
+			data->px -= step * data->pdx;
+			data->py -= step * data->pdy;
+		}
 	}
 	else if (keycode == 1)
 	{
-		data->py += step;
+		data->px -= step * data->pdx;
+		data->py -= step * data->pdy;
+		// data->px -= data->pdx;
+		// data->py -= data->pdy;
 		if (!is_wall(data, data->map.map, data->px, data->py))
-			data->py -= step;
+		{
+			data->px += step * data->pdx;
+			data->py += step * data->pdy;
+		}
 	}
 	else if (keycode == 0)
 	{
 		data->px -= step;
+		// data->py += step * data->pdy;
 		if (!is_wall(data, data->map.map, data->px, data->py))
 			data->px += step;
 	}
 	else if (keycode == 2)
 	{
 		data->px += step;
+		// data->py -= step * data->pdy;
 		if (!is_wall(data, data->map.map, data->px, data->py))
 			data->px -= step;
 	}
@@ -112,7 +126,7 @@ int	key_hook(int keycode, t_input *data)
 	else
 		printf("Key %d was pressed!\n", keycode);
 	// render_player(data, &data->pl);
-	printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
+	// printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
 	render(data);
 	return (0);
 }

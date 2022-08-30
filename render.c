@@ -115,7 +115,7 @@ void	render_rays(t_input *data, int color)
 			data->lx += data->ldx;
 			data->ly += data->ldy;
 		}
-		angle += 0.1;
+		angle += 0.5;
 		// angle++;
 	}
 }
