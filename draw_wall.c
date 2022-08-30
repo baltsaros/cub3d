@@ -6,33 +6,35 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/29 19:43:53 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/30 14:10:59 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    draw_vertical_line(t_data *data, t_ray_calcul *ray, t_point begin, t_point end)
+void    draw_vertical_line(t_data *data, t_wall_drawing *wall, int pos)
 {
-    (void)ray;
     int color;
 
     color = 0x1E90FF;
-    // printf("ray->pos: %d\n", ray->posH);
-    while (begin.y != end.y + 1)
+    while (wall->begin.y != wall->end.y + 1)
     {
-        if (begin.x >= 0 && begin.x <= WIDTH && begin.y >= 0 && begin.y <= HEIGHT)
+        if (wall->begin.x >= 0 && wall->begin.x <= WIDTH && wall->begin.y >= 0 && wall->begin.y <= HEIGHT)
         {
-            // if (ray->posH == NORTH || ray->posH == WEST)
-                mlx_pixel_put_img(&data->walls, begin.x, begin.y, data->walls.basic_color);
-            // else if (ray->posH == SOUTH || ray->posH == EAST)
-                // mlx_pixel_put_img(&data->walls, begin.x, begin.y, color);
+            if (pos == NORTH)
+                mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, data->walls.basic_color);
+            else if (pos == WEST)
+                mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, data->walls.basic_color);
+            else if (pos == SOUTH)
+                mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, color);
+            else if (pos == EAST)
+                mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, color);
         }    
-        begin.y++;
+        wall->begin.y++;
     }
 }
 
-void    init_calculate_wall(t_data *data, t_ray_calcul *ray)
+void    init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
 {
     int     distProj;
     int     wallHeight;
@@ -45,19 +47,10 @@ void    init_calculate_wall(t_data *data, t_ray_calcul *ray)
     data->wall_drawing.end.y = data->wall_drawing.begin.y + wallHeight;
     // for (int i = ray->r; i != (ray->r + 1) * (WIDTH / FIELD_OF_VIEW); i++)
     // {
-        draw_vertical_line(data, ray, data->wall_drawing.begin, data->wall_drawing.end);
+        draw_vertical_line(data, &data->wall_drawing, pos);
         // begin.x = i;
         // end.x = begin.x;    
     // }
-    if (ray->r != 0)
-    {
-        bresenham(data, data->wall_drawing.begin, data->wall_drawing.old_begin, &data->walls);
-        bresenham(data, data->wall_drawing.end, data->wall_drawing.old_end, &data->walls);
-    }
-    data->wall_drawing.old_begin.x = data->wall_drawing.begin.x;
-    data->wall_drawing.old_begin.y = data->wall_drawing.begin.y;
-    data->wall_drawing.old_end.x = data->wall_drawing.end.x;
-    data->wall_drawing.old_end.y = data->wall_drawing.end.y;
 }
 
 void    init_wall(t_data *data)

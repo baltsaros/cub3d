@@ -18,13 +18,14 @@
 #define SQUARE_SIZE		64
 #define	PLAYER_SIZE		8
 #define FIELD_OF_VIEW 	60
-#define	NB_RAYS			150
+#define	NB_RAYS			1500
 
 // North south east west
 #define NORTH			1
 #define SOUTH			2
 #define	EAST			3
 #define	WEST			4
+#define	ERROR_POS		100
 
 //	struct to store mlx data
 typedef struct s_img
@@ -72,8 +73,6 @@ typedef struct s_ray_calcul
     float   yo;
     float   disV;
     float   disH;
-	int		posV;
-	int		posH;
     float   vx;
     float   vy;
 } t_ray_calcul;
@@ -82,8 +81,6 @@ typedef struct s_wall_drawing
 {
 	t_point	begin;
 	t_point	end;
-	t_point	old_begin;
-	t_point	old_end;
 }	t_wall_drawing;
 
 // 	struct for positions
@@ -225,7 +222,7 @@ void    init_player(t_data *data);
 void    init_player_values(t_data *data);
 
 // Ray
-void	adapt_distance(t_ray_calcul *ray);
+int   	adapt_distance(t_ray_calcul *ray, int posH, int posV);
 void    draw_ray(t_data *data, t_ray_calcul *ray);
 void    fisheye_fix(t_data *data, t_ray_calcul *ray);
 void  	raycast(t_data *data, t_ray_calcul ray);
@@ -234,20 +231,20 @@ void  	init_ray(t_data *data);
 // Vertical wall
 float	disV_calcul(t_data *data, float ra, float ry, float rx);
 void    calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof);
-void    check_right(t_data *data, t_ray_calcul *ray, float Tan);
-void    check_left(t_data *data, t_ray_calcul *ray, float Tan);
-void    check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan);
+int	    check_right(t_data *data, t_ray_calcul *ray, float Tan);
+int	    check_left(t_data *data, t_ray_calcul *ray, float Tan);
+int	    check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan);
 
 // Horizontal wall
 float   disH_calcul(t_data *data, float ra, float ry, float rx);
 void    calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof);
-void    check_up(t_data *data, t_ray_calcul *ray, float Tan);
-void    check_down(t_data *data, t_ray_calcul *ray, float Tan);
-void    check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
+int	    check_up(t_data *data, t_ray_calcul *ray, float Tan);
+int	    check_down(t_data *data, t_ray_calcul *ray, float Tan);
+int	    check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
 
 // Draw Wall
-void    draw_vertical_line(t_data *data, t_ray_calcul *ray, t_point begin, t_point end);
-void    init_calculate_wall(t_data *data, t_ray_calcul *ray);
+void    draw_vertical_line(t_data *data, t_wall_drawing *wall, int pos);
+void    init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos);
 void    init_wall(t_data *data);
 
 // Bresenham

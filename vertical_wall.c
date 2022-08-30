@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:35:14 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/29 18:39:06 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/08/30 13:58:38 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,41 +47,43 @@ void    calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof)
     }
 }
 
-void    check_right(t_data *data, t_ray_calcul *ray, float Tan)
+int    check_right(t_data *data, t_ray_calcul *ray, float Tan)
 {
     ray->rx = (((int)data->player_s.pos_x / SQUARE_SIZE) * SQUARE_SIZE) + SQUARE_SIZE;
     ray->ry = (data->player_s.pos_x - ray->rx) * Tan + data->player_s.pos_y;
     ray->xo = SQUARE_SIZE;
     ray->yo = -ray->xo * Tan;
-    // printf("EAST\n");
-    ray->posV = EAST;
+    return (EAST);
 }
 
-void    check_left(t_data *data, t_ray_calcul *ray, float Tan)
+int    check_left(t_data *data, t_ray_calcul *ray, float Tan)
 {
     ray->rx = (((int)data->player_s.pos_x / SQUARE_SIZE) * SQUARE_SIZE) - 0.0001;
     ray->ry = (data->player_s.pos_x - ray->rx) * Tan + data->player_s.pos_y;
     ray->xo = -SQUARE_SIZE;
     ray->yo = -ray->xo * Tan;
-    // printf("WEST\n");
-    ray->posV = WEST;
+    return (WEST);
 }
 
-void    check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan)
+int    check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan)
 {
     int dof;
+    int ret;
 
     dof = 0;
+    ret = 0;
     ray->disV = 100000;
     if (cos(degToRad(ray->ra)) > 0.001)
-        check_right(data, ray, Tan);
+        ret = check_right(data, ray, Tan);
     else if (cos(degToRad(ray->ra)) < -0.001)
-        check_left(data, ray, Tan);
+        ret = check_left(data, ray, Tan);
     else
     {
         ray->rx = data->player_s.pos_x;
         ray->ry = data->player_s.pos_y;
         dof = 8;
+        ret = ERROR_POS;
     }
     calculate_vertical_distance(data, ray, dof);
+    return (ret);
 }
