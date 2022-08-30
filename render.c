@@ -100,7 +100,7 @@ void	render_player(t_input *data, t_img *img)
 
 void	render_rays(t_input *data, int color)
 {
-	int	angle;
+	float	angle;
 
 	angle = 0;
 	while (angle < 60)
@@ -115,12 +115,10 @@ void	render_rays(t_input *data, int color)
 			data->lx += data->ldx;
 			data->ly += data->ldy;
 		}
-		angle++;
+		angle += 0.1;
+		// angle++;
 	}
 }
-
-
-
 
 void	rendle_mray(t_input *data, int color)
 {

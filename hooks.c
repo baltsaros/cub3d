@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/29 15:52:26 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/08/30 14:59:18 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int	key_hook(int keycode, t_input *data)
 	else
 		printf("Key %d was pressed!\n", keycode);
 	// render_player(data, &data->pl);
+	printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
 	render(data);
 	return (0);
 }
