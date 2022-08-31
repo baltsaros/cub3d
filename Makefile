@@ -28,7 +28,7 @@ OBJ_DIR		= objs
 OBJ_FILES	= $(SRCS:.c=.o)
 OBJS		= $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))
 
-INCS		= -Ilibft -Imlx
+INCS		= -Ilibft -Imlx_linux
 
 GCC			= gcc
 RM			= rm -f
@@ -43,7 +43,7 @@ $(OBJ_DIR)/%.o: %.c
 			@$(GCC) $(CFLAGS) -c $< $(INCS) -o $@
 
 $(NAME):	$(OBJS) 
-			@$(GCC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit libft/libft.a -o $(NAME)
+			@$(GCC) $(OBJS) -Lmlx_linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz libft/libft.a -o $(NAME)
 			@printf "\n$(C_GREEN_B)Finished!$(C_RESET)\n";
 
 
