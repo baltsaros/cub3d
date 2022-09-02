@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/30 15:27:14 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/09/02 08:13:49 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,23 @@ int	key_hook(int keycode, t_input *data)
 	}
 	else if (keycode == 0)
 	{
-		data->px -= step;
-		// data->py += step * data->pdy;
+		data->px += step * cos(data->pa - ((90 * PI) / 180));
+		data->py += step * sin(data->pa - ((90 * PI) / 180));
 		if (!is_wall(data, data->map.map, data->px, data->py))
-			data->px += step;
+		{
+			data->px -= step * cos(data->pa - ((90 * PI) / 180));
+			data->py -= step * sin(data->pa - ((90 * PI) / 180));
+		}
 	}
 	else if (keycode == 2)
 	{
-		data->px += step;
-		// data->py -= step * data->pdy;
+		data->px -= step * cos(data->pa - ((90 * PI) / 180));
+		data->py -= step * sin(data->pa - ((90 * PI) / 180));
 		if (!is_wall(data, data->map.map, data->px, data->py))
-			data->px -= step;
+		{
+			data->px += step * cos(data->pa - ((90 * PI) / 180));
+			data->py += step * sin(data->pa - ((90 * PI) / 180));
+		}
 	}
 	else if (keycode == 123)
 	{
