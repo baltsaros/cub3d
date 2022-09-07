@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/09/07 12:34:08 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/09/07 13:00:31 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	key_hook(int keycode, t_input *data)
 
 	step = 7;
 	turn = 0.2;
-	// is_wall(data, data->map.map);
 	if (keycode == 53)
 	{
 		mlx_destroy_image(data->mlx, data->img.mlx_img);
@@ -46,13 +45,10 @@ int	key_hook(int keycode, t_input *data)
 		cub_free_all(data);
 		exit(EXIT_SUCCESS);
 	}
-	// else if (keycode == 119 && map[y - 1][x] && map[y - 1][x] != '1')
 	else if (keycode == 13)
 	{
 		data->px += step * data->pdx;
 		data->py += step * data->pdy;
-		// data->px += data->pdx;
-		// data->py += data->pdy;
 		if (!is_wall(data, data->map.map, data->px, data->py))
 		{
 			data->px -= step * data->pdx;
@@ -63,8 +59,6 @@ int	key_hook(int keycode, t_input *data)
 	{
 		data->px -= step * data->pdx;
 		data->py -= step * data->pdy;
-		// data->px -= data->pdx;
-		// data->py -= data->pdy;
 		if (!is_wall(data, data->map.map, data->px, data->py))
 		{
 			data->px += step * data->pdx;
@@ -131,7 +125,6 @@ int	key_hook(int keycode, t_input *data)
 	}
 	else
 		printf("Key %d was pressed!\n", keycode);
-	// render_player(data, &data->pl);
 	// printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
 	render(data);
 	return (0);
@@ -146,6 +139,7 @@ int	mouse_hook(int keycode, int x, int y, t_input *data)
 	float	up;
 	float	dw;
 	float	mul;
+
 	if (keycode == 1)
 	{
 		px = data->px;
@@ -164,8 +158,8 @@ int	mouse_hook(int keycode, int x, int y, t_input *data)
 		data->la = data->pa - (30 * PI) / 180;
 		printf("xx is %f, yy is %f, key is %d\n", xx, yy, keycode);
 		// printf("30%% is %f, la is %f\n", (30 * PI) / 180, data->la);
-		// data->pdx = cos(data->pa);
-		// data->pdy = sin(data->pa);
+		data->pdx = cos(data->pa);
+		data->pdy = sin(data->pa);
 		printf("px is %f, py is %f, pa is %f\n", px, py, data->pa);
 		// printf("pdx: %f, pdy: %f\n", data->pdx, data->pdy);
 	}
