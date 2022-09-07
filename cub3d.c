@@ -6,6 +6,7 @@ int	main(int argc, char *argv[])
 	
 	if (argc != 2)
 		error_exit(&data, "Ivalid amount of arguments", 0);
+	// data.angle = data.map.angle % 360 - 30;
 	init_map(&data, argv[1]);
 	data.mlx = mlx_init();
 	check_mlx(data.mlx, &data);
@@ -35,7 +36,6 @@ int	main(int argc, char *argv[])
 	// data.pdx = cos(data.pa);
 	// data.pdy = sin(data.pa);
 	data.psize = 8;
-	data.angle = data.map.angle % 360 - 30;
 	data.pl.mlx_img = mlx_new_image(data.mlx, data.psize, data.psize);
 	data.pl.addr = mlx_get_data_addr(data.pl.mlx_img, &data.pl.bpp,
 			&data.pl.line_length, &data.pl.endian);

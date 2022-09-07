@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/09/02 08:13:49 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/09/07 12:34:08 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,19 +139,36 @@ int	key_hook(int keycode, t_input *data)
 
 int	mouse_hook(int keycode, int x, int y, t_input *data)
 {
-	(void)x;
-	(void)y;
-	(void)keycode;
-	(void)data;
-	// cub_free_all(data);
-	// if (keycode == 4)
-	// 	data->set.zoom *= 1.1;
-	// else if (keycode == 5)
-	// 	data->set.zoom *= 0.9;
-	// data->set.move_x = (x - WIDTH / 2) / (data->set.zoom * WIDTH)
-	// 	+ data->set.move_x;
-	// data->set.move_y = (y - HEIGHT / 2) / (data->set.zoom * HEIGHT)
-	// 	+ data->set.move_y;
-	render_player(data, &data->pl);
+	float	px;
+	float	py;
+	float	xx;
+	float	yy;
+	float	up;
+	float	dw;
+	float	mul;
+	if (keycode == 1)
+	{
+		px = data->px;
+		py = data->py;
+		xx = (float)x - data->px;
+		yy = data->py - (float)y;
+		up = px * xx + py * yy;
+		dw = sqrtf(px * px + py * py) * sqrtf(xx * xx + yy * yy);
+		printf("%f, sqrt is %f\n", px * px + py * py, sqrtf(px * px + py * py));
+		printf("%f, sqrt is %f\n", xx * xx + yy * yy, sqrtf(xx * xx + yy * yy));
+		mul = up / dw;
+		printf("up is %f, down is %f, mul is %f\n", up, dw, mul);
+		data->pa = acosf(mul);
+		if (yy > 0)
+			data->pa = 2*PI - data->pa;
+		data->la = data->pa - (30 * PI) / 180;
+		printf("xx is %f, yy is %f, key is %d\n", xx, yy, keycode);
+		// printf("30%% is %f, la is %f\n", (30 * PI) / 180, data->la);
+		// data->pdx = cos(data->pa);
+		// data->pdy = sin(data->pa);
+		printf("px is %f, py is %f, pa is %f\n", px, py, data->pa);
+		// printf("pdx: %f, pdy: %f\n", data->pdx, data->pdy);
+	}
+	render(data);
 	return (0);
 }
