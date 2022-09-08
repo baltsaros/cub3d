@@ -11,16 +11,16 @@ void	check_direction(t_input *data)
 	else if (data->map.dir == 'S')
 		data->map.angle = 270;
 	data->pa = ((data->map.angle % 360) * PI) / 180;
-	data->ra = ((data->map.angle % 360 + 30) * PI) / 180;
 	data->rdx = cos(data->ra);
-	data->rdy = sin(data->ra);
+	data->rdy = -sin(data->ra);
 	data->la = data->pa - (30 * PI) / 180;
+	data->ra = data->pa + (30 * PI) / 180;
 	// printf("pa is %f, la is %f\n", data->pa, data->la);
 	// printf("pa is %f, la is %f\n", (data->pa * 180) / PI, (data->la * 180) / PI);
 	data->ldx = cos(data->la);
-	data->ldy = sin(data->la);
+	data->ldy = -sin(data->la);
 	data->pdx = cos(data->pa);
-	data->pdy = sin(data->pa);
+	data->pdy = -sin(data->pa);
 }
 
 void	squarification(t_input *data, char **map)

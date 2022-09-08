@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/09/07 13:00:31 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/09/08 10:14:59 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,42 +85,42 @@ int	key_hook(int keycode, t_input *data)
 			data->py += step * sin(data->pa - ((90 * PI) / 180));
 		}
 	}
-	else if (keycode == 123)
+	else if (keycode == 124)
 	{
 		data->pa -= turn;
 		if (data->pa < 0)
 			data->pa += 2 * PI;
 		data->pdx = cos(data->pa);
-		data->pdy = sin(data->pa);
+		data->pdy = -sin(data->pa);
 		data->ra -= turn;
 		if (data->ra < 0)
 			data->ra += 2 * PI;
 		data->rdx = cos(data->ra);
-		data->rdy = sin(data->ra);
+		data->rdy = -sin(data->ra);
 		data->la -= turn;
 		if (data->la < 0)
 			data->la += 2 * PI;
 		data->ldx = cos(data->la);
-		data->ldy = sin(data->la);
+		data->ldy = -sin(data->la);
 		// printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
 	}
-	else if (keycode == 124)
+	else if (keycode == 123)
 	{
 		data->pa += turn;
 		if (data->pa > 2 * PI)
 			data->pa -= 2 * PI;
 		data->pdx = cos(data->pa);
-		data->pdy = sin(data->pa);
+		data->pdy = -sin(data->pa);
 		data->ra += turn;
 		if (data->ra > 2 * PI)
 			data->ra -= 2 * PI;
 		data->rdx = cos(data->ra);
-		data->rdy = sin(data->ra);
+		data->rdy = -sin(data->ra);
 		data->la += turn;
 		if (data->la > 2 * PI)
 			data->la -= 2 * PI;
 		data->ldx = cos(data->la);
-		data->ldy = sin(data->la);
+		data->ldy = -sin(data->la);
 		// printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
 	}
 	else
@@ -132,36 +132,50 @@ int	key_hook(int keycode, t_input *data)
 
 int	mouse_hook(int keycode, int x, int y, t_input *data)
 {
-	float	px;
-	float	py;
-	float	xx;
-	float	yy;
-	float	up;
-	float	dw;
-	float	mul;
+	// float	px;
+	// float	py;
+	// float	xx;
+	// float	yy;
+	// float	up;
+	// float	dw;
+	// float	mul;
+	// float	angl;
 
 	if (keycode == 1)
 	{
-		px = data->px;
-		py = data->py;
-		xx = (float)x - data->px;
-		yy = data->py - (float)y;
-		up = px * xx + py * yy;
-		dw = sqrtf(px * px + py * py) * sqrtf(xx * xx + yy * yy);
-		printf("%f, sqrt is %f\n", px * px + py * py, sqrtf(px * px + py * py));
-		printf("%f, sqrt is %f\n", xx * xx + yy * yy, sqrtf(xx * xx + yy * yy));
-		mul = up / dw;
-		printf("up is %f, down is %f, mul is %f\n", up, dw, mul);
-		data->pa = acosf(mul);
-		if (yy > 0)
-			data->pa = 2*PI - data->pa;
-		data->la = data->pa - (30 * PI) / 180;
-		printf("xx is %f, yy is %f, key is %d\n", xx, yy, keycode);
-		// printf("30%% is %f, la is %f\n", (30 * PI) / 180, data->la);
-		data->pdx = cos(data->pa);
-		data->pdy = sin(data->pa);
-		printf("px is %f, py is %f, pa is %f\n", px, py, data->pa);
-		// printf("pdx: %f, pdy: %f\n", data->pdx, data->pdy);
+		// px = data->px - WIDTH/2;
+		// py = HEIGHT/2 - data->py;
+		// printf("PA is %f\n", data->pa);
+		// px = data->xx - data->px;
+		// py = data->py - data->yy;
+		// xx = (float)x - data->px;
+		// yy = data->py - (float)y;
+		// up = px * xx + py * yy;
+		// dw = sqrtf(px * px + py * py) * sqrtf(xx * xx + yy * yy);
+		// printf("%f, sqrt is %f\n", px * px + py * py, sqrtf(px * px + py * py));
+		// printf("%f, sqrt is %f\n", xx * xx + yy * yy, sqrtf(xx * xx + yy * yy));
+		// mul = up / dw;
+		// printf("up is %f, down is %f, mul is %f\n", up, dw, mul);
+		// if (mul < 1)
+		// {
+		// 	angl = acosf(mul);
+		// 	printf("acos: %f\n", angl);
+		// 	if (data->pa < angl)
+		// 		data->pa += angl;
+		// 	else
+		// 		data->pa -= angl;
+		// 	if (data->pa > 2 * PI)
+		// 		data->pa -= 2 * PI;
+		// 	if (data->pa < 0)
+		// 		data->pa += 2 * PI;
+		// 	data->la = data->pa - (30 * PI) / 180;
+		// 	printf("xx is %f, yy is %f, key is %d\n", xx, yy, keycode);
+		// 	// printf("30%% is %f, la is %f\n", (30 * PI) / 180, data->la);
+		// 	data->pdx = cos(data->pa);
+		// 	data->pdy = -sin(data->pa);
+		// 	printf("px is %f, py is %f, pa is %f\n", px, py, data->pa);
+		// 	printf("pdx: %f, pdy: %f\n", data->pdx, data->pdy);
+		printf("x is %d, y is %d, pa is %f\n", x, y, data->pa);
 	}
 	render(data);
 	return (0);

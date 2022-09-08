@@ -11,7 +11,7 @@ int	render(t_input *data)
 	render_background(data);
 	render_map(data, data->map.map);
 	render_rays(data, RED);
-	// render_mray(data, RED);
+	render_mray(data, GREEN);
 	// render_lray(data, RED);
 	// render_rray(data, RED);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
@@ -108,7 +108,7 @@ void	render_rays(t_input *data, int color)
 		data->ly = data->py + data->psize / 2;
 		data->lx = data->px + data->psize / 2;
 		data->ldx = cos(data->la + (angle * PI / 180));
-		data->ldy = sin(data->la + (angle * PI / 180));
+		data->ldy = -sin(data->la + (angle * PI / 180));
 		while (is_wall(data, data->map.map, data->lx, data->ly))
 		{
 			my_mlx_pixel_put(&data->img, data->lx, data->ly, color);
@@ -120,7 +120,8 @@ void	render_rays(t_input *data, int color)
 	}
 }
 
-void	rendle_mray(t_input *data, int color)
+// old functions
+void	render_mray(t_input *data, int color)
 {
 	float	x;
 	float	y;
@@ -134,6 +135,8 @@ void	rendle_mray(t_input *data, int color)
 		my_mlx_pixel_put(&data->img, x, y, color);
 		x += data->pdx;
 		y += data->pdy;
+		data->xx = x;
+		data->yy = y;
 		++j;
 	}
 }

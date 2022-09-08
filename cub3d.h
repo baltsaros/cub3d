@@ -82,6 +82,8 @@ typedef struct s_input
 	float	ldy;
 	float	sx;
 	float	sy;
+	float	xx;
+	float	yy;
 	int		color;
 	int		angle;
 	t_img	img;
