@@ -20,6 +20,7 @@
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 # define GRAY 0x808080
+# define TEST 0x90B3B0
 
 # define PI 3.1415926535
 # define RAD 0.0174533
@@ -86,6 +87,8 @@ typedef struct s_input
 	float	yy;
 	int		color;
 	int		angle;
+	float	time;
+	float	otime;
 	t_img	img;
 	t_img	pl;
 	t_img	ray;

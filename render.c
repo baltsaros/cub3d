@@ -12,6 +12,7 @@ int	render(t_input *data)
 	render_map(data, data->map.map);
 	render_rays(data, RED);
 	render_mray(data, GREEN);
+	// new_ray(data, RED);
 	// render_lray(data, RED);
 	// render_rray(data, RED);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
@@ -98,25 +99,146 @@ void	render_player(t_input *data, t_img *img)
 	mlx_put_image_to_window(data->mlx, data->win, img->mlx_img, data->px, data->py);
 }
 
+// void	new_ray(t_input *data, int color)
+// {
+// 	float	rx;
+// 	float	ry;
+// 	int		x;
+// 	int		y;
+// 	float	cam;
+// 	float	sdx;
+// 	float	sdy;
+// 	float	ddx;
+// 	float	ddy;
+// 	float	walld;
+// 	int		mapx;
+// 	int		mapy;
+// 	int		stepx;
+// 	int		stepy;
+// 	int		side;
+// 	int		hit = 0;
+
+// 	x = 0;
+// 	while (x < WIDTH)
+// 	{
+// 		cam = 2 * x / WIDTH - data->sx;
+// 		rx = data->xx + data->pdx * cam;
+// 		ry = data->yy + data->pdy * cam;
+// 		x++;
+// 		mapx = data->px;
+// 		mapy = data->py;
+// 		ddx = (rx == 0) ? 1e30 : fabs(1 / rx);
+// 		ddy = (ry == 0) ? 1e30 : fabs(1 / ry);
+// 		if (rx < 0)
+// 		{
+// 			stepx = -data->sx;
+// 			sdx = (data->px - mapx) * ddx;
+// 		}
+// 		else
+// 		{
+// 			stepx = data->sx;
+// 			sdx = (mapx + data->sx - data->px) * ddx;
+// 		}
+// 		if (ry < 0)
+// 		{
+// 			stepy = -data->sy;
+// 			sdy = (data->py - mapy) * ddy;
+// 		}
+// 		else
+// 		{
+// 			stepy = data->sy;
+// 			sdy = (mapy + data->sy - data->py) * ddy;
+// 		}
+// 		while (hit == 0)
+// 		{
+// 			if (sdx < sdy)
+// 			{
+// 				sdx += ddx;
+// 				mapx += stepx;
+// 				side = 0;
+// 			}
+// 			else
+// 			{
+// 				sdy += ddy;
+// 				mapy += stepy;
+// 				side = 1;
+// 			}
+// 			if (!is_wall(data, data->map.map, mapx, mapy))
+// 				hit = 1;
+// 		}
+// 		if (side == 0)
+// 			walld = sdx - ddx;
+// 		else
+// 			walld = sdy - ddy;
+		
+// 		int	lheight = (int)(HEIGHT/walld);
+// 		int	drawstart = -lheight / 2 + HEIGHT / 2;
+// 		if (drawstart < 0)
+// 			drawstart = 0;
+// 		int	drawend	= lheight / 2 + HEIGHT / 2;
+// 		if (drawend >= HEIGHT)
+// 			drawend = HEIGHT - data->sy;
+// 		y = drawstart;
+// 		while (y < drawend)
+// 		{
+// 			my_mlx_pixel_put(&data->img, x, y, color);
+// 			++y;
+// 		}
+// 	}
+// }
+
 void	render_rays(t_input *data, int color)
 {
 	float	angle;
+	float	dist;
+	int		nceil;
+	int		nfloor;
+	int		y;
+	int		x;
+	int		w;
+	float	z;
 
-	angle = 0;
+	(void)color;
+	angle = 0.0f;
+	x = 0;
+	w = data->sx/2;
 	while (angle < 60)
 	{
+		dist = 0.0f;
 		data->ly = data->py + data->psize / 2;
 		data->lx = data->px + data->psize / 2;
 		data->ldx = cos(data->la + (angle * PI / 180));
 		data->ldy = -sin(data->la + (angle * PI / 180));
-		while (is_wall(data, data->map.map, data->lx, data->ly))
+		// data->ldx = cos(data->la + (angle * PI / 180)) * data->sx;
+		// data->ldy = -sin(data->la + (angle * PI / 180)) * data->sy;
+		while (is_wall(data, data->map.map, data->lx, data->ly) && z < 16.0)
 		{
 			my_mlx_pixel_put(&data->img, data->lx, data->ly, color);
 			data->lx += data->ldx;
 			data->ly += data->ldy;
+			dist += 0.1;
+			z = dist * data->pdx;
+			// printf("lx is %f, ly is %f\n", data->lx, data->ly);
 		}
 		angle += 0.5;
-		// angle++;
+		nceil = HEIGHT / 2.0f - HEIGHT/dist;
+		nfloor = HEIGHT - nceil;
+		while (x < w && w < WIDTH)
+		{
+			y = nceil;
+			while (y < nfloor - z)
+			{
+				if (dist > 15.9f)
+					my_mlx_pixel_put(&data->img, x, y, GRAY);
+				else
+					my_mlx_pixel_put(&data->img, x, y, 420 + (3 * dist));
+				++y;
+			}
+			++x;
+		}
+		w += data->sx/2;
+		angle++;
+		printf("ceiling is %d, floor is %d\n", nceil, nfloor);
 	}
 }
 

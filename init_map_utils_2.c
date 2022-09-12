@@ -91,7 +91,7 @@ void	check_columns(char **map, t_input *data)
 		while (map[j][i] && map[j][i] == ' ')
 			++j;
 		if (map[j][i] && map[j][i] != '1')
-			error_exit(data, "Unclosed map: columns", 1);
+			error_exit(data, "Unclosed map: columns1", 1);
 		while (map[j] && map[j][i])
 		{
 			if (map[j][i] == '1')
@@ -101,7 +101,7 @@ void	check_columns(char **map, t_input *data)
 			j++;
 		}
 		if (!closed)
-			error_exit(data, "Unclosed map: columns", 1);
+			error_exit(data, "Unclosed map: columns2", 1);
 		++i;
 		j = check_length(map, i, data);
 	}
