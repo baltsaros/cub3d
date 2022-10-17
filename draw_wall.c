@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/30 14:10:59 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/10/17 19:10:05 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void    draw_vertical_line(t_data *data, t_wall_drawing *wall, int pos)
 
 void    init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
 {
-    int     distProj;
-    int     wallHeight;
+    float   distProj;
+    float   wallHeight;
 
     distProj = (WIDTH / 2) / tan(degToRad(FIELD_OF_VIEW / 2));
     wallHeight = (SQUARE_SIZE / ray->disH) * distProj;
-    data->wall_drawing.begin.x = ((ray->r) * (WIDTH / NB_RAYS));
+    data->wall_drawing.begin.x = (((float)ray->r) * ((float)WIDTH / (float)NB_RAYS));
     data->wall_drawing.begin.y = (HEIGHT / 2) - (wallHeight / 2);
     data->wall_drawing.end.x = data->wall_drawing.begin.x;
     data->wall_drawing.end.y = data->wall_drawing.begin.y + wallHeight;

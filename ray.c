@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/30 14:01:42 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/10/17 19:41:41 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void    draw_ray(t_data *data, t_ray_calcul *ray)
 
 void    fisheye_fix(t_data *data, t_ray_calcul *ray)
 {
-    int ca;
+    float ca;
     
     ca = FixAng(data->player_s.p_ang - ray->ra);
     ray->disH = ray->disH * cos(degToRad(ca));  

@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:30:54 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/29 18:02:21 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/10/17 19:15:12 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-float   degToRad(int a)
+float   degToRad(float a)
 {
-    return (a * M_PI / 180.0);
+    return (a * (float)M_PI / 180.0);
 }
 
 float FixAng(float a)

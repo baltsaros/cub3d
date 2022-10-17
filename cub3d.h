@@ -256,7 +256,7 @@ void	bresenham(t_data *data, t_point begin, t_point end, t_img *img);
 
 // Calculs Utils
 int		create_trgb(int t, int r, int g, int b);
-float   degToRad(int a);
+float   degToRad(float a);
 float 	FixAng(float a);
 
 #endif
