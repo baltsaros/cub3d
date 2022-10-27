@@ -6,23 +6,23 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/10/17 19:31:28 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/10/27 18:02:34 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_wall(char **map, int x, int y, int flag)
-{
-	int	rx;
-	int	ry;
+// int	is_wall(char **map, int x, int y, int flag)
+// {
+// 	int	rx;
+// 	int	ry;
 
-	ry = y / SQUARE_SIZE;
-	rx = x / SQUARE_SIZE;
-	if (map[ry][rx] && map[ry][rx] != '1')
-		return (1);
-	return (0);
-}
+// 	ry = y / SQUARE_SIZE;
+// 	rx = x / SQUARE_SIZE;
+// 	if (map[ry][rx] && map[ry][rx] != '1')
+// 		return (1);
+// 	return (0);
+// }
 
 void	render(t_data *data)
 {
