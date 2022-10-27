@@ -144,6 +144,10 @@ typedef struct s_data
 	t_img			walls;
 	t_ray_calcul	ray_calcul;
 	t_wall_drawing	wall_drawing;
+	int				*no_text;
+	int				*so_text;
+	int				*ea_text;
+	int				*we_text;
 }	t_data;
 
 //	alloc_check
