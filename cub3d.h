@@ -255,8 +255,10 @@ void	init_seg_values(t_seg *seg, t_point *begin, t_point *end);
 void	bresenham(t_data *data, t_point begin, t_point end, t_img *img);
 
 // Calculs Utils
-int		create_trgb(int t, int r, int g, int b);
 float   degToRad(float a);
 float 	FixAng(float a);
+
+// Colors Utils
+int		create_trgb(int t, int r, int g, int b);
 
 #endif
