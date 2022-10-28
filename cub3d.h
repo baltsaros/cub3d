@@ -38,6 +38,11 @@ typedef struct s_img
 	int		basic_color;
 }	t_img;
 
+typedef struct s_text
+{
+	t_img	text;
+} t_text;
+
 // structs to store values for drawing
 
 typedef struct s_bre
@@ -144,10 +149,10 @@ typedef struct s_data
 	t_img			walls;
 	t_ray_calcul	ray_calcul;
 	t_wall_drawing	wall_drawing;
-	int				*no_text;
-	int				*so_text;
-	int				*ea_text;
-	int				*we_text;
+	t_text			no_text;
+	t_text			so_text;
+	t_text			ea_text;
+	t_text			we_text;
 }	t_data;
 
 //	alloc_check
