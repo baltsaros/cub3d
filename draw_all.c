@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/26 15:28:45 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/10/31 16:02:24 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,20 @@ void    draw_all(t_data *data)
 {
     // Ceiling
     data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
+    printf("ceiling\n");
     if (data->ceiling.img_ptr != NULL)
         init_ceiling(data);
     // Floors
     data->floor.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
+    printf("floor\n");
     if (data->floor.img_ptr != NULL)
         init_floor(data);
     //else
         // put error here
+    printf("minimap\n");
     init_minimap(data, data->minimap_s);
+    printf("player\n");
     init_player(data);
+    printf("ray\n");
     init_ray(data);
 }

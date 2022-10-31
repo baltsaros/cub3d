@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/10/31 15:28:19 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/10/31 15:57:49 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void    init_minimap_values(t_data *data)
     data->minimap_s.position.y = 10;
     // data->minimap_s.position.x = data->player_s.pos_x;
     // data->minimap_s.position.y = data->player_s.pos_y;
+    printf("w: %ld, h: %ld\n", data->map.width, data->map.height);
     data->minimap_s.width = data->map.width * SQUARE_SIZE;
     data->minimap_s.height = data->map.height * SQUARE_SIZE;
     data->minimap.img_ptr = mlx_new_image(data->mlx, data->minimap_s.width, data->minimap_s.height);

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:11:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/10/31 15:08:35 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/10/31 16:00:58 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int launcher(t_data *data)
     check_win(data);
     init_minimap_values(data);
     init_player_values(data);
-    printf("drawing\n");
+    printf("angle: %f, x: %f, y: %f, x_w: %f, y_w: %f\n", data->player_s.p_ang,
+        data->player_s.pos_x, data->player_s.pos_y, data->player_s.pos_win_x, data->player_s.pos_win_y);
+    printf("x_m: %d, y_m: %d\n", data->minimap_s.position.x, data->minimap_s.position.y);  
     draw_all(data);
 
     hook_manager(data);

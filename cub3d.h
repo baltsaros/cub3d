@@ -130,6 +130,7 @@ typedef struct s_map
 	char	**f_spl;
 	char	**c_spl;
 	char	**map;
+	int		coord[2];
 	int		dir;
 	int		angle;
 	size_t	width;

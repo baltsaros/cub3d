@@ -124,8 +124,8 @@ void	check_player(char **map, t_data *data)
 			{
 				player = 1;
 				data->map.dir = map[j][i];
-				data->player_s.pos_x = i;
-				data->player_s.pos_y = j;
+				data->map.coord[0] = i;
+				data->map.coord[1] = j;
 				break ;
 			}
 			++i;
