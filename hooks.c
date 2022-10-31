@@ -6,18 +6,17 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/10/31 13:58:23 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/10/31 14:05:59 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_wall(char **map, int x, int y, int flag)
+int	is_wall(char **map, int x, int y)
 {
 	int	rx;
 	int	ry;
 
-	(void)flag;
 	ry = y / SQUARE_SIZE;
 	rx = x / SQUARE_SIZE;
 	if (map[ry][rx] && map[ry][rx] != '1')
@@ -107,7 +106,7 @@ void	move(int keycode, t_data *data)
 		data->player_s.pos_win_x += 5 * data->player_s.delta_x;
 		data->player_s.pos_y += 5 * data->player_s.delta_y;
 		data->player_s.pos_x += 5 * data->player_s.delta_x;
-		if (data->player_s.pos_win_y < 0)
+		if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
 		{
 			data->player_s.pos_win_y -= 5 * data->player_s.delta_y;
 			data->player_s.pos_win_x -= 5 * data->player_s.delta_x;
@@ -127,7 +126,7 @@ void	move(int keycode, t_data *data)
 		data->player_s.pos_win_x -= 5 * data->player_s.delta_x;
 		data->player_s.pos_y -= 5 * data->player_s.delta_y;
 		data->player_s.pos_x -= 5 * data->player_s.delta_x;
-		if (data->player_s.pos_win_y > HEIGHT - PLAYER_SIZE)
+		if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
 		{
 			data->player_s.pos_win_y += 5 * data->player_s.delta_y;
 			data->player_s.pos_win_x += 5 * data->player_s.delta_x;
@@ -146,7 +145,7 @@ void	move(int keycode, t_data *data)
 		data->player_s.pos_win_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
 		data->player_s.pos_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
 		data->player_s.pos_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		if (data->player_s.pos_win_x < 0)
+		if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
 		{
 			data->player_s.pos_win_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
 			data->player_s.pos_win_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
@@ -165,7 +164,7 @@ void	move(int keycode, t_data *data)
 		data->player_s.pos_win_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
 		data->player_s.pos_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
 		data->player_s.pos_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		if (data->player_s.pos_win_x > WIDTH - PLAYER_SIZE)
+		if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
 		{
 			data->player_s.pos_win_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
 			data->player_s.pos_win_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
