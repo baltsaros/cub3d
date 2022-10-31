@@ -277,16 +277,4 @@ int		create_trgb(int t, int r, int g, int b);
 float   degToRad(float a);
 float 	FixAng(float a);
 
-//	drawing
-int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
-int		render(t_data *data);
-void	render_background(t_data *data);
-void	render_map(t_data *data, char **map);
-void	render_elem(t_data *data, int color, int j, int i);
-void	render_player(t_data *data, t_img *img);
-void	render_rays(t_data *data, int color);
-void	render_mray(t_data *data, int color);
-void	render_lray(t_data *data, int color);
-void	render_rray(t_data *data, int color);
-
 #endif

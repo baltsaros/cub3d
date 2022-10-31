@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/10/31 14:40:53 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/10/31 14:51:43 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,10 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 	// float	mul;
 	// float	angl;
 
+	(void)x;
+	(void)y;
+	(void)keycode;
+	(void)data;
 	if (keycode == 1)
 	{
 		// px = data->px - WIDTH/2;
@@ -124,9 +128,9 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 		// 	data->pdy = -sin(data->pa);
 		// 	printf("px is %f, py is %f, pa is %f\n", px, py, data->pa);
 		// 	printf("pdx: %f, pdy: %f\n", data->pdx, data->pdy);
-		printf("x is %d, y is %d, pa is %f\n", x, y, data->pa);
+		// printf("x is %d, y is %d, pa is %f\n", x, y, data->pa);
 	}
-	render(data);
+	// render(data);
 	return (0);
 }
 
