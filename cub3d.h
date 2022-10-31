@@ -36,7 +36,6 @@
 
 # define PI 3.1415926535
 # define RAD 0.0174533
-# define FOV 60
 
 //	struct to store mlx data for map
 typedef struct s_img

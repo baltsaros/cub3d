@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/26 14:25:19 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/10/31 15:29:38 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void    init_player_values(t_data *data)
     data->player_s.pos_y = 0;
     data->player_s.pos_win_x = 0;
     data->player_s.pos_win_y = 0;
-    data->player_s.p_ang = 90;
+    printf("angle is: %f\n", data->player_s.p_ang);
+    // data->player_s.p_ang = 90;
+    // data->player_s.pos_win_x = data->player_s.pos_x * SQUARE_SIZE;
+    // data->player_s.pos_win_y = data->player_s.pos_y * SQUARE_SIZE;
     data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 	data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
     data->player.img_ptr = mlx_new_image(data->mlx, PLAYER_SIZE, PLAYER_SIZE);

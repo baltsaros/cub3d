@@ -9,7 +9,7 @@ C_RESET			=\033[0m
 GCC			= gcc
 RM			= rm -f
 RMF			= rm -rf
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 
 NAME		= cub3d
 LIBFT       = ./libft/libft.a
