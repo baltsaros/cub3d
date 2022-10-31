@@ -21,9 +21,11 @@ SRCS		=	cub3d.c \
 				alloc_check.c \
 				error_messages.c \
 				hooks.c \
+				render.c \
 				init_map.c \
 				init_map_utils_1.c \
 				init_map_utils_2.c \
+				init_map_utils_3.c \
 				launcher.c \
 				draw_all.c \
 				minimap.c \
@@ -34,6 +36,8 @@ SRCS		=	cub3d.c \
 				draw_wall.c \
 				bresenham.c \
 				calculs_utils.c
+
+# SRCS		= $(notdir $(SRC_FILES))
 
 OBJ_DIR		= objs
 OBJ_FILES	= $(SRCS:.c=.o)
@@ -51,6 +55,7 @@ $(OBJ_DIR)/%.o: %.c
 $(NAME):	$(OBJS) $(MLX)
 			@$(GCC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit ${INCS} libft/libft.a -o $(NAME)
 			@printf "\n$(C_GREEN_B)Finished!$(C_RESET)\n";
+
 
 libft:
 			@make -C ./libft

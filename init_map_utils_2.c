@@ -91,7 +91,7 @@ void	check_columns(char **map, t_data *data)
 		while (map[j][i] && map[j][i] == ' ')
 			++j;
 		if (map[j][i] && map[j][i] != '1')
-			error_exit(data, "Unclosed map: columns", 1);
+			error_exit(data, "Unclosed map: columns1", 1);
 		while (map[j] && map[j][i])
 		{
 			if (map[j][i] == '1')
@@ -101,7 +101,7 @@ void	check_columns(char **map, t_data *data)
 			j++;
 		}
 		if (!closed)
-			error_exit(data, "Unclosed map: columns", 1);
+			error_exit(data, "Unclosed map: columns2", 1);
 		++i;
 		j = check_length(map, i, data);
 	}
@@ -123,6 +123,9 @@ void	check_player(char **map, t_data *data)
 			if (check_charset(map[j][i], "NEWS"))
 			{
 				player = 1;
+				data->map.dir = map[j][i];
+				data->player_s.pos_x = i;
+				data->player_s.pos_y = j;
 				break ;
 			}
 			++i;
@@ -131,17 +134,4 @@ void	check_player(char **map, t_data *data)
 	}
 	if (!player)
 		error_exit(data, "There is no player on the map!", 1);
-}
-
-void	check_map(t_map *map, t_data *data)
-{
-	check_chars(map->map, data);
-	// printf("checking rows\n");
-	check_rows(map->map, data);
-	// printf("checking columns\n");
-	check_columns(map->map, data);
-	// printf("closed\n");
-	// printf("checking player\n");
-	// printf("width is %ld\nheight is %ld\n", data->map.width, data->map.height);
-	check_player(map->map, data);
 }

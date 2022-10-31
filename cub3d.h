@@ -27,9 +27,18 @@
 #define	WEST			4
 #define	ERROR_POS		100
 
-# define PI 3.1415926535
+# define RED 0xFF0000
+# define GREEN 0xFF00
+# define WHITE 0xFFFFFF
+# define BLACK 0x000000
+# define GRAY 0x808080
+# define TEST 0x90B3B0
 
-//	struct to store mlx data
+# define PI 3.1415926535
+# define RAD 0.0174533
+# define FOV 60
+
+//	struct to store mlx data for map
 typedef struct s_img
 {
 	void	*img_ptr;
@@ -122,6 +131,8 @@ typedef struct s_map
 	char	**f_spl;
 	char	**c_spl;
 	char	**map;
+	int		dir;
+	int		angle;
 	size_t	width;
 	size_t	height;
 }	t_map;
@@ -188,13 +199,18 @@ int		init_map(t_data *data, char *file);
 char	*find_param(char **raw, char *param, t_data *data);
 size_t	find_mapsize(char **raw, int j);
 void	copy_map(char **raw, t_data *data);
+void	check_map(t_map *map, t_data *data);
 
 //	init_utils_2 - for check_map
 void	check_chars(char **raw, t_data *data);
 void	check_rows(char **map, t_data *data);
 size_t	check_length(char **map, size_t i, t_data *data);
 void	check_columns(char **map, t_data *data);
-void	check_map(t_map *map, t_data *data);
+void	check_player(char **map, t_data *data);
+
+//	init_utils_3 - other functions
+void	check_direction(t_data *data);
+void	squarification(t_data *data, char **map);
 
 //	free
 void	cub_free(char *str[]);
@@ -260,5 +276,17 @@ void	bresenham(t_data *data, t_point begin, t_point end, t_img *img);
 int		create_trgb(int t, int r, int g, int b);
 float   degToRad(float a);
 float 	FixAng(float a);
+
+//	drawing
+int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
+int		render(t_data *data);
+void	render_background(t_data *data);
+void	render_map(t_data *data, char **map);
+void	render_elem(t_data *data, int color, int j, int i);
+void	render_player(t_data *data, t_img *img);
+void	render_rays(t_data *data, int color);
+void	render_mray(t_data *data, int color);
+void	render_lray(t_data *data, int color);
+void	render_rray(t_data *data, int color);
 
 #endif

@@ -65,3 +65,18 @@ void	copy_map(char **raw, t_data *data)
 	}
 	data->map.map[i] = NULL;
 }
+
+void	check_map(t_map *map, t_data *data)
+{
+	check_chars(map->map, data);
+	printf("checking rows\n");
+	check_rows(map->map, data);
+	printf("checking columns\n");
+	check_columns(map->map, data);
+	printf("closed\n");
+	printf("checking player\n");
+	printf("width is %ld\nheight is %ld\n", data->map.width, data->map.height);
+	check_player(map->map, data);
+	check_direction(data);
+	squarification(data, map->map);
+}
