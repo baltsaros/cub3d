@@ -27,6 +27,8 @@
 #define	WEST			4
 #define	ERROR_POS		100
 
+# define PI 3.1415926535
+
 //	struct to store mlx data
 typedef struct s_img
 {

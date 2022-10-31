@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/10/17 19:31:28 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/10/31 13:58:23 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	is_wall(char **map, int x, int y, int flag)
 	int	rx;
 	int	ry;
 
+	(void)flag;
 	ry = y / SQUARE_SIZE;
 	rx = x / SQUARE_SIZE;
 	if (map[ry][rx] && map[ry][rx] != '1')
@@ -102,10 +103,18 @@ void	move(int keycode, t_data *data)
 {
 	if (keycode == 13)
 	{
-		data->player_s.pos_win_y -= 5;
-		data->player_s.pos_y -= 5;
+		data->player_s.pos_win_y += 5 * data->player_s.delta_y;
+		data->player_s.pos_win_x += 5 * data->player_s.delta_x;
+		data->player_s.pos_y += 5 * data->player_s.delta_y;
+		data->player_s.pos_x += 5 * data->player_s.delta_x;
 		if (data->player_s.pos_win_y < 0)
-			data->player_s.pos_win_y = 0;
+		{
+			data->player_s.pos_win_y -= 5 * data->player_s.delta_y;
+			data->player_s.pos_win_x -= 5 * data->player_s.delta_x;
+			data->player_s.pos_y -= 5 * data->player_s.delta_y;
+			data->player_s.pos_x -= 5 * data->player_s.delta_x;
+
+		}
 		// else if (!is_wall(data->map.map, data->player_s.pos_x, data->player_s.pos_y))
 		// {
 		// 	data->player_s.pos_win_y += 5;
@@ -114,10 +123,17 @@ void	move(int keycode, t_data *data)
 	}
 	else if (keycode == 1)
 	{
-		data->player_s.pos_win_y += 5;
-		data->player_s.pos_y += 5;
+		data->player_s.pos_win_y -= 5 * data->player_s.delta_y;
+		data->player_s.pos_win_x -= 5 * data->player_s.delta_x;
+		data->player_s.pos_y -= 5 * data->player_s.delta_y;
+		data->player_s.pos_x -= 5 * data->player_s.delta_x;
 		if (data->player_s.pos_win_y > HEIGHT - PLAYER_SIZE)
-			data->player_s.pos_win_y = HEIGHT - PLAYER_SIZE;	
+		{
+			data->player_s.pos_win_y += 5 * data->player_s.delta_y;
+			data->player_s.pos_win_x += 5 * data->player_s.delta_x;
+			data->player_s.pos_y += 5 * data->player_s.delta_y;
+			data->player_s.pos_x += 5 * data->player_s.delta_x;
+		}
 		// else if (!is_wall(data->map.map, data->player_s.pos_x, data->player_s.pos_y))
 		// {
 		// 	data->player_s.pos_win_y -= 5;
@@ -126,10 +142,17 @@ void	move(int keycode, t_data *data)
 	}
 	else if (keycode == 0)
 	{
-		data->player_s.pos_win_x -= 5;
-		data->player_s.pos_x -= 5;
+		data->player_s.pos_win_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_win_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
 		if (data->player_s.pos_win_x < 0)
-			data->player_s.pos_win_x = 0;
+		{
+			data->player_s.pos_win_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+			data->player_s.pos_win_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+			data->player_s.pos_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+			data->player_s.pos_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		}
 		// else if (!is_wall(data->map.map, data->player_s.pos_x, data->player_s.pos_y))
 		// {
 		// 	data->player_s.pos_win_x += 5;
@@ -138,10 +161,17 @@ void	move(int keycode, t_data *data)
 	}
 	else if (keycode == 2)
 	{
-		data->player_s.pos_win_x += 5;
-		data->player_s.pos_x += 5;
+		data->player_s.pos_win_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_win_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
 		if (data->player_s.pos_win_x > WIDTH - PLAYER_SIZE)
-			data->player_s.pos_win_x = WIDTH - PLAYER_SIZE;
+		{
+			data->player_s.pos_win_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+			data->player_s.pos_win_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+			data->player_s.pos_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+			data->player_s.pos_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		}
 		// else if (!is_wall(data->map.map, data->player_s.pos_x, data->player_s.pos_y))
 		// {
 		// 	data->player_s.pos_win_x -= 5;
