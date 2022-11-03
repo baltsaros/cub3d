@@ -43,4 +43,21 @@ void	squarification(t_data *data, char **map)
 		data->i++;
 	}
 	data->map.map = tmp;
+	// size_t	i;
+	// size_t	j;
+
+	// (void)data;
+	// i = 0;
+	// while(map[i])
+	// {
+	// 	j = 0;
+	// 	while (map[i][j])
+	// 	{
+	// 		write(1, &map[i][j], 1);
+	// 		++j;
+	// 	}
+	// 	write(1, "\n", 1);
+	// 	++i;
+	// }
+	return;
 }
