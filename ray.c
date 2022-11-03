@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/10/17 19:41:41 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/03 11:58:51 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ void  init_ray(t_data *data)
     data->ray.addr = mlx_get_data_addr(data->ray.img_ptr, &data->ray.bpp,
 		  &data->ray.line_length, &data->ray.endian);
     draw_square(data->ray, create_trgb(255, 255, 255, 255), data->minimap_s.height, data->minimap_s.width);
+    printf("wall\n");
     init_wall(data);
 }

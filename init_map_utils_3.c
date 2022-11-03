@@ -39,6 +39,8 @@ void	squarification(t_data *data, char **map)
 	while (map[data->i])
 	{
 		tmp[data->i] = ft_memcpy(tmp[data->i], map[data->i], data->map.width);
+		free(map[data->i]);
 		data->i++;
 	}
+	data->map.map = tmp;
 }
