@@ -6,13 +6,13 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/24 11:40:45 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/10/31 14:46:05 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_vars(t_input *data)
+void	init_vars(t_data *data)
 {
 	data->map.raw = NULL;
 	data->map.no = NULL;
@@ -28,7 +28,7 @@ void	init_vars(t_input *data)
 	data->map.height = 0;
 }
 
-void	check_extension(t_input *data, char *file)
+void	check_extension(t_data *data, char *file)
 {
 	size_t	len;
 
@@ -39,7 +39,7 @@ void	check_extension(t_input *data, char *file)
 		error_exit(data, "Invalid map extension", 0);
 }
 
-void	check_param(t_map *map, t_input *data)
+void	check_param(t_map *map, t_data *data)
 {
 	data->j = 0;
 	data->map.map = NULL;
@@ -64,7 +64,7 @@ void	check_param(t_map *map, t_input *data)
 	check_map(map, data);
 }
 
-t_map	read_param(t_input *data, char *file)
+t_map	read_param(t_data *data, char *file)
 {
 	t_map	map;
 	char	*buf;
@@ -89,14 +89,14 @@ t_map	read_param(t_input *data, char *file)
 	return (map);
 }
 
-int	init_map(t_input *data, char *file)
+int	init_map(t_data *data, char *file)
 {
 	init_vars(data);
 	check_extension(data, file);
 	data->map = read_param(data, file);
 	check_param(&(data->map), data);
-	data->sx = WIDTH / data->map.width;
-	data->sy = HEIGHT / data->map.height;
-	printf("sx is %f\nsy is %f\n", data->sx, data->sy);
+	// data->sx = WIDTH / data->map.width;
+	// data->sy = HEIGHT / data->map.height;
+	// printf("sx is %f\nsy is %f\n", data->sx, data->sy);
 	return (0);
 }

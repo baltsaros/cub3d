@@ -7,33 +7,115 @@
 # include <stdlib.h>
 # include <errno.h>
 # include <math.h>
-# include <stdint.h>
-# include <mlx.h>
+# include "mlx/mlx.h"
 # include "libft/libft.h"
 
 //	default window size
-# define WIDTH 600
-# define HEIGHT 600
+#define WIDTH 			1500
+#define HEIGHT 			1000
+
+// some default values
+#define SQUARE_SIZE		64
+#define	PLAYER_SIZE		8
+#define FIELD_OF_VIEW 	60
+#define	NB_RAYS			1500
+
+// North south east west
+#define NORTH			1
+#define SOUTH			2
+#define	EAST			3
+#define	WEST			4
+#define	ERROR_POS		100
 
 # define RED 0xFF0000
 # define GREEN 0xFF00
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 # define GRAY 0x808080
+# define TEST 0x90B3B0
 
 # define PI 3.1415926535
 # define RAD 0.0174533
-# define FOV 60
 
 //	struct to store mlx data for map
 typedef struct s_img
 {
-	void	*mlx_img;
+	void	*img_ptr;
 	char	*addr;
 	int		bpp;
 	int		line_length;
 	int		endian;
+	int		basic_color;
 }	t_img;
+
+// structs to store values for drawing
+
+typedef struct s_bre
+{
+	int	dx;
+	int	sx;
+	int	dy;
+	int	sy;
+	int	err;
+}	t_bre;
+
+typedef struct s_point
+{
+	int x;
+	int y;
+}	t_point;
+
+typedef struct s_seg
+{
+	t_point	p0;
+	t_point	p1;
+}	t_seg;
+
+typedef struct s_ray_calcul
+{
+	int     r;
+    int     mx;
+    int     my;
+    float   rx;
+    float   ry;
+    float   ra;
+    float   xo;
+    float   yo;
+    float   disV;
+    float   disH;
+    float   vx;
+    float   vy;
+} t_ray_calcul;
+
+typedef struct s_wall_drawing
+{
+	t_point	begin;
+	t_point	end;
+}	t_wall_drawing;
+
+// 	struct for positions
+typedef struct s_player
+{
+	float	pos_x;
+	float	pos_y;
+	float	pos_win_x;
+	float	pos_win_y;
+	float	p_ang;
+	float	delta_x;
+	float	delta_y;
+}	t_player;
+
+typedef struct s_ray
+{
+	int test;
+}	t_ray;
+
+typedef struct s_minimap
+{
+	t_point		position;
+	int			width;
+	int			height;
+}	t_minimap;
 
 //	struct to store map data
 typedef struct s_map
@@ -48,117 +130,151 @@ typedef struct s_map
 	char	**f_spl;
 	char	**c_spl;
 	char	**map;
+	int		coord[2];
 	int		dir;
 	int		angle;
 	size_t	width;
 	size_t	height;
 }	t_map;
 
-//	global(integral) struct to store all data
-typedef struct s_input
+typedef struct s_data
 {
-	size_t	i;
-	size_t	j; 
-	char	*s_tmp;
-	int		fd;
-	void	*mlx;
-	void	*win;
-	int		pcoord[2];
-	float	px;
-	float	py;
-	float	pdx;
-	float	pdy;
-	float	pa;
-	int		psize;
-	float	ra;
-	float	rx;
-	float	ry;
-	float	rdx;
-	float	rdy;
-	float	la;
-	float	lx;
-	float	ly;
-	float	ldx;
-	float	ldy;
-	float	sx;
-	float	sy;
-	int		color;
-	int		angle;
-	t_img	img;
-	t_img	pl;
-	t_img	ray;
-	t_map	map;
-}	t_input;
+	void			*mlx;
+	void			*win;
+	size_t			i;
+	size_t			j;
+	char			*s_tmp;
+	int				fd;
+	t_img			ceiling;
+	t_img			floor;
+	t_map			map;
+	t_player		player_s;
+	t_img			player;
+	t_ray			ray_s;
+	t_img			ray;
+	t_minimap		minimap_s;
+	t_img			minimap;
+	t_img			walls;
+	t_ray_calcul	ray_calcul;
+	t_wall_drawing	wall_drawing;
+}	t_data;
 
 //	alloc_check
-void	alloc_check_big(char **str, t_input *data);
-void	alloc_check_small(void *str, t_input *data);
+void	alloc_check_big(char **str, t_data *data);
+void	alloc_check_small(void *str, t_data *data);
 
 //	utils_1
-char	*cub_strjoin_free(char *rest, char *buf, t_input *data);
-char	*cub_charjoin_free(char *line, char b, t_input *data);
-char	*cub_strndup(char const *str, size_t size, t_input *data);
-char	*cub_strdup(const char *s, t_input *data);
-void	*cub_malloc(size_t n, t_input *data);
+char	*cub_strjoin_free(char *rest, char *buf, t_data *data);
+char	*cub_charjoin_free(char *line, char b, t_data *data);
+char	*cub_strndup(char const *str, size_t size, t_data *data);
+char	*cub_strdup(const char *s, t_data *data);
+void	*cub_malloc(size_t n, t_data *data);
 
 //	utils_2
 int		ft_strcmp(char *s1, char *s2);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-char	*get_next_line(int fd, t_input *data);
+char	*get_next_line(int fd, t_data *data);
 int		check_charset(char c, char *charset);
-int		ft_exit(t_input *data);
+int		ft_exit(t_data *data);
 
 //	error_messages
-int		error_check_exit(int input, char *str, t_input *data);
-int		error_check_noexit(int input, char *str, t_input *data);
-void	error_exit(t_input *data, char *msg, int param);
-void	check_mlx(void *mlx, t_input *data);
-void	check_win(t_input *data);
+int		error_check_exit(int input, char *str, t_data *data);
+int		error_check_noexit(int input, char *str, t_data *data);
+void	error_exit(t_data *data, char *msg, int param);
+void	check_mlx(void *mlx, t_data *data);
+void	check_win(t_data *data);
 
 //	hooks
-int		is_wall(t_input *data, char **map, float x, float y);
-int		key_hook(int keycode, t_input *data);
-int		mouse_hook(int keycode, int x, int y, t_input *data);
+int		key_hook_manager(int keycode, t_data *data);
+int		mouse_hook(int keycode, int x, int y, t_data *data);
+int		infinite_hook(int keycode, t_data *data);
 
 //	init
-void	init_vars(t_input *data);
-void	check_extension(t_input *data, char *file);
-t_map	read_param(t_input *data, char *file);
-void	check_param(t_map *map, t_input *data);
-int		init_map(t_input *data, char *file);
+void	init_vars(t_data *data);
+void	check_extension(t_data *data, char *file);
+t_map	read_param(t_data *data, char *file);
+void	check_param(t_map *map, t_data *data);
+int		init_map(t_data *data, char *file);
 
 //	init_utils_1 - for check_param
-char	*find_param(char **raw, char *param, t_input *data);
+char	*find_param(char **raw, char *param, t_data *data);
 size_t	find_mapsize(char **raw, int j);
-void	copy_map(char **raw, t_input *data);
-void	check_map(t_map *map, t_input *data);
+void	copy_map(char **raw, t_data *data);
+void	check_map(t_map *map, t_data *data);
 
 //	init_utils_2 - for check_map
-void	check_chars(char **raw, t_input *data);
-void	check_rows(char **map, t_input *data);
-size_t	check_length(char **map, size_t i, t_input *data);
-void	check_columns(char **map, t_input *data);
-void	check_player(char **map, t_input *data);
+void	check_chars(char **raw, t_data *data);
+void	check_rows(char **map, t_data *data);
+size_t	check_length(char **map, size_t i, t_data *data);
+void	check_columns(char **map, t_data *data);
+void	check_player(char **map, t_data *data);
 
 //	init_utils_3 - other functions
-void	check_direction(t_input *data);
-void	squarification(t_input *data, char **map);
+void	check_direction(t_data *data);
+void	squarification(t_data *data, char **map);
 
 //	free
 void	cub_free(char *str[]);
-void	cub_free_all(t_input *data);
-void	cub_free_params(t_input *data);
+void	cub_free_all(t_data *data);
+void	cub_free_params(t_data *data);
 
-//	drawing
-int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
-int		render(t_input *data);
-void	render_background(t_input *data);
-void	render_map(t_input *data, char **map);
-void	render_elem(t_input *data, int color, int j, int i);
-void	render_player(t_input *data, t_img *img);
-void	render_rays(t_input *data, int color);
-void	render_mray(t_input *data, int color);
-void	render_lray(t_input *data, int color);
-void	render_rray(t_input *data, int color);
+// Launcher
+void    hook_manager(t_data *data);
+int 	launcher(t_data *data);
+
+// Draw All
+void    draw_square(t_img img, int color, int end_i, int end_j);
+void    init_ceiling(t_data *data);
+void    init_floor(t_data *data);
+void    draw_all(t_data *data);
+
+// Minimap
+void    draw_square_coord(t_data *data, int color, int x, int y);
+void    draw_empty_square_coord(t_data *data, int color, int x, int y);
+void    draw_map(t_data *data, int color, int height, int width);
+void    redraw_map(t_data *data, int color, int height, int width);
+void    init_minimap(t_data *data, t_minimap minimap);
+void    init_minimap_values(t_data *data);
+
+// Player
+void    init_player(t_data *data);
+void    init_player_values(t_data *data);
+
+// Ray
+int   	adapt_distance(t_ray_calcul *ray, int posH, int posV);
+void    draw_ray(t_data *data, t_ray_calcul *ray);
+void    fisheye_fix(t_data *data, t_ray_calcul *ray);
+void  	raycast(t_data *data, t_ray_calcul ray);
+void  	init_ray(t_data *data);
+
+// Vertical wall
+float	disV_calcul(t_data *data, float ra, float ry, float rx);
+void    calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof);
+int	    check_right(t_data *data, t_ray_calcul *ray, float Tan);
+int	    check_left(t_data *data, t_ray_calcul *ray, float Tan);
+int	    check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan);
+
+// Horizontal wall
+float   disH_calcul(t_data *data, float ra, float ry, float rx);
+void    calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof);
+int	    check_up(t_data *data, t_ray_calcul *ray, float Tan);
+int	    check_down(t_data *data, t_ray_calcul *ray, float Tan);
+int	    check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
+
+// Draw Wall
+void    draw_vertical_line(t_data *data, t_wall_drawing *wall, int pos);
+void    init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos);
+void    init_wall(t_data *data);
+
+// Bresenham
+void	mlx_pixel_put_img(t_img	*img, int x, int y, int color);
+void	init_bre_values(t_bre	*values, t_seg *seg);
+void	ft_put_pixel(t_data *data, t_seg *seg, t_img *img, int color);
+void	init_seg_values(t_seg *seg, t_point *begin, t_point *end);
+void	bresenham(t_data *data, t_point begin, t_point end, t_img *img);
+
+// Calculs Utils
+int		create_trgb(int t, int r, int g, int b);
+float   degToRad(float a);
+float 	FixAng(float a);
 
 #endif

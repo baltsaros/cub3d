@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	check_direction(t_input *data)
+void	check_direction(t_data *data)
 {
 	if (data->map.dir == 'N')
 		data->map.angle = 90;
@@ -10,18 +10,11 @@ void	check_direction(t_input *data)
 		data->map.angle = 180;
 	else if (data->map.dir == 'S')
 		data->map.angle = 270;
-	data->pa = ((data->map.angle % 360) * PI) / 180;
-	data->ra = ((data->map.angle % 360 + 30) * PI) / 180;
-	data->rdx = cos(data->ra);
-	data->rdy = sin(data->ra);
-	data->la = ((data->map.angle % 360 - 30) * PI) / 180;
-	data->ldx = cos(data->la);
-	data->ldy = sin(data->la);
-	data->pdx = cos(data->pa);
-	data->pdy = sin(data->pa);
+	data->player_s.p_ang = data->map.angle;
+	// data->player_s.p_ang = ((data->map.angle % 360) * PI) / 180;
 }
 
-void	squarification(t_input *data, char **map)
+void	squarification(t_data *data, char **map)
 {
 	char	**tmp;
 
@@ -46,6 +39,25 @@ void	squarification(t_input *data, char **map)
 	while (map[data->i])
 	{
 		tmp[data->i] = ft_memcpy(tmp[data->i], map[data->i], data->map.width);
+		free(map[data->i]);
 		data->i++;
 	}
+	data->map.map = tmp;
+	// size_t	i;
+	// size_t	j;
+
+	// (void)data;
+	// i = 0;
+	// while(map[i])
+	// {
+	// 	j = 0;
+	// 	while (map[i][j])
+	// 	{
+	// 		write(1, &map[i][j], 1);
+	// 		++j;
+	// 	}
+	// 	write(1, "\n", 1);
+	// 	++i;
+	// }
+	return;
 }

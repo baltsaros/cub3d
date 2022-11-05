@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_check.c                                      :+:      :+:    :+:   */
+/*   calculs_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 09:29:45 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/16 15:08:56 by mthiry           ###   ########.fr       */
+/*   Created: 2022/08/19 14:30:54 by mthiry            #+#    #+#             */
+/*   Updated: 2022/10/17 19:15:12 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// allocation check for ft functions from libft
-void	alloc_check_big(char **str, t_data *data)
+int	create_trgb(int t, int r, int g, int b)
 {
-	(void)data;
-	if (!str)
-	{
-		write(2, "Cub3d: ", 7);
-		write(2, "allocation failed\n", 18);
-		cub_free_all(data);
-		exit(1);
-	}
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	alloc_check_small(void *str, t_data *data)
+float   degToRad(float a)
 {
-	(void)data;
-	if (!str)
-	{
-		write(2, "Cub3d: ", 7);
-		write(2, "allocation failed\n", 18);
-		cub_free_all(data);
-		exit(1);
-	}
+    return (a * (float)M_PI / 180.0);
+}
+
+float FixAng(float a)
+{ 
+    if(a > 359)
+        a -= 360;
+    if(a < 0)
+        a += 360;
+    return a;
 }

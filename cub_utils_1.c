@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-char	*cub_strjoin_free(char *rest, char *buf, t_input *data)
+char	*cub_strjoin_free(char *rest, char *buf, t_data *data)
 {
 	char	*unis;
 	size_t	i;
@@ -27,7 +27,7 @@ char	*cub_strjoin_free(char *rest, char *buf, t_input *data)
 	return (unis);
 }
 
-char	*cub_charjoin_free(char *line, char b, t_input *data)
+char	*cub_charjoin_free(char *line, char b, t_data *data)
 {
 	size_t	i;
 	char	*unis;
@@ -48,7 +48,7 @@ char	*cub_charjoin_free(char *line, char b, t_input *data)
 	return (unis);
 }
 
-char	*cub_strndup(char const *str, size_t size, t_input *data)
+char	*cub_strndup(char const *str, size_t size, t_data *data)
 {
 	char	*dest;
 	size_t	i;
@@ -64,10 +64,11 @@ char	*cub_strndup(char const *str, size_t size, t_input *data)
 	return (dest);
 }
 
-void	*cub_malloc(size_t n, t_input *data)
+void	*cub_malloc(size_t n, t_data *data)
 {
 	void	*ptr;
 
+	(void)data;
 	ptr = malloc(n);
 	if (!ptr)
 	{
@@ -79,7 +80,7 @@ void	*cub_malloc(size_t n, t_input *data)
 	return (ptr);
 }
 
-char	*cub_strdup(const char *s, t_input *data)
+char	*cub_strdup(const char *s, t_data *data)
 {
 	char	*dest;
 	size_t	i;

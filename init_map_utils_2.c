@@ -4,7 +4,7 @@
 // utils for check_map //
 /////////////////////////
 // check the map for invalid characters
-void	check_chars(char **raw, t_input *data)
+void	check_chars(char **raw, t_data *data)
 {
 	size_t	j;
 	size_t	i;
@@ -24,7 +24,7 @@ void	check_chars(char **raw, t_input *data)
 }
 
 // check that all rows are closed
-void	check_rows(char **map, t_input *data)
+void	check_rows(char **map, t_data *data)
 {
 	size_t	j;
 	size_t	i;
@@ -55,7 +55,7 @@ void	check_rows(char **map, t_input *data)
 }
 
 // check whether a line was fully checked; if so, go to another one
-size_t	check_length(char **map, size_t i, t_input *data)
+size_t	check_length(char **map, size_t i, t_data *data)
 {
 	size_t	j;
 	size_t	len;
@@ -75,7 +75,7 @@ size_t	check_length(char **map, size_t i, t_input *data)
 }
 
 // check that all columns are closed
-void	check_columns(char **map, t_input *data)
+void	check_columns(char **map, t_data *data)
 {
 	size_t	j;
 	size_t	i;
@@ -91,7 +91,7 @@ void	check_columns(char **map, t_input *data)
 		while (map[j][i] && map[j][i] == ' ')
 			++j;
 		if (map[j][i] && map[j][i] != '1')
-			error_exit(data, "Unclosed map: columns", 1);
+			error_exit(data, "Unclosed map: columns1", 1);
 		while (map[j] && map[j][i])
 		{
 			if (map[j][i] == '1')
@@ -101,13 +101,13 @@ void	check_columns(char **map, t_input *data)
 			j++;
 		}
 		if (!closed)
-			error_exit(data, "Unclosed map: columns", 1);
+			error_exit(data, "Unclosed map: columns2", 1);
 		++i;
 		j = check_length(map, i, data);
 	}
 }
 
-void	check_player(char **map, t_input *data)
+void	check_player(char **map, t_data *data)
 {
 	size_t	j;
 	size_t	i;
@@ -124,8 +124,8 @@ void	check_player(char **map, t_input *data)
 			{
 				player = 1;
 				data->map.dir = map[j][i];
-				data->px = i;
-				data->py = j;
+				data->map.coord[0] = i;
+				data->map.coord[1] = j;
 				break ;
 			}
 			++i;

@@ -6,152 +6,186 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/08/31 14:14:29 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/05 14:23:47 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_wall(t_input *data, char **map, float x, float y)
+int	is_wall(char **map, int x, int y)
 {
 	int	rx;
 	int	ry;
 
-	// printf("py is %f\n", data->py);
-	ry = y / data->sy;
-	rx = x / data->sx;
-	// printf("rx is %d, ry is %d\n", rx, ry);
-	// printf("map[%d][%d] is %c\n", ry, rx, map[ry][rx]);
-	// printf("px is %f, py is %f\n", data->px, data->py);
+	ry = y / SQUARE_SIZE;
+	rx = x / SQUARE_SIZE;
 	if (map[ry][rx] && map[ry][rx] != '1')
 		return (1);
 	return (0);
 }
 
-int	key_hook(int keycode, t_input *data)
+void	render(t_data *data)
 {
-	float	step;
-	float	turn;
+	// Temporary solution
+	mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
+	mlx_destroy_image(data->mlx, data->floor.img_ptr);
+	mlx_destroy_image(data->mlx, data->minimap.img_ptr);
+	mlx_destroy_image(data->mlx, data->player.img_ptr);
+	mlx_destroy_image(data->mlx, data->ray.img_ptr);
+	mlx_destroy_image(data->mlx, data->walls.img_ptr);
+	mlx_clear_window(data->mlx, data->win);
+	data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
+    if (data->ceiling.img_ptr != NULL)
+	{
+        init_ceiling(data);
+	}
+	data->floor.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
+    if (data->floor.img_ptr != NULL)
+	{
+        init_floor(data);
+	}
+	data->minimap.img_ptr = mlx_new_image(data->mlx, data->minimap_s.width, data->minimap_s.height);
+	if (data->minimap.img_ptr != NULL)
+	{
+		data->minimap.basic_color = 0x000000;
+    	data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr, &data->minimap.bpp,
+        	&data->minimap.line_length, &data->minimap.endian);
+   		draw_square(data->minimap, create_trgb(255, 255, 255, 255), data->minimap_s.height, data->minimap_s.width);
+    	redraw_map(data, data->minimap.basic_color, data->map.height, data->map.width);
+    	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
+	}
+	data->player.img_ptr = mlx_new_image(data->mlx, PLAYER_SIZE, PLAYER_SIZE);
+	if (data->player.img_ptr != NULL)
+	{
+		data->player.basic_color = 0x0FAE2;
+    	data->player.addr = mlx_get_data_addr(data->player.img_ptr, &data->player.bpp,
+			&data->player.line_length, &data->player.endian);
+    	draw_square(data->player, data->player.basic_color, PLAYER_SIZE, PLAYER_SIZE);
+		mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
+	}
+    init_ray(data);
+}
 
-	step = 7;
-	turn = 0.2;
-	// is_wall(data, data->map.map);
-	if (keycode == 65307)
-	{
-		mlx_destroy_image(data->mlx, data->img.mlx_img);
-		mlx_destroy_image(data->mlx, data->pl.mlx_img);
-		// mlx_destroy_image(data->mlx, data->ray.mlx_img);
-		mlx_destroy_window(data->mlx, data->win);
-		data->win = NULL;
-		cub_free_all(data);
-		exit(EXIT_SUCCESS);
-	}
-	// else if (keycode == 119 && map[y - 1][x] && map[y - 1][x] != '1')
-	else if (keycode == 119)
-	{
-		data->px += step * data->pdx;
-		data->py += step * data->pdy;
-		// data->px += data->pdx;
-		// data->py += data->pdy;
-		if (!is_wall(data, data->map.map, data->px, data->py))
-		{
-			data->px -= step * data->pdx;
-			data->py -= step * data->pdy;
-		}
-	}
-	else if (keycode == 115)
-	{
-		data->px -= step * data->pdx;
-		data->py -= step * data->pdy;
-		// data->px -= data->pdx;
-		// data->py -= data->pdy;
-		if (!is_wall(data, data->map.map, data->px, data->py))
-		{
-			data->px += step * data->pdx;
-			data->py += step * data->pdy;
-		}
-	}
-	else if (keycode == 97)
-	{
-		data->px += step * cos(data->pa - ((90 * PI) / 180));
-		data->py += step * sin(data->pa - ((90 * PI) / 180));
-		if (!is_wall(data, data->map.map, data->px, data->py))
-		{
-			data->px -= step * cos(data->pa - ((90 * PI) / 180));
-			data->py -= step * sin(data->pa - ((90 * PI) / 180));
-		}
-	}
-	else if (keycode == 100)
-	{
-		data->px -= step * cos(data->pa - ((90 * PI) / 180));
-		data->py -= step * sin(data->pa - ((90 * PI) / 180));
-		if (!is_wall(data, data->map.map, data->px, data->py))
-		{
-			data->px += step * cos(data->pa - ((90 * PI) / 180));
-			data->py += step * sin(data->pa - ((90 * PI) / 180));
-		}
-	}
-	else if (keycode == 65361)
-	{
-		data->pa -= turn;
-		if (data->pa < 0)
-			data->pa += 2 * PI;
-		data->pdx = cos(data->pa);
-		data->pdy = sin(data->pa);
-		data->ra -= turn;
-		if (data->ra < 0)
-			data->ra += 2 * PI;
-		data->rdx = cos(data->ra);
-		data->rdy = sin(data->ra);
-		data->la -= turn;
-		if (data->la < 0)
-			data->la += 2 * PI;
-		data->ldx = cos(data->la);
-		data->ldy = sin(data->la);
-		// printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
-	}
-	else if (keycode == 65363)
-	{
-		data->pa += turn;
-		if (data->pa > 2 * PI)
-			data->pa -= 2 * PI;
-		data->pdx = cos(data->pa);
-		data->pdy = sin(data->pa);
-		data->ra += turn;
-		if (data->ra > 2 * PI)
-			data->ra -= 2 * PI;
-		data->rdx = cos(data->ra);
-		data->rdy = sin(data->ra);
-		data->la += turn;
-		if (data->la > 2 * PI)
-			data->la -= 2 * PI;
-		data->ldx = cos(data->la);
-		data->ldy = sin(data->la);
-		// printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
-	}
-	else
-		printf("Key %d was pressed!\n", keycode);
-	// render_player(data, &data->pl);
-	// printf("pa is %f\npdx is %f\npdy is %f\n", data->pa, data->pdx, data->pdy);
-	render(data);
+int	infinite_hook(int keycode, t_data *data)
+{
+	(void)keycode;
+	(void)data;
+	// Temporary solution
 	return (0);
 }
 
-int	mouse_hook(int keycode, int x, int y, t_input *data)
+void	leave(t_data *data)
+{
+	mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
+	mlx_destroy_window(data->mlx, data->win);
+	data->win = NULL;
+	// cub_free_all(data);
+	exit(EXIT_SUCCESS);
+}
+
+int	mouse_hook(int keycode, int x, int y, t_data *data)
 {
 	(void)x;
 	(void)y;
 	(void)keycode;
 	(void)data;
-	// cub_free_all(data);
-	// if (keycode == 4)
-	// 	data->set.zoom *= 1.1;
-	// else if (keycode == 5)
-	// 	data->set.zoom *= 0.9;
-	// data->set.move_x = (x - WIDTH / 2) / (data->set.zoom * WIDTH)
-	// 	+ data->set.move_x;
-	// data->set.move_y = (y - HEIGHT / 2) / (data->set.zoom * HEIGHT)
-	// 	+ data->set.move_y;
-	render_player(data, &data->pl);
+	if (keycode == 1)
+	{
+	}
+	// render(data);
+	return (0);
+}
+
+void	move(int keycode, t_data *data)
+{
+	if (keycode == 119)
+	{
+		data->player_s.pos_win_y += 5 * data->player_s.delta_y;
+		data->player_s.pos_win_x += 5 * data->player_s.delta_x;
+		data->player_s.pos_y += 5 * data->player_s.delta_y;
+		data->player_s.pos_x += 5 * data->player_s.delta_x;
+		if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
+		{
+			data->player_s.pos_win_y -= 5 * data->player_s.delta_y;
+			data->player_s.pos_win_x -= 5 * data->player_s.delta_x;
+			data->player_s.pos_y -= 5 * data->player_s.delta_y;
+			data->player_s.pos_x -= 5 * data->player_s.delta_x;
+
+		}
+	}
+	else if (keycode == 115)
+	{
+		data->player_s.pos_win_y -= 5 * data->player_s.delta_y;
+		data->player_s.pos_win_x -= 5 * data->player_s.delta_x;
+		data->player_s.pos_y -= 5 * data->player_s.delta_y;
+		data->player_s.pos_x -= 5 * data->player_s.delta_x;
+		if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
+		{
+			data->player_s.pos_win_y += 5 * data->player_s.delta_y;
+			data->player_s.pos_win_x += 5 * data->player_s.delta_x;
+			data->player_s.pos_y += 5 * data->player_s.delta_y;
+			data->player_s.pos_x += 5 * data->player_s.delta_x;
+		}
+	}
+	else if (keycode == 97)
+	{
+		data->player_s.pos_win_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_win_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
+		{
+			data->player_s.pos_win_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+			data->player_s.pos_win_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+			data->player_s.pos_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+			data->player_s.pos_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		}
+	}
+	else if (keycode == 100)
+	{
+		data->player_s.pos_win_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_win_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
+		{
+			data->player_s.pos_win_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+			data->player_s.pos_win_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+			data->player_s.pos_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+			data->player_s.pos_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		}
+	}
+	render(data);
+}
+
+void	rotate_fov(int keycode, t_data *data)
+{
+	if (keycode == 65361)
+	{
+		data->player_s.p_ang += 5;
+		data->player_s.p_ang = FixAng(data->player_s.p_ang);
+		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
+		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
+	}
+	else if (keycode == 65363)
+	{
+		data->player_s.p_ang -= 5;
+		data->player_s.p_ang = FixAng(data->player_s.p_ang);
+		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
+		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
+	}
+	render(data);
+}
+
+int	key_hook_manager(int keycode, t_data *data)
+{
+	if (keycode == 65307)
+		leave(data);
+	else if (keycode == 119 || keycode == 115 || keycode == 100 || keycode == 97)
+		move(keycode, data);
+	else if (keycode == 65363 || keycode == 65361)
+		rotate_fov(keycode, data);
+	else
+		printf("Key %d was pressed!\n", keycode);
 	return (0);
 }

@@ -4,7 +4,7 @@
 // utils for check_param //
 ///////////////////////////
 // find a certain parameter from map input
-char	*find_param(char **raw, char *param, t_input *data)
+char	*find_param(char **raw, char *param, t_data *data)
 {
 	size_t	i;
 	size_t	len;
@@ -41,7 +41,7 @@ size_t	find_mapsize(char **raw, int j)
 }
 
 // copying map form raw data
-void	copy_map(char **raw, t_input *data)
+void	copy_map(char **raw, t_data *data)
 {
 	size_t	j;
 	size_t	i;
@@ -66,7 +66,7 @@ void	copy_map(char **raw, t_input *data)
 	data->map.map[i] = NULL;
 }
 
-void	check_map(t_map *map, t_input *data)
+void	check_map(t_map *map, t_data *data)
 {
 	check_chars(map->map, data);
 	printf("checking rows\n");
@@ -78,5 +78,7 @@ void	check_map(t_map *map, t_input *data)
 	printf("width is %ld\nheight is %ld\n", data->map.width, data->map.height);
 	check_player(map->map, data);
 	check_direction(data);
-	// squarification(data, map->map);
+	printf("squarification\n");
+	squarification(data, map->map);
+	printf("width is %ld\nheight is %ld\n", data->map.width, data->map.height);
 }

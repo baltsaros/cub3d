@@ -15,7 +15,7 @@ void	cub_free(char *str[])
 	free(str);
 }
 
-void	cub_free_params(t_input *data)
+void	cub_free_params(t_data *data)
 {
 	cub_free(data->map.raw);
 	if (data->map.no)
@@ -35,7 +35,7 @@ void	cub_free_params(t_input *data)
 	cub_free(data->map.c_spl);
 }
 
-void	cub_free_all(t_input *data)
+void	cub_free_all(t_data *data)
 {
 	cub_free_params(data);
 }

@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	error_check_exit(int input, char *str, t_input *data)
+int	error_check_exit(int input, char *str, t_data *data)
 {
 	size_t	len;
 
@@ -17,7 +17,7 @@ int	error_check_exit(int input, char *str, t_input *data)
 	return (input);
 }
 
-int	error_check_noexit(int input, char *str, t_input *data)
+int	error_check_noexit(int input, char *str, t_data *data)
 {
 	size_t	len;
 
@@ -32,7 +32,7 @@ int	error_check_noexit(int input, char *str, t_input *data)
 	return (input);
 }
 
-void	error_exit(t_input *data, char *msg, int param)
+void	error_exit(t_data *data, char *msg, int param)
 {
 	size_t	len;
 
@@ -45,7 +45,7 @@ void	error_exit(t_input *data, char *msg, int param)
 	exit(EXIT_FAILURE);
 }
 
-void	check_mlx(void *mlx, t_input *data)
+void	check_mlx(void *mlx, t_data *data)
 {
 	if (!mlx)
 	{
@@ -56,13 +56,13 @@ void	check_mlx(void *mlx, t_input *data)
 	}
 }
 
-void	check_win(t_input *data)
+void	check_win(t_data *data)
 {
 	if (!data->win)
 	{
 		write(2, "Cub3d: ", 7);
-		write(2, "Windoes is broken!\n", 19);
-		mlx_destroy_image(data->mlx, data->img.mlx_img);
+		write(2, "Windows is broken!\n", 19);
+		mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
 		cub_free_all(data);
 		exit(EXIT_FAILURE);
 	}
