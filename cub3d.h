@@ -41,11 +41,20 @@ typedef struct s_img
 typedef struct s_text
 {
 	t_img	img;
+	int		*buf;
 	int		width;
 	int		height;
 } t_text;
 
 // structs to store values for drawing
+
+typedef struct s_color
+{
+	int	t;
+	int	r;
+	int	g;
+	int	b;
+} t_color;
 
 typedef struct s_bre
 {
