@@ -226,18 +226,18 @@ void    draw_empty_square_coord(t_data *data, int color, int x, int y);
 void    draw_map(t_data *data, int color, int height, int width);
 void    redraw_map(t_data *data, int color, int height, int width);
 void    init_minimap(t_data *data, t_minimap minimap);
-void    init_minimap_values(t_data *data);
+int		init_minimap_values(t_data *data);
 
 // Player
 void    init_player(t_data *data);
-void    init_player_values(t_data *data);
+int		init_player_values(t_data *data);
 
 // Ray
 int   	adapt_distance(t_ray_calcul *ray, int posH, int posV);
 void    draw_ray(t_data *data, t_ray_calcul *ray);
 void    fisheye_fix(t_data *data, t_ray_calcul *ray);
 void  	raycast(t_data *data, t_ray_calcul ray);
-void  	init_ray(t_data *data);
+int  	init_ray(t_data *data);
 
 // Vertical wall
 float	disV_calcul(t_data *data, float ra, float ry, float rx);

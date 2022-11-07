@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/29 18:39:45 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/07 14:51:43 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,14 @@ void    init_minimap(t_data *data, t_minimap minimap)
     mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, minimap.position.x, minimap.position.y);
 }
 
-void    init_minimap_values(t_data *data)
+int init_minimap_values(t_data *data)
 {
     data->minimap_s.position.x = 10;
     data->minimap_s.position.y = 10;
     data->minimap_s.width = data->map.width * SQUARE_SIZE;
     data->minimap_s.height = data->map.height * SQUARE_SIZE;
     data->minimap.img_ptr = mlx_new_image(data->mlx, data->minimap_s.width, data->minimap_s.height);
-    // if (!data->minimap_s.minimap.img_ptr)
-    // Do Error here
+    if (!data->minimap.img_ptr)
+        return (1);
+    return (0);
 }
