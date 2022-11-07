@@ -73,19 +73,19 @@ typedef struct s_seg
 
 typedef struct s_ray_calcul
 {
-	int     r;
-    int     mx;
-    int     my;
-    float   rx;
-    float   ry;
-    float   ra;
-    float   xo;
-    float   yo;
-    float   disV;
-    float   disH;
-    float   vx;
-    float   vy;
-} t_ray_calcul;
+	int		r;
+	int		mx;
+	int		my;
+	float	rx;
+	float	ry;
+	float	ra;
+	float	xo;
+	float	yo;
+	float	disV;
+	float	disH;
+	float	vx;
+	float	vy;
+}	t_ray_calcul;
 
 typedef struct s_wall_drawing
 {
@@ -218,52 +218,52 @@ void	cub_free_all(t_data *data);
 void	cub_free_params(t_data *data);
 
 // Launcher
-void    hook_manager(t_data *data);
-int 	launcher(t_data *data);
+void	hook_manager(t_data *data);
+int		launcher(t_data *data);
 
 // Draw All
-void    draw_square(t_img img, int color, int end_i, int end_j);
-void    init_ceiling(t_data *data);
-void    init_floor(t_data *data);
-void    draw_all(t_data *data);
+void	draw_square(t_img img, int color, int end_i, int end_j);
+void	init_ceiling(t_data *data);
+void	init_floor(t_data *data);
+void	draw_all(t_data *data);
 
 // Minimap
-void    draw_square_coord(t_data *data, int color, int x, int y);
-void    draw_empty_square_coord(t_data *data, int color, int x, int y);
-void    draw_map(t_data *data, int color, int height, int width);
-void    redraw_map(t_data *data, int color, int height, int width);
-void    init_minimap(t_data *data, t_minimap minimap);
-void    init_minimap_values(t_data *data);
+void	draw_square_coord(t_data *data, int color, int x, int y);
+void	draw_empty_square_coord(t_data *data, int color, int x, int y);
+void	draw_map(t_data *data, int color, int height, int width);
+void	redraw_map(t_data *data, int color, int height, int width);
+void	init_minimap(t_data *data, t_minimap minimap);
+void	init_minimap_values(t_data *data);
 
 // Player
-void    init_player(t_data *data);
-void    init_player_values(t_data *data);
+void	init_player(t_data *data);
+void	init_player_values(t_data *data);
 
 // Ray
-int   	adapt_distance(t_ray_calcul *ray, int posH, int posV);
-void    draw_ray(t_data *data, t_ray_calcul *ray);
-void    fisheye_fix(t_data *data, t_ray_calcul *ray);
-void  	raycast(t_data *data, t_ray_calcul ray);
-void  	init_ray(t_data *data);
+int		adapt_distance(t_ray_calcul *ray, int posH, int posV);
+void	draw_ray(t_data *data, t_ray_calcul *ray);
+void	fisheye_fix(t_data *data, t_ray_calcul *ray);
+void	raycast(t_data *data, t_ray_calcul ray);
+void	init_ray(t_data *data);
 
 // Vertical wall
 float	disV_calcul(t_data *data, float ra, float ry, float rx);
-void    calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof);
-int	    check_right(t_data *data, t_ray_calcul *ray, float Tan);
-int	    check_left(t_data *data, t_ray_calcul *ray, float Tan);
-int	    check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan);
+void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof);
+int		check_right(t_data *data, t_ray_calcul *ray, float Tan);
+int		check_left(t_data *data, t_ray_calcul *ray, float Tan);
+int		check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan);
 
 // Horizontal wall
-float   disH_calcul(t_data *data, float ra, float ry, float rx);
-void    calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof);
-int	    check_up(t_data *data, t_ray_calcul *ray, float Tan);
-int	    check_down(t_data *data, t_ray_calcul *ray, float Tan);
-int	    check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
+float	disH_calcul(t_data *data, float ra, float ry, float rx);
+void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof);
+int		check_up(t_data *data, t_ray_calcul *ray, float Tan);
+int		check_down(t_data *data, t_ray_calcul *ray, float Tan);
+int		check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
 
 // Draw Wall
-void    draw_vertical_line(t_data *data, t_wall_drawing *wall, int pos);
-void    init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos);
-void    init_wall(t_data *data);
+void	draw_vertical_line(t_data *data, t_wall_drawing *wall, int pos);
+void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos);
+void	init_wall(t_data *data);
 
 // Bresenham
 void	mlx_pixel_put_img(t_img	*img, int x, int y, int color);
@@ -274,7 +274,7 @@ void	bresenham(t_data *data, t_point begin, t_point end, t_img *img);
 
 // Calculs Utils
 int		create_trgb(int t, int r, int g, int b);
-float   degToRad(float a);
-float 	FixAng(float a);
+float	degToRad(float a);
+float	FixAng(float a);
 
 #endif
