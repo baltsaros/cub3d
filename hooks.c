@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/07 16:59:38 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/07 18:16:28 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int	is_wall(char **map, int x, int y)
 void	render(t_data *data)
 {
 	// Temporary solution
-	mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
-	mlx_destroy_image(data->mlx, data->floor.img_ptr);
-	mlx_destroy_image(data->mlx, data->minimap.img_ptr);
-	mlx_destroy_image(data->mlx, data->player.img_ptr);
-	mlx_destroy_image(data->mlx, data->ray.img_ptr);
-	mlx_destroy_image(data->mlx, data->walls.img_ptr);
-	mlx_clear_window(data->mlx, data->win);
+	// mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
+	// mlx_destroy_image(data->mlx, data->floor.img_ptr);
+	// mlx_destroy_image(data->mlx, data->minimap.img_ptr);
+	// mlx_destroy_image(data->mlx, data->player.img_ptr);
+	// mlx_destroy_image(data->mlx, data->ray.img_ptr);
+	// mlx_destroy_image(data->mlx, data->walls.img_ptr);
+	// mlx_clear_window(data->mlx, data->win);
 	data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
 	if (data->ceiling.img_ptr != NULL)
 	{
@@ -155,7 +155,6 @@ void	move(int keycode, t_data *data)
 			data->player_s.pos_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
 		}
 	}
-	render(data);
 }
 
 void	rotate_fov(int keycode, t_data *data)
@@ -174,7 +173,6 @@ void	rotate_fov(int keycode, t_data *data)
 		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
 	}
-	render(data);
 }
 
 int	key_hook_manager(int keycode, t_data *data)
