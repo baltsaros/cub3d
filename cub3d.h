@@ -41,7 +41,6 @@ typedef struct s_img
 typedef struct s_text
 {
 	t_img	img;
-	int		*buf;
 	int		width;
 	int		height;
 } t_text;
@@ -95,6 +94,8 @@ typedef struct s_ray_calcul
 
 typedef struct s_wall_drawing
 {
+	float   distProj;
+    float   wallHeight;
 	t_point	begin;
 	t_point	end;
 }	t_wall_drawing;
@@ -280,6 +281,7 @@ float 	FixAng(float a);
 
 // Colors Utils
 int		create_trgb(int t, int r, int g, int b);
+int		get_pixel(t_img img, int y, int x);
 
 // Load Textures
 int		load_textures(t_data *data);

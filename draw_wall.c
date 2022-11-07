@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/07 17:38:11 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/07 18:35:55 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 void    draw_vertical_line(t_data *data, t_wall_drawing *wall, int pos)
 {
-    int color;
-
-    color = 0x1E90FF;
+    // int color;
+    
     while (wall->begin.y != wall->end.y + 1)
     {
         if (wall->begin.x >= 0 && wall->begin.x <= WIDTH && wall->begin.y >= 0 && wall->begin.y <= HEIGHT)
         {
             if (pos == NORTH)
+            {
+                
+                // color = data->no_text.buf[(int)ty * 64];
                 mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, data->walls.basic_color);
+            }
             else if (pos == WEST)
                 mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, data->walls.basic_color);
             else if (pos == SOUTH)
-                mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, color);
+                mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, data->walls.basic_color);
             else if (pos == EAST)
-                mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, color);
+                mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, data->walls.basic_color);
         }    
         wall->begin.y++;
     }
@@ -36,15 +39,12 @@ void    draw_vertical_line(t_data *data, t_wall_drawing *wall, int pos)
 
 void    init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
 {
-    float   distProj;
-    float   wallHeight;
-
-    distProj = (WIDTH / 2) / tan(degToRad(FIELD_OF_VIEW / 2));
-    wallHeight = (SQUARE_SIZE / ray->disH) * distProj;
+    data->wall_drawing.distProj = (WIDTH / 2) / tan(degToRad(FIELD_OF_VIEW / 2));
+    data->wall_drawing.wallHeight = (SQUARE_SIZE / ray->disH) * data->wall_drawing.distProj;
     data->wall_drawing.begin.x = (((float)ray->r) * ((float)WIDTH / (float)NB_RAYS));
-    data->wall_drawing.begin.y = (HEIGHT / 2) - (wallHeight / 2);
+    data->wall_drawing.begin.y = (HEIGHT / 2) - (data->wall_drawing.wallHeight / 2);
     data->wall_drawing.end.x = data->wall_drawing.begin.x;
-    data->wall_drawing.end.y = data->wall_drawing.begin.y + wallHeight;
+    data->wall_drawing.end.y = data->wall_drawing.begin.y + data->wall_drawing.wallHeight;
     draw_vertical_line(data, &data->wall_drawing, pos);
 }
 
@@ -55,7 +55,24 @@ void    init_wall(t_data *data)
     data->walls.addr = mlx_get_data_addr(data->walls.img_ptr, &data->walls.bpp,
         &data->walls.line_length, &data->walls.endian);
     draw_square(data->walls, create_trgb(255, 255, 255, 255), HEIGHT, WIDTH);
-    raycast(data, data->ray_calcul);
+    // raycast(data, data->ray_calcul);
+
+    int y;
+    int x;
+
+    y = 0;
+    while (y < data->so_text.height)
+    {
+        x = 0;
+        while (x < data->so_text.width)
+        {
+            mlx_pixel_put_img(&data->walls, x, y, get_pixel(data->so_text.img, y, x));
+            // mlx_pixel_put_img(&data->walls, x, y, data->no_text.buf[y + x]);
+            x++;
+        }
+        y++;
+    }
+
     mlx_put_image_to_window(data->mlx, data->win, data->ray.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
     mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
 }
