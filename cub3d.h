@@ -40,7 +40,9 @@ typedef struct s_img
 
 typedef struct s_text
 {
-	t_img	text;
+	t_img	img;
+	int		width;
+	int		height;
 } t_text;
 
 // structs to store values for drawing
@@ -269,5 +271,8 @@ float 	FixAng(float a);
 
 // Colors Utils
 int		create_trgb(int t, int r, int g, int b);
+
+// Load Textures
+int		load_textures(t_data *data);
 
 #endif

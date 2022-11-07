@@ -34,7 +34,8 @@ SRCS		=	cub3d.c \
 				draw_wall.c \
 				bresenham.c \
 				calculs_utils.c \
-				colors_utils.c
+				colors_utils.c \
+				load_textures.c
 
 OBJ_DIR		= objs
 OBJ_FILES	= $(SRCS:.c=.o)

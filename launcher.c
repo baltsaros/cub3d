@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:11:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/22 15:46:02 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/07 13:45:04 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void    hook_manager(t_data *data)
 
 int launcher(t_data *data)
 {
+    int ret;
+
+    ret = 0;
     data->mlx = mlx_init();
     check_mlx(data->mlx, data);
     data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
@@ -29,9 +32,13 @@ int launcher(t_data *data)
     init_minimap_values(data);
     init_player_values(data);
 
+    ret = load_textures(data);
+    if (ret != 0)
+        return (ret);
+
     draw_all(data);
 
     hook_manager(data);
     mlx_loop(data->mlx);
-    return (0);
+    return (ret);
 }
