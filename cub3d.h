@@ -96,6 +96,9 @@ typedef struct s_wall_drawing
 {
 	float   distProj;
     float   wallHeight;
+	float	ty;
+	float	ty_step;
+	float	tx;
 	t_point	begin;
 	t_point	end;
 }	t_wall_drawing;
@@ -264,7 +267,8 @@ int	    check_down(t_data *data, t_ray_calcul *ray, float Tan);
 int	    check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
 
 // Draw Wall
-void    draw_vertical_line(t_data *data, t_wall_drawing *wall, int pos);
+void    draw_a_wall(t_data *data, t_wall_drawing *wall, t_text text, double shade);
+void    draw_vertical_line(t_data *data, t_wall_drawing *wall, t_ray_calcul *ray, int pos);
 void    init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos);
 void    init_wall(t_data *data);
 
