@@ -268,7 +268,7 @@ int	    check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
 void    draw_a_wall(t_data *data, t_wall_drawing *wall, t_text text, double shade);
 void    draw_vertical_line(t_data *data, t_wall_drawing *wall, t_ray_calcul *ray, int pos);
 void    init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos);
-void    init_wall(t_data *data);
+int		init_wall(t_data *data);
 
 // Calculs Utils
 float   degToRad(float a);

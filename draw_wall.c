@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 10:31:13 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 10:40:53 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,16 @@ void    init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
     draw_vertical_line(data, &data->wall_drawing, ray, pos);
 }
 
-void    init_wall(t_data *data)
+int init_wall(t_data *data)
 {
     data->walls.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+    if (!data->walls.img_ptr)
+        return (1);
     data->walls.basic_color = 0x00BFFF;
     data->walls.addr = mlx_get_data_addr(data->walls.img_ptr, &data->walls.bpp,
         &data->walls.line_length, &data->walls.endian);
     draw_square(data->walls, create_trgb(255, 255, 255, 255), HEIGHT, WIDTH);
     raycast(data, data->ray_calcul);
     mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
+    return (0);
 }

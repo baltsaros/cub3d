@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 10:35:54 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 10:41:47 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ void    init_floor(t_data *data)
 
 int draw_all(t_data *data)
 {
+    int ret;
+
+    ret = 0;
     data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
     if (data->ceiling.img_ptr != NULL)
         init_ceiling(data);
@@ -68,6 +71,8 @@ int draw_all(t_data *data)
         return (1);
     init_minimap(data, data->minimap_s);
     init_player(data);
-    init_wall(data);
-    return (0);
+    ret = init_wall(data);
+    if (ret != 0)
+        return (ret);
+    return (ret);
 }
