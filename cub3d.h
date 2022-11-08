@@ -275,6 +275,7 @@ float 	FixAng(float a);
 int		create_trgb(int t, int r, int g, int b);
 int		get_pixel(t_img img, int y, int x);
 void	mlx_pixel_put_img(t_img	*img, int x, int y, int color);
+void	draw_square(t_img img, int color, int end_i, int end_j);
 
 // Load Textures
 int		load_textures(t_data *data);

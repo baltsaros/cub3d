@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 12:11:54 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 15:46:41 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,20 @@ int draw_all(t_data *data)
     int ret;
 
     ret = 0;
-    data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
-    if (data->ceiling.img_ptr != NULL)
-        init_ceiling(data);
-    else
-        return (1);
-    data->floor.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
-    if (data->floor.img_ptr != NULL)
-        init_floor(data);
-    else
-        return (1);
+    // data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
+    // if (data->ceiling.img_ptr != NULL)
+    //     init_ceiling(data);
+    // else
+    //     return (1);
+    // data->floor.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
+    // if (data->floor.img_ptr != NULL)
+    //     init_floor(data);
+    // else
+    //     return (1);
     ret = init_wall(data);
     if (ret != 0)
         return (ret);
+    init_player(data);
     // init_minimap(data, data->minimap_s);
-    // init_player(data);
     return (ret);
 }

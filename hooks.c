@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/08 15:06:23 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 15:45:32 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,38 @@
 void	render(t_data *data)
 {
 	// Temporary solution
-	mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
-	mlx_destroy_image(data->mlx, data->floor.img_ptr);
+	// mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
+	// mlx_destroy_image(data->mlx, data->floor.img_ptr);
+	// mlx_destroy_image(data->mlx, data->minimap.img_ptr);
+	mlx_destroy_image(data->mlx, data->player.img_ptr);
 	mlx_destroy_image(data->mlx, data->walls.img_ptr);
 	mlx_clear_window(data->mlx, data->win);
-	data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
-    if (data->ceiling.img_ptr != NULL)
-        init_ceiling(data);
-	data->floor.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
-    if (data->floor.img_ptr != NULL)
-        init_floor(data);
+	// data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
+    // if (data->ceiling.img_ptr != NULL)
+    //     init_ceiling(data);
+	// data->floor.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
+    // if (data->floor.img_ptr != NULL)
+    //     init_floor(data);
 	init_wall(data);
+	// data->minimap.img_ptr = mlx_new_image(data->mlx, data->minimap_s.width, data->minimap_s.height);
+	// if (data->minimap.img_ptr != NULL)
+	// {
+	// 	data->minimap.basic_color = 0x000000;
+	// 	data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr, &data->minimap.bpp,
+	// 		&data->minimap.line_length, &data->minimap.endian);
+	// 	ft_memset(data->minimap.addr, create_trgb(255, 255, 255, 255), data->minimap_s.height * data->minimap_s.width * sizeof(int));
+	// 	draw_map(data, data->minimap.basic_color, data->map.height, data->map.width);
+	// 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
+	// }
+	data->player.img_ptr = mlx_new_image(data->mlx, PLAYER_SIZE / 2, PLAYER_SIZE / 2);
+	if (data->player.img_ptr != NULL)
+	{
+		data->player.basic_color = 0xFF0000;
+		data->player.addr = mlx_get_data_addr(data->player.img_ptr, &data->player.bpp,
+			&data->player.line_length, &data->player.endian);
+		draw_square(data->player, data->player.basic_color, PLAYER_SIZE / 2, PLAYER_SIZE / 2);
+		mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
+	}
 }
 
 int	infinite_hook(int keycode, t_data *data)
@@ -80,29 +101,29 @@ void	move(int keycode, t_data *data)
 {
 	if (keycode == 13)
 	{
-		data->player_s.pos_win_y += 5 * data->player_s.delta_y;
-		data->player_s.pos_win_x += 5 * data->player_s.delta_x;
+		// data->player_s.pos_win_y += 5 * data->player_s.delta_y;
+		// data->player_s.pos_win_x += 5 * data->player_s.delta_x;
 		data->player_s.pos_y += 5 * data->player_s.delta_y;
 		data->player_s.pos_x += 5 * data->player_s.delta_x;
 	}
 	else if (keycode == 1)
 	{
-		data->player_s.pos_win_y -= 5 * data->player_s.delta_y;
-		data->player_s.pos_win_x -= 5 * data->player_s.delta_x;
+		// data->player_s.pos_win_y -= 5 * data->player_s.delta_y;
+		// data->player_s.pos_win_x -= 5 * data->player_s.delta_x;
 		data->player_s.pos_y -= 5 * data->player_s.delta_y;
 		data->player_s.pos_x -= 5 * data->player_s.delta_x;
 	}
 	else if (keycode == 0)
 	{
-		data->player_s.pos_win_y += 5 * sin(data->player_s.p_ang - ((90 * M_PI) / 180));
-		data->player_s.pos_win_x += 5 * cos(data->player_s.p_ang - ((90 * M_PI) / 180));
+		// data->player_s.pos_win_y += 5 * sin(data->player_s.p_ang - ((90 * M_PI) / 180));
+		// data->player_s.pos_win_x += 5 * cos(data->player_s.p_ang - ((90 * M_PI) / 180));
 		data->player_s.pos_y += 5 * sin(data->player_s.p_ang - ((90 * M_PI) / 180));
 		data->player_s.pos_x += 5 * cos(data->player_s.p_ang - ((90 * M_PI) / 180));
 	}
 	else if (keycode == 2)
 	{
-		data->player_s.pos_win_y -= 5 * sin(data->player_s.p_ang - ((90 * M_PI) / 180));
-		data->player_s.pos_win_x -= 5 * cos(data->player_s.p_ang - ((90 * M_PI) / 180));
+		// data->player_s.pos_win_y -= 5 * sin(data->player_s.p_ang - ((90 * M_PI) / 180));
+		// data->player_s.pos_win_x -= 5 * cos(data->player_s.p_ang - ((90 * M_PI) / 180));
 		data->player_s.pos_y -= 5 * sin(data->player_s.p_ang - ((90 * M_PI) / 180));
 		data->player_s.pos_x -= 5 * cos(data->player_s.p_ang - ((90 * M_PI) / 180));
 	}

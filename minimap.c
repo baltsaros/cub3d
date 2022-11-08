@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 12:22:19 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 15:23:00 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void    draw_map(t_data *data, int color, int height, int width)
         while (j != width)
         {
             if (data->map.map[i][j] == '1')
-                draw_square_coord(data, color, (j * SQUARE_SIZE), (i * SQUARE_SIZE));
+                draw_square_coord(data, color, j * SQUARE_SIZE, i * SQUARE_SIZE);
             else if (data->map.map[i][j] == '0' || data->map.map[i][j] == 'N')
                 draw_empty_square_coord(data, color, (j * SQUARE_SIZE), (i * SQUARE_SIZE));
             j++;
@@ -84,8 +84,8 @@ int init_minimap_values(t_data *data)
 {
     data->minimap_s.position.x = 10;
     data->minimap_s.position.y = 10;
-    data->minimap_s.width = data->map.width * SQUARE_SIZE;
-    data->minimap_s.height = data->map.height * SQUARE_SIZE;
+    data->minimap_s.width = data->map.width * (SQUARE_SIZE);
+    data->minimap_s.height = data->map.height * (SQUARE_SIZE);
     data->minimap.img_ptr = mlx_new_image(data->mlx, data->minimap_s.width, data->minimap_s.height);
     if (!data->minimap.img_ptr)
         return (1);
