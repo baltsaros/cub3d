@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 18:25:26 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 18:33:06 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ int launcher(t_data *data)
     if (ret != 0)
         return (ret);
     draw_all(data);
-
-	printf("width: %zu\n", data->map.width);
-	printf("height: %zu\n", data->map.height);
-
     hook_manager(data);
     mlx_loop(data->mlx);
     return (ret);

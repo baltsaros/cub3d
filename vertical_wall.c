@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:35:14 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 18:28:12 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 18:32:00 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ int    check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan)
         ret = check_left(data, ray, Tan);
     else
     {
-        if (ray->r == NB_RAYS / 2)
-            printf("Testefkjqwefoqipuehfoqfhoygwefoghqwfqiuwehiuqhweiouhqwoefoqwef\n");
         ray->rx = data->player_s.pos_x;
         ray->ry = data->player_s.pos_y;
         dof = 8;
