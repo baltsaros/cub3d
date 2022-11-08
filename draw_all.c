@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 16:25:45 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 18:36:47 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void    init_ceiling(t_data *data)
     data->ceiling.addr = mlx_get_data_addr(data->ceiling.img_ptr, &data->ceiling.bpp,
 		&data->ceiling.line_length, &data->ceiling.endian);
     draw_square(data->ceiling, data->ceiling.basic_color, HEIGHT / 2, WIDTH);
-    // ft_memset(data->ceiling.addr, data->ceiling.basic_color, (HEIGHT / 2) * WIDTH * sizeof(int));
     mlx_put_image_to_window(data->mlx, data->win, data->ceiling.img_ptr, 0, 0);
 }
 
@@ -33,7 +32,6 @@ void    init_floor(t_data *data)
         ft_atoi(data->map.f_spl[2]));
     data->floor.addr = mlx_get_data_addr(data->floor.img_ptr, &data->floor.bpp,
 		&data->floor.line_length, &data->floor.endian);
-    // ft_memset(data->floor.addr, data->floor.basic_color, (HEIGHT / 2) * WIDTH * sizeof(int));
     draw_square(data->floor, data->floor.basic_color, HEIGHT / 2, WIDTH);
     mlx_put_image_to_window(data->mlx, data->win, data->floor.img_ptr, 0, HEIGHT / 2);
 }
