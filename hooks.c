@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/10/27 18:02:34 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 10:32:50 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	render(t_data *data)
 	mlx_destroy_image(data->mlx, data->floor.img_ptr);
 	mlx_destroy_image(data->mlx, data->minimap.img_ptr);
 	mlx_destroy_image(data->mlx, data->player.img_ptr);
-	mlx_destroy_image(data->mlx, data->ray.img_ptr);
 	mlx_destroy_image(data->mlx, data->walls.img_ptr);
 	mlx_clear_window(data->mlx, data->win);
 	data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
@@ -59,7 +58,7 @@ void	render(t_data *data)
     	draw_square(data->player, data->player.basic_color, PLAYER_SIZE, PLAYER_SIZE);
 		mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
 	}
-    init_ray(data);
+	init_wall(data);
 }
 
 int	infinite_hook(int keycode, t_data *data)

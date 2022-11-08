@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/26 15:28:45 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 10:32:29 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void    draw_all(t_data *data)
         // put error here
     init_minimap(data, data->minimap_s);
     init_player(data);
-    init_ray(data);
+    init_wall(data);
 }

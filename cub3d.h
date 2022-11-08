@@ -247,10 +247,8 @@ int		init_player_values(t_data *data);
 
 // Ray
 int   	adapt_distance(t_ray_calcul *ray, int posH, int posV);
-void    draw_ray(t_data *data, t_ray_calcul *ray);
 void    fisheye_fix(t_data *data, t_ray_calcul *ray);
 void  	raycast(t_data *data, t_ray_calcul ray);
-int  	init_ray(t_data *data);
 
 // Vertical wall
 float	disV_calcul(t_data *data, float ra, float ry, float rx);
@@ -272,20 +270,14 @@ void    draw_vertical_line(t_data *data, t_wall_drawing *wall, t_ray_calcul *ray
 void    init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos);
 void    init_wall(t_data *data);
 
-// Bresenham
-void	mlx_pixel_put_img(t_img	*img, int x, int y, int color);
-void	init_bre_values(t_bre	*values, t_seg *seg);
-void	ft_put_pixel(t_data *data, t_seg *seg, t_img *img, int color);
-void	init_seg_values(t_seg *seg, t_point *begin, t_point *end);
-void	bresenham(t_data *data, t_point begin, t_point end, t_img *img);
-
 // Calculs Utils
 float   degToRad(float a);
 float 	FixAng(float a);
 
-// Colors Utils
+// Draw Utils
 int		create_trgb(int t, int r, int g, int b);
 int		get_pixel(t_img img, int y, int x);
+void	mlx_pixel_put_img(t_img	*img, int x, int y, int color);
 
 // Load Textures
 int		load_textures(t_data *data);

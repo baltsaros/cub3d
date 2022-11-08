@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/07 19:57:48 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 10:31:13 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,5 @@ void    init_wall(t_data *data)
         &data->walls.line_length, &data->walls.endian);
     draw_square(data->walls, create_trgb(255, 255, 255, 255), HEIGHT, WIDTH);
     raycast(data, data->ray_calcul);
-    // mlx_put_image_to_window(data->mlx, data->win, data->ray.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
     mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
 }
