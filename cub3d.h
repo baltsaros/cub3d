@@ -228,7 +228,6 @@ void    hook_manager(t_data *data);
 int 	launcher(t_data *data);
 
 // Draw All
-void    draw_square(t_img img, int color, int end_i, int end_j);
 void    init_ceiling(t_data *data);
 void    init_floor(t_data *data);
 int		draw_all(t_data *data);
@@ -237,7 +236,6 @@ int		draw_all(t_data *data);
 void    draw_square_coord(t_data *data, int color, int x, int y);
 void    draw_empty_square_coord(t_data *data, int color, int x, int y);
 void    draw_map(t_data *data, int color, int height, int width);
-void    redraw_map(t_data *data, int color, int height, int width);
 void    init_minimap(t_data *data, t_minimap minimap);
 int		init_minimap_values(t_data *data);
 
