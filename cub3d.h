@@ -158,7 +158,6 @@ typedef struct s_data
 	t_player		player_s;
 	t_img			player;
 	t_ray			ray_s;
-	t_img			ray;
 	t_minimap		minimap_s;
 	t_img			minimap;
 	t_img			walls;
