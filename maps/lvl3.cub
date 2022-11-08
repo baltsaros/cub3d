@@ -1,7 +1,7 @@
 NO ./textures/greystone.xpm
-SO ./textures/greystone.xpm
-WE ./textures/greystone.xpm
-EA ./textures/greystone.xpm
+SO ./textures/redstone.xpm
+WE ./textures/wood.xpm
+EA ./textures/purplestone.xpm
 F 220,100,0
 C 225,30,0
 

@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 12:10:50 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 17:54:45 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,20 @@ void    raycast(t_data *data, t_ray_calcul ray)
         posH = check_horizontal_wall(data, &ray, Tan);
         pos = adapt_distance(&ray, posH, posV);
         fisheye_fix(data, &ray);
+
+        if (ray.r == NB_RAYS / 2)
+        {
+            printf("ra: %f\n", ray.ra);
+
+            printf("rx: %f\n", ray.rx);
+            printf("ry: %f\n", ray.ry);
+            printf("disH: %f\n", ray.disH);
+
+            printf("vx: %f\n", ray.vx);
+            printf("vy: %f\n", ray.vy);
+            printf("disV: %f\n", ray.disV);
+        }
+
         init_calculate_wall(data, &ray, pos);
         ray.ra = FixAng(ray.ra - ((float)FIELD_OF_VIEW / (float)NB_RAYS));
         ray.r++;
