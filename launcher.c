@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:11:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/07 14:52:09 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 10:35:04 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,9 @@ int launcher(t_data *data)
     ret = init_player_values(data);
     if (ret != 0)
         return (ret);
-
     ret = load_textures(data);
     if (ret != 0)
         return (ret);
-
     draw_all(data);
 
     hook_manager(data);

@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 10:32:29 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 10:35:54 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,20 @@ void    init_floor(t_data *data)
     mlx_put_image_to_window(data->mlx, data->win, data->floor.img_ptr, 0, HEIGHT / 2);
 }
 
-void    draw_all(t_data *data)
+int draw_all(t_data *data)
 {
-    // Ceiling
     data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
     if (data->ceiling.img_ptr != NULL)
         init_ceiling(data);
-    // Floors
+    else
+        return (1);
     data->floor.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
     if (data->floor.img_ptr != NULL)
         init_floor(data);
-    //else
-        // put error here
+    else
+        return (1);
     init_minimap(data, data->minimap_s);
     init_player(data);
     init_wall(data);
+    return (0);
 }
