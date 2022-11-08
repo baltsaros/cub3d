@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 17:54:45 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 18:25:42 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,21 @@ void    raycast(t_data *data, t_ray_calcul ray)
         pos = adapt_distance(&ray, posH, posV);
         fisheye_fix(data, &ray);
 
-        if (ray.r == NB_RAYS / 2)
-        {
-            printf("ra: %f\n", ray.ra);
+        // if (ray.r == NB_RAYS / 2)
+        // {
+        //     printf("ra: %f\n\n", ray.ra);
+        //     printf("pos_x: %f\n", data->player_s.pos_x);
+        //     printf("pos_y: %f\n", data->player_s.pos_y);
 
-            printf("rx: %f\n", ray.rx);
-            printf("ry: %f\n", ray.ry);
-            printf("disH: %f\n", ray.disH);
+        //     printf("rx: %f\n", ray.rx);
+        //     printf("ry: %f\n", ray.ry);
+        //     printf("disH: %f\n", ray.disH);
 
-            printf("vx: %f\n", ray.vx);
-            printf("vy: %f\n", ray.vy);
-            printf("disV: %f\n", ray.disV);
-        }
+        //     printf("vx: %f\n", ray.vx);
+        //     printf("vy: %f\n", ray.vy);
+        //     printf("disV: %f\n", ray.disV);
+        //     printf("\n");
+        // }
 
         init_calculate_wall(data, &ray, pos);
         ray.ra = FixAng(ray.ra - ((float)FIELD_OF_VIEW / (float)NB_RAYS));
