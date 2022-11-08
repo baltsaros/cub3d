@@ -6,61 +6,77 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/10/17 19:10:05 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 13:23:45 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    draw_vertical_line(t_data *data, t_wall_drawing *wall, int pos)
+void    draw_a_wall(t_data *data, t_wall_drawing *wall, t_text text, double shade)
 {
-    int color;
-
-    color = 0x1E90FF;
+    int     color;
+    
     while (wall->begin.y != wall->end.y + 1)
     {
         if (wall->begin.x >= 0 && wall->begin.x <= WIDTH && wall->begin.y >= 0 && wall->begin.y <= HEIGHT)
         {
-            if (pos == NORTH)
-                mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, data->walls.basic_color);
-            else if (pos == WEST)
-                mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, data->walls.basic_color);
-            else if (pos == SOUTH)
-                mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, color);
-            else if (pos == EAST)
-                mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, color);
+            color = get_pixel(text.img, (int)wall->ty, (int)wall->tx);
+            mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, color * shade);
         }    
         wall->begin.y++;
+        wall->ty += wall->ty_step;
+    }
+}
+
+void    draw_vertical_line(t_data *data, t_wall_drawing *wall, t_ray_calcul *ray, int pos)
+{   
+    wall->ty = 0;
+    if (pos == NORTH)
+    {
+        wall->ty_step = (float)data->no_text.height / (float)wall->wallHeight;
+        wall->tx = (int)(ray->rx) % data->no_text.width;
+        draw_a_wall(data, wall, data->no_text, 1);
+    }
+    else if (pos == SOUTH)
+    {
+        wall->ty_step = (float)data->so_text.height / (float)wall->wallHeight;
+        wall->tx = (int)(ray->rx) % data->so_text.width;
+        draw_a_wall(data, wall, data->so_text, 1);
+    }
+    else if (pos == EAST)
+    {
+        wall->ty_step = (float)data->ea_text.height / (float)wall->wallHeight;
+        wall->tx = (int)(ray->ry) % data->ea_text.width;
+        draw_a_wall(data, wall, data->ea_text, 0.5);
+    }
+    else if (pos == WEST)
+    {
+        wall->ty_step = (float)data->we_text.height / (float)wall->wallHeight;
+        wall->tx = (int)(ray->ry) % data->we_text.width;
+        draw_a_wall(data, wall, data->we_text, 0.5);
     }
 }
 
 void    init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
 {
-    float   distProj;
-    float   wallHeight;
-
-    distProj = (WIDTH / 2) / tan(degToRad(FIELD_OF_VIEW / 2));
-    wallHeight = (SQUARE_SIZE / ray->disH) * distProj;
+    data->wall_drawing.distProj = (WIDTH / 2) / tan(degToRad(FIELD_OF_VIEW / 2));
+    data->wall_drawing.wallHeight = (SQUARE_SIZE / ray->disH) * data->wall_drawing.distProj;
     data->wall_drawing.begin.x = (((float)ray->r) * ((float)WIDTH / (float)NB_RAYS));
-    data->wall_drawing.begin.y = (HEIGHT / 2) - (wallHeight / 2);
+    data->wall_drawing.begin.y = (HEIGHT / 2) - (data->wall_drawing.wallHeight / 2);
     data->wall_drawing.end.x = data->wall_drawing.begin.x;
-    data->wall_drawing.end.y = data->wall_drawing.begin.y + wallHeight;
-    // for (int i = ray->r; i != (ray->r + 1) * (WIDTH / FIELD_OF_VIEW); i++)
-    // {
-        draw_vertical_line(data, &data->wall_drawing, pos);
-        // begin.x = i;
-        // end.x = begin.x;    
-    // }
+    data->wall_drawing.end.y = data->wall_drawing.begin.y + data->wall_drawing.wallHeight;
+    draw_vertical_line(data, &data->wall_drawing, ray, pos);
 }
 
-void    init_wall(t_data *data)
+int init_wall(t_data *data)
 {
     data->walls.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-    data->walls.basic_color = 0x00BFFF;
+    if (!data->walls.img_ptr)
+        return (1);
     data->walls.addr = mlx_get_data_addr(data->walls.img_ptr, &data->walls.bpp,
         &data->walls.line_length, &data->walls.endian);
-    draw_square(data->walls, create_trgb(255, 255, 255, 255), HEIGHT, WIDTH);
+    ft_memset(data->walls.addr, create_trgb(255, 255, 255, 255), HEIGHT * WIDTH * sizeof(int));
     raycast(data, data->ray_calcul);
-    mlx_put_image_to_window(data->mlx, data->win, data->ray.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
     mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
+    return (0);
 }
