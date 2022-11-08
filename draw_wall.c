@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 12:21:42 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 13:23:45 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int init_wall(t_data *data)
     data->walls.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
     if (!data->walls.img_ptr)
         return (1);
-    data->walls.basic_color = 0x00BFFF;
     data->walls.addr = mlx_get_data_addr(data->walls.img_ptr, &data->walls.bpp,
         &data->walls.line_length, &data->walls.endian);
     ft_memset(data->walls.addr, create_trgb(255, 255, 255, 255), HEIGHT * WIDTH * sizeof(int));
