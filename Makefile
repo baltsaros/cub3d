@@ -6,24 +6,36 @@ C_GREEN			=\033[0;32m
 C_GREEN_B		=\033[1;32m
 C_RESET			=\033[0m
 
+OS			= $(shell uname -s)
 GCC			= gcc
 RM			= rm -f
 RMF			= rm -rf
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 
 NAME		= cub3d
-LIBFT       = ./libft/libft.a
-MLX			= ./mlx/libmlx.a
+LIBFT		= ./libft/libft.a
+MLX			= -Lmlx -lmlx -framework OpenGL -framework AppKit
+HOOKS		= hooks_mac.c
+INCS		= -Ilibft -Imlx
+
+ifeq	($(OS), Linux)
+$(warning $(OS))
+		MLX 	= -Lmlx_linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz
+		HOOKS	= hooks.c
+		INCS	= -Ilibft -Imlx_linux
+endif
+
 SRCS		=	cub3d.c \
 				cub_utils_1.c \
 				cub_utils_2.c \
 				cub_free.c \
 				alloc_check.c \
 				error_messages.c \
-				hooks.c \
+				$(HOOKS) \
 				init_map.c \
 				init_map_utils_1.c \
 				init_map_utils_2.c \
+				init_map_utils_3.c \
 				draw_all.c \
 				minimap.c \
 				player.c \
@@ -35,11 +47,12 @@ SRCS		=	cub3d.c \
 				draw_utils.c \
 				load_textures.c
 
+# SRCS		= $(notdir $(SRC_FILES))
+
 OBJ_DIR		= objs
 OBJ_FILES	= $(SRCS:.c=.o)
 OBJS		= $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))
 
-INCS		= -Ilibft -Imlx
 
 all:		libft $(NAME)
 
@@ -48,15 +61,16 @@ $(OBJ_DIR)/%.o: %.c
 			@printf "$(C_GREEN).$(C_RESET)";
 			@$(GCC) $(CFLAGS) -c $< $(INCS) -o $@
 
-$(NAME):	$(OBJS) $(MLX)
-			@$(GCC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit ${INCS} libft/libft.a -o $(NAME)
+$(NAME):	$(OBJS) 
+			@$(GCC) $(OBJS) $(MLX) $(LIBFT) -o $(NAME)
 			@printf "\n$(C_GREEN_B)Finished!$(C_RESET)\n";
+
 
 libft:
 			@make -C ./libft
 
-$(MLX):
-			@make -C ./mlx/
+# $(MLX):
+# @make -C ./mlx/
 
 norm:
 			@echo "$(C_PURPLE_B)Let's test the Norm!$(C_RESET)";
@@ -68,13 +82,13 @@ clean:
 			@make -C ./libft clean
 			@$(RM) $(OBJS)
 			@$(RMF) $(OBJ_DIR)
-			@$(RM) ./mlx/*.o
 			@echo "$(C_RED_B)Cub3d o-files have been deleted!$(C_RESET)";
+# @$(RM) ./mlx/*.o
 
 fclean:		clean
 			@make -C ./libft fclean
 			@echo "$(C_RED_B)Deleting cub3d program...$(C_RESET)";
-			@$(RM) $(NAME) $(MLX)
+			@$(RM) $(NAME)
 			@echo "$(C_RED_B)Cub3d program has been deleted!$(C_RESET)";
 
 re:			fclean all

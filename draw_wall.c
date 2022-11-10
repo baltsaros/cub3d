@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 16:15:23 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/10 11:13:47 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void    draw_vertical_line(t_data *data, t_wall_drawing *wall, t_ray_calcul *ray
     }
 }
 
-void    init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
+void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
 {
     data->wall_drawing.distProj = (WIDTH / 2) / tan(degToRad(FIELD_OF_VIEW / 2));
     data->wall_drawing.wallHeight = (SQUARE_SIZE / ray->disH) * data->wall_drawing.distProj;

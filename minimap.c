@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 17:15:02 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/10 14:46:13 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    draw_square_coord(t_data *data, int color, int x, int y)
+void	draw_square_coord(t_data *data, int color, int x, int y)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
     i = 0;
     while (i != SQUARE_SIZE / 2)
@@ -30,10 +30,10 @@ void    draw_square_coord(t_data *data, int color, int x, int y)
     }
 }
 
-void    draw_empty_square_coord(t_data *data, int color, int x, int y)
+void	draw_empty_square_coord(t_data *data, int color, int x, int y)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
     i = 0;
     while (i != SQUARE_SIZE / 2)
@@ -49,7 +49,7 @@ void    draw_empty_square_coord(t_data *data, int color, int x, int y)
     }
 }
 
-void    draw_map(t_data *data, int color, int height, int width)
+void	draw_map(t_data *data, int color, int height, int width)
 {
     int i;
     int j;
@@ -70,7 +70,7 @@ void    draw_map(t_data *data, int color, int height, int width)
     }
 }
 
-void    init_minimap(t_data *data, t_minimap minimap)
+void	init_minimap(t_data *data, t_minimap minimap)
 {
     data->minimap.basic_color = 0x88000000;
     data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr, &data->minimap.bpp,

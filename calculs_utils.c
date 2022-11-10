@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   calculs_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:30:54 by mthiry            #+#    #+#             */
 /*   Updated: 2022/11/08 18:32:11 by mthiry           ###   ########.fr       */
@@ -14,7 +14,7 @@
 
 float   degToRad(float a)
 {
-    return (a * (float)M_PI / 180.0);
+	return (a * (float)M_PI / 180.0);
 }
 
 float FixAng(float a)

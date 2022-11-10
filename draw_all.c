@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 18:36:47 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/10 11:20:06 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,22 @@
 
 void    init_ceiling(t_data *data)
 {
-    data->ceiling.basic_color = create_trgb(0,
-        ft_atoi(data->map.c_spl[0]),
-        ft_atoi(data->map.c_spl[1]),
-        ft_atoi(data->map.c_spl[2]));
-    data->ceiling.addr = mlx_get_data_addr(data->ceiling.img_ptr, &data->ceiling.bpp,
+	data->ceiling.basic_color = create_trgb(0,
+		ft_atoi(data->map.c_spl[0]),
+		ft_atoi(data->map.c_spl[1]),
+		ft_atoi(data->map.c_spl[2]));
+	data->ceiling.addr = mlx_get_data_addr(data->ceiling.img_ptr, &data->ceiling.bpp,
 		&data->ceiling.line_length, &data->ceiling.endian);
-    draw_square(data->ceiling, data->ceiling.basic_color, HEIGHT / 2, WIDTH);
-    mlx_put_image_to_window(data->mlx, data->win, data->ceiling.img_ptr, 0, 0);
 }
 
-void    init_floor(t_data *data)
+void	init_floor(t_data *data)
 {
-    data->floor.basic_color = create_trgb(0,
-        ft_atoi(data->map.f_spl[0]),
-        ft_atoi(data->map.f_spl[1]),
-        ft_atoi(data->map.f_spl[2]));
-    data->floor.addr = mlx_get_data_addr(data->floor.img_ptr, &data->floor.bpp,
+	data->floor.basic_color = create_trgb(0,
+		ft_atoi(data->map.f_spl[0]),
+		ft_atoi(data->map.f_spl[1]),
+		ft_atoi(data->map.f_spl[2]));
+	data->floor.addr = mlx_get_data_addr(data->floor.img_ptr, &data->floor.bpp,
 		&data->floor.line_length, &data->floor.endian);
-    draw_square(data->floor, data->floor.basic_color, HEIGHT / 2, WIDTH);
-    mlx_put_image_to_window(data->mlx, data->win, data->floor.img_ptr, 0, HEIGHT / 2);
 }
 
 int draw_all(t_data *data)

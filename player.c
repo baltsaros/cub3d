@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
 /*   Updated: 2022/11/10 15:01:46 by mthiry           ###   ########.fr       */
@@ -47,12 +47,10 @@ void    init_player_pos(t_data *data, int height, int width)
 
 int init_player_values(t_data *data)
 {
-    data->player_s.pos_x = 0;
-    data->player_s.pos_y = 0;
-    data->player_s.pos_win_x = 0;
-    data->player_s.pos_win_y = 0;
-    data->player_s.p_ang = 90;
-    data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
+	data->player_s.pos_x = 0;
+	data->player_s.pos_y = 0;
+	data->player_s.p_ang = 90;
+	data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 	data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
     data->player.img_ptr = mlx_new_image(data->mlx, PLAYER_SIZE / 2, PLAYER_SIZE / 2);
     if (!data->player.img_ptr)

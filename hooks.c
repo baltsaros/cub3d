@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
 /*   Updated: 2022/11/10 15:00:53 by mthiry           ###   ########.fr       */
@@ -24,7 +24,7 @@
 // 	return (0);
 // }
 
-void	render(t_data *data)
+int		render(t_data *data)
 {
 	// Temporary solution
 	mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
@@ -34,8 +34,10 @@ void	render(t_data *data)
 	mlx_destroy_image(data->mlx, data->walls.img_ptr);
 	mlx_clear_window(data->mlx, data->win);
 	data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
-    if (data->ceiling.img_ptr != NULL)
-        init_ceiling(data);
+	if (data->ceiling.img_ptr != NULL)
+	{
+		init_ceiling(data);
+	}
 	data->floor.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
     if (data->floor.img_ptr != NULL)
         init_floor(data);
@@ -84,78 +86,70 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 	(void)y;
 	(void)keycode;
 	(void)data;
-	// cub_free_all(data);
-	// if (keycode == 4)
-	// 	data->set.zoom *= 1.1;
-	// else if (keycode == 5)
-	// 	data->set.zoom *= 0.9;
-	// data->set.move_x = (x - WIDTH / 2) / (data->set.zoom * WIDTH)
-	// 	+ data->set.move_x;
-	// data->set.move_y = (y - HEIGHT / 2) / (data->set.zoom * HEIGHT)
-	// 	+ data->set.move_y;
+	if (keycode == 1)
+	{
+	}
 	// render(data);
 	return (0);
 }
 
 void	move(int keycode, t_data *data)
 {
-	if (keycode == 13)
+	if (keycode == 119)
 	{
 		data->player_s.pos_win_y += (data->player_s.speed * data->player_s.delta_y) / 2;
 		data->player_s.pos_win_x += (data->player_s.speed * data->player_s.delta_x) / 2;
 		data->player_s.pos_y += data->player_s.speed * data->player_s.delta_y;
 		data->player_s.pos_x += data->player_s.speed * data->player_s.delta_x;
 	}
-	else if (keycode == 1)
+	else if (keycode == 115)
 	{
 		data->player_s.pos_win_y -= (data->player_s.speed * data->player_s.delta_y) / 2;
 		data->player_s.pos_win_x -= (data->player_s.speed * data->player_s.delta_x) / 2;
 		data->player_s.pos_y -= data->player_s.speed * data->player_s.delta_y;
 		data->player_s.pos_x -= data->player_s.speed * data->player_s.delta_x;
 	}
-	else if (keycode == 0)
+	else if (keycode == 97)
 	{
 		data->player_s.pos_win_y += (data->player_s.speed * sin(data->player_s.p_ang - ((90 * M_PI) / 180))) / 2;
 		data->player_s.pos_win_x += (data->player_s.speed * cos(data->player_s.p_ang - ((90 * M_PI) / 180))) / 2;
 		data->player_s.pos_y += data->player_s.speed * sin(data->player_s.p_ang - ((90 * M_PI) / 180));
 		data->player_s.pos_x += data->player_s.speed * cos(data->player_s.p_ang - ((90 * M_PI) / 180));
 	}
-	else if (keycode == 2)
+	else if (keycode == 100)
 	{
 		data->player_s.pos_win_y -= (data->player_s.speed * sin(data->player_s.p_ang - ((90 * M_PI) / 180))) / 2;
 		data->player_s.pos_win_x -= (data->player_s.speed * cos(data->player_s.p_ang - ((90 * M_PI) / 180))) / 2;
 		data->player_s.pos_y -= data->player_s.speed * sin(data->player_s.p_ang - ((90 * M_PI) / 180));
 		data->player_s.pos_x -= data->player_s.speed * cos(data->player_s.p_ang - ((90 * M_PI) / 180));
 	}
-	render(data);
 }
 
 void	rotate_fov(int keycode, t_data *data)
 {
-	if (keycode == 123)
+	if (keycode == 65361)
 	{
 		data->player_s.p_ang += data->player_s.speed;
 		data->player_s.p_ang = FixAng(data->player_s.p_ang);
 		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
 	}
-	else if (keycode == 124)
+	else if (keycode == 65363)
 	{
 		data->player_s.p_ang -= data->player_s.speed;
 		data->player_s.p_ang = FixAng(data->player_s.p_ang);
 		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
 	}
-	render(data);
 }
 
 int	key_hook_manager(int keycode, t_data *data)
 {
-	if (keycode == 53)
+	if (keycode == 65307)
 		leave(data);
-	else if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
+	else if (keycode == 119 || keycode == 115 || keycode == 100 || keycode == 97)
 		move(keycode, data);
-	else if (keycode == 123 || keycode == 124)
+	else if (keycode == 65363 || keycode == 65361)
 		rotate_fov(keycode, data);
 	else
 		printf("Key %d was pressed!\n", keycode);

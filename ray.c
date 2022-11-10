@@ -3,36 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 18:32:16 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/10 11:13:16 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int   adapt_distance(t_ray_calcul *ray, int posH, int posV)
+int	adapt_distance(t_ray_calcul *ray, int posH, int posV)
 {
-    if (ray->disV < ray->disH)
-    {
-        ray->rx = ray->vx;
-        ray->ry = ray->vy;
-        ray->disH = ray->disV;
-        return (posV);
-    }
-    return (posH);
+	if (ray->disV < ray->disH)
+	{
+		ray->rx = ray->vx;
+		ray->ry = ray->vy;
+		ray->disH = ray->disV;
+		return (posV);
+	}
+	return (posH);
 }
 
 void    fisheye_fix(t_data *data, t_ray_calcul *ray)
 {
-    float ca;
-    
-    ca = FixAng(data->player_s.p_ang - ray->ra);
-    ray->disH = ray->disH * cos(degToRad(ca));  
+	float	ca;
+	
+	ca = FixAng(data->player_s.p_ang - ray->ra);
+	ray->disH = ray->disH * cos(degToRad(ca));  
 }
 
-void    raycast(t_data *data, t_ray_calcul ray)
+void	raycast(t_data *data, t_ray_calcul ray)
 {
     float   Tan;
     int     posH;
