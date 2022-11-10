@@ -113,6 +113,7 @@ typedef struct s_player
 	float	p_ang;
 	float	delta_x;
 	float	delta_y;
+	int		speed;
 }	t_player;
 
 typedef struct s_ray

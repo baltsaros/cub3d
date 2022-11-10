@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 17:43:45 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/10 15:01:46 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ int init_player_values(t_data *data)
     if (!data->player.img_ptr)
         return (1);
     init_player_pos(data, data->map.height, data->map.width);
+    data->player_s.speed = 10;
     return (0);
 }
