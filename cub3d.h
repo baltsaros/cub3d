@@ -113,6 +113,7 @@ typedef struct s_player
 	float	p_ang;
 	float	delta_x;
 	float	delta_y;
+	int		speed;
 }	t_player;
 
 typedef struct s_ray
@@ -158,7 +159,6 @@ typedef struct s_data
 	t_player		player_s;
 	t_img			player;
 	t_ray			ray_s;
-	t_img			ray;
 	t_minimap		minimap_s;
 	t_img			minimap;
 	t_img			walls;
@@ -276,6 +276,7 @@ float 	FixAng(float a);
 int		create_trgb(int t, int r, int g, int b);
 int		get_pixel(t_img img, int y, int x);
 void	mlx_pixel_put_img(t_img	*img, int x, int y, int color);
+void	draw_square(t_img img, int color, int end_i, int end_j);
 
 // Load Textures
 int		load_textures(t_data *data);

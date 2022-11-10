@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:35:14 by mthiry            #+#    #+#             */
-/*   Updated: 2022/08/30 13:58:38 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/08 18:32:00 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ float    disV_calcul(t_data *data, float ra, float ry, float rx)
 
 void    calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof)
 {
-    while (dof < 8)
+    while ((size_t)dof < data->map.width)
     {
         ray->mx = (int)(ray->rx) / SQUARE_SIZE;
         ray->my = (int)(ray->ry) / SQUARE_SIZE;            
@@ -35,7 +35,7 @@ void    calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof)
             && ray->mx < (int)data->map.width
             && data->map.map[ray->my][ray->mx] == '1')
         {
-            dof = 8;
+            dof = data->map.width;
             ray->disV = disV_calcul(data, ray->ra, ray->ry, ray->rx);
         }         
         else
@@ -73,9 +73,9 @@ int    check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan)
     dof = 0;
     ret = 0;
     ray->disV = 100000;
-    if (cos(degToRad(ray->ra)) > 0.001)
+    if (cos(degToRad(ray->ra)) > 0)
         ret = check_right(data, ray, Tan);
-    else if (cos(degToRad(ray->ra)) < -0.001)
+    else if (cos(degToRad(ray->ra)) < -0)
         ret = check_left(data, ray, Tan);
     else
     {
@@ -83,6 +83,8 @@ int    check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan)
         ray->ry = data->player_s.pos_y;
         dof = 8;
         ret = ERROR_POS;
+
+        ray->disV = 100;
     }
     calculate_vertical_distance(data, ray, dof);
     return (ret);
