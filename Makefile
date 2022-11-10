@@ -20,10 +20,11 @@ INCS		= -Ilibft -Imlx
 
 ifeq	($(OS), Linux)
 $(warning $(OS))
-		MLX 	= -Lmlx_linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz
+		MLX 	= -Lmlx_linux -Imlx_linux -lXext -lX11 -lm -lz
 		HOOKS	= hooks.c
 		INCS	= -Ilibft -Imlx_linux
 endif
+#-lmlx_Linux
 
 SRCS		=	cub3d.c \
 				cub_utils_1.c \
