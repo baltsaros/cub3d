@@ -81,7 +81,7 @@ int check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan)
 	{
 		ray->rx = data->player_s.pos_x;
 		ray->ry = data->player_s.pos_y;
-		dof = 8;
+		dof = (int)data->map.height;
 		ret = ERROR_POS;
 	}
 	calculate_horizontal_distance(data, ray, dof);

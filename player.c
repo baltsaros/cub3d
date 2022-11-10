@@ -12,12 +12,6 @@
 
 #include "cub3d.h"
 
-// void	init_player(t_data *data)
-// {
-// 	draw_square(data->player, data->player.basic_color, PLAYER_SIZE, PLAYER_SIZE);
-// 	// mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
-// }
-
 void    init_player(t_data *data)
 {
     data->player.basic_color = 0x000000;
@@ -55,14 +49,7 @@ int init_player_values(t_data *data)
 {
 	data->player_s.pos_x = 0;
 	data->player_s.pos_y = 0;
-	// data->player_s.pos_win_x = 0;
-	// data->player_s.pos_win_y = 0;
-	data->player_s.pos_win_x = data->minimap_s.position.x + data->player_s.pos_x;
-	data->player_s.pos_win_y = data->minimap_s.position.y + data->player_s.pos_y;
-	printf("angle is: %f\n", data->player_s.p_ang);
-	// data->player_s.p_ang = 90;
-	// data->player_s.pos_win_x = data->player_s.pos_x * SQUARE_SIZE;
-	// data->player_s.pos_win_y = data->player_s.pos_y * SQUARE_SIZE;
+	data->player_s.p_ang = 90;
 	data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 	data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
     data->player.img_ptr = mlx_new_image(data->mlx, PLAYER_SIZE / 2, PLAYER_SIZE / 2);

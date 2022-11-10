@@ -81,7 +81,7 @@ int		check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan)
 	{
 		ray->rx = data->player_s.pos_x;
 		ray->ry = data->player_s.pos_y;
-		dof = 8;
+		dof = (int)data->map.width;
 		ret = ERROR_POS;
 	}
 	calculate_vertical_distance(data, ray, dof);
