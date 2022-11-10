@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/07 18:15:49 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/10 11:13:16 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,6 @@ void	raycast(t_data *data, t_ray_calcul ray)
 
 void	init_ray(t_data *data)
 {
-	data->ray.img_ptr = mlx_new_image(data->mlx, data->minimap_s.width, data->minimap_s.height);
-	// if (!data->ray_s.ray.img_ptr)
-	// // Put error here
-	data->ray.basic_color = 0xFFFFFF;
-	data->ray.addr = mlx_get_data_addr(data->ray.img_ptr, &data->ray.bpp,
-		  &data->ray.line_length, &data->ray.endian);
 	draw_square(data->ray, create_trgb(255, 255, 255, 255), data->minimap_s.height, data->minimap_s.width);
 	// printf("wall\n");
 	init_wall(data);
