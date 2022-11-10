@@ -48,12 +48,9 @@ SRCS		=	cub3d.c \
 				draw_utils.c \
 				load_textures.c
 
-# SRCS		= $(notdir $(SRC_FILES))
-
 OBJ_DIR		= objs
 OBJ_FILES	= $(SRCS:.c=.o)
 OBJS		= $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))
-
 
 all:		libft $(NAME)
 
@@ -62,16 +59,12 @@ $(OBJ_DIR)/%.o: %.c
 			@printf "$(C_GREEN).$(C_RESET)";
 			@$(GCC) $(CFLAGS) -c $< $(INCS) -o $@
 
-$(NAME):	$(OBJS) 
+$(NAME):	$(OBJS)
 			@$(GCC) $(OBJS) $(MLX) $(LIBFT) -o $(NAME)
 			@printf "\n$(C_GREEN_B)Finished!$(C_RESET)\n";
 
-
 libft:
 			@make -C ./libft
-
-# $(MLX):
-# @make -C ./mlx/
 
 norm:
 			@echo "$(C_PURPLE_B)Let's test the Norm!$(C_RESET)";
@@ -84,7 +77,6 @@ clean:
 			@$(RM) $(OBJS)
 			@$(RMF) $(OBJ_DIR)
 			@echo "$(C_RED_B)Cub3d o-files have been deleted!$(C_RESET)";
-# @$(RM) ./mlx/*.o
 
 fclean:		clean
 			@make -C ./libft fclean
