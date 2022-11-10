@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/07 18:16:28 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/10 08:05:36 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ int	is_wall(char **map, int x, int y)
 	return (0);
 }
 
-void	render(t_data *data)
+int		render(t_data *data)
 {
 	// Temporary solution
-	// mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
-	// mlx_destroy_image(data->mlx, data->floor.img_ptr);
-	// mlx_destroy_image(data->mlx, data->minimap.img_ptr);
-	// mlx_destroy_image(data->mlx, data->player.img_ptr);
-	// mlx_destroy_image(data->mlx, data->ray.img_ptr);
-	// mlx_destroy_image(data->mlx, data->walls.img_ptr);
-	// mlx_clear_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
+	mlx_destroy_image(data->mlx, data->floor.img_ptr);
+	mlx_destroy_image(data->mlx, data->minimap.img_ptr);
+	mlx_destroy_image(data->mlx, data->player.img_ptr);
+	mlx_destroy_image(data->mlx, data->ray.img_ptr);
+	mlx_destroy_image(data->mlx, data->walls.img_ptr);
+	mlx_clear_window(data->mlx, data->win);
 	data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
 	if (data->ceiling.img_ptr != NULL)
 	{
@@ -64,6 +64,7 @@ void	render(t_data *data)
 		mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
 	}
 	init_ray(data);
+	retunr (0);
 }
 
 int	infinite_hook(int keycode, t_data *data)

@@ -227,7 +227,7 @@ void	draw_square(t_img img, int color, int end_i, int end_j);
 void	init_ceiling(t_data *data);
 void	init_floor(t_data *data);
 int		draw_all(t_data *data);
-void	render(t_data *data);
+int		render(t_data *data);
 
 // Minimap
 void	draw_square_coord(t_data *data, int color, int x, int y);

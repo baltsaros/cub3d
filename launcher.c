@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:11:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/07 18:07:46 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/10 08:04:34 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int		launcher(t_data *data)
 	init_player_values(data);
 	printf("angle: %f, x: %f, y: %f, x_w: %f, y_w: %f\n", data->player_s.p_ang,
 		data->player_s.pos_x, data->player_s.pos_y, data->player_s.pos_win_x, data->player_s.pos_win_y);
-	printf("x_m: %d, y_m: %d\n", data->minimap_s.position.x, data->minimap_s.position.y);  
-	mlx_loop_hook(data->mlx, draw_all, data);
+	printf("x_m: %d, y_m: %d\n", data->minimap_s.position.x, data->minimap_s.position.y);
+	hook_manager(data);
+	draw_all(data);
+	mlx_loop_hook(data->mlx, render, data);
 	mlx_loop(data->mlx);
 	return (0);
 }
