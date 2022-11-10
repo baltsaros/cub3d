@@ -8,6 +8,7 @@
 # include <errno.h>
 # include <math.h>
 # include "mlx/mlx.h"
+# include "mlx_linux/mlx.h"
 # include "libft/libft.h"
 
 //	default window size
