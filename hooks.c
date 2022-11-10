@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/10 15:00:53 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/10 18:00:11 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ int		render(t_data *data)
 	}
 	data->floor.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
     if (data->floor.img_ptr != NULL)
-        init_floor(data);
+	{
+		init_floor(data);
+	}
 	init_wall(data);
 	data->minimap.img_ptr = mlx_new_image(data->mlx, data->minimap_s.width, data->minimap_s.height);
 	if (data->minimap.img_ptr != NULL)
@@ -61,6 +63,7 @@ int		render(t_data *data)
 		draw_square(data->player, data->player.basic_color, PLAYER_SIZE / 2, PLAYER_SIZE / 2);
 		mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
 	}
+	return (0);
 }
 
 int	infinite_hook(int keycode, t_data *data)

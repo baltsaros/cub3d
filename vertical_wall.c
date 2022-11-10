@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertical_wall.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:35:14 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 18:32:00 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/10 18:00:29 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan)
 	if (cos(degToRad(ray->ra)) > 0.001)
 		ret = check_right(data, ray, Tan);
 	else if (cos(degToRad(ray->ra)) < -0.001)
-		ret = check_left(data, ray, Tsan);
+		ret = check_left(data, ray, Tan);
 	else
 	{
 		ray->rx = data->player_s.pos_x;
