@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:35:14 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/07 17:03:44 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/08 18:32:00 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,25 @@ float	disV_calcul(t_data *data, float ra, float ry, float rx)
 
 void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof)
 {
-	while (dof < 8)
-	{
-		ray->mx = (int)(ray->rx) / SQUARE_SIZE;
-		ray->my = (int)(ray->ry) / SQUARE_SIZE;            
-		if (ray->my >= 0 && ray->mx >= 0
-			&& ray->my < (int)data->map.height
-			&& ray->mx < (int)data->map.width
-			&& data->map.map[ray->my][ray->mx] == '1')
-		{
-			dof = 8;
-			ray->disV = disV_calcul(data, ray->ra, ray->ry, ray->rx);
-		}         
-		else
-		{
-			ray->rx += ray->xo;
-			ray->ry += ray->yo;
-			dof++;
-		}
-	}
+    while ((size_t)dof < data->map.width)
+    {
+        ray->mx = (int)(ray->rx) / SQUARE_SIZE;
+        ray->my = (int)(ray->ry) / SQUARE_SIZE;            
+        if (ray->my >= 0 && ray->mx >= 0
+            && ray->my < (int)data->map.height
+            && ray->mx < (int)data->map.width
+            && data->map.map[ray->my][ray->mx] == '1')
+        {
+            dof = data->map.width;
+            ray->disV = disV_calcul(data, ray->ra, ray->ry, ray->rx);
+        }         
+        else
+        {
+            ray->rx += ray->xo;
+            ray->ry += ray->yo;
+            dof++;
+        }
+    }
 }
 
 int		check_right(t_data *data, t_ray_calcul *ray, float Tan)
@@ -76,7 +76,7 @@ int		check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan)
 	if (cos(degToRad(ray->ra)) > 0.001)
 		ret = check_right(data, ray, Tan);
 	else if (cos(degToRad(ray->ra)) < -0.001)
-		ret = check_left(data, ray, Tan);
+		ret = check_left(data, ray, Tsan);
 	else
 	{
 		ray->rx = data->player_s.pos_x;

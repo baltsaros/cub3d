@@ -36,7 +36,6 @@ SRCS		=	cub3d.c \
 				init_map_utils_1.c \
 				init_map_utils_2.c \
 				init_map_utils_3.c \
-				launcher.c \
 				draw_all.c \
 				minimap.c \
 				player.c \
@@ -44,8 +43,9 @@ SRCS		=	cub3d.c \
 				vertical_wall.c \
 				horizontal_wall.c \
 				draw_wall.c \
-				bresenham.c \
-				calculs_utils.c
+				calculs_utils.c \
+				draw_utils.c \
+				load_textures.c
 
 # SRCS		= $(notdir $(SRC_FILES))
 

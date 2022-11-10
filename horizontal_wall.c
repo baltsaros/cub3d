@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:36:36 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/07 17:00:36 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/08 18:32:06 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,25 @@ float	disH_calcul(t_data *data, float ra, float ry, float rx)
 
 void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof)
 {
-	while (dof < 8)
-	{
-		ray->mx = ((int)(ray->rx) / SQUARE_SIZE);
-		ray->my = ((int)(ray->ry) / SQUARE_SIZE);
-		if (ray->my >= 0 && ray->mx >= 0
-			&& ray->my < (int)data->map.height
-			&& ray->mx < (int)data->map.width
-			&& data->map.map[ray->my][ray->mx] == '1')
-		{
-			dof = 8;
-			ray->disH = disH_calcul(data, ray->ra, ray->ry, ray->rx);
-		}
-		else
-		{
-			ray->rx += ray->xo;
-			ray->ry += ray->yo;
-			dof++;
-		}
-	}
+    while ((size_t)dof < data->map.height)
+    {
+        ray->mx = ((int)(ray->rx) / SQUARE_SIZE);
+        ray->my = ((int)(ray->ry) / SQUARE_SIZE);
+        if (ray->my >= 0 && ray->mx >= 0
+            && ray->my < (int)data->map.height
+            && ray->mx < (int)data->map.width
+            && data->map.map[ray->my][ray->mx] == '1')
+        {
+            dof = data->map.height;
+            ray->disH = disH_calcul(data, ray->ra, ray->ry, ray->rx);
+        }
+        else
+        {
+            ray->rx += ray->xo;
+            ray->ry += ray->yo;
+            dof++;
+        }
+    }
 }
 
 int		check_up(t_data *data, t_ray_calcul *ray, float Tan)
