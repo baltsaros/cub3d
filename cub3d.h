@@ -106,7 +106,7 @@ typedef struct s_ray_calcul
 typedef struct s_wall_drawing
 {
 	float   distProj;
-    float   wallHeight;
+	float   wallHeight;
 	float	ty;
 	float	ty_step;
 	float	tx;
@@ -184,7 +184,7 @@ typedef struct s_data
 	t_text			we_text;
 }	t_data;
 
-/* 
+/*
 	Functions
 */
 
@@ -193,8 +193,8 @@ void	alloc_check_big(char **str, t_data *data);
 void	alloc_check_small(void *str, t_data *data);
 
 /* calculs_utils.c */
-float   degToRad(float a);
-float 	FixAng(float a);
+float	degToRad(float a);
+float	FixAng(float a);
 
 /* cub_free.c */
 void	cub_free(char *str[]);
@@ -215,14 +215,14 @@ int		check_charset(char c, char *charset);
 int		ft_exit(t_data *data);
 
 /* cub3d.c */
-void    hook_manager(t_data *data);
-int 	launcher(t_data *data);
+void	hook_manager(t_data *data);
+int		launcher(t_data *data);
 int		main(int argc, char *argv[]);
 
 /* draw_all.c */
-void    init_ceiling(t_data *data);
+void	init_ceiling(t_data *data);
 void	init_floor(t_data *data);
-int 	draw_all(t_data *data);
+int		draw_all(t_data *data);
 
 /* draw_utils.c */
 int		create_trgb(int t, int r, int g, int b);
@@ -231,10 +231,10 @@ void	mlx_pixel_put_img(t_img	*img, int x, int y, int color);
 void	draw_square(t_img img, int color, int end_i, int end_j);
 
 /* draw_wall.c */
-void    draw_a_wall(t_data *data, t_wall_drawing *wall, t_text text, double shade);
-void    draw_vertical_line(t_data *data, t_wall_drawing *wall, t_ray_calcul *ray, int pos);
+void	draw_a_wall(t_data *data, t_wall_drawing *wall, t_text text, double shade);
+void	draw_vertical_line(t_data *data, t_wall_drawing *wall, t_ray_calcul *ray, int pos);
 void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos);
-int 	init_wall(t_data *data);
+int		init_wall(t_data *data);
 
 /* error_messages.c */
 int		error_check_exit(int input, char *str, t_data *data);
@@ -304,13 +304,13 @@ void	init_minimap(t_data *data, t_minimap minimap);
 int 	init_minimap_values(t_data *data);
 
 /* player.c */
-void    init_player(t_data *data);
-void    init_player_pos(t_data *data, int height, int width);
-int 	init_player_values(t_data *data);
+void	init_player(t_data *data);
+void	init_player_pos(t_data *data, int height, int width);
+int		init_player_values(t_data *data);
 
 /* ray.c */
 int		adapt_distance(t_ray_calcul *ray, int posH, int posV);
-void    fisheye_fix(t_data *data, t_ray_calcul *ray);
+void	fisheye_fix(t_data *data, t_ray_calcul *ray);
 void	raycast(t_data *data, t_ray_calcul ray);
 
 /* vertical_wall.c */
