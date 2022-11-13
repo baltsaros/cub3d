@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/10 14:46:13 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/13 17:57:05 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	init_minimap(t_data *data, t_minimap minimap)
         &data->minimap.line_length, &data->minimap.endian);
     ft_memset(data->minimap.addr, create_trgb(255, 255, 255, 255), minimap.height * minimap.width * sizeof(int));
     draw_map(data, data->minimap.basic_color, data->map.height, data->map.width);
-    // mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, minimap.position.x, minimap.position.y);
     mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
 }
 

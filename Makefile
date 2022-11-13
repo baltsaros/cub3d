@@ -48,6 +48,8 @@ SRCS		=	cub3d.c \
 				draw_utils.c \
 				load_textures.c
 
+HEADER		= cub3d.h
+
 OBJ_DIR		= objs
 OBJ_FILES	= $(SRCS:.c=.o)
 OBJS		= $(addprefix $(OBJ_DIR)/,$(OBJ_FILES))
@@ -59,7 +61,7 @@ $(OBJ_DIR)/%.o: %.c
 			@printf "$(C_GREEN).$(C_RESET)";
 			@$(GCC) $(CFLAGS) -c $< $(INCS) -o $@
 
-$(NAME):	$(OBJS)
+$(NAME):	$(OBJS) $(HEADER)
 			@$(GCC) $(OBJS) $(MLX) $(LIBFT) -o $(NAME)
 			@printf "\n$(C_GREEN_B)Finished!$(C_RESET)\n";
 

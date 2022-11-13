@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_mac.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/10 11:25:39 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/13 17:36:56 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,44 +27,6 @@ int	is_wall(char **map, int x, int y)
 int		render(t_data *data)
 {
 	(void)data;
-	// Temporary solution
-	// mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
-	// mlx_destroy_image(data->mlx, data->floor.img_ptr);
-	// mlx_destroy_image(data->mlx, data->minimap.img_ptr);
-	// mlx_destroy_image(data->mlx, data->player.img_ptr);
-	// mlx_destroy_image(data->mlx, data->ray.img_ptr);
-	// mlx_destroy_image(data->mlx, data->walls.img_ptr);
-	// mlx_clear_window(data->mlx, data->win);
-	// data->ceiling.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
-	// if (data->ceiling.img_ptr != NULL)
-	// {
-	// 	init_ceiling(data);
-	// }
-	// data->floor.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT / 2);
-	// if (data->floor.img_ptr != NULL)
-	// {
-	// 	init_floor(data);
-	// }
-	// data->minimap.img_ptr = mlx_new_image(data->mlx, data->minimap_s.width, data->minimap_s.height);
-	// if (data->minimap.img_ptr != NULL)
-	// {
-	// 	data->minimap.basic_color = 0x000000;
-	// 	data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr, &data->minimap.bpp,
-	// 		&data->minimap.line_length, &data->minimap.endian);
-	// 	draw_square(data->minimap, create_trgb(255, 255, 255, 255), data->minimap_s.height, data->minimap_s.width);
-	// 	redraw_map(data, data->minimap.basic_color, data->map.height, data->map.width);
-	// 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
-	// }
-	// data->player.img_ptr = mlx_new_image(data->mlx, PLAYER_SIZE, PLAYER_SIZE);
-	// if (data->player.img_ptr != NULL)
-	// {
-	// 	data->player.basic_color = 0x0FAE2;
-	// 	data->player.addr = mlx_get_data_addr(data->player.img_ptr, &data->player.bpp,
-	// 		&data->player.line_length, &data->player.endian);
-	// 	draw_square(data->player, data->player.basic_color, PLAYER_SIZE, PLAYER_SIZE);
-	// 	mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
-	// }
-	// init_ray(data);
 	return (0);
 }
 

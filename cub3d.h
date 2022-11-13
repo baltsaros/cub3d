@@ -166,8 +166,7 @@ typedef struct s_data
 	size_t			j;
 	char			*s_tmp;
 	int				fd;
-	t_img			ceiling;
-	t_img			floor;
+	t_img			background;
 	t_map			map;
 	t_player		player_s;
 	t_img			player;
@@ -219,7 +218,7 @@ int		launcher(t_data *data);
 int		main(int argc, char *argv[]);
 
 /* draw_all.c */
-void	init_floor_and_ceiling(t_data *data);
+void	init_background(t_data *data);
 int		draw_all(t_data *data);
 
 /* draw_utils.c */
@@ -227,6 +226,7 @@ int		create_trgb(int t, int r, int g, int b);
 int		get_pixel(t_img img, int y, int x);
 void	mlx_pixel_put_img(t_img	*img, int x, int y, int color);
 void	draw_square(t_img img, int color, int end_i, int end_j);
+void	draw_square_from(t_img img, int color, t_point begin, t_point end);
 
 /* draw_wall.c */
 void	draw_a_wall(t_data *data, t_wall_drawing *wall, t_text text, double shade);
