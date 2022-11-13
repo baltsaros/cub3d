@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/13 14:43:49 by root             ###   ########.fr       */
+/*   Updated: 2022/11/13 14:45:02 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
 {
     data->wall_drawing.distProj = (WIDTH / 2) / tan(degToRad(FIELD_OF_VIEW / 2));
     data->wall_drawing.wallHeight = (SQUARE_SIZE / ray->disH) * data->wall_drawing.distProj;
-    data->wall_drawing.begin.x = (((float)ray->r) * ((float)WIDTH / (float)WIDTH));
+    data->wall_drawing.begin.x = (float)ray->r;
     data->wall_drawing.begin.y = (HEIGHT / 2) - (data->wall_drawing.wallHeight / 2);
     data->wall_drawing.end.x = data->wall_drawing.begin.x;
     data->wall_drawing.end.y = data->wall_drawing.begin.y + data->wall_drawing.wallHeight;
