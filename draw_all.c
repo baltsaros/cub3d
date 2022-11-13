@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/13 19:11:33 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/13 19:20:13 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int draw_all(t_data *data)
 	ret = init_wall(data);
 	if (ret != 0)
 		return (ret);
-	// init_player(data);
 	// init_minimap(data, data->minimap_s);
-	mlx_put_image_to_window(data->mlx, data->win, data->background.img_ptr, 0, 0);
+	// init_player(data);
+	// mlx_put_image_to_window(data->mlx, data->win, data->background.img_ptr, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
 	return (ret);
 }
