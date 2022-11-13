@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/13 19:12:18 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/13 19:30:50 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,4 @@ void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
     data->wall_drawing.end.x = data->wall_drawing.begin.x;
     data->wall_drawing.end.y = data->wall_drawing.begin.y + data->wall_drawing.wallHeight;
     draw_vertical_line(data, &data->wall_drawing, ray, pos);
-}
-
-int init_wall(t_data *data)
-{
-    ft_memset(data->walls.addr, create_trgb(255, 255, 255, 255), HEIGHT * WIDTH * sizeof(int));
-    raycast(data, data->ray_calcul);
-    return (0);
 }

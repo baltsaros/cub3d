@@ -232,7 +232,6 @@ void	draw_square_from(t_img img, int color, t_point begin, t_point end);
 void	draw_a_wall(t_data *data, t_wall_drawing *wall, t_text text, double shade);
 void	draw_vertical_line(t_data *data, t_wall_drawing *wall, t_ray_calcul *ray, int pos);
 void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos);
-int		init_wall(t_data *data);
 
 /* error_messages.c */
 int		error_check_exit(int input, char *str, t_data *data);

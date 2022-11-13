@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/13 19:20:13 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/13 19:30:43 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ int draw_all(t_data *data)
 
 	ret = 0;
 	// init_background(data);
-	ret = init_wall(data);
-	if (ret != 0)
-		return (ret);
+	ft_memset(data->walls.addr, create_trgb(255, 255, 255, 255), HEIGHT * WIDTH * sizeof(int));
+    raycast(data, data->ray_calcul);
 	// init_minimap(data, data->minimap_s);
 	// init_player(data);
 	// mlx_put_image_to_window(data->mlx, data->win, data->background.img_ptr, 0, 0);
