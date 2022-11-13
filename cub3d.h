@@ -219,8 +219,7 @@ int		launcher(t_data *data);
 int		main(int argc, char *argv[]);
 
 /* draw_all.c */
-void	init_ceiling(t_data *data);
-void	init_floor(t_data *data);
+void	init_floor_and_ceiling(t_data *data);
 int		draw_all(t_data *data);
 
 /* draw_utils.c */
