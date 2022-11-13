@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/13 14:45:02 by root             ###   ########.fr       */
+/*   Updated: 2022/11/13 19:12:18 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,7 @@ void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
 
 int init_wall(t_data *data)
 {
-    data->walls.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-    if (!data->walls.img_ptr)
-        return (1);
-    data->walls.addr = mlx_get_data_addr(data->walls.img_ptr, &data->walls.bpp,
-        &data->walls.line_length, &data->walls.endian);
     ft_memset(data->walls.addr, create_trgb(255, 255, 255, 255), HEIGHT * WIDTH * sizeof(int));
     raycast(data, data->ray_calcul);
-    mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
     return (0);
 }

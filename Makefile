@@ -46,7 +46,8 @@ SRCS		=	cub3d.c \
 				draw_wall.c \
 				calculs_utils.c \
 				draw_utils.c \
-				load_textures.c
+				load_textures.c \
+				init_img.c
 
 HEADER		= cub3d.h
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/13 11:10:31 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/13 19:08:41 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	hook_manager(t_data *data)
 	mlx_hook(data->win, 2, (1L << 0), key_hook_manager, data);
 	mlx_mouse_hook(data->win, mouse_hook, data);
 	mlx_hook(data->win, 17, 1L << 17, ft_exit, data);
-	mlx_loop_hook(data->mlx, infinite_hook, &data);
+	mlx_loop_hook(data->mlx, draw_all, &data);
 }
 
 int		launcher(t_data *data)
@@ -36,6 +36,9 @@ int		launcher(t_data *data)
 	if (ret != 0)
 		return (ret);
 	ret = load_textures(data);
+	if (ret != 0)
+		return (ret);
+	ret = init_img(data);
 	if (ret != 0)
 		return (ret);
 	draw_all(data);

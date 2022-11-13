@@ -266,6 +266,9 @@ int		check_up(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_down(t_data *data, t_ray_calcul *ray, float Tan);
 int 	check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
 
+/* init_img.c */
+int 	init_img(t_data *data);
+
 /* init_map.c */
 void	init_vars(t_data *data);
 void	check_extension(t_data *data, char *file);
