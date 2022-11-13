@@ -19,7 +19,6 @@
 #define SQUARE_SIZE		64
 #define	PLAYER_SIZE		8
 #define FIELD_OF_VIEW 	60
-#define	NB_RAYS			1500
 
 // North south east west
 #define NORTH			1

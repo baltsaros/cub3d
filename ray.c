@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/10 11:13:16 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/13 14:43:23 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	raycast(t_data *data, t_ray_calcul ray)
     posH = 0;
     posV = 0;
     pos = 0;
-    while (ray.r < NB_RAYS)
+    while (ray.r < WIDTH)
     {
         Tan = tan(degToRad(ray.ra));
         posV = check_vertical_wall(data, &ray, Tan);
@@ -55,7 +55,7 @@ void	raycast(t_data *data, t_ray_calcul ray)
         pos = adapt_distance(&ray, posH, posV);
         fisheye_fix(data, &ray);
         init_calculate_wall(data, &ray, pos);
-        ray.ra = FixAng(ray.ra - ((float)FIELD_OF_VIEW / (float)NB_RAYS));
+        ray.ra = FixAng(ray.ra - ((float)FIELD_OF_VIEW / (float)WIDTH));
         ray.r++;
     }
 }
