@@ -47,7 +47,8 @@ SRCS		=	cub3d.c \
 				calculs_utils.c \
 				draw_utils.c \
 				init_img.c \
-				move.c
+				move.c \
+				collisions.c
 
 HEADER		= cub3d.h
 

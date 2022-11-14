@@ -194,6 +194,10 @@ void	alloc_check_small(void *str, t_data *data);
 float	degToRad(float a);
 float	FixAng(float a);
 
+/* collisions.c */
+void	mono_raycast(t_data *data, t_ray_calcul *ray, float angle);
+int		hitbox_wall(t_data *data, float angle);
+
 /* cub_free.c */
 void	cub_free(char *str[]);
 void	cub_free_params(t_data *data);

@@ -6,23 +6,11 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/14 17:14:49 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 18:00:51 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	is_wall(char **map, int x, int y)
-{
-	int	rx;
-	int	ry;
-
-	ry = y / SQUARE_SIZE;
-	rx = x / SQUARE_SIZE;
-	if (map[ry][rx] && map[ry][rx] != '1')
-		return (1);
-	return (0);
-}
 
 void	leave(t_data *data)
 {
@@ -49,13 +37,25 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 void	move(int keycode, t_data *data)
 {
 	if (keycode == 13)
-		move_up(data);
+	{
+		if (hitbox_wall(data, data->player_s.p_ang))
+			move_up(data);
+	}
 	else if (keycode == 1)
-		move_down(data);
+	{
+		if (hitbox_wall(data, FixAng(data->player_s.p_ang + 180)))
+			move_down(data);
+	}
 	else if (keycode == 0)
-		move_left(data);
+	{
+		if (hitbox_wall(data, FixAng(data->player_s.p_ang - 90)))
+			move_left(data);
+	}
 	else if (keycode == 2)
-		move_right(data);
+	{
+		if (hitbox_wall(data, FixAng(data->player_s.p_ang + 90)))
+			move_right(data);
+	}
 	draw_all(data);
 }
 
