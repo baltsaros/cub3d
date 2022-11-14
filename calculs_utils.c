@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculs_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:30:54 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 18:32:11 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 14:36:33 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ float   degToRad(float a)
 
 float FixAng(float a)
 { 
-    if(a > 180)
+    if(a > 359)
         a -= 360;
-    if(a <= -180)
+    if(a < 0)
         a += 360;
-    return (a);
+    return a;
 }
