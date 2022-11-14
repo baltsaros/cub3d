@@ -299,6 +299,7 @@ void	draw_map(t_data *data, int color, int height, int width);
 int 	init_minimap_values(t_data *data);
 
 /* player.c */
+int 	is_player(char c);
 void	init_player_pos(t_data *data, int height, int width);
 int		init_player_values(t_data *data);
 

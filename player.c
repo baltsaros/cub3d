@@ -6,11 +6,18 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/14 13:41:29 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 14:16:50 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int is_player(char c)
+{
+    if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+        return (0);
+    return (1);
+}
 
 void    init_player_pos(t_data *data, int height, int width)
 {
@@ -23,7 +30,7 @@ void    init_player_pos(t_data *data, int height, int width)
         j = 0;
         while (j != width)
         {
-            if (data->map.map[i][j] == 'N')
+            if (!is_player(data->map.map[i][j]))
             {
                 data->player_s.pos_x = (j * SQUARE_SIZE) + (SQUARE_SIZE / 2) - (PLAYER_SIZE / 2);
                 data->player_s.pos_y = (i * SQUARE_SIZE) + (SQUARE_SIZE / 2) - (PLAYER_SIZE / 2);
@@ -38,7 +45,7 @@ int init_player_values(t_data *data)
 {
 	data->player_s.pos_x = 0;
 	data->player_s.pos_y = 0;
-	data->player_s.p_ang = 90;
+	data->player_s.p_ang = data->map.angle;
 	data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 	data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
     init_player_pos(data, data->map.height, data->map.width);
