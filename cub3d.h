@@ -300,11 +300,9 @@ int 	load_textures(t_data *data);
 void	draw_square_coord(t_data *data, int color, int x, int y);
 void	draw_empty_square_coord(t_data *data, int color, int x, int y);
 void	draw_map(t_data *data, int color, int height, int width);
-void	init_minimap(t_data *data, t_minimap minimap);
 int 	init_minimap_values(t_data *data);
 
 /* player.c */
-void	init_player(t_data *data);
 void	init_player_pos(t_data *data, int height, int width);
 int		init_player_values(t_data *data);
 

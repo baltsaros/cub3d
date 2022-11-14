@@ -6,19 +6,11 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/14 13:36:23 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 13:41:29 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void    init_player(t_data *data)
-{
-    data->player.basic_color = 0x000000;
-    draw_square(data->player, data->player.basic_color, PLAYER_SIZE / 2, PLAYER_SIZE / 2);
-    data->player_s.pos_win_x = data->minimap_s.position.x + (data->player_s.pos_x / 2);
-	data->player_s.pos_win_y = data->minimap_s.position.y + (data->player_s.pos_y / 2);
-}
 
 void    init_player_pos(t_data *data, int height, int width)
 {
@@ -51,5 +43,7 @@ int init_player_values(t_data *data)
 	data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
     init_player_pos(data, data->map.height, data->map.width);
     data->player_s.speed = 10;
+    data->player_s.pos_win_x = data->minimap_s.position.x + (data->player_s.pos_x / 2);
+	data->player_s.pos_win_y = data->minimap_s.position.y + (data->player_s.pos_y / 2);
     return (0);
 }

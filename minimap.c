@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/14 13:35:57 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 13:42:15 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,6 @@ void	draw_map(t_data *data, int color, int height, int width)
         }
         i++;
     }
-}
-
-void	init_minimap(t_data *data, t_minimap minimap)
-{
-    data->minimap.basic_color = 0x88000000;
-    ft_memset(data->minimap.addr, create_trgb(255, 255, 255, 255), minimap.height * minimap.width * sizeof(int));
-    draw_map(data, data->minimap.basic_color, data->map.height, data->map.width);
 }
 
 int init_minimap_values(t_data *data)
