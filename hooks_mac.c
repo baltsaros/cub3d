@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/14 13:34:56 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 13:52:20 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	move(int keycode, t_data *data)
 {
 	if (keycode == 13)
 	{
-		data->player_s.pos_win_y += 5 * data->player_s.delta_y;
-		data->player_s.pos_win_x += 5 * data->player_s.delta_x;
-		data->player_s.pos_y += 5 * data->player_s.delta_y;
-		data->player_s.pos_x += 5 * data->player_s.delta_x;
+		data->player_s.pos_win_y += data->player_s.speed * data->player_s.delta_y / 2;
+		data->player_s.pos_win_x += data->player_s.speed * data->player_s.delta_x / 2;
+		data->player_s.pos_y += data->player_s.speed * data->player_s.delta_y;
+		data->player_s.pos_x += data->player_s.speed * data->player_s.delta_x;
 		// if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
 		// {
 		// 	data->player_s.pos_win_y -= 5 * data->player_s.delta_y;
@@ -78,10 +78,10 @@ void	move(int keycode, t_data *data)
 	}
 	else if (keycode == 1)
 	{
-		data->player_s.pos_win_y -= 5 * data->player_s.delta_y;
-		data->player_s.pos_win_x -= 5 * data->player_s.delta_x;
-		data->player_s.pos_y -= 5 * data->player_s.delta_y;
-		data->player_s.pos_x -= 5 * data->player_s.delta_x;
+		data->player_s.pos_win_y -= data->player_s.speed * data->player_s.delta_y / 2;
+		data->player_s.pos_win_x -= data->player_s.speed * data->player_s.delta_x / 2;
+		data->player_s.pos_y -= data->player_s.speed * data->player_s.delta_y;
+		data->player_s.pos_x -= data->player_s.speed * data->player_s.delta_x;
 		// if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
 		// {
 		// 	data->player_s.pos_win_y += 5 * data->player_s.delta_y;
@@ -92,10 +92,10 @@ void	move(int keycode, t_data *data)
 	}
 	else if (keycode == 0)
 	{
-		data->player_s.pos_win_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
-		data->player_s.pos_win_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		data->player_s.pos_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
-		data->player_s.pos_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_win_y += data->player_s.speed * sin(data->player_s.p_ang - ((90 * PI) / 180)) / 2;
+		data->player_s.pos_win_x += data->player_s.speed * cos(data->player_s.p_ang - ((90 * PI) / 180)) / 2;
+		data->player_s.pos_y += data->player_s.speed * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_x += data->player_s.speed * cos(data->player_s.p_ang - ((90 * PI) / 180));
 		// if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
 		// {
 		// 	data->player_s.pos_win_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
@@ -106,10 +106,10 @@ void	move(int keycode, t_data *data)
 	}
 	else if (keycode == 2)
 	{
-		data->player_s.pos_win_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
-		data->player_s.pos_win_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		data->player_s.pos_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
-		data->player_s.pos_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_win_y -= data->player_s.speed * sin(data->player_s.p_ang - ((90 * PI) / 180)) / 2;
+		data->player_s.pos_win_x -= data->player_s.speed * cos(data->player_s.p_ang - ((90 * PI) / 180)) / 2;
+		data->player_s.pos_y -= data->player_s.speed * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		data->player_s.pos_x -= data->player_s.speed * cos(data->player_s.p_ang - ((90 * PI) / 180));
 		// if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
 		// {
 		// 	data->player_s.pos_win_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
@@ -118,24 +118,26 @@ void	move(int keycode, t_data *data)
 		// 	data->player_s.pos_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
 		// }
 	}
+	draw_all(data);
 }
 
 void	rotate_fov(int keycode, t_data *data)
 {
 	if (keycode == 123)
 	{
-		data->player_s.p_ang += 5;
+		data->player_s.p_ang += data->player_s.speed;
 		data->player_s.p_ang = FixAng(data->player_s.p_ang);
 		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
 	}
 	else if (keycode == 124)
 	{
-		data->player_s.p_ang -= 5;
+		data->player_s.p_ang -= data->player_s.speed;
 		data->player_s.p_ang = FixAng(data->player_s.p_ang);
 		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
 	}
+	draw_all(data);
 }
 
 int	key_hook_manager(int keycode, t_data *data)
