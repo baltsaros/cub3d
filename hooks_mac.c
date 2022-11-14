@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/14 14:03:03 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 17:14:49 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,33 +49,13 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 void	move(int keycode, t_data *data)
 {
 	if (keycode == 13)
-	{
-		data->player_s.pos_win_y += data->player_s.speed * data->player_s.delta_y / 2;
-		data->player_s.pos_win_x += data->player_s.speed * data->player_s.delta_x / 2;
-		data->player_s.pos_y += data->player_s.speed * data->player_s.delta_y;
-		data->player_s.pos_x += data->player_s.speed * data->player_s.delta_x;
-	}
+		move_up(data);
 	else if (keycode == 1)
-	{
-		data->player_s.pos_win_y -= data->player_s.speed * data->player_s.delta_y / 2;
-		data->player_s.pos_win_x -= data->player_s.speed * data->player_s.delta_x / 2;
-		data->player_s.pos_y -= data->player_s.speed * data->player_s.delta_y;
-		data->player_s.pos_x -= data->player_s.speed * data->player_s.delta_x;
-	}
+		move_down(data);
 	else if (keycode == 0)
-	{
-		data->player_s.pos_win_y += data->player_s.speed * sin(data->player_s.p_ang - ((90 * PI) / 180)) / 2;
-		data->player_s.pos_win_x += data->player_s.speed * cos(data->player_s.p_ang - ((90 * PI) / 180)) / 2;
-		data->player_s.pos_y += data->player_s.speed * sin(data->player_s.p_ang - ((90 * PI) / 180));
-		data->player_s.pos_x += data->player_s.speed * cos(data->player_s.p_ang - ((90 * PI) / 180));
-	}
+		move_left(data);
 	else if (keycode == 2)
-	{
-		data->player_s.pos_win_y -= data->player_s.speed * sin(data->player_s.p_ang - ((90 * PI) / 180)) / 2;
-		data->player_s.pos_win_x -= data->player_s.speed * cos(data->player_s.p_ang - ((90 * PI) / 180)) / 2;
-		data->player_s.pos_y -= data->player_s.speed * sin(data->player_s.p_ang - ((90 * PI) / 180));
-		data->player_s.pos_x -= data->player_s.speed * cos(data->player_s.p_ang - ((90 * PI) / 180));
-	}
+		move_right(data);
 	draw_all(data);
 }
 

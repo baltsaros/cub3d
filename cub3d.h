@@ -298,6 +298,12 @@ void	draw_empty_square_coord(t_data *data, int color, int x, int y);
 void	draw_map(t_data *data, int color, int height, int width);
 int 	init_minimap_values(t_data *data);
 
+/* move.c */
+void    move_up(t_data *data);
+void    move_down(t_data *data);
+void    move_right(t_data *data);
+void    move_left(t_data *data);
+
 /* player.c */
 int 	is_player(char c);
 void	init_player_pos(t_data *data, int height, int width);
