@@ -241,8 +241,6 @@ void	check_mlx(void *mlx, t_data *data);
 void	check_win(t_data *data);
 
 /* hooks.c */
-int		render(t_data *data);
-int		infinite_hook(int keycode, t_data *data);
 void	leave(t_data *data);
 int		mouse_hook(int keycode, int x, int y, t_data *data);
 void	move(int keycode, t_data *data);
@@ -267,6 +265,8 @@ int 	check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
 
 /* init_img.c */
 int 	init_img(t_data *data);
+int 	is_xpm(char *str);
+int 	load_textures(t_data *data);
 
 /* init_map.c */
 void	init_vars(t_data *data);
@@ -291,10 +291,6 @@ void	check_player(char **map, t_data *data);
 /* init_map_utils_3.c */
 void	check_direction(t_data *data);
 void	squarification(t_data *data, char **map);
-
-/* load_textures.c */
-int 	is_xpm(char *str);
-int 	load_textures(t_data *data);
 
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
