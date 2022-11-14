@@ -11,7 +11,7 @@
 // # include "mlx_linux/mlx.h"
 # include "libft/libft.h"
 
-//	default window size
+/* default window size */
 #define WIDTH 			1500
 #define HEIGHT 			1000
 
@@ -33,9 +33,6 @@
 # define BLACK 0x000000
 # define GRAY 0x808080
 # define TEST 0x90B3B0
-
-# define PI 3.1415926535
-# define RAD 0.0174533
 
 //	struct to store mlx data for map
 typedef struct s_img
