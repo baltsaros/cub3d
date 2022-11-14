@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/13 19:13:48 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 13:36:23 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void    init_player(t_data *data)
     draw_square(data->player, data->player.basic_color, PLAYER_SIZE / 2, PLAYER_SIZE / 2);
     data->player_s.pos_win_x = data->minimap_s.position.x + (data->player_s.pos_x / 2);
 	data->player_s.pos_win_y = data->minimap_s.position.y + (data->player_s.pos_y / 2);
-    mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
 }
 
 void    init_player_pos(t_data *data, int height, int width)

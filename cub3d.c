@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/13 19:20:20 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 13:35:18 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int		launcher(t_data *data)
 	ret = init_img(data);
 	if (ret != 0)
 		return (ret);
-	// draw_all(data);
+	draw_all(data);
 	hook_manager(data);
-	mlx_loop_hook(data->mlx, draw_all, &data);
+	// mlx_loop_hook(data->mlx, draw_all, &data);
 	mlx_loop(data->mlx);
 	return (ret);
 }

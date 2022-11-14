@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/13 17:36:56 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 13:34:56 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	infinite_hook(int keycode, t_data *data)
 
 void	leave(t_data *data)
 {
-	mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
+	// mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
 	mlx_destroy_window(data->mlx, data->win);
 	data->win = NULL;
 	// cub_free_all(data);
@@ -68,13 +68,13 @@ void	move(int keycode, t_data *data)
 		data->player_s.pos_win_x += 5 * data->player_s.delta_x;
 		data->player_s.pos_y += 5 * data->player_s.delta_y;
 		data->player_s.pos_x += 5 * data->player_s.delta_x;
-		if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
-		{
-			data->player_s.pos_win_y -= 5 * data->player_s.delta_y;
-			data->player_s.pos_win_x -= 5 * data->player_s.delta_x;
-			data->player_s.pos_y -= 5 * data->player_s.delta_y;
-			data->player_s.pos_x -= 5 * data->player_s.delta_x;
-		}
+		// if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
+		// {
+		// 	data->player_s.pos_win_y -= 5 * data->player_s.delta_y;
+		// 	data->player_s.pos_win_x -= 5 * data->player_s.delta_x;
+		// 	data->player_s.pos_y -= 5 * data->player_s.delta_y;
+		// 	data->player_s.pos_x -= 5 * data->player_s.delta_x;
+		// }
 	}
 	else if (keycode == 1)
 	{
@@ -82,13 +82,13 @@ void	move(int keycode, t_data *data)
 		data->player_s.pos_win_x -= 5 * data->player_s.delta_x;
 		data->player_s.pos_y -= 5 * data->player_s.delta_y;
 		data->player_s.pos_x -= 5 * data->player_s.delta_x;
-		if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
-		{
-			data->player_s.pos_win_y += 5 * data->player_s.delta_y;
-			data->player_s.pos_win_x += 5 * data->player_s.delta_x;
-			data->player_s.pos_y += 5 * data->player_s.delta_y;
-			data->player_s.pos_x += 5 * data->player_s.delta_x;
-		}
+		// if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
+		// {
+		// 	data->player_s.pos_win_y += 5 * data->player_s.delta_y;
+		// 	data->player_s.pos_win_x += 5 * data->player_s.delta_x;
+		// 	data->player_s.pos_y += 5 * data->player_s.delta_y;
+		// 	data->player_s.pos_x += 5 * data->player_s.delta_x;
+		// }
 	}
 	else if (keycode == 0)
 	{
@@ -96,13 +96,13 @@ void	move(int keycode, t_data *data)
 		data->player_s.pos_win_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
 		data->player_s.pos_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
 		data->player_s.pos_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
-		{
-			data->player_s.pos_win_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
-			data->player_s.pos_win_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-			data->player_s.pos_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
-			data->player_s.pos_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		}
+		// if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
+		// {
+		// 	data->player_s.pos_win_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		// 	data->player_s.pos_win_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		// 	data->player_s.pos_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		// 	data->player_s.pos_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		// }
 	}
 	else if (keycode == 2)
 	{
@@ -110,13 +110,13 @@ void	move(int keycode, t_data *data)
 		data->player_s.pos_win_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
 		data->player_s.pos_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
 		data->player_s.pos_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
-		{
-			data->player_s.pos_win_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
-			data->player_s.pos_win_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-			data->player_s.pos_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
-			data->player_s.pos_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		}
+		// if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
+		// {
+		// 	data->player_s.pos_win_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		// 	data->player_s.pos_win_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		// 	data->player_s.pos_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
+		// 	data->player_s.pos_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
+		// }
 	}
 }
 

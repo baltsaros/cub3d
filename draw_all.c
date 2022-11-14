@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/13 19:30:43 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 13:36:30 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ int draw_all(t_data *data)
 	int		ret;
 
 	ret = 0;
-	// init_background(data);
+	init_background(data);
 	ft_memset(data->walls.addr, create_trgb(255, 255, 255, 255), HEIGHT * WIDTH * sizeof(int));
     raycast(data, data->ray_calcul);
-	// init_minimap(data, data->minimap_s);
-	// init_player(data);
-	// mlx_put_image_to_window(data->mlx, data->win, data->background.img_ptr, 0, 0);
+	init_minimap(data, data->minimap_s);
+	init_player(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->background.img_ptr, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
+	mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
 	return (ret);
 }
