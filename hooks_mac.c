@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/14 13:52:20 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 14:03:03 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,6 @@ int	is_wall(char **map, int x, int y)
 	rx = x / SQUARE_SIZE;
 	if (map[ry][rx] && map[ry][rx] != '1')
 		return (1);
-	return (0);
-}
-
-int		render(t_data *data)
-{
-	(void)data;
-	return (0);
-}
-
-int	infinite_hook(int keycode, t_data *data)
-{
-	(void)keycode;
-	(void)data;
-	// Temporary solution
 	return (0);
 }
 
@@ -68,13 +54,6 @@ void	move(int keycode, t_data *data)
 		data->player_s.pos_win_x += data->player_s.speed * data->player_s.delta_x / 2;
 		data->player_s.pos_y += data->player_s.speed * data->player_s.delta_y;
 		data->player_s.pos_x += data->player_s.speed * data->player_s.delta_x;
-		// if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
-		// {
-		// 	data->player_s.pos_win_y -= 5 * data->player_s.delta_y;
-		// 	data->player_s.pos_win_x -= 5 * data->player_s.delta_x;
-		// 	data->player_s.pos_y -= 5 * data->player_s.delta_y;
-		// 	data->player_s.pos_x -= 5 * data->player_s.delta_x;
-		// }
 	}
 	else if (keycode == 1)
 	{
@@ -82,13 +61,6 @@ void	move(int keycode, t_data *data)
 		data->player_s.pos_win_x -= data->player_s.speed * data->player_s.delta_x / 2;
 		data->player_s.pos_y -= data->player_s.speed * data->player_s.delta_y;
 		data->player_s.pos_x -= data->player_s.speed * data->player_s.delta_x;
-		// if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
-		// {
-		// 	data->player_s.pos_win_y += 5 * data->player_s.delta_y;
-		// 	data->player_s.pos_win_x += 5 * data->player_s.delta_x;
-		// 	data->player_s.pos_y += 5 * data->player_s.delta_y;
-		// 	data->player_s.pos_x += 5 * data->player_s.delta_x;
-		// }
 	}
 	else if (keycode == 0)
 	{
@@ -96,13 +68,6 @@ void	move(int keycode, t_data *data)
 		data->player_s.pos_win_x += data->player_s.speed * cos(data->player_s.p_ang - ((90 * PI) / 180)) / 2;
 		data->player_s.pos_y += data->player_s.speed * sin(data->player_s.p_ang - ((90 * PI) / 180));
 		data->player_s.pos_x += data->player_s.speed * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		// if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
-		// {
-		// 	data->player_s.pos_win_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
-		// 	data->player_s.pos_win_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		// 	data->player_s.pos_y -= 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
-		// 	data->player_s.pos_x -= 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		// }
 	}
 	else if (keycode == 2)
 	{
@@ -110,13 +75,6 @@ void	move(int keycode, t_data *data)
 		data->player_s.pos_win_x -= data->player_s.speed * cos(data->player_s.p_ang - ((90 * PI) / 180)) / 2;
 		data->player_s.pos_y -= data->player_s.speed * sin(data->player_s.p_ang - ((90 * PI) / 180));
 		data->player_s.pos_x -= data->player_s.speed * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		// if (!is_wall(data->map.map, data->player_s.pos_win_x, data->player_s.pos_win_y))
-		// {
-		// 	data->player_s.pos_win_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
-		// 	data->player_s.pos_win_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		// 	data->player_s.pos_y += 5 * sin(data->player_s.p_ang - ((90 * PI) / 180));
-		// 	data->player_s.pos_x += 5 * cos(data->player_s.p_ang - ((90 * PI) / 180));
-		// }
 	}
 	draw_all(data);
 }
