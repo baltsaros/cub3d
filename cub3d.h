@@ -28,6 +28,8 @@
 #define	ERROR_POS		100
 
 /* Hooks values */
+# define ESCAPE			53
+
 # define W_KEY			13
 # define A_KEY			0
 # define S_KEY			1

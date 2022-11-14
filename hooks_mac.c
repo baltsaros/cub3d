@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/14 18:21:16 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 18:22:16 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	rotate_fov(int keycode, t_data *data)
 
 int	key_hook_manager(int keycode, t_data *data)
 {
-	if (keycode == 53)
+	if (keycode == ESCAPE)
 		leave(data);
 	else if (keycode == W_KEY || keycode == S_KEY 
 		|| keycode == D_KEY || keycode == A_KEY)
