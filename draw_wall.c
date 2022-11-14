@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/13 19:30:50 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 18:44:03 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void    draw_vertical_line(t_data *data, t_wall_drawing *wall, t_ray_calcul *ray
     {
         wall->ty_step = (float)data->ea_text.height / (float)wall->wallHeight;
         wall->tx = (int)(ray->ry) % data->ea_text.width;
-        draw_a_wall(data, wall, data->ea_text, 1);
+        draw_a_wall(data, wall, data->ea_text, 0.5);
     }
     else if (pos == WEST)
     {
         wall->ty_step = (float)data->we_text.height / (float)wall->wallHeight;
         wall->tx = (int)(ray->ry) % data->we_text.width;
-        draw_a_wall(data, wall, data->we_text, 1);
+        draw_a_wall(data, wall, data->we_text, 0.5);
     }
 }
 

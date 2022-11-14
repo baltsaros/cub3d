@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/14 14:16:50 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 18:42:13 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int init_player_values(t_data *data)
 	data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 	data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
     init_player_pos(data, data->map.height, data->map.width);
-    data->player_s.speed = 10;
+    data->player_s.speed = 15;
     data->player_s.pos_win_x = data->minimap_s.position.x + (data->player_s.pos_x / 2);
 	data->player_s.pos_win_y = data->minimap_s.position.y + (data->player_s.pos_y / 2);
     return (0);

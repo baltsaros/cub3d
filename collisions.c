@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:48:39 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/14 18:00:09 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 18:40:55 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	hitbox_wall(t_data *data, float angle)
     t_ray_calcul mono;
 
     mono_raycast(data, &mono, angle);
-    if (mono.disH < 10)
+    if (mono.disH <= data->player_s.speed)
         return (0);
     return (1);
 }
