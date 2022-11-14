@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/14 18:00:51 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/14 18:21:16 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,22 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 
 void	move(int keycode, t_data *data)
 {
-	if (keycode == 13)
+	if (keycode == W_KEY)
 	{
 		if (hitbox_wall(data, data->player_s.p_ang))
 			move_up(data);
 	}
-	else if (keycode == 1)
+	else if (keycode == S_KEY)
 	{
 		if (hitbox_wall(data, FixAng(data->player_s.p_ang + 180)))
 			move_down(data);
 	}
-	else if (keycode == 0)
+	else if (keycode == A_KEY)
 	{
 		if (hitbox_wall(data, FixAng(data->player_s.p_ang - 90)))
 			move_left(data);
 	}
-	else if (keycode == 2)
+	else if (keycode == D_KEY)
 	{
 		if (hitbox_wall(data, FixAng(data->player_s.p_ang + 90)))
 			move_right(data);
@@ -61,14 +61,14 @@ void	move(int keycode, t_data *data)
 
 void	rotate_fov(int keycode, t_data *data)
 {
-	if (keycode == 123)
+	if (keycode == RIGHT)
 	{
 		data->player_s.p_ang += data->player_s.speed;
 		data->player_s.p_ang = FixAng(data->player_s.p_ang);
 		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
 	}
-	else if (keycode == 124)
+	else if (keycode == LEFT)
 	{
 		data->player_s.p_ang -= data->player_s.speed;
 		data->player_s.p_ang = FixAng(data->player_s.p_ang);
@@ -82,9 +82,10 @@ int	key_hook_manager(int keycode, t_data *data)
 {
 	if (keycode == 53)
 		leave(data);
-	else if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
+	else if (keycode == W_KEY || keycode == S_KEY 
+		|| keycode == D_KEY || keycode == A_KEY)
 		move(keycode, data);
-	else if (keycode == 123 || keycode == 124)
+	else if (keycode == LEFT || keycode == RIGHT)
 		rotate_fov(keycode, data);
 	else
 		printf("Key %d was pressed!\n", keycode);

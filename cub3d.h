@@ -27,6 +27,15 @@
 #define	WEST			4
 #define	ERROR_POS		100
 
+/* Hooks values */
+# define W_KEY			13
+# define A_KEY			0
+# define S_KEY			1
+# define D_KEY			2
+
+# define LEFT			124	
+# define RIGHT			123
+
 # define RED 0xFF0000
 # define GREEN 0xFF00
 # define WHITE 0xFFFFFF
