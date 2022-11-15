@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/14 13:42:51 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/15 12:52:06 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ void	init_background(t_data *data)
 
 int draw_all(t_data *data)
 {
-	int		ret;
+	int	ret;
 
 	ret = 0;
 	init_background(data);
 	ft_memset(data->walls.addr, create_trgb(255, 255, 255, 255), HEIGHT * WIDTH * sizeof(int));
-    raycast(data, data->ray_calcul);
+	raycast(data, data->ray_calcul);
 	ft_memset(data->minimap.addr, create_trgb(255, 255, 255, 255), data->minimap_s.height * data->minimap_s.width * sizeof(int));
-    draw_map(data, data->minimap.basic_color, data->map.height, data->map.width);
+	draw_map(data, data->minimap.basic_color, data->map.height, data->map.width);
 	draw_square(data->player, data->player.basic_color, PLAYER_SIZE / 2, PLAYER_SIZE / 2);
 	mlx_put_image_to_window(data->mlx, data->win, data->background.img_ptr, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
