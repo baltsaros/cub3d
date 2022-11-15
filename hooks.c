@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/15 16:10:04 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/15 16:37:47 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	key_press(int keycode, t_data *data)
 	if (keycode == D_KEY)
 		data->keyboard.d = 1;
 	if (keycode == ESCAPE)
-		data->keyboard.esc = 1;
+		leave(data);
 	if (keycode == RIGHT)
 		data->keyboard.right = 1;
 	if (keycode == LEFT)
@@ -41,8 +41,6 @@ int	key_release(int keycode, t_data *data)
 		data->keyboard.s = 0;
 	if (keycode == D_KEY)
 		data->keyboard.d = 0;
-	if (keycode == ESCAPE)
-		data->keyboard.esc = 0;
 	if (keycode == RIGHT)
 		data->keyboard.right = 0;
 	if (keycode == LEFT)
@@ -79,8 +77,6 @@ void	rotate_fov(int keycode, t_data *data)
 
 int	key_hook_manager(t_data *data)
 {
-	if (data->keyboard.esc)
-		leave(data);
 	if (data->keyboard.w || data->keyboard.a
 			|| data->keyboard.s || data->keyboard.d)
 		move(data);
