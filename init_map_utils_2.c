@@ -23,7 +23,18 @@ void	check_chars(char **raw, t_data *data)
 	}
 }
 
-// check that all rows are closed
+void	check_gap(char **map, size_t i, size_t j, t_data *data)
+{
+	if (j > 0 && map[j - 1][i] && map[j - 1][i] == '0')
+		error_exit(data, "Unclosed map: gap", 1);
+	if (map[j + 1] && map[j + 1][i] && map[j + 1][i] == '0')
+		error_exit(data, "Unclosed map: gap", 1);
+	if (i > 0 && map[j][i - 1] && map[j][i - 1] == '0')
+		error_exit(data, "Unclosed map: gap", 1);
+	if (map[j][i + 1] && map[j][i + 1] == '0')
+		error_exit(data, "Unclosed map: gap", 1);
+}
+
 void	check_rows(char **map, t_data *data)
 {
 	size_t	j;
@@ -45,6 +56,8 @@ void	check_rows(char **map, t_data *data)
 				closed = 1;
 			else if (map[j][i] == '0')
 				closed = 0;
+			else if (map[j][i] == ' ')
+				check_gap(map, i, j, data);
 			i++;
 		}
 		if (!closed)
