@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/15 16:37:47 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/15 17:37:16 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	key_press(int keycode, t_data *data)
 {
-	if (keycode == W_KEY)
+	if (keycode == W)
 		data->keyboard.w = 1;
-	if (keycode == A_KEY)
+	if (keycode == A)
 		data->keyboard.a = 1;
-	if (keycode == S_KEY)
+	if (keycode == S)
 		data->keyboard.s = 1;
-	if (keycode == D_KEY)
+	if (keycode == D)
 		data->keyboard.d = 1;
-	if (keycode == ESCAPE)
+	if (keycode == ESC)
 		leave(data);
 	if (keycode == RIGHT)
 		data->keyboard.right = 1;
@@ -33,13 +33,13 @@ int	key_press(int keycode, t_data *data)
 
 int	key_release(int keycode, t_data *data)
 {
-	if (keycode == W_KEY)
+	if (keycode == W)
 		data->keyboard.w = 0;
-	if (keycode == A_KEY)
+	if (keycode == A)
 		data->keyboard.a = 0;
-	if (keycode == S_KEY)
+	if (keycode == S)
 		data->keyboard.s = 0;
-	if (keycode == D_KEY)
+	if (keycode == D)
 		data->keyboard.d = 0;
 	if (keycode == RIGHT)
 		data->keyboard.right = 0;

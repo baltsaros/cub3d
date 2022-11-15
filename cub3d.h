@@ -33,22 +33,36 @@
 # define KEYPRESSMASK	1L
 # define KEYRELEASEMASK	2L
 
-# define ESCAPE			53
-
-# define W_KEY			13
-# define A_KEY			0
-# define S_KEY			1
-# define D_KEY			2
-
-# define LEFT			124	
-# define RIGHT			123
-
 # define RED 0xFF0000
 # define GREEN 0xFF00
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 # define GRAY 0x808080
 # define TEST 0x90B3B0
+
+# ifdef __linux__
+enum	s_keys
+{
+	LEFT	= 65361,
+	RIGHT	= 65363,
+	W		= 119,
+	A		= 97,
+	S		= 115,
+	D		= 100,
+	ESC		= 65307
+};
+# else
+enum	s_keys
+{
+	LEFT	= 123,
+	RIGHT	= 124,
+	W		= 13,
+	A		= 0,
+	S		= 1,
+	D		= 2,
+	ESC		= 53
+};
+# endif
 
 //	struct to store mlx data for map
 typedef struct s_img
@@ -284,12 +298,12 @@ float	disH_calcul(t_data *data, float ra, float ry, float rx);
 void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof);
 int		check_up(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_down(t_data *data, t_ray_calcul *ray, float Tan);
-int 	check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
+int		check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
 
 /* init_img.c */
-int 	init_img(t_data *data);
-int 	is_xpm(char *str);
-int 	load_textures(t_data *data);
+int		init_img(t_data *data);
+int		is_xpm(char *str);
+int		load_textures(t_data *data);
 
 /* init_map.c */
 void	init_vars(t_data *data);
@@ -300,26 +314,25 @@ int		init_map(t_data *data, char *file);
 
 /* init_map_utils_1.c */
 char	*find_param(char **raw, char *param, t_data *data);
-size_t	find_mapsize(char **raw, int j);
+void	find_mapsize(char **raw, int j, t_data *data);
 void	copy_map(char **raw, t_data *data);
 void	check_map(t_map *map, t_data *data);
 
 /* init_map_utils_2.c */
 void	check_chars(char **raw, t_data *data);
 void	check_rows(char **map, t_data *data);
-size_t	check_length(char **map, size_t i, t_data *data);
 void	check_columns(char **map, t_data *data);
 void	check_player(char **map, t_data *data);
 
 /* init_map_utils_3.c */
 void	check_direction(t_data *data);
-void	squarification(t_data *data, char **map);
+void	print_map(t_data *data, char **map);
 
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
 void	draw_empty_square_coord(t_data *data, int color, int x, int y);
 void	draw_map(t_data *data, int color, int height, int width);
-int 	init_minimap_values(t_data *data);
+int		init_minimap_values(t_data *data);
 
 /* move_utils.c */
 void    collisions_calculs(t_data *data, t_ray_calcul *collisions);
@@ -332,7 +345,7 @@ void    move_left(t_data *data, t_ray_calcul *collisions);
 void    move(t_data *data);
 
 /* player.c */
-int 	is_player(char c);
+int		is_player(char c);
 void	init_player_pos(t_data *data, int height, int width);
 int		init_player_values(t_data *data);
 

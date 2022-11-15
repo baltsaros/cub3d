@@ -23,7 +23,18 @@ void	check_chars(char **raw, t_data *data)
 	}
 }
 
-// check that all rows are closed
+void	check_gap(char **map, size_t i, size_t j, t_data *data)
+{
+	if (j > 0 && map[j - 1][i] && check_charset(map[j - 1][i], "0NEWS"))
+		error_exit(data, "Unclosed map: gap", 1);
+	if (map[j + 1] && map[j + 1][i] && check_charset(map[j + 1][i], "0NEWS"))
+		error_exit(data, "Unclosed map: gap", 1);
+	if (i > 0 && map[j][i - 1] && check_charset(map[j][i - 1], "0NEWS"))
+		error_exit(data, "Unclosed map: gap", 1);
+	if (map[j][i + 1] && check_charset(map[j][i + 1], "0NEWS"))
+		error_exit(data, "Unclosed map: gap", 1);
+}
+
 void	check_rows(char **map, t_data *data)
 {
 	size_t	j;
@@ -45,33 +56,14 @@ void	check_rows(char **map, t_data *data)
 				closed = 1;
 			else if (map[j][i] == '0')
 				closed = 0;
+			else if (map[j][i] == ' ')
+				check_gap(map, i, j, data);
 			i++;
 		}
 		if (!closed)
 			error_exit(data, "Unclosed map: rows", 1);
 		++j;
 	}
-	data->map.height = j;
-}
-
-// check whether a line was fully checked; if so, go to another one
-size_t	check_length(char **map, size_t i, t_data *data)
-{
-	size_t	j;
-	size_t	len;
-
-	j = data->j;
-	while (map[j])
-	{
-		len = ft_strlen(map[j]);
-		if (i < len)
-			break ;
-		++j;
-	}
-	data->j = j;
-	if (len > data->map.width)
-		data->map.width = len;
-	return (j);
 }
 
 // check that all columns are closed
@@ -81,14 +73,12 @@ void	check_columns(char **map, t_data *data)
 	size_t	i;
 	int		closed;
 
-	j = 0;
-	data->j = 0;
 	closed = 1;
+	j = 0;
 	i = 0;
-	data->map.width = 0;
-	while (map[j])
+	while (map[j][i])
 	{
-		while (map[j][i] && map[j][i] == ' ')
+		while (map[j][i] && check_charset(map[j][i], " \f\n\r\t\v"))
 			++j;
 		if (map[j][i] && map[j][i] != '1')
 			error_exit(data, "Unclosed map: columns1", 1);
@@ -103,7 +93,7 @@ void	check_columns(char **map, t_data *data)
 		if (!closed)
 			error_exit(data, "Unclosed map: columns2", 1);
 		++i;
-		j = check_length(map, i, data);
+		j = 0;
 	}
 }
 
