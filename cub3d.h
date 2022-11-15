@@ -271,11 +271,6 @@ void	check_mlx(void *mlx, t_data *data);
 void	check_win(t_data *data);
 
 /* hooks.c */
-void	leave(t_data *data);
-void	rotate_fov(int keycode, t_data *data);
-int		key_hook_manager(t_data *data);
-
-/* hooks_mac.c */
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
 void	leave(t_data *data);

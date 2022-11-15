@@ -15,13 +15,11 @@ CFLAGS		= -Wall -Wextra -Werror -g
 NAME		= cub3d
 LIBFT		= ./libft/libft.a
 MLX			= -Lmlx -lmlx -framework OpenGL -framework AppKit
-HOOKS		= hooks_mac.c
 INCS		= -Ilibft -Imlx
 
 ifeq	($(OS), Linux)
 $(warning $(OS))
 		MLX 	= -Lmlx_linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz
-		HOOKS	= hooks.c
 		INCS	= -Ilibft -Imlx_linux
 endif
 #-lmlx_Linux
@@ -32,7 +30,7 @@ SRCS		=	cub3d.c \
 				cub_free.c \
 				alloc_check.c \
 				error_messages.c \
-				$(HOOKS) \
+				hooks.c \
 				init_map.c \
 				init_map_utils_1.c \
 				init_map_utils_2.c \
