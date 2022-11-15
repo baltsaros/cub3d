@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/15 12:52:06 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/15 13:17:39 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	init_background(t_data *data)
 
 int draw_all(t_data *data)
 {
-	int	ret;
+	// int	ret;
 
-	ret = 0;
+	// ret = 0;
 	init_background(data);
 	ft_memset(data->walls.addr, create_trgb(255, 255, 255, 255), HEIGHT * WIDTH * sizeof(int));
 	raycast(data, data->ray_calcul);
@@ -50,5 +50,5 @@ int draw_all(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
 	mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);
-	return (ret);
+	return (0);
 }

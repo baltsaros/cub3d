@@ -35,13 +35,14 @@
 # define TEST 0x90B3B0
 
 # define PI 3.1415926535
+# define M_PI 3.1415926535
 # define RAD 0.0174533
 
 # ifdef __linux__
 enum	s_keys
 {
-	LEFT	= 65363,
-	RIGHT	= 65361,
+	LEFT	= 65361,
+	RIGHT	= 65363,
 	W		= 119,
 	A		= 97,
 	S		= 115,

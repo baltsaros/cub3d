@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/14 13:49:06 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/15 13:08:37 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		launcher(t_data *data)
 		return (ret);
 	draw_all(data);
 	hook_manager(data);
-	// mlx_loop_hook(data->mlx, draw_all, &data);
+	mlx_loop_hook(data->mlx, draw_all, data);
 	mlx_loop(data->mlx);
 	return (ret);
 }
