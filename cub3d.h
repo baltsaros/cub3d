@@ -308,13 +308,11 @@ void	check_map(t_map *map, t_data *data);
 /* init_map_utils_2.c */
 void	check_chars(char **raw, t_data *data);
 void	check_rows(char **map, t_data *data);
-size_t	check_length(char **map, size_t i, t_data *data);
 void	check_columns(char **map, t_data *data);
 void	check_player(char **map, t_data *data);
 
 /* init_map_utils_3.c */
 void	check_direction(t_data *data);
-void	squarification(t_data *data, char **map);
 void	print_map(t_data *data, char **map);
 
 /* minimap.c */
