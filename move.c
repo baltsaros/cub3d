@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:15:12 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/15 16:56:00 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/15 17:27:27 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,48 @@ void    move_left(t_data *data, t_ray_calcul *collisions)
     data->player_s.pos_y -= data->player_s.speed * data->player_s.delta_x;
 }
 
+void    move_mult_up(t_data *data, t_ray_calcul *collisions)
+{
+    if (data->keyboard.d)
+    {
+
+    }
+    else if (data->keyboard.a)
+    {
+
+    }
+}
+
+void    move_mult_down(t_data *data, t_ray_calcul *collision)
+{
+    if (data->keyboard.d)
+    {
+        
+    }
+    else if (data->keyboard.a)
+    {
+
+    }
+}
+
 void    move(t_data *data)
 {
     t_ray_calcul    collisions;
     
     collisions_calculs(data, &collisions);
-    if (data->keyboard.w)
-        move_up(data, &collisions);
-    if (data->keyboard.a)
-        move_left(data, &collisions);
-    if (data->keyboard.s)
-        move_down(data, &collisions);
-    if (data->keyboard.d)
-        move_right(data, &collisions);
+    if (data->keyboard.w && (data->keyboard.d || data->keyboard.a))
+        move_mult_up(data, &collisions);
+    else if (data->keyboard.s && (data->keyboard.d || data->keyboard.a))
+        move_down_up(data, &collisions);
+    else
+    {
+        if (data->keyboard.w)
+            move_up(data, &collisions);
+        if (data->keyboard.a)
+            move_left(data, &collisions);
+        if (data->keyboard.s)
+            move_down(data, &collisions);
+        if (data->keyboard.d)
+            move_right(data, &collisions);
+    }
 }
