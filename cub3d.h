@@ -301,7 +301,7 @@ int		init_map(t_data *data, char *file);
 
 /* init_map_utils_1.c */
 char	*find_param(char **raw, char *param, t_data *data);
-size_t	find_mapsize(char **raw, int j);
+void	find_mapsize(char **raw, int j, t_data *data);
 void	copy_map(char **raw, t_data *data);
 void	check_map(t_map *map, t_data *data);
 

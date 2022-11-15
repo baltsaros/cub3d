@@ -27,17 +27,22 @@ char	*find_param(char **raw, char *param, t_data *data)
 }
 
 // count lines in the map
-size_t	find_mapsize(char **raw, int j)
+void	find_mapsize(char **raw, int j, t_data *data)
 {
-	size_t	size;
+	size_t	h;
+	size_t	w;
 
-	size = 0;
-	while (raw[j])
+	h = 0;
+	data->map.width = 0;
+	w = 0;
+	while (raw[j + h])
 	{
-		++size;
-		++j;
+		w = ft_strlen(raw[j]);
+		if (w > data->map.width)
+			data->map.width = w;
+		++h;
 	}
-	return (size);
+	data->map.height = h;
 }
 
 // copying map form raw data
@@ -45,7 +50,7 @@ void	copy_map(char **raw, t_data *data)
 {
 	size_t	j;
 	size_t	i;
-	size_t	size;
+	size_t	len;
 
 	data->j++;
 	j = data->j;
@@ -55,12 +60,16 @@ void	copy_map(char **raw, t_data *data)
 		++j;
 	if (!raw[j])
 		error_exit(data, "Invalid map!", 1);
+	find_mapsize(raw, j, data);
 	i = 0;
-	size = find_mapsize(raw, j);
-	data->map.map = cub_malloc(sizeof(char*) * (size + 1), data);
+	data->map.map = cub_malloc(sizeof(char*) * (data->map.height + 1), data);
 	while (raw[j + i])
 	{
-		data->map.map[i] = cub_strdup(raw[j + i], data);
+		data->map.map[i] = ft_calloc(data->map.width + 1, 1);
+		alloc_check_small(data->map.map[i], data);
+		data->map.map[i] = ft_memset(data->map.map[i], ' ', data->map.width);
+		len = ft_strlen(raw[j + i]);
+		data->map.map[i] = ft_memcpy(data->map.map[i], raw[j + i], len);
 		++i;
 	}
 	data->map.map[i] = NULL;
@@ -71,8 +80,6 @@ void	check_map(t_map *map, t_data *data)
 	check_chars(map->map, data);
 	printf("checking rows\n");
 	check_rows(map->map, data);
-	printf("squarification\n");
-	squarification(data, map->map);
 	printf("checking columns\n");
 	check_columns(map->map, data);
 	printf("closed\n");

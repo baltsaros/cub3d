@@ -14,28 +14,10 @@ void	check_direction(t_data *data)
 	// data->player_s.p_ang = ((data->map.angle % 360) * PI) / 180;
 }
 
-void	find_width(t_data *data, char **map)
-{
-	size_t	j;
-	size_t	len;
-
-	j = 0;
-	data->map.width = 0;
-	len = 0;
-	while (map[j])
-	{
-		len = ft_strlen(map[j]);
-		if (len > data->map.width)
-			data->map.width = len;
-		++j;
-	}
-}
-
 void	squarification(t_data *data, char **map)
 {
 	char	**tmp;
 
-	find_width(data, map);
 	// printf("width is %ld\nheight is %ld\n", data->map.width, data->map.height);
 	// if (data->map.width == data->map.height)
 	// 	return ;
