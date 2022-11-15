@@ -28,6 +28,11 @@
 #define	ERROR_POS		100
 
 /* Hooks values */
+# define KEYPRESS		2
+# define KEYRELEASE		3
+# define KEYPRESSMASK	1L
+# define KEYRELEASEMASK	2L
+
 # define ESCAPE			53
 
 # define W_KEY			13
@@ -132,6 +137,7 @@ typedef struct s_player
 	float	delta_x;
 	float	delta_y;
 	int		speed;
+	int		rot_speed;
 }	t_player;
 
 typedef struct s_ray
@@ -147,6 +153,17 @@ typedef struct s_minimap
 }	t_minimap;
 
 //	struct to store map data
+typedef struct s_keyboard
+{
+	int	esc;
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	right;
+	int	left;
+} t_keyboard;
+
 typedef struct s_map
 {
 	char	**raw;
@@ -188,6 +205,7 @@ typedef struct s_data
 	t_text			so_text;
 	t_text			ea_text;
 	t_text			we_text;
+	t_keyboard		keyboard;
 }	t_data;
 
 /*
@@ -254,19 +272,13 @@ void	check_win(t_data *data);
 
 /* hooks.c */
 void	leave(t_data *data);
-int		mouse_hook(int keycode, int x, int y, t_data *data);
-void	move(int keycode, t_data *data);
 void	rotate_fov(int keycode, t_data *data);
-int		key_hook_manager(int keycode, t_data *data);
+int		key_hook_manager(t_data *data);
 
 /* hooks_mac.c */
-int		render(t_data *data);
-int		infinite_hook(int keycode, t_data *data);
 void	leave(t_data *data);
-int		mouse_hook(int keycode, int x, int y, t_data *data);
-void	move(int keycode, t_data *data);
 void	rotate_fov(int keycode, t_data *data);
-int		key_hook_manager(int keycode, t_data *data);
+int		key_hook_manager(t_data *data);
 
 /* horizontal_wall.c */
 float	disH_calcul(t_data *data, float ra, float ry, float rx);

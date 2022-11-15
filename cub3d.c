@@ -6,16 +6,64 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/14 13:49:06 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/15 13:11:54 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	key_press(int keycode, t_data *data)
+{
+	if (keycode == ESCAPE)
+		data->keyboard.esc = 1;
+	else if (keycode == W_KEY)
+		data->keyboard.w = 1;
+	else if (keycode == A_KEY)
+		data->keyboard.a = 1;
+	else if (keycode == S_KEY)
+		data->keyboard.s = 1;
+	else if (keycode == D_KEY)
+		data->keyboard.d = 1;
+	else if (keycode == RIGHT)
+		data->keyboard.right = 1;
+	else if (keycode == LEFT)
+		data->keyboard.left = 1;
+	return (0);
+}
+
+int	key_release(int keycode, t_data *data)
+{
+	if (keycode == ESCAPE)
+		data->keyboard.esc = 0;
+	else if (keycode == W_KEY)
+		data->keyboard.w = 0;
+	else if (keycode == A_KEY)
+		data->keyboard.a = 0;
+	else if (keycode == S_KEY)
+		data->keyboard.s = 0;
+	else if (keycode == D_KEY)
+		data->keyboard.d = 0;
+	else if (keycode == RIGHT)
+		data->keyboard.right = 0;
+	else if (keycode == LEFT)
+		data->keyboard.left = 0;
+	return (0);
+}
+
 void	hook_manager(t_data *data)
 {
-	mlx_hook(data->win, 2, (1L << 0), key_hook_manager, data);
-	mlx_mouse_hook(data->win, mouse_hook, data);
+	data->keyboard.esc = 0;
+	data->keyboard.w = 0;
+	data->keyboard.a = 0;
+	data->keyboard.s = 0;
+	data->keyboard.d = 0;
+	data->keyboard.right = 0;
+	data->keyboard.left = 0;
+	mlx_hook(data->win, KEYPRESS, KEYPRESSMASK, key_press, data);
+	mlx_hook(data->win, KEYRELEASE, KEYRELEASEMASK, key_release, data);
+	mlx_loop_hook(data->mlx, key_hook_manager, data);
+	// mlx_loop_hook(data->mlx, draw_all, &data);
+	// mlx_mouse_hook(data->win, mouse_hook, data);
 	mlx_hook(data->win, 17, 1L << 17, ft_exit, data);
 }
 
@@ -40,9 +88,8 @@ int		launcher(t_data *data)
 	ret = init_img(data);
 	if (ret != 0)
 		return (ret);
-	draw_all(data);
+	// draw_all(data);
 	hook_manager(data);
-	// mlx_loop_hook(data->mlx, draw_all, &data);
 	mlx_loop(data->mlx);
 	return (ret);
 }
