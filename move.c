@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:15:12 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/15 17:27:27 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/15 17:38:13 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void    move_left(t_data *data, t_ray_calcul *collisions)
 
 void    move_mult_up(t_data *data, t_ray_calcul *collisions)
 {
+    (void)collisions;
     if (data->keyboard.d)
     {
 
@@ -86,8 +87,9 @@ void    move_mult_up(t_data *data, t_ray_calcul *collisions)
     }
 }
 
-void    move_mult_down(t_data *data, t_ray_calcul *collision)
+void    move_mult_down(t_data *data, t_ray_calcul *collisions)
 {
+    (void)collisions;
     if (data->keyboard.d)
     {
         
@@ -106,7 +108,7 @@ void    move(t_data *data)
     if (data->keyboard.w && (data->keyboard.d || data->keyboard.a))
         move_mult_up(data, &collisions);
     else if (data->keyboard.s && (data->keyboard.d || data->keyboard.a))
-        move_down_up(data, &collisions);
+        move_mult_down(data, &collisions);
     else
     {
         if (data->keyboard.w)

@@ -54,8 +54,8 @@ enum	s_keys
 # else
 enum	s_keys
 {
-	LEFT	= 123,
-	RIGHT	= 124,
+	LEFT	= 124,
+	RIGHT	= 123,
 	W		= 13,
 	A		= 0,
 	S		= 1,
