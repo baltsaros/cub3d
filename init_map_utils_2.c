@@ -25,13 +25,13 @@ void	check_chars(char **raw, t_data *data)
 
 void	check_gap(char **map, size_t i, size_t j, t_data *data)
 {
-	if (j > 0 && map[j - 1][i] && map[j - 1][i] == '0')
+	if (j > 0 && map[j - 1][i] && check_charset(map[j - 1][i], "0NEWS"))
 		error_exit(data, "Unclosed map: gap", 1);
-	if (map[j + 1] && map[j + 1][i] && map[j + 1][i] == '0')
+	if (map[j + 1] && map[j + 1][i] && check_charset(map[j + 1][i], "0NEWS"))
 		error_exit(data, "Unclosed map: gap", 1);
-	if (i > 0 && map[j][i - 1] && map[j][i - 1] == '0')
+	if (i > 0 && map[j][i - 1] && check_charset(map[j][i - 1], "0NEWS"))
 		error_exit(data, "Unclosed map: gap", 1);
-	if (map[j][i + 1] && map[j][i + 1] == '0')
+	if (map[j][i + 1] && check_charset(map[j][i + 1], "0NEWS"))
 		error_exit(data, "Unclosed map: gap", 1);
 }
 
