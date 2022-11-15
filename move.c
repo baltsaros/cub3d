@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:15:12 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/15 16:05:37 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/15 16:09:02 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ void    move(t_data *data)
     collisions_calculs(data, &collisions);
     if (data->keyboard.w)
         move_up(data, &collisions);
-    else if (data->keyboard.a)
+    if (data->keyboard.a)
         move_left(data, &collisions);
-    else if (data->keyboard.s)
+    if (data->keyboard.s)
         move_down(data, &collisions);
-    else if (data->keyboard.d)
+    if (data->keyboard.d)
         move_right(data, &collisions);
 }
