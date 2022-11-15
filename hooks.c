@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/13 17:48:27 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/15 12:33:40 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,28 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 
 void	move(int keycode, t_data *data)
 {
-	if (keycode == 119)
+	if (keycode == W)
 	{
 		data->player_s.pos_win_y += (data->player_s.speed * data->player_s.delta_y) / 2;
 		data->player_s.pos_win_x += (data->player_s.speed * data->player_s.delta_x) / 2;
 		data->player_s.pos_y += data->player_s.speed * data->player_s.delta_y;
 		data->player_s.pos_x += data->player_s.speed * data->player_s.delta_x;
 	}
-	else if (keycode == 115)
+	else if (keycode == S)
 	{
 		data->player_s.pos_win_y -= (data->player_s.speed * data->player_s.delta_y) / 2;
 		data->player_s.pos_win_x -= (data->player_s.speed * data->player_s.delta_x) / 2;
 		data->player_s.pos_y -= data->player_s.speed * data->player_s.delta_y;
 		data->player_s.pos_x -= data->player_s.speed * data->player_s.delta_x;
 	}
-	else if (keycode == 97)
+	else if (keycode == A)
 	{
 		data->player_s.pos_win_y += (data->player_s.speed * sin(data->player_s.p_ang - ((90 * M_PI) / 180))) / 2;
 		data->player_s.pos_win_x += (data->player_s.speed * cos(data->player_s.p_ang - ((90 * M_PI) / 180))) / 2;
 		data->player_s.pos_y += data->player_s.speed * sin(data->player_s.p_ang - ((90 * M_PI) / 180));
 		data->player_s.pos_x += data->player_s.speed * cos(data->player_s.p_ang - ((90 * M_PI) / 180));
 	}
-	else if (keycode == 100)
+	else if (keycode == D)
 	{
 		data->player_s.pos_win_y -= (data->player_s.speed * sin(data->player_s.p_ang - ((90 * M_PI) / 180))) / 2;
 		data->player_s.pos_win_x -= (data->player_s.speed * cos(data->player_s.p_ang - ((90 * M_PI) / 180))) / 2;
@@ -94,14 +94,14 @@ void	move(int keycode, t_data *data)
 
 void	rotate_fov(int keycode, t_data *data)
 {
-	if (keycode == 65361)
+	if (keycode == LEFT)
 	{
 		data->player_s.p_ang += data->player_s.speed;
 		data->player_s.p_ang = FixAng(data->player_s.p_ang);
 		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
 	}
-	else if (keycode == 65363)
+	else if (keycode == RIGHT)
 	{
 		data->player_s.p_ang -= data->player_s.speed;
 		data->player_s.p_ang = FixAng(data->player_s.p_ang);
@@ -112,11 +112,11 @@ void	rotate_fov(int keycode, t_data *data)
 
 int	key_hook_manager(int keycode, t_data *data)
 {
-	if (keycode == 65307)
+	if (keycode == ESC)
 		leave(data);
-	else if (keycode == 119 || keycode == 115 || keycode == 100 || keycode == 97)
+	else if (keycode == W || keycode == S || keycode == A || keycode == D)
 		move(keycode, data);
-	else if (keycode == 65363 || keycode == 65361)
+	else if (keycode == LEFT || keycode == RIGHT)
 		rotate_fov(keycode, data);
 	else
 		printf("Key %d was pressed!\n", keycode);
