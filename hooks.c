@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/15 13:23:33 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/15 13:49:50 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,9 @@ int	key_hook_manager(t_data *data)
 {
 	if (data->keyboard.esc)
 		leave(data);
-	else if (data->keyboard.w && hitbox_wall(data, data->player_s.p_ang))
-		move_up(data);
-	else if (data->keyboard.a && hitbox_wall(data, FixAng(data->player_s.p_ang - 90)))
-		move_left(data);
-	else if (data->keyboard.s && hitbox_wall(data, FixAng(data->player_s.p_ang + 180)))
-			move_down(data);
-	else if (data->keyboard.d && hitbox_wall(data, FixAng(data->player_s.p_ang + 90)))
-		move_right(data);
+	else if (data->keyboard.w || data->keyboard.a
+			|| data->keyboard.s || data->keyboard.d)
+		move(data);
 	else if (data->keyboard.right)
 		rotate_fov(RIGHT, data);
 	else if (data->keyboard.left)

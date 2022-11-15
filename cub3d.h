@@ -113,6 +113,12 @@ typedef struct s_ray_calcul
 	float	disH;
 	float	vx;
 	float	vy;
+	int 	ipx;
+    int 	ipx_add_xo;
+    int 	ipx_sub_xo;
+	int 	ipy;
+    int 	ipy_add_yo;
+    int 	ipy_sub_yo;
 }	t_ray_calcul;
 
 typedef struct s_wall_drawing
@@ -220,10 +226,6 @@ void	alloc_check_small(void *str, t_data *data);
 float	degToRad(float a);
 float	FixAng(float a);
 
-/* collisions.c */
-void	mono_raycast(t_data *data, t_ray_calcul *ray, float angle);
-int		hitbox_wall(t_data *data, float angle);
-
 /* cub_free.c */
 void	cub_free(char *str[]);
 void	cub_free_params(t_data *data);
@@ -319,11 +321,15 @@ void	draw_empty_square_coord(t_data *data, int color, int x, int y);
 void	draw_map(t_data *data, int color, int height, int width);
 int 	init_minimap_values(t_data *data);
 
+/* move_utils.c */
+void    collisions_calculs(t_data *data, t_ray_calcul *collisions);
+
 /* move.c */
-void    move_up(t_data *data);
-void    move_down(t_data *data);
-void    move_right(t_data *data);
-void    move_left(t_data *data);
+void    move_up(t_data *data, t_ray_calcul *collisions);
+void    move_down(t_data *data, t_ray_calcul *collisions);
+void    move_right(t_data *data, t_ray_calcul *collisions);
+void    move_left(t_data *data, t_ray_calcul *collisions);
+void    move(t_data *data);
 
 /* player.c */
 int 	is_player(char c);
