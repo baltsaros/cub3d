@@ -71,14 +71,13 @@ void	check_map(t_map *map, t_data *data)
 	check_chars(map->map, data);
 	printf("checking rows\n");
 	check_rows(map->map, data);
+	printf("squarification\n");
+	squarification(data, map->map);
 	printf("checking columns\n");
 	check_columns(map->map, data);
 	printf("closed\n");
 	printf("checking player\n");
-	printf("width is %ld\nheight is %ld\n", data->map.width, data->map.height);
 	check_player(map->map, data);
 	check_direction(data);
-	printf("squarification\n");
-	squarification(data, map->map);
-	printf("width is %ld\nheight is %ld\n", data->map.width, data->map.height);
+	// printf("width is %ld\nheight is %ld\n", data->map.width, data->map.height);
 }

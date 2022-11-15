@@ -88,7 +88,7 @@ void	check_columns(char **map, t_data *data)
 	data->map.width = 0;
 	while (map[j])
 	{
-		while (map[j][i] && map[j][i] == ' ')
+		while (map[j][i] && check_charset(map[j][i], " \f\n\r\t\v"))
 			++j;
 		if (map[j][i] && map[j][i] != '1')
 			error_exit(data, "Unclosed map: columns1", 1);

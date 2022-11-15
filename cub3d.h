@@ -35,7 +35,6 @@
 # define TEST 0x90B3B0
 
 # define PI 3.1415926535
-# define M_PI 3.1415926535
 # define RAD 0.0174533
 
 # ifdef __linux__
@@ -316,7 +315,7 @@ void	check_player(char **map, t_data *data);
 /* init_map_utils_3.c */
 void	check_direction(t_data *data);
 void	squarification(t_data *data, char **map);
-void	print_map(char **map);
+void	print_map(t_data *data, char **map);
 
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
