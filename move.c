@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:15:12 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/15 17:38:13 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/15 18:03:04 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,13 @@ void    move_mult_up(t_data *data, t_ray_calcul *collisions)
     (void)collisions;
     if (data->keyboard.d)
     {
-
+        data->player_s.pos_win_x += data->player_s.speed * (data->player_s.delta_x / 2);
+        data->player_s.pos_x += data->player_s.speed * data->player_s.delta_x;
     }
     else if (data->keyboard.a)
     {
-
+        data->player_s.pos_win_y += data->player_s.speed * (data->player_s.delta_y / 2);
+	    data->player_s.pos_y += data->player_s.speed * data->player_s.delta_y;
     }
 }
 
@@ -92,11 +94,13 @@ void    move_mult_down(t_data *data, t_ray_calcul *collisions)
     (void)collisions;
     if (data->keyboard.d)
     {
-        
+        data->player_s.pos_win_x -= data->player_s.speed * (data->player_s.delta_x / 2);
+        data->player_s.pos_x -= data->player_s.speed * data->player_s.delta_x;
     }
     else if (data->keyboard.a)
     {
-
+        data->player_s.pos_win_y -= data->player_s.speed * (data->player_s.delta_y / 2);
+	    data->player_s.pos_y -= data->player_s.speed * data->player_s.delta_y;
     }
 }
 
