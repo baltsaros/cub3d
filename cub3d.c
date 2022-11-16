@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/15 13:08:37 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/15 17:35:34 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 
 void	hook_manager(t_data *data)
 {
-	mlx_hook(data->win, 2, (1L << 0), key_hook_manager, data);
-	mlx_mouse_hook(data->win, mouse_hook, data);
+	data->keyboard.esc = 0;
+	data->keyboard.w = 0;
+	data->keyboard.a = 0;
+	data->keyboard.s = 0;
+	data->keyboard.d = 0;
+	data->keyboard.right = 0;
+	data->keyboard.left = 0;
+	mlx_hook(data->win, KEYPRESS, KEYPRESSMASK, key_press, data);
+	mlx_hook(data->win, KEYRELEASE, KEYRELEASEMASK, key_release, data);
+	mlx_loop_hook(data->mlx, key_hook_manager, data);
+	// mlx_loop_hook(data->mlx, draw_all, &data);
+	// mlx_mouse_hook(data->win, mouse_hook, data);
 	mlx_hook(data->win, 17, 1L << 17, ft_exit, data);
 }
 
@@ -40,9 +50,7 @@ int		launcher(t_data *data)
 	ret = init_img(data);
 	if (ret != 0)
 		return (ret);
-	draw_all(data);
 	hook_manager(data);
-	mlx_loop_hook(data->mlx, draw_all, data);
 	mlx_loop(data->mlx);
 	return (ret);
 }
