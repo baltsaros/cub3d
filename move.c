@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:15:12 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/16 12:31:24 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/16 13:40:31 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,34 @@
 
 void    move_up(t_data *data, t_ray_calcul *collisions)
 {
-    (void)collisions;
-    // t_point col_x;
-    // t_point col_y;
-
-    // col_x.y = (collisions->ipy * data->map.width + collisions->ipx_add_xo) / data->map.height;
-    // col_x.x = collisions->ipy * data->map.width + collisions->ipx_add_xo;
-    // printf("col_x.y: %d\n", col_x.y);
-    // printf("col_y.x: %d\n", col_x.x);
-
-    // if (data->map.map[col_x.y][col_x.x] == '0')
-    // {
+    if (data->map.map[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo] == '0' 
+        || !is_player(data->map.map[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo]))
+    {
         data->player_s.pos_win_x += data->player_s.speed * (data->player_s.delta_x / 2);
         data->player_s.pos_x += data->player_s.speed * data->player_s.delta_x;
-    // }
-    // col_y.y = (collisions->ipy_add_yo * data->map.width + collisions->ipx) / data->map.height;
-    // col_y.x = 0;
-    // if (data->map.map[col_y.y][col_y.x] == '0')
-    // {
+    }
+    if (data->map.map[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE] == '0'
+        || !is_player(data->map.map[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE]))
+    {
         data->player_s.pos_win_y += data->player_s.speed * (data->player_s.delta_y / 2);
 	    data->player_s.pos_y += data->player_s.speed * data->player_s.delta_y;
-    // }
+    }
 }
 
 void    move_down(t_data *data, t_ray_calcul *collisions)
 {
-    (void)collisions;
-    // if (data->map.map[collisions->ipy * data->map.width + collisions->ipx_sub_xo] == 0)
-    // {
+    if (data->map.map[collisions->ipy / SQUARE_SIZE][collisions->ipx_sub_xo] == '0' 
+        || !is_player(data->map.map[collisions->ipy / SQUARE_SIZE][collisions->ipx_sub_xo]))
+    {
         data->player_s.pos_win_x -= data->player_s.speed * (data->player_s.delta_x / 2);
         data->player_s.pos_x -= data->player_s.speed * data->player_s.delta_x;
-    // }
-    // if (data->map.map[collisions->ipy_sub_yo * data->map.width + collisions->ipx] == 0)
-    // {
+    }
+    if (data->map.map[collisions->ipy_sub_yo][collisions->ipx / SQUARE_SIZE] == '0'
+        || !is_player(data->map.map[collisions->ipy_sub_yo][collisions->ipx / SQUARE_SIZE]))
+    {
         data->player_s.pos_win_y -= data->player_s.speed * (data->player_s.delta_y / 2);
 	    data->player_s.pos_y -= data->player_s.speed * data->player_s.delta_y;
-    // }
+    }
 }
 
 void    move_right(t_data *data, t_ray_calcul *collisions)
@@ -78,13 +70,21 @@ void    move(t_data *data)
 {
     t_ray_calcul    collisions;
     
-    collisions_calculs(data, &collisions);
-    if (data->keyboard.w)
-        move_up(data, &collisions);
-    if (data->keyboard.a)
-        move_left(data, &collisions);
-    if (data->keyboard.s)
-        move_down(data, &collisions);
-    if (data->keyboard.d)
-        move_right(data, &collisions);
+    if (data->keyboard.w || data->keyboard.s)
+    {
+        collisions_calculs_up_down(data, &collisions);
+        if (data->keyboard.w)
+            move_up(data, &collisions);
+        if (data->keyboard.s)
+            move_down(data, &collisions);
+    }
+    if (data->keyboard.d || data->keyboard.a)
+    {
+        collisions_calculs_right(data, &collisions);
+        collisions_calculs_left(data, &collisions);
+        if (data->keyboard.d)
+            move_right(data, &collisions);
+        if (data->keyboard.a)
+            move_left(data, &collisions);
+    }
 }

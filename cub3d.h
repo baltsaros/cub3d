@@ -335,7 +335,9 @@ void	draw_map(t_data *data, int color, int height, int width);
 int		init_minimap_values(t_data *data);
 
 /* move_utils.c */
-void    collisions_calculs(t_data *data, t_ray_calcul *collisions);
+void    collisions_calculs_up_down(t_data *data, t_ray_calcul *collisions);
+void    collisions_calculs_right(t_data *data, t_ray_calcul *collisions);
+void    collisions_calculs_left(t_data *data, t_ray_calcul *collisions);
 
 /* move.c */
 void    move_up(t_data *data, t_ray_calcul *collisions);
