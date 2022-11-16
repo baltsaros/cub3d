@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:57:43 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/16 13:37:57 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/16 14:25:29 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void    collisions_calculs_right(t_data *data, t_ray_calcul *collisions)
 
     xo = 0;
     yo = 0;
-    if (data->player_s.delta_y < 0)
+    if (-data->player_s.delta_y < 0)
         xo = -(SQUARE_SIZE / 2);
     else
         xo = (SQUARE_SIZE / 2);
-    if (-data->player_s.delta_x < 0)
+    if (data->player_s.delta_x < 0)
         yo = -(SQUARE_SIZE / 2);
     else
         yo = (SQUARE_SIZE / 2);
@@ -63,11 +63,11 @@ void    collisions_calculs_left(t_data *data, t_ray_calcul *collisions)
 
     xo = 0;
     yo = 0;
-    if (-data->player_s.delta_y < 0)
+    if (data->player_s.delta_y < 0)
         xo = -(SQUARE_SIZE / 2);
     else
         xo = (SQUARE_SIZE / 2);
-    if (data->player_s.delta_x < 0)
+    if (-data->player_s.delta_x < 0)
         yo = -(SQUARE_SIZE / 2);
     else
         yo = (SQUARE_SIZE / 2);
