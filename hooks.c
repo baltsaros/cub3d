@@ -3,38 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/15 12:33:40 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/15 17:37:16 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// int	is_wall(char **map, int x, int y, int flag)
-// {
-// 	int	rx;
-// 	int	ry;
-
-// 	ry = y / SQUARE_SIZE;
-// 	rx = x / SQUARE_SIZE;
-// 	if (map[ry][rx] && map[ry][rx] != '1')
-// 		return (1);
-// 	return (0);
-// }
-
-int		render(t_data *data)
+int	key_press(int keycode, t_data *data)
 {
-	(void)data;
+	if (keycode == W)
+		data->keyboard.w = 1;
+	if (keycode == A)
+		data->keyboard.a = 1;
+	if (keycode == S)
+		data->keyboard.s = 1;
+	if (keycode == D)
+		data->keyboard.d = 1;
+	if (keycode == ESC)
+		leave(data);
+	if (keycode == RIGHT)
+		data->keyboard.right = 1;
+	if (keycode == LEFT)
+		data->keyboard.left = 1;
 	return (0);
 }
 
-int	infinite_hook(int keycode, t_data *data)
+int	key_release(int keycode, t_data *data)
 {
-	(void)keycode;
-	(void)data;
-	// Temporary solution
+	if (keycode == W)
+		data->keyboard.w = 0;
+	if (keycode == A)
+		data->keyboard.a = 0;
+	if (keycode == S)
+		data->keyboard.s = 0;
+	if (keycode == D)
+		data->keyboard.d = 0;
+	if (keycode == RIGHT)
+		data->keyboard.right = 0;
+	if (keycode == LEFT)
+		data->keyboard.left = 0;
 	return (0);
 }
 
@@ -47,78 +57,33 @@ void	leave(t_data *data)
 	exit(EXIT_SUCCESS);
 }
 
-int	mouse_hook(int keycode, int x, int y, t_data *data)
-{
-	(void)x;
-	(void)y;
-	(void)keycode;
-	(void)data;
-	if (keycode == 1)
-	{
-	}
-	// render(data);
-	return (0);
-}
-
-void	move(int keycode, t_data *data)
-{
-	if (keycode == W)
-	{
-		data->player_s.pos_win_y += (data->player_s.speed * data->player_s.delta_y) / 2;
-		data->player_s.pos_win_x += (data->player_s.speed * data->player_s.delta_x) / 2;
-		data->player_s.pos_y += data->player_s.speed * data->player_s.delta_y;
-		data->player_s.pos_x += data->player_s.speed * data->player_s.delta_x;
-	}
-	else if (keycode == S)
-	{
-		data->player_s.pos_win_y -= (data->player_s.speed * data->player_s.delta_y) / 2;
-		data->player_s.pos_win_x -= (data->player_s.speed * data->player_s.delta_x) / 2;
-		data->player_s.pos_y -= data->player_s.speed * data->player_s.delta_y;
-		data->player_s.pos_x -= data->player_s.speed * data->player_s.delta_x;
-	}
-	else if (keycode == A)
-	{
-		data->player_s.pos_win_y += (data->player_s.speed * sin(data->player_s.p_ang - ((90 * M_PI) / 180))) / 2;
-		data->player_s.pos_win_x += (data->player_s.speed * cos(data->player_s.p_ang - ((90 * M_PI) / 180))) / 2;
-		data->player_s.pos_y += data->player_s.speed * sin(data->player_s.p_ang - ((90 * M_PI) / 180));
-		data->player_s.pos_x += data->player_s.speed * cos(data->player_s.p_ang - ((90 * M_PI) / 180));
-	}
-	else if (keycode == D)
-	{
-		data->player_s.pos_win_y -= (data->player_s.speed * sin(data->player_s.p_ang - ((90 * M_PI) / 180))) / 2;
-		data->player_s.pos_win_x -= (data->player_s.speed * cos(data->player_s.p_ang - ((90 * M_PI) / 180))) / 2;
-		data->player_s.pos_y -= data->player_s.speed * sin(data->player_s.p_ang - ((90 * M_PI) / 180));
-		data->player_s.pos_x -= data->player_s.speed * cos(data->player_s.p_ang - ((90 * M_PI) / 180));
-	}
-}
-
 void	rotate_fov(int keycode, t_data *data)
 {
-	if (keycode == LEFT)
+	if (keycode == RIGHT)
 	{
-		data->player_s.p_ang += data->player_s.speed;
+		data->player_s.p_ang += data->player_s.rot_speed;
 		data->player_s.p_ang = FixAng(data->player_s.p_ang);
 		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
 	}
-	else if (keycode == RIGHT)
+	if (keycode == LEFT)
 	{
-		data->player_s.p_ang -= data->player_s.speed;
+		data->player_s.p_ang -= data->player_s.rot_speed;
 		data->player_s.p_ang = FixAng(data->player_s.p_ang);
 		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
 	}
 }
 
-int	key_hook_manager(int keycode, t_data *data)
+int	key_hook_manager(t_data *data)
 {
-	if (keycode == ESC)
-		leave(data);
-	else if (keycode == W || keycode == S || keycode == A || keycode == D)
-		move(keycode, data);
-	else if (keycode == LEFT || keycode == RIGHT)
-		rotate_fov(keycode, data);
-	else
-		printf("Key %d was pressed!\n", keycode);
+	if (data->keyboard.w || data->keyboard.a
+			|| data->keyboard.s || data->keyboard.d)
+		move(data);
+	if (data->keyboard.right)
+		rotate_fov(RIGHT, data);
+	if (data->keyboard.left)
+		rotate_fov(LEFT, data);
+	draw_all(data);
 	return (0);
 }

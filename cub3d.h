@@ -11,7 +11,7 @@
 // # include "mlx_linux/mlx.h"
 # include "libft/libft.h"
 
-//	default window size
+/* default window size */
 #define WIDTH 			1500
 #define HEIGHT 			1000
 
@@ -27,15 +27,18 @@
 #define	WEST			4
 #define	ERROR_POS		100
 
+/* Hooks values */
+# define KEYPRESS		2
+# define KEYRELEASE		3
+# define KEYPRESSMASK	1L
+# define KEYRELEASEMASK	2L
+
 # define RED 0xFF0000
 # define GREEN 0xFF00
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 # define GRAY 0x808080
 # define TEST 0x90B3B0
-
-# define PI 3.1415926535
-# define RAD 0.0174533
 
 # ifdef __linux__
 enum	s_keys
@@ -51,8 +54,8 @@ enum	s_keys
 # else
 enum	s_keys
 {
-	LEFT	= 123,
-	RIGHT	= 124,
+	LEFT	= 124,
+	RIGHT	= 123,
 	W		= 13,
 	A		= 0,
 	S		= 1,
@@ -124,6 +127,12 @@ typedef struct s_ray_calcul
 	float	disH;
 	float	vx;
 	float	vy;
+	int 	ipx;
+    int 	ipx_add_xo;
+    int 	ipx_sub_xo;
+	int 	ipy;
+    int 	ipy_add_yo;
+    int 	ipy_sub_yo;
 }	t_ray_calcul;
 
 typedef struct s_wall_drawing
@@ -148,6 +157,7 @@ typedef struct s_player
 	float	delta_x;
 	float	delta_y;
 	int		speed;
+	int		rot_speed;
 }	t_player;
 
 typedef struct s_ray
@@ -163,6 +173,17 @@ typedef struct s_minimap
 }	t_minimap;
 
 //	struct to store map data
+typedef struct s_keyboard
+{
+	int	esc;
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	right;
+	int	left;
+} t_keyboard;
+
 typedef struct s_map
 {
 	char	**raw;
@@ -205,6 +226,7 @@ typedef struct s_data
 	t_text			ea_text;
 	t_text			we_text;
 	int				is_full_screen;
+	t_keyboard		keyboard;
 }	t_data;
 
 /*
@@ -266,20 +288,11 @@ void	check_mlx(void *mlx, t_data *data);
 void	check_win(t_data *data);
 
 /* hooks.c */
+int		key_press(int keycode, t_data *data);
+int		key_release(int keycode, t_data *data);
 void	leave(t_data *data);
-int		mouse_hook(int keycode, int x, int y, t_data *data);
-void	move(int keycode, t_data *data);
 void	rotate_fov(int keycode, t_data *data);
-int		key_hook_manager(int keycode, t_data *data);
-
-/* hooks_mac.c */
-int		render(t_data *data);
-int		infinite_hook(int keycode, t_data *data);
-void	leave(t_data *data);
-int		mouse_hook(int keycode, int x, int y, t_data *data);
-void	move(int keycode, t_data *data);
-void	rotate_fov(int keycode, t_data *data);
-int		key_hook_manager(int keycode, t_data *data);
+int		key_hook_manager(t_data *data);
 
 /* horizontal_wall.c */
 float	disH_calcul(t_data *data, float ra, float ry, float rx);
@@ -320,6 +333,18 @@ void	print_map(t_data *data, char **map);
 void	draw_square_coord(t_data *data, int color, int x, int y);
 void	draw_map(t_data *data, int color, int height, int width);
 int		init_minimap_values(t_data *data);
+
+/* move_utils.c */
+void    collisions_calculs_up_down(t_data *data, t_ray_calcul *collisions);
+void    collisions_calculs_right(t_data *data, t_ray_calcul *collisions);
+void    collisions_calculs_left(t_data *data, t_ray_calcul *collisions);
+
+/* move.c */
+void    move_up(t_data *data, t_ray_calcul *collisions);
+void    move_down(t_data *data, t_ray_calcul *collisions);
+void    move_right(t_data *data, t_ray_calcul *collisions);
+void    move_left(t_data *data, t_ray_calcul *collisions);
+void    move(t_data *data);
 
 /* player.c */
 int		is_player(char c);
