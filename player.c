@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/15 16:22:32 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/16 17:46:51 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void    init_player_pos(t_data *data, int height, int width)
     }
 }
 
-int init_player_values(t_data *data)
+void    init_player_values(t_data *data)
 {
 	data->player_s.pos_x = 0;
 	data->player_s.pos_y = 0;
