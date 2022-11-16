@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/16 17:21:14 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/16 17:33:42 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 		error_exit(&data, "Ivalid amount of arguments", 0);
-	ret = EXIT_SUCCESS;
 	init_map(&data, argv[1]);
 	ret = launcher(&data);
 	leave(&data, ret);
