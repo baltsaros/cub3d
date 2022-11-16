@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/16 16:01:50 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/16 17:06:36 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@ void    draw_a_wall(t_data *data, t_wall_drawing *wall, t_text text, double shad
 {
     int     color;
     
-    while (wall->begin.y != wall->end.y + 1)
+    if (wall->begin.y < 0)
+    {
+        wall->ty = (-wall->begin.y * wall->ty_step);
+        wall->begin.y = 0;
+    }
+    while (wall->begin.y != wall->end.y && wall->begin.y <= HEIGHT)
     {
         if (wall->begin.x >= 0 && wall->begin.x <= WIDTH && wall->begin.y >= 0 && wall->begin.y <= HEIGHT)
         {
