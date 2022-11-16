@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:15:12 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/15 20:31:10 by root             ###   ########.fr       */
+/*   Updated: 2022/11/16 12:31:24 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,62 +74,17 @@ void    move_left(t_data *data, t_ray_calcul *collisions)
     data->player_s.pos_y -= data->player_s.speed * data->player_s.delta_x;
 }
 
-void    move_mult_up(t_data *data, t_ray_calcul *collisions)
-{
-    (void)collisions;
-    if (data->keyboard.d)
-    {
-        data->player_s.pos_win_x += data->player_s.speed * ((data->player_s.delta_x * cos(45) + data->player_s.delta_y * sin(45)) / 2);
-        data->player_s.pos_x += data->player_s.speed * (data->player_s.delta_x * cos(45) + data->player_s.delta_y * sin(45));
-        data->player_s.pos_win_y += data->player_s.speed * ((-data->player_s.delta_x * sin(45) + data->player_s.delta_y * cos(45)) / 2);
-        data->player_s.pos_y += data->player_s.speed * (-data->player_s.delta_x * sin(45) + data->player_s.delta_y * cos(45));
-    }
-    else if (data->keyboard.a)
-    {
-        data->player_s.pos_win_x += data->player_s.speed * ((data->player_s.delta_x * cos(45) + data->player_s.delta_y * sin(45)) / 2);
-        data->player_s.pos_x += data->player_s.speed * (data->player_s.delta_x * cos(45) + data->player_s.delta_y * sin(45));
-        data->player_s.pos_win_y += data->player_s.speed * ((data->player_s.delta_x * sin(45) + data->player_s.delta_y * cos(45)) / 2);
-        data->player_s.pos_y += data->player_s.speed * (data->player_s.delta_x * sin(45) + data->player_s.delta_y * cos(45));
-    }
-}
-
-void    move_mult_down(t_data *data, t_ray_calcul *collisions)
-{
-    (void)collisions;
-    if (data->keyboard.d)
-    {
-        data->player_s.pos_win_x -= data->player_s.speed * ((data->player_s.delta_x * cos(45) + data->player_s.delta_y * sin(45)) / 2);
-        data->player_s.pos_x -= data->player_s.speed * (data->player_s.delta_x * cos(45) + data->player_s.delta_y * sin(45));
-        data->player_s.pos_win_y -= data->player_s.speed * ((-data->player_s.delta_x * sin(45) + data->player_s.delta_y * cos(45)) / 2);
-        data->player_s.pos_y -= data->player_s.speed * (-data->player_s.delta_x * sin(45) + data->player_s.delta_y * cos(45));
-    }
-    else if (data->keyboard.a)
-    {
-        data->player_s.pos_win_x -= data->player_s.speed * ((data->player_s.delta_x * cos(45) + data->player_s.delta_y * sin(45)) / 2);
-        data->player_s.pos_x -= data->player_s.speed * (data->player_s.delta_x * cos(45) + data->player_s.delta_y * sin(45));
-        data->player_s.pos_win_y -= data->player_s.speed * ((data->player_s.delta_x * sin(45) + data->player_s.delta_y * cos(45)) / 2);
-        data->player_s.pos_y -= data->player_s.speed * (data->player_s.delta_x * sin(45) + data->player_s.delta_y * cos(45));
-    }
-}
-
 void    move(t_data *data)
 {
     t_ray_calcul    collisions;
     
     collisions_calculs(data, &collisions);
-    if (data->keyboard.w && (data->keyboard.d || data->keyboard.a))
-        move_mult_up(data, &collisions);
-    else if (data->keyboard.s && (data->keyboard.d || data->keyboard.a))
-        move_mult_down(data, &collisions);
-    else
-    {
-        if (data->keyboard.w)
-            move_up(data, &collisions);
-        if (data->keyboard.a)
-            move_left(data, &collisions);
-        if (data->keyboard.s)
-            move_down(data, &collisions);
-        if (data->keyboard.d)
-            move_right(data, &collisions);
-    }
+    if (data->keyboard.w)
+        move_up(data, &collisions);
+    if (data->keyboard.a)
+        move_left(data, &collisions);
+    if (data->keyboard.s)
+        move_down(data, &collisions);
+    if (data->keyboard.d)
+        move_right(data, &collisions);
 }
