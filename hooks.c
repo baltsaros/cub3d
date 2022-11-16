@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/15 17:37:16 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/16 16:14:47 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	key_press(int keycode, t_data *data)
 {
+	if (keycode == ESC)
+		leave(data);
 	if (keycode == W)
 		data->keyboard.w = 1;
 	if (keycode == A)
@@ -22,8 +24,6 @@ int	key_press(int keycode, t_data *data)
 		data->keyboard.s = 1;
 	if (keycode == D)
 		data->keyboard.d = 1;
-	if (keycode == ESC)
-		leave(data);
 	if (keycode == RIGHT)
 		data->keyboard.right = 1;
 	if (keycode == LEFT)
