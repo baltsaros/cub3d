@@ -51,8 +51,7 @@ void	check_mlx(void *mlx, t_data *data)
 	{
 		write(2, "Cub3d: ", 7);
 		write(2, "Mlx init error\n", 15);
-		cub_free_all(data);
-		exit(EXIT_FAILURE);
+		leave(data, EXIT_FAILURE);
 	}
 }
 
@@ -62,8 +61,6 @@ void	check_win(t_data *data)
 	{
 		write(2, "Cub3d: ", 7);
 		write(2, "Windows is broken!\n", 19);
-		// mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
-		cub_free_all(data);
-		exit(EXIT_FAILURE);
+		leave(data, EXIT_FAILURE);
 	}
 }
