@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/16 15:44:56 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/16 15:52:28 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int draw_all(t_data *data)
 	ft_memset(data->minimap.addr, create_trgb(255, 255, 255, 255), data->minimap_s.height * data->minimap_s.width * sizeof(int));
 	draw_map(data, data->minimap.basic_color, data->map.height, data->map.width);
 	ft_memset(data->player.addr, data->player.basic_color, PLAYER_SIZE * sizeof(int));
-	if (data->is_full_screen != WIDTH - 1)
+	if (data->is_full_screen != WIDTH)
 	{
 		init_background(data);
 		mlx_put_image_to_window(data->mlx, data->win, data->background.img_ptr, 0, 0);
