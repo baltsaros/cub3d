@@ -318,7 +318,6 @@ void	print_map(t_data *data, char **map);
 
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
-void	draw_empty_square_coord(t_data *data, int color, int x, int y);
 void	draw_map(t_data *data, int color, int height, int width);
 int		init_minimap_values(t_data *data);
 
