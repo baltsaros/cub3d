@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/16 16:24:15 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/16 16:27:01 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void	raycast(t_data *data, t_ray_calcul ray)
         posV = check_vertical_wall(data, &ray, Tan);
         ray.vx = ray.rx;
         ray.vy = ray.ry;
-        Tan = 1.0 / Tan;
-        posH = check_horizontal_wall(data, &ray, Tan);
+        posH = check_horizontal_wall(data, &ray, (1.0 / Tan));
         pos = adapt_distance(&ray, posH, posV);
         fisheye_fix(data, &ray);
         init_calculate_wall(data, &ray, pos);
