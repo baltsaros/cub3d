@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/13 19:30:50 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/16 15:39:46 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
     data->wall_drawing.begin.y = (HEIGHT / 2) - (data->wall_drawing.wallHeight / 2);
     data->wall_drawing.end.x = data->wall_drawing.begin.x;
     data->wall_drawing.end.y = data->wall_drawing.begin.y + data->wall_drawing.wallHeight;
+    if (data->wall_drawing.begin.y < 0)
+        data->is_full_screen++;
     draw_vertical_line(data, &data->wall_drawing, ray, pos);
 }

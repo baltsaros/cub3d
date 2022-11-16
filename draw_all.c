@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/15 13:17:39 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/16 15:40:37 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,17 @@ void	init_background(t_data *data)
 
 int draw_all(t_data *data)
 {
-	// int	ret;
-
-	// ret = 0;
-	init_background(data);
+	data->is_full_screen = 0;
 	ft_memset(data->walls.addr, create_trgb(255, 255, 255, 255), HEIGHT * WIDTH * sizeof(int));
 	raycast(data, data->ray_calcul);
 	ft_memset(data->minimap.addr, create_trgb(255, 255, 255, 255), data->minimap_s.height * data->minimap_s.width * sizeof(int));
 	draw_map(data, data->minimap.basic_color, data->map.height, data->map.width);
 	draw_square(data->player, data->player.basic_color, PLAYER_SIZE / 2, PLAYER_SIZE / 2);
-	mlx_put_image_to_window(data->mlx, data->win, data->background.img_ptr, 0, 0);
+	if (data->is_full_screen != WIDTH - 1)
+	{
+		init_background(data);
+		mlx_put_image_to_window(data->mlx, data->win, data->background.img_ptr, 0, 0);
+	}
 	mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr, data->minimap_s.position.x, data->minimap_s.position.y);
 	mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr, data->player_s.pos_win_x, data->player_s.pos_win_y);

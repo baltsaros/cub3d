@@ -204,6 +204,7 @@ typedef struct s_data
 	t_text			so_text;
 	t_text			ea_text;
 	t_text			we_text;
+	int				is_full_screen;
 }	t_data;
 
 /*
