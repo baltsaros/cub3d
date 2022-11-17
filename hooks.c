@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/17 09:26:25 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/17 09:27:37 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	rotate_fov(int keycode, t_data *data)
 
 int	mouse_hook(int x, int y, t_data *data)
 {
-	printf("dx: %d\nx: %d, y: %d\n", data->x, x, y);
+	// printf("dx: %d\nx: %d, y: %d\n", data->x, x, y);
 	if (WIDTH - x > data->x)
 	{
 		rotate_fov(RIGHT, data);

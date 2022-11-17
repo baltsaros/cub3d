@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 09:22:45 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/17 09:28:39 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	hook_manager(t_data *data)
 	// mlx_mouse_hook(data->win, mouse_hook, data);
 	mlx_loop_hook(data->mlx, key_hook_manager, data);
 	// mlx_loop_hook(data->mlx, draw_all, &data);
-	mlx_hook(data->win, 17, 1L << 17, ft_exit, data);
+	mlx_hook(data->win, 17, 1L<<17, ft_exit, data);
 }
 
 int		launcher(t_data *data)
