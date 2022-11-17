@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 18:23:44 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/16 16:22:11 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 18:00:56 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int get_pixel(t_img img, int y, int x)
+int	get_pixel(t_img img, int y, int x)
 {
 	char	*dst;
 
@@ -35,8 +35,8 @@ void	mlx_pixel_put_img(t_img	*img, int x, int y, int color)
 
 void	draw_square(t_img img, int color, int end_i, int end_j)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i != end_i)
@@ -53,8 +53,8 @@ void	draw_square(t_img img, int color, int end_i, int end_j)
 
 void	draw_square_from(t_img img, int color, t_point begin, t_point end)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = begin.y;
 	while (i != end.y)
