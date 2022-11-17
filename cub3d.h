@@ -209,6 +209,7 @@ typedef struct s_data
 	void			*win;
 	size_t			i;
 	size_t			j;
+	int				x;
 	char			*s_tmp;
 	int				fd;
 	t_img			background;
@@ -291,6 +292,7 @@ int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
 void	leave(t_data *data);
 void	rotate_fov(int keycode, t_data *data);
+int		mouse_hook(int x, int y, t_data *data);
 int		key_hook_manager(t_data *data);
 
 /* horizontal_wall.c */
