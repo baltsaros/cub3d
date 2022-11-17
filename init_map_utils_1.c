@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_map_utils_1.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/11/17 18:10:25 by mthiry           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 ///////////////////////////
@@ -97,14 +109,9 @@ void	copy_map(char **raw, t_data *data)
 
 void	check_map(t_map *map, t_data *data)
 {
-	printf("Checking characters...\n");
 	check_chars(map->map, data);
-	printf("Checking rows...\n");
 	check_rows(map->map, data);
-	printf("Checking columns...\n");
 	check_columns(map->map, data);
-	printf("Checking player...\n");
 	check_player(map->map, data);
 	check_direction(data);
-	printf("Mas has been checked!\n");
 }

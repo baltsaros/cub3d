@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_messages.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/11/17 18:44:21 by mthiry           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	error_check_exit(int input, char *str, t_data *data)
 {
 	size_t	len;
 
-	(void)data;
 	if (input < 0)
 	{
 		write(2, "Cub3d: ", 7);
@@ -17,11 +28,10 @@ int	error_check_exit(int input, char *str, t_data *data)
 	return (input);
 }
 
-int	error_check_noexit(int input, char *str, t_data *data)
+int	error_check_noexit(int input, char *str)
 {
 	size_t	len;
 
-	(void)data;
 	if (input < 0)
 	{
 		write(2, "Cub3d: ", 7);

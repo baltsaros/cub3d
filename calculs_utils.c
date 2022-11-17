@@ -6,22 +6,22 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:30:54 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/14 14:36:33 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 18:05:05 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float   degToRad(float a)
+float	degtorad(float a)
 {
 	return (a * (float)M_PI / 180.0);
 }
 
-float FixAng(float a)
-{ 
-    if(a > 359)
-        a -= 360;
-    if(a < 0)
-        a += 360;
-    return a;
+float	fixang(float a)
+{
+	if (a > 359)
+		a -= 360;
+	if (a < 0)
+		a += 360;
+	return (a);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
+/*   Updated: 2022/11/17 18:57:19 by mthiry           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -8,44 +20,34 @@
 # include <errno.h>
 # include <math.h>
 # include "mlx/mlx.h"
-// # include "mlx_linux/mlx.h"
 # include "libft/libft.h"
 
-/* default window size */
-#define WIDTH 			1500
-#define HEIGHT 			1000
+/* Default Window Size */
+# define WIDTH			1500
+# define HEIGHT 		1000
 
-// some default values
-#define SQUARE_SIZE		64
-#define	PLAYER_SIZE		8
-#define FIELD_OF_VIEW 	60
+/* Default Player Values */
+# define SQUARE_SIZE	64
+# define PLAYER_SIZE	8
+# define FIELD_OF_VIEW 	60
 
-// North south east west
-#define NORTH			1
-#define SOUTH			2
-#define	EAST			3
-#define	WEST			4
-#define	ERROR_POS		100
+/* North-South-East-West Flags */
+# define NORTH			1
+# define SOUTH			2
+# define EAST			3
+# define WEST			4
+# define ERROR_POS		100
 
-/* Hooks values */
+/* Hooks Values */
 # define KEYPRESS		2
 # define KEYRELEASE		3
 # define MOUSEMOVE		6
 # define DESTROY		17
 # define KEYPRESSMASK	1L
 # define KEYRELEASEMASK	2L
-# define BUTTONMOTION	1L<<13
-# define STRUCTURENOT	1L<<17
-
-# define RED 0xFF0000
-# define GREEN 0xFF00
-# define WHITE 0xFFFFFF
-# define BLACK 0x000000
-# define GRAY 0x808080
-# define TEST 0x90B3B0
-
 # ifdef __linux__
-enum	s_keys
+
+enum	e_s_keys
 {
 	LEFT	= 65361,
 	RIGHT	= 65363,
@@ -56,7 +58,8 @@ enum	s_keys
 	ESC		= 65307
 };
 # else
-enum	s_keys
+
+enum	e_s_keys
 {
 	LEFT	= 124,
 	RIGHT	= 123,
@@ -68,7 +71,7 @@ enum	s_keys
 };
 # endif
 
-//	struct to store mlx data for map
+/* Structs to store mlx data for map */
 typedef struct s_img
 {
 	void	*img_ptr;
@@ -84,38 +87,14 @@ typedef struct s_text
 	t_img	img;
 	int		width;
 	int		height;
-} t_text;
+}	t_text;
 
-// structs to store values for drawing
-
-typedef struct s_color
-{
-	int	t;
-	int	r;
-	int	g;
-	int	b;
-} t_color;
-
-typedef struct s_bre
-{
-	int	dx;
-	int	sx;
-	int	dy;
-	int	sy;
-	int	err;
-}	t_bre;
-
+/* Structs to store utils values for drawing */
 typedef struct s_point
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 }	t_point;
-
-typedef struct s_seg
-{
-	t_point	p0;
-	t_point	p1;
-}	t_seg;
 
 typedef struct s_ray_calcul
 {
@@ -127,22 +106,22 @@ typedef struct s_ray_calcul
 	float	ra;
 	float	xo;
 	float	yo;
-	float	disV;
-	float	disH;
+	float	disv;
+	float	dish;
 	float	vx;
 	float	vy;
-	int 	ipx;
-    int 	ipx_add_xo;
-    int 	ipx_sub_xo;
-	int 	ipy;
-    int 	ipy_add_yo;
-    int 	ipy_sub_yo;
+	int		ipx;
+	int		ipx_add_xo;
+	int		ipx_sub_xo;
+	int		ipy;
+	int		ipy_add_yo;
+	int		ipy_sub_yo;
 }	t_ray_calcul;
 
 typedef struct s_wall_drawing
 {
-	float   distProj;
-	float   wallHeight;
+	float	distproj;
+	float	wallheight;
 	float	ty;
 	float	ty_step;
 	float	tx;
@@ -150,7 +129,7 @@ typedef struct s_wall_drawing
 	t_point	end;
 }	t_wall_drawing;
 
-// 	struct for positions
+/* Structs for player and minimap positions */
 typedef struct s_player
 {
 	float	pos_x;
@@ -164,11 +143,6 @@ typedef struct s_player
 	int		rot_speed;
 }	t_player;
 
-typedef struct s_ray
-{
-	int test;
-}	t_ray;
-
 typedef struct s_minimap
 {
 	t_point		position;
@@ -176,7 +150,7 @@ typedef struct s_minimap
 	int			height;
 }	t_minimap;
 
-//	struct to store map data
+/* Struct for keys */
 typedef struct s_keyboard
 {
 	int	esc;
@@ -186,8 +160,9 @@ typedef struct s_keyboard
 	int	d;
 	int	right;
 	int	left;
-} t_keyboard;
+}	t_keyboard;
 
+/* Struct for map values */
 typedef struct s_map
 {
 	char	**raw;
@@ -207,6 +182,7 @@ typedef struct s_map
 	size_t	height;
 }	t_map;
 
+/* Basic struct for basic data */
 typedef struct s_data
 {
 	void			*mlx;
@@ -220,7 +196,6 @@ typedef struct s_data
 	t_map			map;
 	t_player		player_s;
 	t_img			player;
-	t_ray			ray_s;
 	t_minimap		minimap_s;
 	t_img			minimap;
 	t_img			walls;
@@ -234,17 +209,19 @@ typedef struct s_data
 	t_keyboard		keyboard;
 }	t_data;
 
-/*
-	Functions
-*/
+/* ************************************************************************** */
+/*                                                                            */
+/*		Functions and files                                                   */
+/*                                                                            */
+/* ************************************************************************** */
 
 /* alloc_check.c */
 void	alloc_check_big(char **str, t_data *data);
 void	alloc_check_small(void *str, t_data *data);
 
 /* calculs_utils.c */
-float	degToRad(float a);
-float	FixAng(float a);
+float	degtorad(float a);
+float	fixang(float a);
 
 /* cub_free.c */
 void	cub_free(char *str[]);
@@ -262,12 +239,10 @@ char	*cub_strdup(const char *s, t_data *data);
 int		ft_strcmp(char *s1, char *s2);
 char	*get_next_line(int fd, t_data *data);
 int		check_charset(char c, char *charset);
-int		ft_exit(t_data *data);
 
 /* cub3d.c */
 void	hook_manager(t_data *data);
 int		launcher(t_data *data);
-int		main(int argc, char *argv[]);
 
 /* draw_all.c */
 void	init_background(t_data *data);
@@ -281,18 +256,21 @@ void	draw_square(t_img img, int color, int end_i, int end_j);
 void	draw_square_from(t_img img, int color, t_point begin, t_point end);
 
 /* draw_wall.c */
-void	draw_a_wall(t_data *data, t_wall_drawing *wall, t_text text, double shade);
-void	draw_vertical_line(t_data *data, t_wall_drawing *wall, t_ray_calcul *ray, int pos);
+void	draw_a_wall(t_data *data, t_wall_drawing *wall,
+			t_text text, double shade);
+void	draw_vertical_line(t_data *data, t_wall_drawing *wall,
+			t_ray_calcul *ray, int pos);
 void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos);
 
 /* error_messages.c */
 int		error_check_exit(int input, char *str, t_data *data);
-int		error_check_noexit(int input, char *str, t_data *data);
+int		error_check_noexit(int input, char *str);
 void	error_exit(t_data *data, char *msg, int param);
 void	check_mlx(void *mlx, t_data *data);
 void	check_win(t_data *data);
 
 /* exit.c */
+int		ft_exit(t_data *data);
 void	leave(t_data *data, int ret);
 
 /* hooks.c */
@@ -303,7 +281,7 @@ int		mouse_hook(int x, int y, t_data *data);
 int		key_hook_manager(t_data *data);
 
 /* horizontal_wall.c */
-float	disH_calcul(t_data *data, float ra, float ry, float rx);
+float	dish_calcul(t_data *data, float ra, float ry, float rx);
 void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof);
 int		check_up(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_down(t_data *data, t_ray_calcul *ray, float Tan);
@@ -312,14 +290,8 @@ int		check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
 /* init_img.c */
 int		init_img(t_data *data);
 int		is_xpm(char *str);
+void	mlx_xpm_init(t_data *data);
 int		load_textures(t_data *data);
-
-/* init_map.c */
-void	init_vars(t_data *data);
-void	check_extension(t_data *data, char *file);
-void	check_param(t_map *map, t_data *data);
-t_map	read_param(t_data *data, char *file);
-int		init_map(t_data *data, char *file);
 
 /* init_map_utils_1.c */
 void	check_chars(char **raw, t_data *data);
@@ -329,6 +301,8 @@ void	copy_map(char **raw, t_data *data);
 void	check_map(t_map *map, t_data *data);
 
 /* init_map_utils_2.c */
+int		check_wall(char c, int state);
+void	check_gap(char **map, size_t i, size_t j, t_data *data);
 void	check_rows(char **map, t_data *data);
 void	check_columns(char **map, t_data *data);
 void	check_player(char **map, t_data *data);
@@ -337,22 +311,29 @@ void	check_player(char **map, t_data *data);
 void	check_direction(t_data *data);
 void	print_map(t_data *data, char **map);
 
+/* init_map.c */
+void	init_vars(t_data *data);
+void	check_extension(t_data *data, char *file);
+void	check_param(t_map *map, t_data *data);
+t_map	read_param(t_data *data, char *file);
+int		init_map(t_data *data, char *file);
+
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
 void	draw_map(t_data *data, int color, int height, int width);
 void	init_minimap_values(t_data *data);
 
 /* move_utils.c */
-void    collisions_calculs_up_down(t_data *data, t_ray_calcul *collisions);
-void    collisions_calculs_right(t_data *data, t_ray_calcul *collisions);
-void    collisions_calculs_left(t_data *data, t_ray_calcul *collisions);
+void	collisions_calculs_up_down(t_data *data, t_ray_calcul *collisions);
+void	collisions_calculs_right(t_data *data, t_ray_calcul *collisions);
+void	collisions_calculs_left(t_data *data, t_ray_calcul *collisions);
 
 /* move.c */
-void    move_up(t_data *data, t_ray_calcul *collisions);
-void    move_down(t_data *data, t_ray_calcul *collisions);
-void    move_right(t_data *data, t_ray_calcul *collisions);
-void    move_left(t_data *data, t_ray_calcul *collisions);
-void    move(t_data *data);
+void	move_up(t_data *data, t_ray_calcul *collisions);
+void	move_down(t_data *data, t_ray_calcul *collisions);
+void	move_right(t_data *data, t_ray_calcul *collisions);
+void	move_left(t_data *data, t_ray_calcul *collisions);
+void	move(t_data *data);
 
 /* player.c */
 int		is_player(char c);
@@ -365,7 +346,7 @@ void	fisheye_fix(t_data *data, t_ray_calcul *ray);
 void	raycast(t_data *data, t_ray_calcul ray);
 
 /* vertical_wall.c */
-float	disV_calcul(t_data *data, float ra, float ry, float rx);
+float	disv_calcul(t_data *data, float ra, float ry, float rx);
 void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof);
 int		check_right(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_left(t_data *data, t_ray_calcul *ray, float Tan);

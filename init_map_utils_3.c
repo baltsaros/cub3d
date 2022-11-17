@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_map_utils_3.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
+/*   Updated: 2022/11/17 18:11:03 by mthiry           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	check_direction(t_data *data)
@@ -11,7 +23,6 @@ void	check_direction(t_data *data)
 	else if (data->map.dir == 'S')
 		data->map.angle = 270;
 	data->player_s.p_ang = data->map.angle;
-	// data->player_s.p_ang = ((data->map.angle % 360) * PI) / 180;
 }
 
 void	print_map(t_data *data, char **map)

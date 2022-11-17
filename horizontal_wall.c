@@ -3,79 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal_wall.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:36:36 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/08 18:32:06 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 18:45:43 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	disH_calcul(t_data *data, float ra, float ry, float rx)
+float	dish_calcul(t_data *data, float ra, float ry, float rx)
 {
-	float	disH;
+	float	dish;
 	float	first;
 	float	second;
 
-	first = cos(degToRad(ra)) * (rx - data->player_s.pos_x);
-	second = sin(degToRad(ra)) * (ry - data->player_s.pos_y);
-	disH = first - second;
-	return (disH);
+	first = cos(degtorad(ra)) * (rx - data->player_s.pos_x);
+	second = sin(degtorad(ra)) * (ry - data->player_s.pos_y);
+	dish = first - second;
+	return (dish);
 }
 
 void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof)
 {
-    while ((size_t)dof < data->map.height)
-    {
-        ray->mx = ((int)(ray->rx) / SQUARE_SIZE);
-        ray->my = ((int)(ray->ry) / SQUARE_SIZE);
-        if (ray->my >= 0 && ray->mx >= 0
-            && ray->my < (int)data->map.height
-            && ray->mx < (int)data->map.width
-            && data->map.map[ray->my][ray->mx] == '1')
-        {
-            dof = data->map.height;
-            ray->disH = disH_calcul(data, ray->ra, ray->ry, ray->rx);
-        }
-        else
-        {
-            ray->rx += ray->xo;
-            ray->ry += ray->yo;
-            dof++;
-        }
-    }
+	while ((size_t)dof < data->map.height)
+	{
+		ray->mx = ((int)(ray->rx) / SQUARE_SIZE);
+		ray->my = ((int)(ray->ry) / SQUARE_SIZE);
+		if (ray->my >= 0 && ray->mx >= 0
+			&& ray->my < (int)data->map.height
+			&& ray->mx < (int)data->map.width
+			&& data->map.map[ray->my][ray->mx] == '1')
+		{
+			dof = data->map.height;
+			ray->dish = dish_calcul(data, ray->ra, ray->ry, ray->rx);
+		}
+		else
+		{
+			ray->rx += ray->xo;
+			ray->ry += ray->yo;
+			dof++;
+		}
+	}
 }
 
-int		check_up(t_data *data, t_ray_calcul *ray, float Tan)
+int	check_up(t_data *data, t_ray_calcul *ray, float Tan)
 {
-	ray->ry = (((int)data->player_s.pos_y / SQUARE_SIZE) * SQUARE_SIZE) - 0.0001;
+	ray->ry = (((int)data->player_s.pos_y / SQUARE_SIZE) * SQUARE_SIZE)
+		- 0.0001;
 	ray->rx = (data->player_s.pos_y - ray->ry) * Tan + data->player_s.pos_x;
 	ray->yo = -SQUARE_SIZE;
 	ray->xo = -ray->yo * Tan;
 	return (NORTH);
 }
 
-int		check_down(t_data *data, t_ray_calcul *ray, float Tan)
+int	check_down(t_data *data, t_ray_calcul *ray, float Tan)
 {
-	ray->ry = (((int)data->player_s.pos_y / SQUARE_SIZE) * SQUARE_SIZE) + SQUARE_SIZE;
+	ray->ry = (((int)data->player_s.pos_y / SQUARE_SIZE) * SQUARE_SIZE)
+		+ SQUARE_SIZE;
 	ray->rx = (data->player_s.pos_y - ray->ry) * Tan + data->player_s.pos_x;
 	ray->yo = SQUARE_SIZE;
 	ray->xo = -ray->yo * Tan;
 	return (SOUTH);
 }
 
-int check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan)
+int	check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan)
 {
 	int	dof;
 	int	ret;
 
 	dof = 0;
 	ret = 0;
-	ray->disH = 100000;
-	if (sin(degToRad(ray->ra)) > 0.001)
+	ray->dish = 100000;
+	if (sin(degtorad(ray->ra)) > 0.001)
 		ret = check_up(data, ray, Tan);
-	else if (sin(degToRad(ray->ra)) < -0.001)
+	else if (sin(degtorad(ray->ra)) < -0.001)
 		ret = check_down(data, ray, Tan);
 	else
 	{
