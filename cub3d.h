@@ -30,8 +30,12 @@
 /* Hooks values */
 # define KEYPRESS		2
 # define KEYRELEASE		3
+# define MOUSEMOVE		6
+# define DESTROY		17
 # define KEYPRESSMASK	1L
 # define KEYRELEASEMASK	2L
+# define BUTTONMOTION	1L<<13
+# define STRUCTURENOT	1L<<17
 
 # define RED 0xFF0000
 # define GREEN 0xFF00
