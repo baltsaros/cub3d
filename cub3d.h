@@ -314,13 +314,13 @@ t_map	read_param(t_data *data, char *file);
 int		init_map(t_data *data, char *file);
 
 /* init_map_utils_1.c */
+void	check_chars(char **raw, t_data *data);
 char	*find_param(char **raw, char *param, t_data *data);
 void	find_mapsize(char **raw, int j, t_data *data);
 void	copy_map(char **raw, t_data *data);
 void	check_map(t_map *map, t_data *data);
 
 /* init_map_utils_2.c */
-void	check_chars(char **raw, t_data *data);
 void	check_rows(char **map, t_data *data);
 void	check_columns(char **map, t_data *data);
 void	check_player(char **map, t_data *data);
