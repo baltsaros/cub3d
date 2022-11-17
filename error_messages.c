@@ -4,7 +4,6 @@ int	error_check_exit(int input, char *str, t_data *data)
 {
 	size_t	len;
 
-	(void)data;
 	if (input < 0)
 	{
 		write(2, "Cub3d: ", 7);
@@ -21,7 +20,6 @@ int	error_check_noexit(int input, char *str, t_data *data)
 {
 	size_t	len;
 
-	(void)data;
 	if (input < 0)
 	{
 		write(2, "Cub3d: ", 7);

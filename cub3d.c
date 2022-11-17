@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 16:52:48 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 17:16:16 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int		launcher(t_data *data)
 		leave(data, EXIT_FAILURE);
 	if (init_img(data))
 		leave(data, EXIT_FAILURE);
-	data->is_full_screen = 0;
 	hook_manager(data);
 	return (EXIT_FAILURE);
 }
