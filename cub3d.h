@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 18:46:37 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 18:57:19 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,6 +290,7 @@ int		check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
 /* init_img.c */
 int		init_img(t_data *data);
 int		is_xpm(char *str);
+void	mlx_xpm_init(t_data *data);
 int		load_textures(t_data *data);
 
 /* init_map_utils_1.c */

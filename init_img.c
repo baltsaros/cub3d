@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:01:28 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 17:50:12 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 19:03:31 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,21 @@ int	is_xpm(char *str)
 	int	i;
 
 	i = ft_strlen(str) - 1;
-	if (str[i] != 'm'
-		|| str[i - 1] != 'p'
-		|| str[i - 2] != 'x'
-		|| str[i - 3] != '.')
+	if (str[i] != 'm')
+		return (1);
+	i--;
+	if (i < 0 || str[i] != 'p')
+		return (1);
+	i--;
+	if (i < 0 || str[i] != 'x')
+		return (1);
+	i--;
+	if (i < 0 || str[i] != '.')
 		return (1);
 	return (0);
 }
 
-int	load_textures(t_data *data)
+void	mlx_xpm_init(t_data *data)
 {
 	data->no_text.img.img_ptr = mlx_xpm_file_to_image(data->mlx, data->map.no,
 			&data->no_text.width, &data->no_text.height);
@@ -63,6 +69,14 @@ int	load_textures(t_data *data)
 			&data->ea_text.width, &data->ea_text.height);
 	data->we_text.img.img_ptr = mlx_xpm_file_to_image(data->mlx, data->map.we,
 			&data->we_text.width, &data->we_text.height);
+}
+
+int	load_textures(t_data *data)
+{
+	if (is_xpm(data->map.no) || is_xpm(data->map.so)
+		|| is_xpm(data->map.ea) || is_xpm(data->map.we))
+		return (1);
+	mlx_xpm_init(data);
 	if (!data->no_text.img.img_ptr || !data->so_text.img.img_ptr
 		|| !data->ea_text.img.img_ptr || !data->we_text.img.img_ptr)
 		return (1);

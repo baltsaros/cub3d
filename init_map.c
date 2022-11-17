@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 08:37:44 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/17 18:53:44 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,5 @@ int	init_map(t_data *data, char *file)
 	check_extension(data, file);
 	data->map = read_param(data, file);
 	check_param(&(data->map), data);
-	print_map(data, data->map.map);
 	return (0);
 }
