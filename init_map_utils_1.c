@@ -97,14 +97,9 @@ void	copy_map(char **raw, t_data *data)
 
 void	check_map(t_map *map, t_data *data)
 {
-	printf("Checking characters...\n");
 	check_chars(map->map, data);
-	printf("Checking rows...\n");
 	check_rows(map->map, data);
-	printf("Checking columns...\n");
 	check_columns(map->map, data);
-	printf("Checking player...\n");
 	check_player(map->map, data);
 	check_direction(data);
-	printf("Mas has been checked!\n");
 }
