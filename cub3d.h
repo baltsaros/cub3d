@@ -88,34 +88,11 @@ typedef struct s_text
 
 // structs to store values for drawing
 
-typedef struct s_color
-{
-	int	t;
-	int	r;
-	int	g;
-	int	b;
-} t_color;
-
-typedef struct s_bre
-{
-	int	dx;
-	int	sx;
-	int	dy;
-	int	sy;
-	int	err;
-}	t_bre;
-
 typedef struct s_point
 {
 	int x;
 	int y;
 }	t_point;
-
-typedef struct s_seg
-{
-	t_point	p0;
-	t_point	p1;
-}	t_seg;
 
 typedef struct s_ray_calcul
 {
@@ -163,11 +140,6 @@ typedef struct s_player
 	int		speed;
 	int		rot_speed;
 }	t_player;
-
-typedef struct s_ray
-{
-	int test;
-}	t_ray;
 
 typedef struct s_minimap
 {
@@ -220,7 +192,6 @@ typedef struct s_data
 	t_map			map;
 	t_player		player_s;
 	t_img			player;
-	t_ray			ray_s;
 	t_minimap		minimap_s;
 	t_img			minimap;
 	t_img			walls;
