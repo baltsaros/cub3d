@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/15 16:23:29 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/17 08:37:44 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void	check_param(t_map *map, t_data *data)
 	alloc_check_big(map->f_spl, data);
 	alloc_check_big(map->c_spl, data);
 	copy_map(map->raw, data);
-	// for (int i = 0; map->map[i]; ++i)
-	// 	printf("map[%d] is %s\n", i, map->map[i]);
 	check_map(map, data);
 }
 

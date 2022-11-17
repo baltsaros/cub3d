@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/15 17:35:34 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/16 16:02:43 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		launcher(t_data *data)
 	ret = init_img(data);
 	if (ret != 0)
 		return (ret);
+	data->is_full_screen = 0;
 	hook_manager(data);
 	mlx_loop(data->mlx);
 	return (ret);

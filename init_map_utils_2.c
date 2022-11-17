@@ -3,26 +3,20 @@
 /////////////////////////
 // utils for check_map //
 /////////////////////////
-// check the map for invalid characters
-void	check_chars(char **raw, t_data *data)
-{
-	size_t	j;
-	size_t	i;
 
-	j = 0;
-	while (raw[j])
-	{
-		i = 0;
-		while (raw[j][i])
-		{
-			if (!check_charset(raw[j][i], "10NEWS "))
-				error_exit(data, "Ivalid character on the map", 1);
-			++i;
-		}
-		++j;
-	}
+int	check_wall(char c, int state)
+{
+	int	closed;
+
+	closed = state;
+	if (c == '1')
+		closed = 1;
+	else if (c == '0')
+		closed = 0;
+	return (closed);
 }
 
+// check if all gapes inside a map are closed
 void	check_gap(char **map, size_t i, size_t j, t_data *data)
 {
 	if (j > 0 && map[j - 1][i] && check_charset(map[j - 1][i], "0NEWS"))
@@ -35,6 +29,7 @@ void	check_gap(char **map, size_t i, size_t j, t_data *data)
 		error_exit(data, "Unclosed map: gap", 1);
 }
 
+// check that all rows are closed
 void	check_rows(char **map, t_data *data)
 {
 	size_t	j;
@@ -52,11 +47,8 @@ void	check_rows(char **map, t_data *data)
 			error_exit(data, "Unclosed map: rows", 1);
 		while (map[j][i])
 		{
-			if (map[j][i] == '1')
-				closed = 1;
-			else if (map[j][i] == '0')
-				closed = 0;
-			else if (map[j][i] == ' ')
+			closed = check_wall(map[j][i], closed);
+			if (map[j][i] == ' ')
 				check_gap(map, i, j, data);
 			i++;
 		}
@@ -84,10 +76,7 @@ void	check_columns(char **map, t_data *data)
 			error_exit(data, "Unclosed map: columns1", 1);
 		while (map[j] && map[j][i])
 		{
-			if (map[j][i] == '1')
-				closed = 1;
-			else if (map[j][i] == '0')
-				closed = 0;
+			closed = check_wall(map[j][i], closed);
 			j++;
 		}
 		if (!closed)
@@ -108,7 +97,7 @@ void	check_player(char **map, t_data *data)
 	while (map[j])
 	{
 		i = 0;
-		while(map[j][i])
+		while (map[j][i])
 		{
 			if (check_charset(map[j][i], "NEWS"))
 			{

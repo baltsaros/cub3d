@@ -19,7 +19,6 @@ char	*get_next_line(int fd, t_data *data)
 	line = ft_calloc(1, sizeof(char));
 	alloc_check_small(line, data);
 	r_bytes = 1;
-	buf[0] = '\0';
 	while (r_bytes > 0)
 	{
 		r_bytes = read(fd, buf, 1);
@@ -58,7 +57,6 @@ int	check_charset(char c, char *charset)
 
 int	ft_exit(t_data *data)
 {
-	// mlx_destroy_image(data->mlx, data->ceiling.img_ptr);
 	mlx_destroy_window(data->mlx, data->win);
 	cub_free_all(data);
 	exit(EXIT_SUCCESS);
