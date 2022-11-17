@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 17:18:47 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 18:46:53 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	init_player_values(t_data *data)
 	data->player_s.pos_x = 0;
 	data->player_s.pos_y = 0;
 	data->player_s.p_ang = data->map.angle;
-	data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
-	data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
+	data->player_s.delta_x = cos(degtorad(data->player_s.p_ang));
+	data->player_s.delta_y = -sin(degtorad(data->player_s.p_ang));
 	init_player_pos(data, data->map.height, data->map.width);
 	data->player_s.speed = 10;
 	data->player_s.rot_speed = 5;

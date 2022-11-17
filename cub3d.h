@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 18:43:32 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 18:46:37 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,7 @@ void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos);
 
 /* error_messages.c */
 int		error_check_exit(int input, char *str, t_data *data);
-int		error_check_noexit(int input, char *str, t_data *data);
+int		error_check_noexit(int input, char *str);
 void	error_exit(t_data *data, char *msg, int param);
 void	check_mlx(void *mlx, t_data *data);
 void	check_win(t_data *data);
@@ -332,6 +332,7 @@ void	move_up(t_data *data, t_ray_calcul *collisions);
 void	move_down(t_data *data, t_ray_calcul *collisions);
 void	move_right(t_data *data, t_ray_calcul *collisions);
 void	move_left(t_data *data, t_ray_calcul *collisions);
+void	move(t_data *data);
 
 /* player.c */
 int		is_player(char c);

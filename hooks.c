@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/17 17:54:44 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 18:45:07 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,16 @@ void	rotate_fov(int keycode, t_data *data)
 	if (keycode == RIGHT)
 	{
 		data->player_s.p_ang += data->player_s.rot_speed;
-		data->player_s.p_ang = FixAng(data->player_s.p_ang);
-		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
-		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
+		data->player_s.p_ang = fixang(data->player_s.p_ang);
+		data->player_s.delta_x = cos(degtorad(data->player_s.p_ang));
+		data->player_s.delta_y = -sin(degtorad(data->player_s.p_ang));
 	}
 	if (keycode == LEFT)
 	{
 		data->player_s.p_ang -= data->player_s.rot_speed;
-		data->player_s.p_ang = FixAng(data->player_s.p_ang);
-		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
-		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
+		data->player_s.p_ang = fixang(data->player_s.p_ang);
+		data->player_s.delta_x = cos(degtorad(data->player_s.p_ang));
+		data->player_s.delta_y = -sin(degtorad(data->player_s.p_ang));
 	}
 }
 

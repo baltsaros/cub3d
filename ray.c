@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 17:09:52 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 18:48:01 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	adapt_distance(t_ray_calcul *ray, int posH, int posV)
 {
-	if (ray->disV < ray->disH)
+	if (ray->disv < ray->dish)
 	{
 		ray->rx = ray->vx;
 		ray->ry = ray->vy;
-		ray->disH = ray->disV;
+		ray->dish = ray->disv;
 		return (posV);
 	}
 	return (posH);
@@ -28,8 +28,8 @@ void	fisheye_fix(t_data *data, t_ray_calcul *ray)
 {
 	float	ca;
 
-	ca = FixAng(data->player_s.p_ang - ray->ra);
-	ray->disH = ray->disH * cos(degToRad(ca));
+	ca = fixang(data->player_s.p_ang - ray->ra);
+	ray->dish = ray->dish * cos(degtorad(ca));
 }
 
 void	raycast(t_data *data, t_ray_calcul ray)
@@ -40,10 +40,10 @@ void	raycast(t_data *data, t_ray_calcul ray)
 	int		pos;
 
 	ray.r = 0;
-	ray.ra = FixAng(data->player_s.p_ang + 30);
+	ray.ra = fixang(data->player_s.p_ang + 30);
 	while (ray.r < WIDTH)
 	{
-		tan_c = tan(degToRad(ray.ra));
+		tan_c = tan(degtorad(ray.ra));
 		posv = check_vertical_wall(data, &ray, tan_c);
 		ray.vx = ray.rx;
 		ray.vy = ray.ry;
@@ -51,7 +51,7 @@ void	raycast(t_data *data, t_ray_calcul ray)
 		pos = adapt_distance(&ray, posh, posv);
 		fisheye_fix(data, &ray);
 		init_calculate_wall(data, &ray, pos);
-		ray.ra = FixAng(ray.ra - ((float)FIELD_OF_VIEW / (float)WIDTH));
+		ray.ra = fixang(ray.ra - ((float)FIELD_OF_VIEW / (float)WIDTH));
 		ray.r++;
 	}
 }

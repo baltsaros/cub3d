@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal_wall.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:36:36 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 17:53:43 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 18:45:43 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ float	dish_calcul(t_data *data, float ra, float ry, float rx)
 	float	first;
 	float	second;
 
-	first = cos(degToRad(ra)) * (rx - data->player_s.pos_x);
-	second = sin(degToRad(ra)) * (ry - data->player_s.pos_y);
+	first = cos(degtorad(ra)) * (rx - data->player_s.pos_x);
+	second = sin(degtorad(ra)) * (ry - data->player_s.pos_y);
 	dish = first - second;
 	return (dish);
 }
@@ -36,7 +36,7 @@ void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof)
 			&& data->map.map[ray->my][ray->mx] == '1')
 		{
 			dof = data->map.height;
-			ray->disH = disH_calcul(data, ray->ra, ray->ry, ray->rx);
+			ray->dish = dish_calcul(data, ray->ra, ray->ry, ray->rx);
 		}
 		else
 		{
@@ -74,10 +74,10 @@ int	check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan)
 
 	dof = 0;
 	ret = 0;
-	ray->disH = 100000;
-	if (sin(degToRad(ray->ra)) > 0.001)
+	ray->dish = 100000;
+	if (sin(degtorad(ray->ra)) > 0.001)
 		ret = check_up(data, ray, Tan);
-	else if (sin(degToRad(ray->ra)) < -0.001)
+	else if (sin(degtorad(ray->ra)) < -0.001)
 		ret = check_down(data, ray, Tan);
 	else
 	{
