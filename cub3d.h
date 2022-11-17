@@ -292,10 +292,12 @@ void	error_exit(t_data *data, char *msg, int param);
 void	check_mlx(void *mlx, t_data *data);
 void	check_win(t_data *data);
 
+/* exit.c */
+void	leave(t_data *data, int ret);
+
 /* hooks.c */
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
-void	leave(t_data *data);
 void	rotate_fov(int keycode, t_data *data);
 int		mouse_hook(int x, int y, t_data *data);
 int		key_hook_manager(t_data *data);
@@ -338,7 +340,7 @@ void	print_map(t_data *data, char **map);
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
 void	draw_map(t_data *data, int color, int height, int width);
-int		init_minimap_values(t_data *data);
+void	init_minimap_values(t_data *data);
 
 /* move_utils.c */
 void    collisions_calculs_up_down(t_data *data, t_ray_calcul *collisions);
@@ -355,7 +357,7 @@ void    move(t_data *data);
 /* player.c */
 int		is_player(char c);
 void	init_player_pos(t_data *data, int height, int width);
-int		init_player_values(t_data *data);
+void	init_player_values(t_data *data);
 
 /* ray.c */
 int		adapt_distance(t_ray_calcul *ray, int posH, int posV);

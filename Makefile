@@ -46,7 +46,8 @@ SRCS		=	cub3d.c \
 				draw_utils.c \
 				init_img.c \
 				move.c \
-				move_utils.c
+				move_utils.c \
+				exit.c
 
 HEADER		= cub3d.h
 
@@ -88,7 +89,7 @@ fclean:		clean
 
 re:			fclean all
 
-val:		${NAME}
-			valgrind --leak-check=full ./$(NAME)
+val:		${LIBFT} ${NAME}
+			valgrind --leak-check=full ./$(NAME) maps/lvl0.cub
 
 .PHONY:		all clean fclean libft re .c.o norm brew val mlx

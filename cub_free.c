@@ -30,9 +30,9 @@ void	cub_free_params(t_data *data)
 		free(data->map.f);
 	if (data->map.c)
 		free(data->map.c);
-	cub_free(data->map.map);
 	cub_free(data->map.f_spl);
 	cub_free(data->map.c_spl);
+	cub_free(data->map.map);
 }
 
 void	cub_free_all(t_data *data)

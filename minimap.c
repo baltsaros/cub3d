@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/16 15:57:43 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 16:52:58 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,10 @@ void	draw_map(t_data *data, int color, int height, int width)
     }
 }
 
-int init_minimap_values(t_data *data)
+void init_minimap_values(t_data *data)
 {
     data->minimap_s.width = data->map.width * (SQUARE_SIZE / 2);
     data->minimap_s.height = data->map.height * (SQUARE_SIZE / 2);
     data->minimap_s.position.x = (WIDTH / 2) - (data->minimap_s.width / 2);
     data->minimap_s.position.y = 0;
-    return (0);
 }

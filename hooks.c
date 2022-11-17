@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/17 16:29:01 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 16:53:47 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	key_press(int keycode, t_data *data)
 {
 	if (keycode == ESC)
-		leave(data);
+		leave(data, EXIT_SUCCESS);
 	if (keycode == W)
 		data->keyboard.w = 1;
 	if (keycode == A)
@@ -46,18 +46,6 @@ int	key_release(int keycode, t_data *data)
 	if (keycode == LEFT)
 		data->keyboard.left = 0;
 	return (0);
-}
-
-void	leave(t_data *data)
-{
-	mlx_destroy_image(data->mlx, data->walls.img_ptr);
-	mlx_destroy_image(data->mlx, data->minimap.img_ptr);
-	mlx_destroy_image(data->mlx, data->player.img_ptr);
-	mlx_destroy_window(data->mlx, data->win);
-	free(data->mlx);
-	data->mlx = NULL;
-	cub_free_all(data);
-	exit(EXIT_SUCCESS);
 }
 
 void	rotate_fov(int keycode, t_data *data)
