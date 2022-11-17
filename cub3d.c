@@ -6,7 +6,11 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/11/17 10:38:45 by abuzdin          ###   ########.fr       */
+=======
+/*   Updated: 2022/11/16 16:02:43 by mthiry           ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +54,7 @@ int		launcher(t_data *data)
 	ret = init_img(data);
 	if (ret != 0)
 		return (ret);
+	data->is_full_screen = 0;
 	hook_manager(data);
 	mlx_loop(data->mlx);
 	return (ret);

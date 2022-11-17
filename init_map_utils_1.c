@@ -3,6 +3,26 @@
 ///////////////////////////
 // utils for check_param //
 ///////////////////////////
+// check the map for invalid characters
+void	check_chars(char **raw, t_data *data)
+{
+	size_t	j;
+	size_t	i;
+
+	j = 0;
+	while (raw[j])
+	{
+		i = 0;
+		while (raw[j][i])
+		{
+			if (!check_charset(raw[j][i], "10NEWS "))
+				error_exit(data, "Ivalid character on the map", 1);
+			++i;
+		}
+		++j;
+	}
+}
+
 // find a certain parameter from map input
 char	*find_param(char **raw, char *param, t_data *data)
 {
@@ -37,7 +57,7 @@ void	find_mapsize(char **raw, int j, t_data *data)
 	w = 0;
 	while (raw[j + h])
 	{
-		w = ft_strlen(raw[j]);
+		w = ft_strlen(raw[j + h]);
 		if (w > data->map.width)
 			data->map.width = w;
 		++h;
@@ -62,7 +82,7 @@ void	copy_map(char **raw, t_data *data)
 		error_exit(data, "Invalid map!", 1);
 	find_mapsize(raw, j, data);
 	i = 0;
-	data->map.map = cub_malloc(sizeof(char*) * (data->map.height + 1), data);
+	data->map.map = cub_malloc(sizeof(char *) * (data->map.height + 1), data);
 	while (raw[j + i])
 	{
 		data->map.map[i] = ft_calloc(data->map.width + 1, 1);

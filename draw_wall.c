@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/14 18:47:02 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 16:16:55 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ void    draw_a_wall(t_data *data, t_wall_drawing *wall, t_text text, double shad
 {
     int     color;
     
-    while (wall->begin.y != wall->end.y + 1)
+    if (wall->begin.y < 0)
     {
-        if (wall->begin.x >= 0 && wall->begin.x <= WIDTH && wall->begin.y >= 0 && wall->begin.y <= HEIGHT)
-        {
-            color = get_pixel(text.img, (int)wall->ty, (int)wall->tx);
-            mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, color * shade);
-        }    
+        wall->ty = (-wall->begin.y * wall->ty_step);
+        wall->begin.y = 0;
+    }
+    while (wall->begin.y != wall->end.y && wall->begin.y <= HEIGHT)
+    {
+        color = get_pixel(text.img, (int)wall->ty, (int)wall->tx);
+        mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, color * shade); 
         wall->begin.y++;
         wall->ty += wall->ty_step;
     }
@@ -65,5 +67,7 @@ void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
     data->wall_drawing.begin.y = (HEIGHT / 2) - (data->wall_drawing.wallHeight / 2);
     data->wall_drawing.end.x = data->wall_drawing.begin.x;
     data->wall_drawing.end.y = data->wall_drawing.begin.y + data->wall_drawing.wallHeight;
+    if (data->wall_drawing.begin.y < 0)
+        data->is_full_screen++;
     draw_vertical_line(data, &data->wall_drawing, ray, pos);
 }

@@ -230,6 +230,7 @@ typedef struct s_data
 	t_text			so_text;
 	t_text			ea_text;
 	t_text			we_text;
+	int				is_full_screen;
 	t_keyboard		keyboard;
 }	t_data;
 
@@ -319,13 +320,13 @@ t_map	read_param(t_data *data, char *file);
 int		init_map(t_data *data, char *file);
 
 /* init_map_utils_1.c */
+void	check_chars(char **raw, t_data *data);
 char	*find_param(char **raw, char *param, t_data *data);
 void	find_mapsize(char **raw, int j, t_data *data);
 void	copy_map(char **raw, t_data *data);
 void	check_map(t_map *map, t_data *data);
 
 /* init_map_utils_2.c */
-void	check_chars(char **raw, t_data *data);
 void	check_rows(char **map, t_data *data);
 void	check_columns(char **map, t_data *data);
 void	check_player(char **map, t_data *data);
@@ -336,7 +337,6 @@ void	print_map(t_data *data, char **map);
 
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
-void	draw_empty_square_coord(t_data *data, int color, int x, int y);
 void	draw_map(t_data *data, int color, int height, int width);
 int		init_minimap_values(t_data *data);
 

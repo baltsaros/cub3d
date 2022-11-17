@@ -17,22 +17,15 @@ void	check_direction(t_data *data)
 void	print_map(t_data *data, char **map)
 {
 	size_t	i;
-	size_t	j;
 
 	i = 0;
 	printf("\nDirection: %c\n", data->map.dir);
 	printf("Players coord: (%d, %d)\n", data->map.coord[1], data->map.coord[0]);
 	printf("Map size: %ld x %ld\n", data->map.width, data->map.height);
 	printf("MAP:\n\n");
-	while(map[i])
+	while (map[i])
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			write(1, &map[i][j], 1);
-			++j;
-		}
-		write(1, "\n", 1);
+		printf("%s\n", map[i]);
 		++i;
 	}
 }
