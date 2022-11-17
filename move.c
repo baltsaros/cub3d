@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:15:12 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/16 14:44:43 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/16 16:18:25 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void    move(t_data *data)
 {
     t_ray_calcul    collisions;
     
-    if (data->keyboard.w || data->keyboard.s)
+    if (data->keyboard.w ^ data->keyboard.s)
     {
         collisions_calculs_up_down(data, &collisions);
         if (data->keyboard.w && !data->keyboard.d && !data->keyboard.a)
@@ -88,13 +88,14 @@ void    move(t_data *data)
         if (data->keyboard.s && !data->keyboard.d && !data->keyboard.a)
             move_down(data, &collisions);
     }
-    if (data->keyboard.d || data->keyboard.a)
+    if (data->keyboard.d && !data->keyboard.a && !data->keyboard.w && !data->keyboard.s)
     {
         collisions_calculs_right(data, &collisions);
-        if (data->keyboard.d && !data->keyboard.w && !data->keyboard.s)
-            move_right(data, &collisions);
+        move_right(data, &collisions);
+    }
+    else if (data->keyboard.a && !data->keyboard.d && !data->keyboard.w && !data->keyboard.s)
+    {
         collisions_calculs_left(data, &collisions);
-        if (data->keyboard.a && !data->keyboard.w && !data->keyboard.s)
-            move_left(data, &collisions);
+        move_left(data, &collisions);
     }
 }

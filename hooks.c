@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/16 17:20:49 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 16:53:47 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	key_press(int keycode, t_data *data)
 {
+	if (keycode == ESC)
+		leave(data, EXIT_SUCCESS);
 	if (keycode == W)
 		data->keyboard.w = 1;
 	if (keycode == A)
@@ -22,8 +24,6 @@ int	key_press(int keycode, t_data *data)
 		data->keyboard.s = 1;
 	if (keycode == D)
 		data->keyboard.d = 1;
-	if (keycode == ESC)
-		leave(data, EXIT_SUCCESS);
 	if (keycode == RIGHT)
 		data->keyboard.right = 1;
 	if (keycode == LEFT)
@@ -64,6 +64,24 @@ void	rotate_fov(int keycode, t_data *data)
 		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
 	}
+}
+
+int	mouse_hook(int x, int y, t_data *data)
+{
+	// printf("dx: %d\nx: %d, y: %d\n", data->x, x, y);
+	if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
+		return (0);
+	if (WIDTH - x > data->x)
+	{
+		rotate_fov(RIGHT, data);
+		data->x += 15;
+	}
+	else
+	{
+		rotate_fov(LEFT, data);
+		data->x -= 15;
+	}
+	return (0);
 }
 
 int	key_hook_manager(t_data *data)

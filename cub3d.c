@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/16 17:47:00 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 16:52:48 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	hook_manager(t_data *data)
 	data->keyboard.left = 0;
 	mlx_hook(data->win, KEYPRESS, KEYPRESSMASK, key_press, data);
 	mlx_hook(data->win, KEYRELEASE, KEYRELEASEMASK, key_release, data);
+	mlx_hook(data->win, MOUSEMOVE, BUTTONMOTION, mouse_hook, data);
+	mlx_hook(data->win, DESTROY, STRUCTURENOT, ft_exit, data);
 	mlx_loop_hook(data->mlx, key_hook_manager, data);
 	mlx_hook(data->win, 17, 1L << 17, ft_exit, data);
 	mlx_loop(data->mlx);
@@ -40,6 +42,7 @@ int		launcher(t_data *data)
 		leave(data, EXIT_FAILURE);
 	if (init_img(data))
 		leave(data, EXIT_FAILURE);
+	data->is_full_screen = 0;
 	hook_manager(data);
 	return (EXIT_FAILURE);
 }

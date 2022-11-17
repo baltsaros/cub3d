@@ -30,8 +30,12 @@
 /* Hooks values */
 # define KEYPRESS		2
 # define KEYRELEASE		3
+# define MOUSEMOVE		6
+# define DESTROY		17
 # define KEYPRESSMASK	1L
 # define KEYRELEASEMASK	2L
+# define BUTTONMOTION	1L<<13
+# define STRUCTURENOT	1L<<17
 
 # define RED 0xFF0000
 # define GREEN 0xFF00
@@ -209,6 +213,7 @@ typedef struct s_data
 	void			*win;
 	size_t			i;
 	size_t			j;
+	int				x;
 	char			*s_tmp;
 	int				fd;
 	t_img			background;
@@ -225,6 +230,7 @@ typedef struct s_data
 	t_text			so_text;
 	t_text			ea_text;
 	t_text			we_text;
+	int				is_full_screen;
 	t_keyboard		keyboard;
 }	t_data;
 
@@ -293,6 +299,7 @@ void	leave(t_data *data, int ret);
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
 void	rotate_fov(int keycode, t_data *data);
+int		mouse_hook(int x, int y, t_data *data);
 int		key_hook_manager(t_data *data);
 
 /* horizontal_wall.c */
@@ -315,13 +322,13 @@ t_map	read_param(t_data *data, char *file);
 int		init_map(t_data *data, char *file);
 
 /* init_map_utils_1.c */
+void	check_chars(char **raw, t_data *data);
 char	*find_param(char **raw, char *param, t_data *data);
 void	find_mapsize(char **raw, int j, t_data *data);
 void	copy_map(char **raw, t_data *data);
 void	check_map(t_map *map, t_data *data);
 
 /* init_map_utils_2.c */
-void	check_chars(char **raw, t_data *data);
 void	check_rows(char **map, t_data *data);
 void	check_columns(char **map, t_data *data);
 void	check_player(char **map, t_data *data);
@@ -332,7 +339,6 @@ void	print_map(t_data *data, char **map);
 
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
-void	draw_empty_square_coord(t_data *data, int color, int x, int y);
 void	draw_map(t_data *data, int color, int height, int width);
 void	init_minimap_values(t_data *data);
 

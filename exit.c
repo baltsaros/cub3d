@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:19:11 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 07:45:43 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/17 16:51:44 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	leave(t_data *data, int ret)
 	mlx_destroy_image(data->mlx, data->we_text.img.img_ptr);
 	mlx_destroy_image(data->mlx, data->ea_text.img.img_ptr);
 	mlx_destroy_window(data->mlx, data->win);
+	free(data->mlx);
 	data->mlx = NULL;
 	data->win = NULL;
 	cub_free_all(data);
