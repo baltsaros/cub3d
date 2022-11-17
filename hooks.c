@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/17 11:18:14 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/17 16:29:01 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,24 @@ void	rotate_fov(int keycode, t_data *data)
 		data->player_s.delta_x = cos(degToRad(data->player_s.p_ang));
 		data->player_s.delta_y = -sin(degToRad(data->player_s.p_ang));
 	}
+}
+
+int	mouse_hook(int x, int y, t_data *data)
+{
+	// printf("dx: %d\nx: %d, y: %d\n", data->x, x, y);
+	if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
+		return (0);
+	if (WIDTH - x > data->x)
+	{
+		rotate_fov(RIGHT, data);
+		data->x += 15;
+	}
+	else
+	{
+		rotate_fov(LEFT, data);
+		data->x -= 15;
+	}
+	return (0);
 }
 
 int	key_hook_manager(t_data *data)
