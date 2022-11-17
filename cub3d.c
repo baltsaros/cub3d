@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 17:16:16 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 17:35:13 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	hook_manager(t_data *data)
 	mlx_loop(data->mlx);
 }
 
-int		launcher(t_data *data)
+int	launcher(t_data *data)
 {
 	data->mlx = mlx_init();
 	check_mlx(data->mlx, data);
@@ -52,7 +52,7 @@ int	main(int argc, char *argv[])
 	t_data	data;
 
 	if (argc != 2)
-		error_exit(&data, "Ivalid amount of arguments", 0);
+		error_exit(&data, "Invalid amount of arguments", 0);
 	init_map(&data, argv[1]);
 	ret = launcher(&data);
 	leave(&data, ret);
