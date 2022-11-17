@@ -89,7 +89,7 @@ fclean:		clean
 
 re:			fclean all
 
-val:		${NAME}
-			valgrind --leak-check=full ./$(NAME)
+val:		${LIBFT} ${NAME}
+			valgrind --leak-check=full ./$(NAME) maps/lvl0.cub
 
 .PHONY:		all clean fclean libft re .c.o norm brew val mlx
