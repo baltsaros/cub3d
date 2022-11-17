@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/16 16:27:01 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 17:09:52 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,34 @@ int	adapt_distance(t_ray_calcul *ray, int posH, int posV)
 	return (posH);
 }
 
-void    fisheye_fix(t_data *data, t_ray_calcul *ray)
+void	fisheye_fix(t_data *data, t_ray_calcul *ray)
 {
 	float	ca;
-	
+
 	ca = FixAng(data->player_s.p_ang - ray->ra);
-	ray->disH = ray->disH * cos(degToRad(ca));  
+	ray->disH = ray->disH * cos(degToRad(ca));
 }
 
 void	raycast(t_data *data, t_ray_calcul ray)
 {
-    float   Tan;
-    int     posH;
-    int     posV;
-    int     pos;
-    
-    ray.r = 0;
-    ray.ra = FixAng(data->player_s.p_ang + 30);
-    while (ray.r < WIDTH)
-    {
-        Tan = tan(degToRad(ray.ra));
-        posV = check_vertical_wall(data, &ray, Tan);
-        ray.vx = ray.rx;
-        ray.vy = ray.ry;
-        posH = check_horizontal_wall(data, &ray, (1.0 / Tan));
-        pos = adapt_distance(&ray, posH, posV);
-        fisheye_fix(data, &ray);
-        init_calculate_wall(data, &ray, pos);
-        ray.ra = FixAng(ray.ra - ((float)FIELD_OF_VIEW / (float)WIDTH));
-        ray.r++;
-    }
+	float	tan_c;
+	int		posh;
+	int		posv;
+	int		pos;
+
+	ray.r = 0;
+	ray.ra = FixAng(data->player_s.p_ang + 30);
+	while (ray.r < WIDTH)
+	{
+		tan_c = tan(degToRad(ray.ra));
+		posv = check_vertical_wall(data, &ray, tan_c);
+		ray.vx = ray.rx;
+		ray.vy = ray.ry;
+		posh = check_horizontal_wall(data, &ray, (1.0 / tan_c));
+		pos = adapt_distance(&ray, posh, posv);
+		fisheye_fix(data, &ray);
+		init_calculate_wall(data, &ray, pos);
+		ray.ra = FixAng(ray.ra - ((float)FIELD_OF_VIEW / (float)WIDTH));
+		ray.r++;
+	}
 }
