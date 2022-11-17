@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 18:57:19 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 22:48:27 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <errno.h>
 # include <math.h>
+# include "mlx_linux/mlx.h"
 # include "mlx/mlx.h"
 # include "libft/libft.h"
 
@@ -49,8 +50,8 @@
 
 enum	e_s_keys
 {
-	LEFT	= 65361,
-	RIGHT	= 65363,
+	LEFT	= 65363,
+	RIGHT	= 65361,
 	W		= 119,
 	A		= 97,
 	S		= 115,
