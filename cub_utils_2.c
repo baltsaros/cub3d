@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/17 18:10:06 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/17 18:32:05 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,4 @@ int	check_charset(char c, char *charset)
 		++i;
 	}
 	return (0);
-}
-
-int	ft_exit(t_data *data)
-{
-	mlx_destroy_window(data->mlx, data->win);
-	cub_free_all(data);
-	exit(EXIT_SUCCESS);
 }
