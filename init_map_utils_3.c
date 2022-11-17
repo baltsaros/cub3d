@@ -17,7 +17,6 @@ void	check_direction(t_data *data)
 void	print_map(t_data *data, char **map)
 {
 	size_t	i;
-	size_t	j;
 
 	i = 0;
 	printf("\nDirection: %c\n", data->map.dir);
@@ -26,13 +25,7 @@ void	print_map(t_data *data, char **map)
 	printf("MAP:\n\n");
 	while (map[i])
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			write(1, &map[i][j], 1);
-			++j;
-		}
-		write(1, "\n", 1);
+		printf("%s\n", map[i]);
 		++i;
 	}
 }

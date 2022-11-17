@@ -57,7 +57,7 @@ void	find_mapsize(char **raw, int j, t_data *data)
 	w = 0;
 	while (raw[j + h])
 	{
-		w = ft_strlen(raw[j]);
+		w = ft_strlen(raw[j + h]);
 		if (w > data->map.width)
 			data->map.width = w;
 		++h;
