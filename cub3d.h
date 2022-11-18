@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 13:27:37 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 13:34:41 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@
 # define DESTROY		17
 # define KEYPRESSMASK	1L
 # define KEYRELEASEMASK	2L
+# define BUTTONMOTION	1L<<13
+# define STRUCTURENOT	1L<<17
 # ifdef __linux__
 
 enum	e_s_keys
