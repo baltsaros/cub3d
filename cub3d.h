@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 20:10:29 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 22:43:20 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ enum	e_s_keys
 	A		= 97,
 	S		= 115,
 	D		= 100,
-	ESC		= 65307
+	ESC		= 65307,
+	SPACE	= 32
 };
 # else
 
@@ -70,7 +71,8 @@ enum	e_s_keys
 	A		= 0,
 	S		= 1,
 	D		= 2,
-	ESC		= 53
+	ESC		= 53,
+	SPACE	= 49
 };
 # endif
 
@@ -250,6 +252,9 @@ int		check_charset(char c, char *charset);
 /* cub3d.c */
 void	hook_manager(t_data *data);
 int		launcher(t_data *data);
+
+/* door.c */
+int 	is_door(t_data *data);
 
 /* draw_all.c */
 void	init_background(t_data *data);
