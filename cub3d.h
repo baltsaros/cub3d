@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 14:00:19 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/18 18:15:53 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,6 +259,9 @@ void	mlx_pixel_put_img(t_img	*img, int x, int y, int color);
 void	draw_square(t_img img, int color, int end_i, int end_j);
 void	draw_square_from(t_img img, int color, t_point begin, t_point end);
 
+/* draw_wall_utils.c */
+float	dis_calcul(t_data *data, float ra, float ry, float rx);
+
 /* draw_wall.c */
 void	draw_a_wall(t_data *data, t_wall_drawing *wall,
 			t_text text, double shade);
@@ -286,7 +289,6 @@ int		mouse_hook(int x, int y, t_data *data);
 int		key_hook_manager(t_data *data);
 
 /* horizontal_wall.c */
-float	dish_calcul(t_data *data, float ra, float ry, float rx);
 void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof);
 int		check_up(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_down(t_data *data, t_ray_calcul *ray, float Tan);
@@ -353,7 +355,6 @@ void	fisheye_fix(t_data *data, t_ray_calcul *ray);
 void	raycast(t_data *data, t_ray_calcul ray);
 
 /* vertical_wall.c */
-float	disv_calcul(t_data *data, float ra, float ry, float rx);
 void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof);
 int		check_right(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_left(t_data *data, t_ray_calcul *ray, float Tan);

@@ -6,23 +6,11 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:36:36 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 18:45:43 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 18:15:25 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-float	dish_calcul(t_data *data, float ra, float ry, float rx)
-{
-	float	dish;
-	float	first;
-	float	second;
-
-	first = cos(degtorad(ra)) * (rx - data->player_s.pos_x);
-	second = sin(degtorad(ra)) * (ry - data->player_s.pos_y);
-	dish = first - second;
-	return (dish);
-}
 
 void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof)
 {
@@ -36,7 +24,7 @@ void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof)
 			&& data->map.map[ray->my][ray->mx] == '1')
 		{
 			dof = data->map.height;
-			ray->dish = dish_calcul(data, ray->ra, ray->ry, ray->rx);
+			ray->dish = dis_calcul(data, ray->ra, ray->ry, ray->rx);
 		}
 		else
 		{

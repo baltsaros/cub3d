@@ -6,23 +6,11 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:35:14 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 18:46:12 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 18:15:33 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-float	disv_calcul(t_data *data, float ra, float ry, float rx)
-{
-	float	disv;
-	float	first;
-	float	second;
-
-	first = cos(degtorad(ra)) * (rx - data->player_s.pos_x);
-	second = sin(degtorad(ra)) * (ry - data->player_s.pos_y);
-	disv = first - second;
-	return (disv);
-}
 
 void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof)
 {
@@ -36,7 +24,7 @@ void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof)
 			&& data->map.map[ray->my][ray->mx] == '1')
 		{
 			dof = data->map.width;
-			ray->disv = disv_calcul(data, ray->ra, ray->ry, ray->rx);
+			ray->disv = dis_calcul(data, ray->ra, ray->ry, ray->rx);
 		}
 		else
 		{
