@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 13:34:41 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/18 14:00:19 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ typedef struct s_map
 	char	**c_spl;
 	char	**map;
 	int		coord[2];
+	int		door[2];
 	int		dir;
 	int		angle;
 	size_t	width;
@@ -308,11 +309,12 @@ void	check_map(t_map *map, t_data *data);
 /* init_map_utils_2.c */
 int		check_wall(char c, int state);
 void	check_gap(char **map, size_t i, size_t j, t_data *data);
+void	check_door(char **map, size_t i, size_t j, t_data *data);
 void	check_rows(char **map, t_data *data);
 void	check_columns(char **map, t_data *data);
-void	check_player(char **map, t_data *data);
 
 /* init_map_utils_3.c */
+void	check_player(char **map, t_data *data);
 void	check_direction(t_data *data);
 void	print_map(t_data *data, char **map);
 
