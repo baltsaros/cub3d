@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 18:51:08 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 13:27:57 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	launcher(t_data *data)
 	check_win(data);
 	init_minimap_values(data);
 	init_player_values(data);
+	init_img_null(data);
 	if (load_textures(data))
 		leave(data, EXIT_FAILURE);
 	if (init_img(data))

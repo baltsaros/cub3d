@@ -6,11 +6,23 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:01:28 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 19:03:31 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 13:28:32 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_img_null(t_data *data)
+{
+	data->background.img_ptr = NULL;
+	data->walls.img_ptr = NULL;
+	data->minimap.img_ptr = NULL;
+	data->player.img_ptr = NULL;
+	data->no_text.img.img_ptr = NULL;
+	data->so_text.img.img_ptr = NULL;
+	data->ea_text.img.img_ptr = NULL;
+	data->we_text.img.img_ptr = NULL;
+}
 
 int	init_img(t_data *data)
 {
