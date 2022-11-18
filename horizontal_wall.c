@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:36:36 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 18:15:25 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 19:04:34 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof)
 		if (ray->my >= 0 && ray->mx >= 0
 			&& ray->my < (int)data->map.height
 			&& ray->mx < (int)data->map.width
-			&& data->map.map[ray->my][ray->mx] == '1')
+			&& data->map.map[ray->my][ray->mx] != '0'
+			&& is_player(data->map.map[ray->my][ray->mx]))
 		{
 			dof = data->map.height;
 			ray->dish = dis_calcul(data, ray->ra, ray->ry, ray->rx);
+			if (data->map.map[ray->my][ray->mx] == 'D')
+				ray->dish += SQUARE_SIZE / 2; 
 		}
 		else
 		{
