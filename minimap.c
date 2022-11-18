@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 18:50:32 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 21:57:36 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	draw_map(t_data *data, int color, int height, int width)
 		j = 0;
 		while (j != width)
 		{
-			if (data->map.map[i][j] == '1')
+			if (data->map.map[i][j] == '1' || data->map.map[i][j] == 'D')
 				draw_square_coord(data, color, j * (SQUARE_SIZE / 2),
 					i * (SQUARE_SIZE / 2));
 			j++;
