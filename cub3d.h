@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 22:43:20 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 22:49:59 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,7 @@ void	hook_manager(t_data *data);
 int		launcher(t_data *data);
 
 /* door.c */
-int 	is_door(t_data *data);
+void    open_door(t_data *data);
 
 /* draw_all.c */
 void	init_background(t_data *data);

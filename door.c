@@ -6,13 +6,13 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 22:18:43 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 22:43:00 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 22:49:43 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int is_door(t_data *data)
+void    open_door(t_data *data)
 {
     t_ray_calcul    door;
 
@@ -20,5 +20,4 @@ int is_door(t_data *data)
     if (data->map.map
         [door.ipy_add_yo][door.ipx_add_xo] == 'D')
         data->map.map[door.ipy_add_yo][door.ipx_add_xo] = '0';
-    return (1);
 }
