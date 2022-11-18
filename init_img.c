@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:01:28 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 13:28:32 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 19:32:06 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_img_null(t_data *data)
 	data->so_text.img.img_ptr = NULL;
 	data->ea_text.img.img_ptr = NULL;
 	data->we_text.img.img_ptr = NULL;
+	data->door_text.img.img_ptr = NULL;
 }
 
 int	init_img(t_data *data)
@@ -81,12 +82,16 @@ void	mlx_xpm_init(t_data *data)
 			&data->ea_text.width, &data->ea_text.height);
 	data->we_text.img.img_ptr = mlx_xpm_file_to_image(data->mlx, data->map.we,
 			&data->we_text.width, &data->we_text.height);
+	data->door_text.img.img_ptr = mlx_xpm_file_to_image(data->mlx,
+			"./textures/door.xpm",
+			&data->door_text.width, &data->door_text.height);
 }
 
 int	load_textures(t_data *data)
 {
 	if (is_xpm(data->map.no) || is_xpm(data->map.so)
-		|| is_xpm(data->map.ea) || is_xpm(data->map.we))
+		|| is_xpm(data->map.ea) || is_xpm(data->map.we)
+		|| is_xpm("./textures/door.xpm"))
 		return (1);
 	mlx_xpm_init(data);
 	if (!data->no_text.img.img_ptr || !data->so_text.img.img_ptr
@@ -104,5 +109,8 @@ int	load_textures(t_data *data)
 	data->we_text.img.addr = mlx_get_data_addr(data->we_text.img.img_ptr,
 			&data->we_text.img.bpp, &data->we_text.img.line_length,
 			&data->we_text.img.endian);
+	data->door_text.img.addr = mlx_get_data_addr(data->door_text.img.img_ptr,
+			&data->door_text.img.bpp, &data->door_text.img.line_length,
+			&data->door_text.img.endian);
 	return (0);
 }

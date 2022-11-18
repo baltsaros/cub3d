@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 18:15:53 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 20:10:29 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ typedef struct s_ray_calcul
 	int		ipy;
 	int		ipy_add_yo;
 	int		ipy_sub_yo;
+	int		is_door_v;
+	int		is_door_h;
 }	t_ray_calcul;
 
 typedef struct s_wall_drawing
@@ -209,6 +211,7 @@ typedef struct s_data
 	t_text			so_text;
 	t_text			ea_text;
 	t_text			we_text;
+	t_text			door_text;
 	int				is_full_screen;
 	t_keyboard		keyboard;
 }	t_data;
