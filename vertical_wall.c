@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:35:14 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 20:23:00 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 21:52:46 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof)
 			&& data->map.map[ray->my][ray->mx] != '0'
 			&& is_player(data->map.map[ray->my][ray->mx]))
 		{
-			if (data->map.map[ray->my][ray->mx] == 'D')
-			{
-				ray->is_door_v = 1;
-			}
 			dof = data->map.width;
 			ray->disv = dis_calcul(data, ray->ra, ray->ry, ray->rx);
+			if (data->map.map[ray->my][ray->mx] == 'D')
+				ray->is_door_v = 1;
 		}
 		else
 		{
