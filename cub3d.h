@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 22:48:27 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 12:28:02 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,7 @@ void	check_mlx(void *mlx, t_data *data);
 void	check_win(t_data *data);
 
 /* exit.c */
+void	free_images(t_data *data);
 int		ft_exit(t_data *data);
 void	leave(t_data *data, int ret);
 
