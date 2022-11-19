@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/17 18:10:32 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/19 12:36:41 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ void	check_columns(char **map, t_data *data)
 	i = 0;
 	while (map[j][i])
 	{
-		while (map[j][i] && check_charset(map[j][i], " \f\n\r\t\v"))
+		while (map[j] && map[j][i] && check_charset(map[j][i], " \f\n\r\t\v"))
 			++j;
-		if (map[j][i] && map[j][i] != '1')
+		if (map[j] && map[j][i] && map[j][i] != '1')
 			error_exit(data, "Unclosed map: columns1", 1);
 		while (map[j] && map[j][i])
 		{
