@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:36:36 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 21:52:38 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/21 16:40:43 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof)
 int	check_up(t_data *data, t_ray_calcul *ray, float Tan)
 {
 	ray->ry = (((int)data->player_s.pos_y / SQUARE_SIZE) * SQUARE_SIZE)
-		- 0.0001;
+		- 1;
 	ray->rx = (data->player_s.pos_y - ray->ry) * Tan + data->player_s.pos_x;
 	ray->yo = -SQUARE_SIZE;
 	ray->xo = -ray->yo * Tan;

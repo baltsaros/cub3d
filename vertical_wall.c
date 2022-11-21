@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:35:14 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 21:52:46 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/21 16:39:43 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_right(t_data *data, t_ray_calcul *ray, float Tan)
 int	check_left(t_data *data, t_ray_calcul *ray, float Tan)
 {
 	ray->rx = (((int)data->player_s.pos_x / SQUARE_SIZE) * SQUARE_SIZE)
-		- 0.0001;
+		- 1;
 	ray->ry = (data->player_s.pos_x - ray->rx) * Tan + data->player_s.pos_y;
 	ray->xo = -SQUARE_SIZE;
 	ray->yo = -ray->xo * Tan;
