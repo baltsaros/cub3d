@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/21 17:42:52 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/21 17:50:37 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,16 @@ void	hook_manager(t_data *data)
 
 void	init_static_img_addr(t_data *data)
 {
+	t_point	max;
+	
 	init_background(data);
 	ft_memset(data->player.addr, data->player.basic_color,
 		PLAYER_SIZE * sizeof(int));
 	ft_memset(data->minimap.addr, create_trgb(255, 255, 255, 255),
 		data->minimap_s.height * data->minimap_s.width * sizeof(int));
-	draw_map(data, data->map.map, data->map.height, data->map.width);
+	max.y = data->map.height;
+	max.x = data->map.width;
+	draw_map(data, data->map.map, data->minimap.basic_color, max);
 }
 
 int	launcher(t_data *data)
