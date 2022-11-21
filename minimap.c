@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/21 17:40:15 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/21 17:42:24 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,28 +68,28 @@ void	draw_door_coord_v(t_data *data, int color, int x, int y)
 	}
 }
 
-void	draw_map(t_data *data, int color, int height, int width)
+void	draw_map(t_data *data, char **map, int height, int width)
 {
+	int	color;
 	int	i;
 	int	j;
 
+	color = data->minimap.basic_color;
 	i = 0;
 	while (i != height)
 	{
 		j = 0;
 		while (j != width)
 		{
-			if (data->map.map[i][j] == '1')
+			if (map[i][j] == '1')
 				draw_square_coord(data, color, j * (SQUARE_SIZE / 2),
 					i * (SQUARE_SIZE / 2));
-			else if (data->map.map[i][j] == 'D')
+			else if (map[i][j] == 'D')
 			{
-				if (data->map.map[i][j - 1] == '1'
-					&& data->map.map[i][j + 1] == '1')
+				if (map[i][j - 1] == '1' && map[i][j + 1] == '1')
 				draw_door_coord_h(data, color, j * (SQUARE_SIZE / 2),
 					i * (SQUARE_SIZE / 2));
-				else if (data->map.map[i - 1][j] == '1'
-					&& data->map.map[i + 1][j] == '1')
+				else if (map[i - 1][j] == '1' && map[i + 1][j] == '1')
 				draw_door_coord_v(data, color, j * (SQUARE_SIZE / 2),
 					i * (SQUARE_SIZE / 2));
 			}
