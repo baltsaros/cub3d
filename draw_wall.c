@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/21 18:11:34 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/21 18:39:31 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,18 @@ void	draw_vertical_line(t_data *data, t_wall_drawing *wall,
 	}
 }
 
+void	draw_vertical_door(t_data *data, t_wall_drawing *wall,
+		t_ray_calcul *ray, int pos)
+{
+	wall->ty = 0;
+	wall->ty_step = (float)data->door_text.height / (float)wall->wallheight;
+	if (pos == NORTH ^ pos == SOUTH)
+		wall->tx = (int)(ray->rx) % data->door_text.width;
+	else
+		wall->tx = (int)(ray->ry) % data->door_text.width;
+	draw_a_wall(data, wall, data->door_text);
+}
+
 void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
 {
 	data->wall_drawing.distproj = (WIDTH / 2)
@@ -80,5 +92,8 @@ void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
 	data->wall_drawing.end.x = data->wall_drawing.begin.x;
 	data->wall_drawing.end.y = data->wall_drawing.begin.y
 		+ data->wall_drawing.wallheight;
-	draw_vertical_line(data, &data->wall_drawing, ray, pos);
+	if (ray->is_door_h)
+		draw_vertical_door(data, &data->wall_drawing, ray, pos);
+	else
+		draw_vertical_line(data, &data->wall_drawing, ray, pos);
 }
