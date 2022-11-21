@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 13:34:57 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/21 17:21:04 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@ void	hook_manager(t_data *data)
 	mlx_loop(data->mlx);
 }
 
+void	init_static_img_addr(t_data *data)
+{
+	init_background(data);
+	ft_memset(data->player.addr, data->player.basic_color,
+		PLAYER_SIZE * sizeof(int));
+	ft_memset(data->minimap.addr, create_trgb(255, 255, 255, 255),
+		data->minimap_s.height * data->minimap_s.width * sizeof(int));
+	draw_map(data, data->minimap.basic_color, data->map.height,
+		data->map.width);
+}
+
 int	launcher(t_data *data)
 {
 	data->mlx = mlx_init();
@@ -42,6 +53,7 @@ int	launcher(t_data *data)
 		leave(data, EXIT_FAILURE);
 	if (init_img(data))
 		leave(data, EXIT_FAILURE);
+	init_static_img_addr(data);
 	hook_manager(data);
 	return (EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/21 14:13:03 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/21 17:33:19 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,6 @@ typedef struct s_data
 	t_text			ea_text;
 	t_text			we_text;
 	t_text			door_text;
-	int				is_full_screen;
 	t_keyboard		keyboard;
 }	t_data;
 
@@ -250,6 +249,7 @@ int		check_charset(char c, char *charset);
 
 /* cub3d.c */
 void	hook_manager(t_data *data);
+void	init_static_img_addr(t_data *data);
 int		launcher(t_data *data);
 
 /* door.c */
@@ -336,6 +336,8 @@ int		init_map(t_data *data, char *file);
 
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
+void	draw_door_coord_h(t_data *data, int color, int x, int y);
+void	draw_door_coord_v(t_data *data, int color, int x, int y);
 void	draw_map(t_data *data, int color, int height, int width);
 void	init_minimap_values(t_data *data);
 

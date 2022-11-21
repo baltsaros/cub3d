@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 21:57:36 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/21 17:40:15 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,44 @@ void	draw_square_coord(t_data *data, int color, int x, int y)
 	}
 }
 
+void	draw_door_coord_h(t_data *data, int color, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	y += SQUARE_SIZE / 8;
+	while (i != (SQUARE_SIZE / 4))
+	{
+		j = 0;
+		while (j != SQUARE_SIZE / 2)
+		{
+			mlx_pixel_put_img(&data->minimap, x + j, y + i, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_door_coord_v(t_data *data, int color, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	x += SQUARE_SIZE / 8;
+	while (i != SQUARE_SIZE / 2)
+	{
+		j = 0;
+		while (j != SQUARE_SIZE / 4)
+		{
+			mlx_pixel_put_img(&data->minimap, x + j, y + i, color);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	draw_map(t_data *data, int color, int height, int width)
 {
 	int	i;
@@ -41,9 +79,20 @@ void	draw_map(t_data *data, int color, int height, int width)
 		j = 0;
 		while (j != width)
 		{
-			if (data->map.map[i][j] == '1' || data->map.map[i][j] == 'D')
+			if (data->map.map[i][j] == '1')
 				draw_square_coord(data, color, j * (SQUARE_SIZE / 2),
 					i * (SQUARE_SIZE / 2));
+			else if (data->map.map[i][j] == 'D')
+			{
+				if (data->map.map[i][j - 1] == '1'
+					&& data->map.map[i][j + 1] == '1')
+				draw_door_coord_h(data, color, j * (SQUARE_SIZE / 2),
+					i * (SQUARE_SIZE / 2));
+				else if (data->map.map[i - 1][j] == '1'
+					&& data->map.map[i + 1][j] == '1')
+				draw_door_coord_v(data, color, j * (SQUARE_SIZE / 2),
+					i * (SQUARE_SIZE / 2));
+			}
 			j++;
 		}
 		i++;
