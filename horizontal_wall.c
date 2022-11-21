@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal_wall.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:36:36 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/21 18:04:26 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/21 19:32:06 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof)
 			&& ray->my < (int)data->map.height
 			&& ray->mx < (int)data->map.width
 			&& data->map.map[ray->my][ray->mx] != '0'
+			&& data->map.map[ray->my][ray->mx] != 'C'
 			&& is_player(data->map.map[ray->my][ray->mx]))
 		{
 			dof = data->map.height;
