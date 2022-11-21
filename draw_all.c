@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 18:02:44 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 19:03:18 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	draw_all(t_data *data)
 			data->background.img_ptr, 0, 0);
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr,
-		data->minimap_s.position.x, data->minimap_s.position.y);
-	mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr,
-		data->player_s.pos_win_x, data->player_s.pos_win_y);
+	// mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr,
+	// 	data->minimap_s.position.x, data->minimap_s.position.y);
+	// mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr,
+	// 	data->player_s.pos_win_x, data->player_s.pos_win_y);
 	return (0);
 }

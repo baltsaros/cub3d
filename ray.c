@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 18:48:01 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 20:11:31 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	adapt_distance(t_ray_calcul *ray, int posH, int posV)
 		ray->rx = ray->vx;
 		ray->ry = ray->vy;
 		ray->dish = ray->disv;
+		ray->is_door_h = ray->is_door_v;
 		return (posV);
 	}
 	return (posH);
@@ -43,6 +44,8 @@ void	raycast(t_data *data, t_ray_calcul ray)
 	ray.ra = fixang(data->player_s.p_ang + 30);
 	while (ray.r < WIDTH)
 	{
+		ray.is_door_h = 0;
+		ray.is_door_v = 0;
 		tan_c = tan(degtorad(ray.ra));
 		posv = check_vertical_wall(data, &ray, tan_c);
 		ray.vx = ray.rx;

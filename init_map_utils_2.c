@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/19 12:36:41 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/21 14:13:11 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,35 @@ int	check_wall(char c, int state)
 // check if all gapes inside a map are closed
 void	check_gap(char **map, size_t i, size_t j, t_data *data)
 {
-	if (j > 0 && map[j - 1][i] && check_charset(map[j - 1][i], "0NEWS"))
+	if (j > 0 && map[j - 1][i] && check_charset(map[j - 1][i], "0NEWSD"))
 		error_exit(data, "Unclosed map: gap", 1);
-	if (map[j + 1] && map[j + 1][i] && check_charset(map[j + 1][i], "0NEWS"))
+	if (map[j + 1] && map[j + 1][i] && check_charset(map[j + 1][i], "0NEWSD"))
 		error_exit(data, "Unclosed map: gap", 1);
-	if (i > 0 && map[j][i - 1] && check_charset(map[j][i - 1], "0NEWS"))
+	if (i > 0 && map[j][i - 1] && check_charset(map[j][i - 1], "0NEWSD"))
 		error_exit(data, "Unclosed map: gap", 1);
-	if (map[j][i + 1] && check_charset(map[j][i + 1], "0NEWS"))
+	if (map[j][i + 1] && check_charset(map[j][i + 1], "0NEWSD"))
 		error_exit(data, "Unclosed map: gap", 1);
+}
+
+void	check_door(char **map, size_t i, size_t j, t_data *data)
+{
+	int	wall;
+
+	wall = 0;
+	data->map.door[0] = i;
+	data->map.door[1] = j;
+	if (!i || !j || !map[j + 1][i] || !map[j][i + 1])
+		error_exit(data, "Incorrect door placement", 1);
+	if (map[j - 1][i] == '1')
+		++wall;
+	if (map[j + 1][i] == '1')
+		++wall;
+	if (map[j][i - 1] == '1')
+		++wall;
+	if (map[j][i + 1] == '1')
+		++wall;
+	if (wall == 4)
+		error_exit(data, "Door is surrounder by walls!", 1);
 }
 
 // check that all rows are closed
@@ -62,6 +83,8 @@ void	check_rows(char **map, t_data *data)
 			closed = check_wall(map[j][i], closed);
 			if (map[j][i] == ' ')
 				check_gap(map, i, j, data);
+			else if (map[j][i] == 'D')
+				check_door(map, i, j, data);
 			i++;
 		}
 		if (!closed)
@@ -96,33 +119,4 @@ void	check_columns(char **map, t_data *data)
 		++i;
 		j = 0;
 	}
-}
-
-void	check_player(char **map, t_data *data)
-{
-	size_t	j;
-	size_t	i;
-	int		player;
-
-	j = 0;
-	player = 0;
-	while (map[j])
-	{
-		i = 0;
-		while (map[j][i])
-		{
-			if (check_charset(map[j][i], "NEWS"))
-			{
-				player = 1;
-				data->map.dir = map[j][i];
-				data->map.coord[0] = i;
-				data->map.coord[1] = j;
-				break ;
-			}
-			++i;
-		}
-		++j;
-	}
-	if (!player)
-		error_exit(data, "There is no player on the map!", 1);
 }

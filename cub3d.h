@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 13:34:41 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/21 14:13:03 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdlib.h>
 # include <errno.h>
 # include <math.h>
-# include "mlx_linux/mlx.h"
 # include "mlx/mlx.h"
 # include "libft/libft.h"
 
@@ -58,7 +57,8 @@ enum	e_s_keys
 	A		= 97,
 	S		= 115,
 	D		= 100,
-	ESC		= 65307
+	ESC		= 65307,
+	SPACE	= 32
 };
 # else
 
@@ -70,7 +70,8 @@ enum	e_s_keys
 	A		= 0,
 	S		= 1,
 	D		= 2,
-	ESC		= 53
+	ESC		= 53,
+	SPACE	= 49
 };
 # endif
 
@@ -119,6 +120,8 @@ typedef struct s_ray_calcul
 	int		ipy;
 	int		ipy_add_yo;
 	int		ipy_sub_yo;
+	int		is_door_v;
+	int		is_door_h;
 }	t_ray_calcul;
 
 typedef struct s_wall_drawing
@@ -179,6 +182,7 @@ typedef struct s_map
 	char	**c_spl;
 	char	**map;
 	int		coord[2];
+	int		door[2];
 	int		dir;
 	int		angle;
 	size_t	width;
@@ -208,6 +212,7 @@ typedef struct s_data
 	t_text			so_text;
 	t_text			ea_text;
 	t_text			we_text;
+	t_text			door_text;
 	int				is_full_screen;
 	t_keyboard		keyboard;
 }	t_data;
@@ -247,6 +252,9 @@ int		check_charset(char c, char *charset);
 void	hook_manager(t_data *data);
 int		launcher(t_data *data);
 
+/* door.c */
+void    open_door(t_data *data);
+
 /* draw_all.c */
 void	init_background(t_data *data);
 int		draw_all(t_data *data);
@@ -257,6 +265,9 @@ int		get_pixel(t_img img, int y, int x);
 void	mlx_pixel_put_img(t_img	*img, int x, int y, int color);
 void	draw_square(t_img img, int color, int end_i, int end_j);
 void	draw_square_from(t_img img, int color, t_point begin, t_point end);
+
+/* draw_wall_utils.c */
+float	dis_calcul(t_data *data, float ra, float ry, float rx);
 
 /* draw_wall.c */
 void	draw_a_wall(t_data *data, t_wall_drawing *wall,
@@ -285,7 +296,6 @@ int		mouse_hook(int x, int y, t_data *data);
 int		key_hook_manager(t_data *data);
 
 /* horizontal_wall.c */
-float	dish_calcul(t_data *data, float ra, float ry, float rx);
 void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof);
 int		check_up(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_down(t_data *data, t_ray_calcul *ray, float Tan);
@@ -308,11 +318,12 @@ void	check_map(t_map *map, t_data *data);
 /* init_map_utils_2.c */
 int		check_wall(char c, int state);
 void	check_gap(char **map, size_t i, size_t j, t_data *data);
+void	check_door(char **map, size_t i, size_t j, t_data *data);
 void	check_rows(char **map, t_data *data);
 void	check_columns(char **map, t_data *data);
-void	check_player(char **map, t_data *data);
 
 /* init_map_utils_3.c */
+void	check_player(char **map, t_data *data);
 void	check_direction(t_data *data);
 void	print_map(t_data *data, char **map);
 
@@ -351,7 +362,6 @@ void	fisheye_fix(t_data *data, t_ray_calcul *ray);
 void	raycast(t_data *data, t_ray_calcul ray);
 
 /* vertical_wall.c */
-float	disv_calcul(t_data *data, float ra, float ry, float rx);
 void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof);
 int		check_right(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_left(t_data *data, t_ray_calcul *ray, float Tan);
