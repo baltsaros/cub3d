@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/21 17:49:59 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/21 18:11:48 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,7 +271,7 @@ float	dis_calcul(t_data *data, float ra, float ry, float rx);
 
 /* draw_wall.c */
 void	draw_a_wall(t_data *data, t_wall_drawing *wall,
-			t_text text, double shade);
+			t_text text);
 void	draw_vertical_line(t_data *data, t_wall_drawing *wall,
 			t_ray_calcul *ray, int pos);
 void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos);
