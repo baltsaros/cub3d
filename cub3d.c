@@ -6,7 +6,11 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2022/11/22 17:20:47 by mthiry           ###   ########.fr       */
+=======
 /*   Updated: 2022/11/22 14:00:38 by mthiry           ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +33,6 @@ void	hook_manager(t_data *data)
 	mlx_loop(data->mlx);
 }
 
-void	init_static_img_addr(t_data *data)
-{
-	t_point	max;
-
-	init_background(data);
-	ft_memset(data->player.addr, data->player.basic_color,
-		PLAYER_SIZE * sizeof(int));
-	ft_memset(data->minimap.addr, create_trgb(255, 255, 255, 255),
-		data->minimap_s.height * data->minimap_s.width * sizeof(int));
-	max.y = data->map.height;
-	max.x = data->map.width;
-	draw_map(data, data->map.map, data->minimap.basic_color, max);
-}
-
 int	launcher(t_data *data)
 {
 	data->mlx = mlx_init();
@@ -56,7 +46,7 @@ int	launcher(t_data *data)
 		leave(data, EXIT_FAILURE);
 	if (init_img(data))
 		leave(data, EXIT_FAILURE);
-	init_static_img_addr(data);
+	init_background(data);;
 	hook_manager(data);
 	return (EXIT_FAILURE);
 }

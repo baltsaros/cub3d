@@ -6,7 +6,11 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2022/11/22 15:52:26 by abuzdin          ###   ########.fr       */
+=======
 /*   Updated: 2022/11/22 13:57:39 by mthiry           ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +43,15 @@ int	draw_all(t_data *data)
 {
 	ft_memset(data->walls.addr, create_trgb(255, 255, 255, 255),
 		HEIGHT * WIDTH * sizeof(int));
+	ft_memset(data->minimap.addr, create_trgb(255, 255, 255, 255),
+		(data->minimap_s.height + 16) * (data->minimap_s.width + 16)
+		* sizeof(int));
+	draw_map(data, data->minimap_s.mmap, data->minimap.basic_color);
 	raycast(data, data->ray_calcul);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->background.img_ptr, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr,
-		data->minimap_s.position.x, data->minimap_s.position.y);
-	mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr,
-		data->player_s.pos_win_x, data->player_s.pos_win_y);
+		10, 10);
 	return (0);
 }

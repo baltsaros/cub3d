@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/21 18:39:54 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:20:58 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdlib.h>
 # include <errno.h>
 # include <math.h>
-# include "mlx/mlx.h"
 # include "libft/libft.h"
 
 /* Default Window Size */
@@ -38,17 +37,23 @@
 # define WEST			4
 # define ERROR_POS		100
 
-/* Hooks Values */
-# define KEYPRESS		2
-# define KEYRELEASE		3
-# define MOUSEMOVE		6
-# define DESTROY		17
-# define KEYPRESSMASK	1L
-# define KEYRELEASEMASK	2L
-# define BUTTONMOTION	1L<<13
-# define STRUCTURENOT	1L<<17
-# ifdef __linux__
+/* Mlx events and masks for hooks */
+enum e_hooks
+{
+	KEYPRESS		= 2,
+	KEYRELEASE		= 3,
+	MOUSEMOVE		= 6,
+	DESTROY			= 17,
+	KEYPRESSMASK	= 1L,
+	KEYRELEASEMASK	= 2L,
+	BUTTONMOTION	= 1L<<13,
+	STRUCTURENOT	= 1L<<17
+};
 
+
+/* Keycodes for Linux and (if not) Mac*/
+# ifdef __linux__
+#  include "mlx_linux/mlx.h"
 enum	e_s_keys
 {
 	LEFT	= 65363,
@@ -61,6 +66,7 @@ enum	e_s_keys
 	SPACE	= 32
 };
 # else
+#  include "mlx/mlx.h"
 
 enum	e_s_keys
 {
@@ -74,6 +80,19 @@ enum	e_s_keys
 	SPACE	= 49
 };
 # endif
+
+/* Set of colors */
+enum	e_colors {
+	RED		= 0xFF0000,
+	GREEN	= 0x00FF00,
+	WHITE	= 0xFFFFFF,
+	BLACK	= 0x000000,
+	GRAY	= 0x808080,
+	YELLOW	= 0xFFFF00,
+	DPURPLE = 0x301934,
+	TEST	= 0x90B3B0
+	
+};
 
 /* Structs to store mlx data for map */
 typedef struct s_img
@@ -99,6 +118,12 @@ typedef struct s_point
 	int	x;
 	int	y;
 }	t_point;
+
+typedef struct s_fpoint
+{
+	float	x;
+	float	y;
+}	t_fpoint;
 
 typedef struct s_ray_calcul
 {
@@ -151,9 +176,11 @@ typedef struct s_player
 
 typedef struct s_minimap
 {
-	t_point		position;
+	t_fpoint	position;
+	char		**mmap;
 	int			width;
 	int			height;
+	float		step;
 }	t_minimap;
 
 /* Struct for keys */
@@ -202,7 +229,6 @@ typedef struct s_data
 	t_img			background;
 	t_map			map;
 	t_player		player_s;
-	t_img			player;
 	t_minimap		minimap_s;
 	t_img			minimap;
 	t_img			walls;
@@ -249,7 +275,6 @@ int		check_charset(char c, char *charset);
 
 /* cub3d.c */
 void	hook_manager(t_data *data);
-void	init_static_img_addr(t_data *data);
 int		launcher(t_data *data);
 
 /* door.c */
@@ -340,7 +365,7 @@ int		init_map(t_data *data, char *file);
 void	draw_square_coord(t_data *data, int color, int x, int y);
 void	draw_door_coord_h(t_data *data, int color, int x, int y);
 void	draw_door_coord_v(t_data *data, int color, int x, int y);
-void	draw_map(t_data *data, char **map, int color, t_point max);
+void	draw_map(t_data *data, char **map, int color);
 void	init_minimap_values(t_data *data);
 
 /* move_utils.c */

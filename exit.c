@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:19:11 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 19:29:19 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:20:12 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	free_images(t_data *data)
 		mlx_destroy_image(data->mlx, data->walls.img_ptr);
 	if (data->minimap.img_ptr != NULL)
 		mlx_destroy_image(data->mlx, data->minimap.img_ptr);
-	if (data->player.img_ptr != NULL)
-		mlx_destroy_image(data->mlx, data->player.img_ptr);
 	if (data->background.img_ptr != NULL)
 		mlx_destroy_image(data->mlx, data->background.img_ptr);
 	if (data->no_text.img.img_ptr != NULL)
@@ -38,6 +36,7 @@ int	ft_exit(t_data *data)
 {
 	free_images(data);
 	mlx_destroy_window(data->mlx, data->win);
+	// mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	data->mlx = NULL;
 	data->win = NULL;
@@ -50,6 +49,7 @@ void	leave(t_data *data, int ret)
 {
 	free_images(data);
 	mlx_destroy_window(data->mlx, data->win);
+	// mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	data->mlx = NULL;
 	data->win = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/17 18:09:59 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/22 14:34:58 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	cub_free_params(t_data *data)
 	cub_free(data->map.f_spl);
 	cub_free(data->map.c_spl);
 	cub_free(data->map.map);
+	cub_free(data->minimap_s.mmap);
 }
 
 void	cub_free_all(t_data *data)
