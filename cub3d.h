@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 12:23:28 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 14:12:56 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,15 @@ typedef struct s_text
 /* Structs to store utils values for drawing */
 typedef struct s_point
 {
-	float	x;
-	float	y;
+	int	x;
+	int	y;
 }	t_point;
 
-typedef struct s_param
+typedef struct s_fpoint
 {
-	int	max_x;
-	int	min_x;
-	int	max_y;
-	int	min_y;
-}	t_param;
+	float	x;
+	float	y;
+}	t_fpoint;
 
 typedef struct s_ray_calcul
 {
@@ -166,10 +164,11 @@ typedef struct s_player
 
 typedef struct s_minimap
 {
-	t_point		position;
+	t_fpoint	position;
 	char		**mmap;
 	int			width;
 	int			height;
+	float		step;
 }	t_minimap;
 
 /* Struct for keys */

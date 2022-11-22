@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/18 13:47:38 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 12:52:09 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	print_map(t_data *data, char **map)
 
 	i = 0;
 	printf("\nDirection: %c\n", data->map.dir);
-	printf("Players coord: (%d, %d)\n", data->map.coord[1], data->map.coord[0]);
+	printf("Players coord: (%d, %d)\n", data->map.coord[0], data->map.coord[1]);
 	printf("Map size: %ld x %ld\n", data->map.width, data->map.height);
 	printf("MAP:\n\n");
 	while (map[i])
