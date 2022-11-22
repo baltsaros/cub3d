@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/18 22:49:33 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/23 00:38:49 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	key_press(int keycode, t_data *data)
 	if (keycode == LEFT)
 		data->keyboard.left = 1;
 	if (keycode == SPACE)
-		open_door(data);
+		open_close_door(data, data->ray_calcul);
 	return (0);
 }
 
