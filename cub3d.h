@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/21 18:39:54 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/22 12:23:28 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # include <math.h>
 # include "mlx/mlx.h"
 # include "libft/libft.h"
+
+# define RED 0xFF0000
+# define GREEN 0xFF00
+# define WHITE 0xFFFFFF
+# define BLACK 0x000000
+# define GRAY 0x808080
+# define TEST 0x90B3B0
 
 /* Default Window Size */
 # define WIDTH			1500
@@ -96,9 +103,17 @@ typedef struct s_text
 /* Structs to store utils values for drawing */
 typedef struct s_point
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 }	t_point;
+
+typedef struct s_param
+{
+	int	max_x;
+	int	min_x;
+	int	max_y;
+	int	min_y;
+}	t_param;
 
 typedef struct s_ray_calcul
 {
@@ -152,6 +167,7 @@ typedef struct s_player
 typedef struct s_minimap
 {
 	t_point		position;
+	char		**mmap;
 	int			width;
 	int			height;
 }	t_minimap;

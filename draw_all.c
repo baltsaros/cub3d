@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/21 19:17:24 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 12:17:56 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	draw_all(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->background.img_ptr, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
-	// mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr,
-	// 	data->minimap_s.position.x, data->minimap_s.position.y);
-	mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr,
-		data->player_s.pos_win_x, data->player_s.pos_win_y);
+	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr,
+		10, 10);
+	// mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr,
+	// 	data->player_s.pos_win_x + 10, data->player_s.pos_win_y + 10);
 	return (0);
 }

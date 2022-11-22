@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/21 17:50:37 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/22 12:10:49 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,15 @@ void	init_static_img_addr(t_data *data)
 		PLAYER_SIZE * sizeof(int));
 	ft_memset(data->minimap.addr, create_trgb(255, 255, 255, 255),
 		data->minimap_s.height * data->minimap_s.width * sizeof(int));
-	max.y = data->map.height;
-	max.x = data->map.width;
-	draw_map(data, data->map.map, data->minimap.basic_color, max);
+	max.y = 120;
+	max.x = 120;
+	(void)max;
+	draw_map(data, data->minimap_s.mmap, data->minimap.basic_color, max);
+	// mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr,
+	// 	data->minimap_s.position.x, data->minimap_s.position.y);
+	// mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr,
+	// 	data->player_s.pos_win_x, data->player_s.pos_win_y);
+	
 }
 
 int	launcher(t_data *data)
