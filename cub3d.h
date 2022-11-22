@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 16:57:26 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 17:20:58 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,6 @@ typedef struct s_data
 	t_img			background;
 	t_map			map;
 	t_player		player_s;
-	t_img			player;
 	t_minimap		minimap_s;
 	t_img			minimap;
 	t_img			walls;
@@ -276,7 +275,6 @@ int		check_charset(char c, char *charset);
 
 /* cub3d.c */
 void	hook_manager(t_data *data);
-void	init_static_img_addr(t_data *data);
 int		launcher(t_data *data);
 
 /* door.c */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:01:28 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 15:37:13 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 17:21:36 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	init_img_null(t_data *data)
 	data->background.img_ptr = NULL;
 	data->walls.img_ptr = NULL;
 	data->minimap.img_ptr = NULL;
-	data->player.img_ptr = NULL;
 	data->no_text.img.img_ptr = NULL;
 	data->so_text.img.img_ptr = NULL;
 	data->ea_text.img.img_ptr = NULL;
@@ -31,10 +30,8 @@ int	init_img(t_data *data)
 	data->walls.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->minimap.img_ptr = mlx_new_image(data->mlx,
 			data->minimap_s.width + 16, data->minimap_s.height + 16);
-	data->player.img_ptr = mlx_new_image(data->mlx, PLAYER_SIZE
-			/ 2, PLAYER_SIZE / 2);
 	if (!data->background.img_ptr || !data->walls.img_ptr
-		|| !data->minimap.img_ptr || !data->player.img_ptr)
+		|| !data->minimap.img_ptr)
 		return (1);
 	data->background.addr = mlx_get_data_addr(data->background.img_ptr,
 			&data->background.bpp, &data->background.line_length,
@@ -46,10 +43,6 @@ int	init_img(t_data *data)
 	data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr,
 			&data->minimap.bpp, &data->minimap.line_length,
 			&data->minimap.endian);
-	data->player.basic_color = 0x000000;
-	data->player.addr = mlx_get_data_addr(data->player.img_ptr,
-			&data->player.bpp, &data->player.line_length,
-			&data->player.endian);
 	return (0);
 }
 
