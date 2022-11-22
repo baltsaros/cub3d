@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 15:01:35 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 15:12:02 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,6 @@
 # include <math.h>
 # include "mlx/mlx.h"
 # include "libft/libft.h"
-
-# define RED 0xFF0000
-# define GREEN 0xFF00
-# define WHITE 0xFFFFFF
-# define BLACK 0x000000
-# define GRAY 0x808080
-# define TEST 0x90B3B0
 
 /* Default Window Size */
 # define WIDTH			1500
@@ -82,6 +75,17 @@ enum	e_s_keys
 };
 # endif
 
+/* Set of colors */
+enum	e_colors {
+	RED		= 0xFF0000,
+	GREEN	= 0x00FF00,
+	WHITE	= 0xFFFFFF,
+	BLACK	= 0x000000,
+	GRAY	= 0x808080,
+	YELLOW	= 0xFFFF00,
+	TEST	= 0x90B3B0
+	
+};
 /* Structs to store mlx data for map */
 typedef struct s_img
 {
