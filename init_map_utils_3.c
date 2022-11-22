@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/17 18:11:03 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 13:47:38 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	check_player(char **map, t_data *data)
+{
+	size_t	j;
+	size_t	i;
+	int		player;
+
+	j = 0;
+	player = 0;
+	while (map[j])
+	{
+		i = 0;
+		while (map[j][i])
+		{
+			if (check_charset(map[j][i], "NEWS"))
+			{
+				player = 1;
+				data->map.dir = map[j][i];
+				data->map.coord[0] = i;
+				data->map.coord[1] = j;
+				break ;
+			}
+			++i;
+		}
+		++j;
+	}
+	if (!player)
+		error_exit(data, "There is no player on the map!", 1);
+}
 
 void	check_direction(t_data *data)
 {

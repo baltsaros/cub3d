@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/17 18:10:25 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 14:01:24 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	check_chars(char **raw, t_data *data)
 		i = 0;
 		while (raw[j][i])
 		{
-			if (!check_charset(raw[j][i], "10NEWS "))
+			if (!check_charset(raw[j][i], "10NEWSD "))
 				error_exit(data, "Ivalid character on the map", 1);
 			++i;
 		}
@@ -114,4 +114,5 @@ void	check_map(t_map *map, t_data *data)
 	check_columns(map->map, data);
 	check_player(map->map, data);
 	check_direction(data);
+	print_map(data, data->map.map);
 }

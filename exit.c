@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:19:11 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 12:34:50 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/18 19:29:19 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	free_images(t_data *data)
 		mlx_destroy_image(data->mlx, data->we_text.img.img_ptr);
 	if (data->ea_text.img.img_ptr != NULL)
 		mlx_destroy_image(data->mlx, data->ea_text.img.img_ptr);
+	if (data->door_text.img.img_ptr != NULL)
+		mlx_destroy_image(data->mlx, data->door_text.img.img_ptr);
 }
 
 int	ft_exit(t_data *data)

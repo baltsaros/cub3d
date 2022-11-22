@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:15:12 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 17:29:27 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/21 19:38:32 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	move_up(t_data *data, t_ray_calcul *collisions)
 {
 	if (data->map.map
 		[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo] == '0'
+		|| data->map.map
+		[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo] == 'C'
 			|| !is_player(data->map.map
 			[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo]))
 	{
@@ -26,6 +28,8 @@ void	move_up(t_data *data, t_ray_calcul *collisions)
 	}
 	if (data->map.map
 		[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE] == '0'
+		|| data->map.map
+		[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE] == 'C'
 			|| !is_player(data->map.map
 			[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE]))
 	{
@@ -40,6 +44,8 @@ void	move_down(t_data *data, t_ray_calcul *collisions)
 {
 	if (data->map.map
 		[collisions->ipy / SQUARE_SIZE][collisions->ipx_sub_xo] == '0'
+		|| data->map.map
+		[collisions->ipy / SQUARE_SIZE][collisions->ipx_sub_xo] == 'C'
 			|| !is_player(data->map.map
 			[collisions->ipy / SQUARE_SIZE][collisions->ipx_sub_xo]))
 	{
@@ -50,6 +56,8 @@ void	move_down(t_data *data, t_ray_calcul *collisions)
 	}
 	if (data->map.map
 		[collisions->ipy_sub_yo][collisions->ipx / SQUARE_SIZE] == '0'
+		|| data->map.map
+		[collisions->ipy_sub_yo][collisions->ipx / SQUARE_SIZE] == 'C'
 			|| !is_player(data->map.map
 			[collisions->ipy_sub_yo][collisions->ipx / SQUARE_SIZE]))
 	{
@@ -64,6 +72,8 @@ void	move_right(t_data *data, t_ray_calcul *collisions)
 {
 	if (data->map.map
 		[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo] == '0'
+		|| data->map.map
+		[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo] == 'C'
 			|| !is_player(data->map.map
 			[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo]))
 	{
@@ -74,6 +84,8 @@ void	move_right(t_data *data, t_ray_calcul *collisions)
 	}
 	if (data->map.map
 		[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE] == '0'
+		|| data->map.map
+		[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE] == 'C'
 			|| !is_player(data->map.map
 			[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE]))
 	{
@@ -88,6 +100,8 @@ void	move_left(t_data *data, t_ray_calcul *collisions)
 {
 	if (data->map.map
 		[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo] == '0'
+		|| data->map.map
+		[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo] == 'C'
 			|| !is_player(data->map.map
 			[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo]))
 	{
@@ -98,6 +112,8 @@ void	move_left(t_data *data, t_ray_calcul *collisions)
 	}
 	if (data->map.map
 		[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE] == '0'
+		|| data->map.map
+		[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE] == 'C'
 			|| !is_player(data->map.map
 			[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE]))
 	{
