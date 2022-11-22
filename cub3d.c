@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/21 17:50:37 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/22 14:00:38 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	hook_manager(t_data *data)
 void	init_static_img_addr(t_data *data)
 {
 	t_point	max;
-	
+
 	init_background(data);
 	ft_memset(data->player.addr, data->player.basic_color,
 		PLAYER_SIZE * sizeof(int));
