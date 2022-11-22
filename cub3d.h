@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 15:24:42 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 16:57:26 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdlib.h>
 # include <errno.h>
 # include <math.h>
-# include "mlx/mlx.h"
 # include "libft/libft.h"
 
 /* Default Window Size */
@@ -54,7 +53,7 @@ enum e_hooks
 
 /* Keycodes for Linux and (if not) Mac*/
 # ifdef __linux__
-
+#  include "mlx_linux/mlx.h"
 enum	e_s_keys
 {
 	LEFT	= 65363,
@@ -67,6 +66,7 @@ enum	e_s_keys
 	SPACE	= 32
 };
 # else
+#  include "mlx/mlx.h"
 
 enum	e_s_keys
 {
@@ -89,6 +89,7 @@ enum	e_colors {
 	BLACK	= 0x000000,
 	GRAY	= 0x808080,
 	YELLOW	= 0xFFFF00,
+	DPURPLE = 0x301934,
 	TEST	= 0x90B3B0
 	
 };

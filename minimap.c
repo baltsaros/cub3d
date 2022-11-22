@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 15:51:30 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 17:10:15 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ void	draw_map(t_data *data, char **map, int color)
 	int		px;
 	int		py;
 
-	px = data->minimap_s.position.x - 7;
-	py = data->minimap_s.position.y - 7;
-	draw_mm_background(data, YELLOW);
+	px = lroundf(data->minimap_s.position.x) - 7;
+	py = lroundf(data->minimap_s.position.y) - 7;
+	draw_mm_background(data, DPURPLE);
 	j = 1;
 	while (j != (data->minimap_s.height + 8) / PLAYER_SIZE)
 	{
