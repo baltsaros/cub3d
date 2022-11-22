@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:01:28 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 19:32:06 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/22 15:37:13 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	init_img(t_data *data)
 	data->background.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->walls.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->minimap.img_ptr = mlx_new_image(data->mlx,
-			data->minimap_s.width, data->minimap_s.height);
+			data->minimap_s.width + 16, data->minimap_s.height + 16);
 	data->player.img_ptr = mlx_new_image(data->mlx, PLAYER_SIZE
 			/ 2, PLAYER_SIZE / 2);
 	if (!data->background.img_ptr || !data->walls.img_ptr

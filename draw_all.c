@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 15:02:59 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 15:52:26 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	draw_all(t_data *data)
 	ft_memset(data->walls.addr, create_trgb(255, 255, 255, 255),
 		HEIGHT * WIDTH * sizeof(int));
 	ft_memset(data->minimap.addr, create_trgb(255, 255, 255, 255),
-		data->minimap_s.height * data->minimap_s.width * sizeof(int));
+		(data->minimap_s.height + 16) * (data->minimap_s.width + 16)
+		* sizeof(int));
 	draw_map(data, data->minimap_s.mmap, data->minimap.basic_color);
 	raycast(data, data->ray_calcul);
 	mlx_put_image_to_window(data->mlx, data->win,
@@ -48,7 +49,5 @@ int	draw_all(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img_ptr,
 		10, 10);
-	// mlx_put_image_to_window(data->mlx, data->win, data->player.img_ptr,
-	// 	data->player_s.pos_win_x + 10, data->player_s.pos_win_y + 10);
 	return (0);
 }

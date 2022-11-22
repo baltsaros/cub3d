@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 15:12:35 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 15:51:30 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,24 @@ void	draw_square_coord(t_data *data, int color, int x, int y)
 			j++;
 		}
 		i++;
+	}
+}
+
+void	draw_mm_background(t_data *data, int color)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (j != data->minimap_s.height + 16)
+	{
+		i = 0;
+		while (i != data->minimap_s.width + 16)
+		{
+			mlx_pixel_put_img(&data->minimap, i, j, color);
+			i++;
+		}
+		j++;
 	}
 }
 
@@ -97,11 +115,12 @@ void	draw_map(t_data *data, char **map, int color)
 
 	px = data->minimap_s.position.x - 7;
 	py = data->minimap_s.position.y - 7;
-	j = 0;
-	while (j != data->minimap_s.height / PLAYER_SIZE)
+	draw_mm_background(data, YELLOW);
+	j = 1;
+	while (j != (data->minimap_s.height + 8) / PLAYER_SIZE)
 	{
-		i = 0;
-		while (i != data->minimap_s.width / PLAYER_SIZE)
+		i = 1;
+		while (i != (data->minimap_s.width + 8) / PLAYER_SIZE)
 		{
 	
 			if (map[py + j][px + i] && map[py + j][px + i] == '1')
@@ -166,5 +185,5 @@ void	init_minimap_values(t_data *data)
 		++i;
 	}
 	data->minimap_s.mmap[data->map.height + 14] = NULL;
-	print_map(data, data->minimap_s.mmap);
+	// print_map(data, data->minimap_s.mmap);
 }
