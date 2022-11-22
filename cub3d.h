@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 15:12:02 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 15:24:42 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,21 @@
 # define WEST			4
 # define ERROR_POS		100
 
-/* Hooks Values */
-# define KEYPRESS		2
-# define KEYRELEASE		3
-# define MOUSEMOVE		6
-# define DESTROY		17
-# define KEYPRESSMASK	1L
-# define KEYRELEASEMASK	2L
-# define BUTTONMOTION	1L<<13
-# define STRUCTURENOT	1L<<17
+/* Mlx events and masks for hooks */
+enum e_hooks
+{
+	KEYPRESS		= 2,
+	KEYRELEASE		= 3,
+	MOUSEMOVE		= 6,
+	DESTROY			= 17,
+	KEYPRESSMASK	= 1L,
+	KEYRELEASEMASK	= 2L,
+	BUTTONMOTION	= 1L<<13,
+	STRUCTURENOT	= 1L<<17
+};
+
+
+/* Keycodes for Linux and (if not) Mac*/
 # ifdef __linux__
 
 enum	e_s_keys
@@ -86,6 +92,7 @@ enum	e_colors {
 	TEST	= 0x90B3B0
 	
 };
+
 /* Structs to store mlx data for map */
 typedef struct s_img
 {
