@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 12:47:35 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 15:02:59 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,11 @@ void	init_background(t_data *data)
 
 int	draw_all(t_data *data)
 {
-	t_point	max;
-
 	ft_memset(data->walls.addr, create_trgb(255, 255, 255, 255),
 		HEIGHT * WIDTH * sizeof(int));
 	ft_memset(data->minimap.addr, create_trgb(255, 255, 255, 255),
 		data->minimap_s.height * data->minimap_s.width * sizeof(int));
-	max.y = 120;
-	max.x = 120;
-	draw_map(data, data->minimap_s.mmap, data->minimap.basic_color, max);
+	draw_map(data, data->minimap_s.mmap, data->minimap.basic_color);
 	raycast(data, data->ray_calcul);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->background.img_ptr, 0, 0);

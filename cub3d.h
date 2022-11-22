@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 14:12:56 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 15:01:35 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -355,7 +355,7 @@ int		init_map(t_data *data, char *file);
 void	draw_square_coord(t_data *data, int color, int x, int y);
 void	draw_door_coord_h(t_data *data, int color, int x, int y);
 void	draw_door_coord_v(t_data *data, int color, int x, int y);
-void	draw_map(t_data *data, char **map, int color, t_point max);
+void	draw_map(t_data *data, char **map, int color);
 void	init_minimap_values(t_data *data);
 
 /* move_utils.c */

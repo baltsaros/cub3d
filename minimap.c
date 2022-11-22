@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 14:13:28 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/22 15:02:45 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,27 @@ void	draw_door_coord_v(t_data *data, int color, int x, int y)
 	}
 }
 
-void	draw_map(t_data *data, char **map, int color, t_point max)
+// track player's direction on the minimap
+void	player_dir(t_data *data, int color)
+{
+	float	x;
+	float	y;
+	int		j;
+
+	j = 0;
+	x = data->player_s.pos_win_x + PLAYER_SIZE / 2;
+	y = data->player_s.pos_win_y + PLAYER_SIZE / 2;
+	while (j < 20)
+	{
+		mlx_pixel_put_img(&data->minimap, y, x, color);
+		x += data->player_s.delta_x;
+		y += data->player_s.delta_y;
+		++j;
+	}
+}
+
+// draw minimap based on player's position; draw a filed 15x15 with a player at the center
+void	draw_map(t_data *data, char **map, int color)
 {
 	int		i;
 	int		j;
@@ -77,13 +97,11 @@ void	draw_map(t_data *data, char **map, int color, t_point max)
 
 	px = data->minimap_s.position.x - 7;
 	py = data->minimap_s.position.y - 7;
-	max.x = max.x / PLAYER_SIZE;
-	max.y = max.y / PLAYER_SIZE;
 	j = 0;
-	while (j != max.y)
+	while (j != data->minimap_s.height / PLAYER_SIZE)
 	{
 		i = 0;
-		while (i != max.x)
+		while (i != data->minimap_s.width / PLAYER_SIZE)
 		{
 	
 			if (map[py + j][px + i] && map[py + j][px + i] == '1')
@@ -96,8 +114,10 @@ void	draw_map(t_data *data, char **map, int color, t_point max)
 		}
 		++j;
 	}
+	player_dir(data, RED);
 }
 
+// copy str with a certain offset
 char	*memcpy_offset(void *dest, const void *src, size_t n, size_t offset)
 {
 	size_t	i;
@@ -127,7 +147,6 @@ void	init_minimap_values(t_data *data)
 	data->minimap_s.width = 120;
 	data->minimap_s.height = 120;
 	data->minimap_s.step = 0.15625;
-	// data->minimap_s.step = 0.15;
 	data->minimap_s.position.x = data->map.coord[0] + 7;
 	data->minimap_s.position.y = data->map.coord[1] + 7;
 	data->minimap_s.mmap = cub_malloc(sizeof(char *) * (data->map.height + 15), data);
