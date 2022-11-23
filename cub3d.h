@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/23 00:38:34 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/23 01:11:09 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,7 +279,9 @@ int		launcher(t_data *data);
 
 /* door.c */
 int		is_close(t_data *data, int my, int mx);
-int		is_door(t_data *data, t_ray_calcul *ray);
+int		close_door(t_data *data, int my, int mx);
+int		is_door_opened(t_data *data, t_ray_calcul *ray);
+int		is_door_closed(t_data *data, t_ray_calcul *ray);
 void	open_close_door(t_data *data, t_ray_calcul ray);
 
 /* draw_all.c */
