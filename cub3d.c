@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 17:37:41 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/24 07:48:53 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	launcher(t_data *data)
 		leave(data, EXIT_FAILURE);
 	if (init_img(data))
 		leave(data, EXIT_FAILURE);
-	init_background(data);;
+	init_background(data);
 	hook_manager(data);
 	return (EXIT_FAILURE);
 }

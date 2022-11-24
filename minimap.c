@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 17:10:15 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/24 08:00:05 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,44 +48,6 @@ void	draw_mm_background(t_data *data, int color)
 	}
 }
 
-void	draw_door_coord_h(t_data *data, int color, int x, int y)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	y += SQUARE_SIZE / 8;
-	while (i != (SQUARE_SIZE / 4))
-	{
-		j = 0;
-		while (j != SQUARE_SIZE / 2)
-		{
-			mlx_pixel_put_img(&data->minimap, x + j, y + i, color);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	draw_door_coord_v(t_data *data, int color, int x, int y)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	x += SQUARE_SIZE / 8;
-	while (i != SQUARE_SIZE / 2)
-	{
-		j = 0;
-		while (j != SQUARE_SIZE / 4)
-		{
-			mlx_pixel_put_img(&data->minimap, x + j, y + i, color);
-			j++;
-		}
-		i++;
-	}
-}
-
 // track player's direction on the minimap
 void	player_dir(t_data *data, int color)
 {
@@ -105,7 +67,8 @@ void	player_dir(t_data *data, int color)
 	}
 }
 
-// draw minimap based on player's position; draw a filed 15x15 with a player at the center
+// draw minimap based on player's position;
+// draw a filed 15x15 with a player at the center
 void	draw_map(t_data *data, char **map, int color)
 {
 	int		i;
@@ -122,7 +85,6 @@ void	draw_map(t_data *data, char **map, int color)
 		i = 1;
 		while (i != (data->minimap_s.width + 8) / PLAYER_SIZE)
 		{
-	
 			if (map[py + j][px + i] && map[py + j][px + i] == '1')
 				draw_square_coord(data, color, j * PLAYER_SIZE, i * PLAYER_SIZE);
 			else if (i == 7 && j == 7 && map[py + j][px + i])
@@ -134,28 +96,6 @@ void	draw_map(t_data *data, char **map, int color)
 		++j;
 	}
 	player_dir(data, RED);
-}
-
-// copy str with a certain offset
-char	*memcpy_offset(void *dest, const void *src, size_t n, size_t offset)
-{
-	size_t	i;
-	char	*src_ch;
-	char	*dest_ch;
-
-	if (dest == src)
-		return (dest);
-	src_ch = (char *)src;
-	dest_ch = (char *)dest;
-	if (!dest || !src)
-		return (0);
-	i = 0;
-	while (n > i)
-	{
-		dest_ch[i + offset] = src_ch[i];
-		++i;
-	}
-	return (dest);
 }
 
 void	init_minimap_values(t_data *data)
@@ -185,5 +125,4 @@ void	init_minimap_values(t_data *data)
 		++i;
 	}
 	data->minimap_s.mmap[data->map.height + 14] = NULL;
-	// print_map(data, data->minimap_s.mmap);
 }

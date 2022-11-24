@@ -6,12 +6,13 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/22 12:52:09 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/24 07:55:33 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// verify that player's character is on the map
 void	check_player(char **map, t_data *data)
 {
 	size_t	j;
@@ -41,6 +42,7 @@ void	check_player(char **map, t_data *data)
 		error_exit(data, "There is no player on the map!", 1);
 }
 
+// check player's direction: N - North, E - East, W - West, S - South
 void	check_direction(t_data *data)
 {
 	if (data->map.dir == 'N')
@@ -54,6 +56,7 @@ void	check_direction(t_data *data)
 	data->player_s.p_ang = data->map.angle;
 }
 
+// print map with its parameters
 void	print_map(t_data *data, char **map)
 {
 	size_t	i;

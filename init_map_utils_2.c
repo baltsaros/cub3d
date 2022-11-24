@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/21 14:13:11 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/24 07:54:24 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // utils for check_map //
 /////////////////////////
 
+// check if c is a waill or a floor tile
 int	check_wall(char c, int state)
 {
 	int	closed;
@@ -41,6 +42,7 @@ void	check_gap(char **map, size_t i, size_t j, t_data *data)
 		error_exit(data, "Unclosed map: gap", 1);
 }
 
+// verify door position
 void	check_door(char **map, size_t i, size_t j, t_data *data)
 {
 	int	wall;
@@ -66,26 +68,25 @@ void	check_door(char **map, size_t i, size_t j, t_data *data)
 void	check_rows(char **map, t_data *data)
 {
 	size_t	j;
-	size_t	i;
 	int		closed;
 
 	j = 0;
 	closed = 1;
 	while (map[j])
 	{
-		i = 0;
-		while (map[j][i] && map[j][i] == ' ')
-			++i;
-		if (map[j][i] && map[j][i] != '1')
+		data->i = 0;
+		while (map[j][data->i] && map[j][data->i] == ' ')
+			++data->i;
+		if (map[j][data->i] && map[j][data->i] != '1')
 			error_exit(data, "Unclosed map: rows", 1);
-		while (map[j][i])
+		while (map[j][data->i])
 		{
-			closed = check_wall(map[j][i], closed);
-			if (map[j][i] == ' ')
-				check_gap(map, i, j, data);
-			else if (map[j][i] == 'D')
-				check_door(map, i, j, data);
-			i++;
+			closed = check_wall(map[j][data->i], closed);
+			if (map[j][data->i] == ' ')
+				check_gap(map, data->i, j, data);
+			else if (map[j][data->i] == 'D')
+				check_door(map, data->i, j, data);
+			data->i++;
 		}
 		if (!closed)
 			error_exit(data, "Unclosed map: rows", 1);

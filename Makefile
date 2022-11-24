@@ -37,6 +37,7 @@ SRCS		=	cub3d.c \
 				init_map_utils_3.c \
 				draw_all.c \
 				minimap.c \
+				minimap_utils.c \
 				player.c \
 				ray.c \
 				vertical_wall.c \

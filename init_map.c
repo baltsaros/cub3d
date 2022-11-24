@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 18:53:44 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/24 07:48:02 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_vars(t_data *data)
 	data->map.c_spl = NULL;
 	data->map.width = 0;
 	data->map.height = 0;
+	data->x = WIDTH / 2;
 }
 
 void	check_extension(t_data *data, char *file)

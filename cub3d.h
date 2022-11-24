@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/23 01:11:09 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/24 07:58:21 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # include <errno.h>
 # include <math.h>
 # include "libft/libft.h"
+# ifdef __linux__
+#  include "mlx_linux/mlx.h"
+# else
+#  include "mlx/mlx.h"
+# endif
 
 /* Default Window Size */
 # define WIDTH			1500
@@ -50,10 +55,9 @@ enum e_hooks
 	STRUCTURENOT	= 1L<<17
 };
 
-
 /* Keycodes for Linux and (if not) Mac*/
 # ifdef __linux__
-#  include "mlx_linux/mlx.h"
+
 enum	e_s_keys
 {
 	LEFT	= 65363,
@@ -66,7 +70,6 @@ enum	e_s_keys
 	SPACE	= 32
 };
 # else
-#  include "mlx/mlx.h"
 
 enum	e_s_keys
 {
@@ -91,7 +94,6 @@ enum	e_colors {
 	YELLOW	= 0xFFFF00,
 	DPURPLE = 0x301934,
 	TEST	= 0x90B3B0
-	
 };
 
 /* Structs to store mlx data for map */
@@ -367,10 +369,11 @@ int		init_map(t_data *data, char *file);
 
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
-void	draw_door_coord_h(t_data *data, int color, int x, int y);
-void	draw_door_coord_v(t_data *data, int color, int x, int y);
 void	draw_map(t_data *data, char **map, int color);
 void	init_minimap_values(t_data *data);
+
+/* minimap_utils.c */
+char	*memcpy_offset(void *dest, const void *src, size_t n, size_t offset);
 
 /* move_utils.c */
 void	collisions_calculs_up_down(t_data *data, t_ray_calcul *collisions);
