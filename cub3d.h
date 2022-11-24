@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 08:10:24 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/24 08:51:07 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,7 @@ typedef struct s_data
 	size_t			i;
 	size_t			j;
 	int				x;
+	int				old_x;
 	char			*s_tmp;
 	int				fd;
 	t_img			background;
