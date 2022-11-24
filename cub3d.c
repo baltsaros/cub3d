@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 07:48:53 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/24 08:10:44 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	launcher(t_data *data)
 	check_mlx(data->mlx, data);
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
 	check_win(data);
-	init_minimap_values(data);
+	init_minimap(data);
 	init_player_values(data);
 	init_img_null(data);
 	if (load_textures(data))
