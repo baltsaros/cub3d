@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/24 15:53:25 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/24 16:00:28 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ int	mouse_hook(int x, int y, t_data *data)
 	mlx_mouse_move(data->win, WIDTH / 2, HEIGHT / 2);
 	if (y != HEIGHT / 2)
 		y = HEIGHT / 2;
-	if (x > (WIDTH / 2) + 10 || x < (WIDTH / 2) - 10)
+	if (x > (WIDTH / 2) + 15 || x < (WIDTH / 2) - 15)
 	{
 		if (x > WIDTH / 2)
-			data->player_s.p_ang -= data->player_s.rot_speed;
+			data->player_s.p_ang -= data->player_s.rot_speed * 1.5;
 		else if (x < WIDTH / 2)
-			data->player_s.p_ang += data->player_s.rot_speed;
+			data->player_s.p_ang += data->player_s.rot_speed * 1.5;
 	}
 	else
 		return (0);
