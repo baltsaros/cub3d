@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/24 08:53:00 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/24 13:32:44 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	mouse_hook(int x, int y, t_data *data)
 {
 	int	dif;
 
-	printf("data->x: %d, x: %d\n", data->x, x);
+	// printf("data->x: %d, x: %d\n", data->x, x);
 	if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
 		return (0);
 	if (!data->old_x)

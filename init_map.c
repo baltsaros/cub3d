@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 08:51:21 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/24 13:35:43 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_vars(t_data *data)
 	data->map.f = NULL;
 	data->map.c = NULL;
 	data->map.map = NULL;
+	data->minimap_s.mmap = NULL;
 	data->map.f_spl = NULL;
 	data->map.c_spl = NULL;
 	data->map.width = 0;
