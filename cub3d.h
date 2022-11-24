@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 07:58:21 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/24 08:51:07 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 /* Default Player Values */
 # define SQUARE_SIZE	64
-# define PLAYER_SIZE	8
+# define PSIZE	8
 # define FIELD_OF_VIEW 	60
 
 /* North-South-East-West Flags */
@@ -226,6 +226,7 @@ typedef struct s_data
 	size_t			i;
 	size_t			j;
 	int				x;
+	int				old_x;
 	char			*s_tmp;
 	int				fd;
 	t_img			background;
@@ -369,10 +370,13 @@ int		init_map(t_data *data, char *file);
 
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
+void	draw_mm_background(t_data *data, int color);
+void	draw_dir(t_data *data, int color);
 void	draw_map(t_data *data, char **map, int color);
-void	init_minimap_values(t_data *data);
+void	init_minimap(t_data *data);
 
 /* minimap_utils.c */
+void	init_minimap_values(t_data *data);
 char	*memcpy_offset(void *dest, const void *src, size_t n, size_t offset);
 
 /* move_utils.c */

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/18 14:01:24 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/24 13:39:04 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	check_chars(char **raw, t_data *data)
 		while (raw[j][i])
 		{
 			if (!check_charset(raw[j][i], "10NEWSD "))
-				error_exit(data, "Ivalid character on the map", 1);
+				error_exit(data, "Invalid character on the map", 1);
 			++i;
 		}
 		++j;
