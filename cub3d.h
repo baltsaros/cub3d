@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 08:51:07 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/24 16:18:16 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -378,6 +378,10 @@ void	init_minimap(t_data *data);
 /* minimap_utils.c */
 void	init_minimap_values(t_data *data);
 char	*memcpy_offset(void *dest, const void *src, size_t n, size_t offset);
+
+/* move_2.c */
+void    move_up_right(t_data *data);
+void    diagonal_move(t_data *data);
 
 /* move_utils.c */
 void	collisions_calculs_up_down(t_data *data, t_ray_calcul *collisions);
