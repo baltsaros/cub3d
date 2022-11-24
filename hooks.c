@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/24 13:48:03 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/24 15:53:25 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,25 +70,22 @@ void	rotate_fov(int keycode, t_data *data)
 
 int	mouse_hook(int x, int y, t_data *data)
 {
-	int	dif;
-
-	if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
+	mlx_mouse_hide();
+	mlx_mouse_move(data->win, WIDTH / 2, HEIGHT / 2);
+	if (y != HEIGHT / 2)
+		y = HEIGHT / 2;
+	if (x > (WIDTH / 2) + 10 || x < (WIDTH / 2) - 10)
+	{
+		if (x > WIDTH / 2)
+			data->player_s.p_ang -= data->player_s.rot_speed;
+		else if (x < WIDTH / 2)
+			data->player_s.p_ang += data->player_s.rot_speed;
+	}
+	else
 		return (0);
-	if (!data->old_x)
-		data->old_x = x;
-	dif = abs(data->old_x - x);
-	if (WIDTH - x > data->x && dif > 5)
-	{
-		data->old_x = x;
-		rotate_fov(RIGHT, data);
-		data->x += 5;
-	}
-	else if (dif > 5)
-	{
-		data->old_x = x;
-		rotate_fov(LEFT, data);
-		data->x -= 5;
-	}
+	data->player_s.p_ang = fixang(data->player_s.p_ang);
+	data->player_s.delta_x = cos(degtorad(data->player_s.p_ang));
+	data->player_s.delta_y = -sin(degtorad(data->player_s.p_ang));
 	return (0);
 }
 

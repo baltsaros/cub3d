@@ -16,11 +16,15 @@ NAME		= cub3d
 LIBFT		= ./libft/libft.a
 MLX			= -Lmlx -lmlx -framework OpenGL -framework AppKit
 INCS		= -Ilibft -Imlx
+MLX_DIR		= ./mlx/
+LIBMLX		= ./mlx/libmlx.a
 
 ifeq	($(OS), Linux)
 $(warning $(OS))
 		MLX 	= -Lmlx_linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz
 		INCS	= -Ilibft -Imlx_linux
+		MLX_DIR	= ./mlx_linux/
+		LIBMLX	= ./mlx_linux/libmlx.a
 endif
 #-lmlx_Linux
 
@@ -65,9 +69,12 @@ $(OBJ_DIR)/%.o: %.c
 			@printf "$(C_GREEN).$(C_RESET)";
 			@$(GCC) $(CFLAGS) -c $< $(INCS) -o $@
 
-$(NAME):	$(OBJS) $(HEADER)
-			@$(GCC) $(OBJS) $(MLX) $(LIBFT) -o $(NAME)
+$(NAME):	$(OBJS) $(HEADER) $(LIBMLX)
+			@$(GCC) $(OBJS) $(MLX) $(LIBFT) $(LIBMLX) -o $(NAME)
 			@printf "\n$(C_GREEN_B)Finished!$(C_RESET)\n";
+
+$(LIBMLX):
+			@make -C $(MLX_DIR)
 
 libft:
 			@make -C ./libft
@@ -80,6 +87,7 @@ norm:
 clean:
 			@echo "$(C_RED_B)Deleting cub3d o-files...$(C_RESET)";
 			@make -C ./libft clean
+			@make -C $(MLX_DIR) clean
 			@$(RM) $(OBJS)
 			@$(RMF) $(OBJ_DIR)
 			@echo "$(C_RED_B)Cub3d o-files have been deleted!$(C_RESET)";
