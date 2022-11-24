@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 14:01:58 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/24 15:04:34 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,7 @@ void	draw_vertical_line(t_data *data, t_wall_drawing *wall,
 		t_ray_calcul *ray, int pos)
 {
 	wall->ty = 0;
-	if (ray->is_door_h)
-	{
-		wall->ty_step = (float)data->door_text.height / (float)wall->wallheight;
-		wall->tx = (int)(ray->rx) % data->door_text.width;
-		draw_a_wall(data, wall, data->door_text);
-	}
-	else if (pos == NORTH)
+	if (pos == NORTH)
 	{
 		wall->ty_step = (float)data->no_text.height / (float)wall->wallheight;
 		wall->tx = (int)(ray->rx) % data->no_text.width;
