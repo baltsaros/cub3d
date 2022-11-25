@@ -54,7 +54,8 @@ SRCS		=	cub3d.c \
 				move_utils.c \
 				exit.c \
 				draw_wall_utils.c \
-				door.c
+				door.c \
+				mouse_hooks.c
 
 HEADER		= cub3d.h
 

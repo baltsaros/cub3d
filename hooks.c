@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/25 15:30:27 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 00:43:59 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,32 +70,6 @@ void	rotate_fov(int keycode, t_data *data)
 		data->player_s.delta_x = cos(degtorad(data->player_s.p_ang));
 		data->player_s.delta_y = -sin(degtorad(data->player_s.p_ang));
 	}
-}
-
-int	mouse_hook(int x, int y, t_data *data)
-{
-	if (data->keyboard.shift)
-	{
-		mlx_mouse_show();
-		return (0);
-	}
-	mlx_mouse_hide();
-	mlx_mouse_move(data->win, WIDTH / 2, HEIGHT / 2);
-	if (y != HEIGHT / 2)
-		y = HEIGHT / 2;
-	// if (x > (WIDTH / 2) + 10 || x < (WIDTH / 2) - 10)
-	// {
-		if (x > WIDTH / 2)
-			data->player_s.p_ang -= data->player_s.rot_speed;
-		else if (x < WIDTH / 2)
-			data->player_s.p_ang += data->player_s.rot_speed;
-	// }
-	else
-		return (0);
-	data->player_s.p_ang = fixang(data->player_s.p_ang);
-	data->player_s.delta_x = cos(degtorad(data->player_s.p_ang));
-	data->player_s.delta_y = -sin(degtorad(data->player_s.p_ang));
-	return (0);
 }
 
 int	key_hook_manager(t_data *data)

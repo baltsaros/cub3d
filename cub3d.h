@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/25 15:23:33 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 00:45:13 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ enum	e_s_keys
 	S		= 115,
 	D		= 100,
 	ESC		= 65307,
-	SPACE	= 32
+	SPACE	= 32,
+	SHIFT	= 65505
 };
 # else
 
@@ -328,7 +329,6 @@ void	leave(t_data *data, int ret);
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
 void	rotate_fov(int keycode, t_data *data);
-int		mouse_hook(int x, int y, t_data *data);
 int		key_hook_manager(t_data *data);
 
 /* horizontal_wall.c */
@@ -380,6 +380,9 @@ void	init_minimap(t_data *data);
 /* minimap_utils.c */
 void	init_minimap_values(t_data *data);
 char	*memcpy_offset(void *dest, const void *src, size_t n, size_t offset);
+
+/* mouse_hooks.c */
+int		mouse_hook(int x, int y, t_data *data);
 
 /* move_utils.c */
 void	collisions_calculs_up_down(t_data *data, t_ray_calcul *collisions);
