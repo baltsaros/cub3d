@@ -50,6 +50,7 @@ SRCS		=	cub3d.c \
 				move_utils.c \
 				exit.c \
 				draw_wall_utils.c \
+				ft_atoi_er.c \
 				door.c
 
 HEADER		= cub3d.h

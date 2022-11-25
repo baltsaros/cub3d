@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/25 13:43:16 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:30:47 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,34 @@ void	check_extension(t_data *data, char *file)
 		error_exit(data, "Invalid map extension", 0);
 }
 
+void	check_num(char **str, int *array, t_data *data)
+{
+	size_t	i;
+	int		error;
+
+	i = 0;
+	error = 0;
+	while (str[i] && i < 3)
+	{
+		array[i] = ft_atoi_er(str[i], &error) % 256;
+		if (error)
+			error_exit(data, "Invalid color parameter", 1);
+		++i;
+	}
+	if (str[i])
+		error_exit(data, "Invalid color parameter", 1);
+}
+
+void	check_colors(t_map *map, t_data *data)
+{
+	map->f_spl = ft_split(map->f, ',');
+	alloc_check_big(map->f_spl, data);
+	map->c_spl = ft_split(map->c, ',');
+	alloc_check_big(map->c_spl, data);
+	check_num(map->f_spl, map->floor, data);
+	check_num(map->c_spl, map->ceiling, data);
+}
+
 void	check_param(t_map *map, t_data *data)
 {
 	data->j = 0;
@@ -52,16 +80,12 @@ void	check_param(t_map *map, t_data *data)
 	map->so = find_param(map->raw, "SO", data);
 	map->we = find_param(map->raw, "WE", data);
 	map->ea = find_param(map->raw, "EA", data);
-	map->f = find_param(map->raw, "F", data);
-	map->c = find_param(map->raw, "C", data);
+	map->f = find_param_color(map->raw, "F", data);
+	map->c = find_param_color(map->raw, "C", data);
 	if (!map->no || !map->so || !map->we
 		|| !map->ea || !map->f || !map->c)
 		error_exit(data, "Invalid parameter(s)", 1);
-	printf("map->c: %s\n", map->c);
-	map->f_spl = ft_split(map->f, ',');
-	map->c_spl = ft_split(map->c, ',');
-	alloc_check_big(map->f_spl, data);
-	alloc_check_big(map->c_spl, data);
+	check_colors(map, data);
 	copy_map(map->raw, data);
 	check_map(map, data);
 }

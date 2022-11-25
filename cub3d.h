@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 08:51:07 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:17:39 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,8 @@ typedef struct s_map
 	char	*c;
 	char	**f_spl;
 	char	**c_spl;
+	int		floor[3];
+	int		ceiling[3];
 	char	**map;
 	int		coord[2];
 	int		door[2];
@@ -345,6 +347,7 @@ int		load_textures(t_data *data);
 /* init_map_utils_1.c */
 void	check_chars(char **raw, t_data *data);
 char	*find_param(char **raw, char *param, t_data *data);
+char	*find_param_color(char **raw, char *param, t_data *data);
 void	find_mapsize(char **raw, int j, t_data *data);
 void	copy_map(char **raw, t_data *data);
 void	check_map(t_map *map, t_data *data);
@@ -360,6 +363,7 @@ void	check_columns(char **map, t_data *data);
 void	check_player(char **map, t_data *data);
 void	check_direction(t_data *data);
 void	print_map(t_data *data, char **map);
+int		ft_atoi_er(const char *str, int *error);
 
 /* init_map.c */
 void	init_vars(t_data *data);
