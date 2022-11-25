@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/24 13:39:04 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:02:08 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,25 @@
 // utils for check_param //
 ///////////////////////////
 // check the map for invalid characters
+
+int		contain_alnum(const void *str)
+{
+	size_t	i;
+	char	*s;
+
+	s = (char*)str;
+	if (!str)
+		return (0);
+	i = 0;
+	while(s[i])
+	{
+		if (ft_isalnum(s[i]))
+			return (1);
+		++i;
+	}
+	return (0);
+}
+
 void	check_chars(char **raw, t_data *data)
 {
 	size_t	j;
@@ -31,6 +50,8 @@ void	check_chars(char **raw, t_data *data)
 				error_exit(data, "Invalid character on the map", 1);
 			++i;
 		}
+		// if (!contain_alnum(raw[j]))
+		// 	error_exit(data, "Empty line inside a map!", 1);
 		++j;
 	}
 }

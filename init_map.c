@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 13:35:43 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 13:43:16 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	check_param(t_map *map, t_data *data)
 	if (!map->no || !map->so || !map->we
 		|| !map->ea || !map->f || !map->c)
 		error_exit(data, "Invalid parameter(s)", 1);
+	printf("map->c: %s\n", map->c);
 	map->f_spl = ft_split(map->f, ',');
 	map->c_spl = ft_split(map->c, ',');
 	alloc_check_big(map->f_spl, data);
