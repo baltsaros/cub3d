@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 13:36:19 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:24:51 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	hook_manager(t_data *data)
 	data->keyboard.d = 0;
 	data->keyboard.right = 0;
 	data->keyboard.left = 0;
+	data->keyboard.shift = 0;
 	mlx_hook(data->win, KEYPRESS, KEYPRESSMASK, key_press, data);
 	mlx_hook(data->win, KEYRELEASE, KEYRELEASEMASK, key_release, data);
 	mlx_hook(data->win, MOUSEMOVE, BUTTONMOTION, mouse_hook, data);

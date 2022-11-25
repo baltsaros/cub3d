@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/24 16:00:28 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/25 15:25:14 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	key_press(int keycode, t_data *data)
 		data->keyboard.left = 1;
 	if (keycode == SPACE)
 		open_close_door(data, data->ray_calcul);
+	if (keycode == SHIFT)
+		data->keyboard.shift = 1;
 	return (0);
 }
 
@@ -47,6 +49,8 @@ int	key_release(int keycode, t_data *data)
 		data->keyboard.right = 0;
 	if (keycode == LEFT)
 		data->keyboard.left = 0;
+	if (keycode == SHIFT)
+		data->keyboard.shift = 0;
 	return (0);
 }
 
@@ -70,6 +74,11 @@ void	rotate_fov(int keycode, t_data *data)
 
 int	mouse_hook(int x, int y, t_data *data)
 {
+	if (data->keyboard.shift)
+	{
+		mlx_mouse_show();
+		return (0);
+	}
 	mlx_mouse_hide();
 	mlx_mouse_move(data->win, WIDTH / 2, HEIGHT / 2);
 	if (y != HEIGHT / 2)

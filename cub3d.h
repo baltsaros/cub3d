@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 08:51:07 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:23:33 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ enum	e_s_keys
 	S		= 1,
 	D		= 2,
 	ESC		= 53,
-	SPACE	= 49
+	SPACE	= 49,
+	SHIFT	= 257
 };
 # endif
 
@@ -195,6 +196,7 @@ typedef struct s_keyboard
 	int	d;
 	int	right;
 	int	left;
+	int	shift;
 }	t_keyboard;
 
 /* Struct for map values */
