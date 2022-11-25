@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/25 17:17:39 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 20:02:23 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,6 +348,7 @@ int		load_textures(t_data *data);
 void	check_chars(char **raw, t_data *data);
 char	*find_param(char **raw, char *param, t_data *data);
 char	*find_param_color(char **raw, char *param, t_data *data);
+size_t	check_lines(char **map, size_t j, t_data *data);
 void	find_mapsize(char **raw, int j, t_data *data);
 void	copy_map(char **raw, t_data *data);
 void	check_map(t_map *map, t_data *data);

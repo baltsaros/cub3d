@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/25 17:26:36 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 20:49:33 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,6 @@
 // utils for check_param //
 ///////////////////////////
 // check the map for invalid characters
-
-int		contain_alnum(const void *str)
-{
-	size_t	i;
-	char	*s;
-
-	s = (char*)str;
-	if (!str)
-		return (0);
-	i = 0;
-	while(s[i])
-	{
-		if (ft_isalnum(s[i]))
-			return (1);
-		++i;
-	}
-	return (0);
-}
 
 void	check_chars(char **raw, t_data *data)
 {
@@ -123,6 +105,28 @@ void	find_mapsize(char **raw, int j, t_data *data)
 	data->map.height = h;
 }
 
+size_t	check_lines(char **map, size_t j, t_data *data)
+{
+	size_t	start;
+
+	start = 0;
+	while (map[j] && !ft_strchr(map[j], '1'))
+		++j;
+	start = j;
+	if (!map[j])
+		error_exit(data, "There is no map!", 1);
+	while (map[j] && ft_strchr(map[j], '1'))
+		++j;
+	while (map[j])
+	{
+		if (ft_strchr(map[j], '1'))
+			error_exit(data, "Empty line inside the map!", 1);
+		++j;
+	}
+	return (start);
+}
+
+
 // copying map form raw data
 void	copy_map(char **raw, t_data *data)
 {
@@ -130,14 +134,16 @@ void	copy_map(char **raw, t_data *data)
 	size_t	i;
 	size_t	len;
 
+	// for (int i = 0; raw[i]; ++i)
+	// 	printf("%d: %s\n", i, raw[i]);
 	data->j++;
-	j = data->j;
-	if (!raw[j])
-		error_exit(data, "There is no map!", 1);
-	while (raw[j] && !ft_strchr(raw[j], '1'))
-		++j;
-	if (!raw[j])
-		error_exit(data, "Invalid map!", 1);
+	j = check_lines(raw, data->j, data);
+	// if (!raw[j])
+	// 	error_exit(data, "There is no map!", 1);
+	// while (raw[j] && !ft_strchr(raw[j], '1'))
+	// 	++j;
+	// if (!raw[j])
+	// 	error_exit(data, "Invalid map!", 1);
 	find_mapsize(raw, j, data);
 	i = 0;
 	data->map.map = cub_malloc(sizeof(char *) * (data->map.height + 1), data);
@@ -160,5 +166,5 @@ void	check_map(t_map *map, t_data *data)
 	check_columns(map->map, data);
 	check_player(map->map, data);
 	check_direction(data);
-	// print_map(data, data->map.map);
+	print_map(data, data->map.map);
 }

@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/25 17:30:47 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 21:03:51 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,24 +90,27 @@ void	check_param(t_map *map, t_data *data)
 	check_map(map, data);
 }
 
-t_map	read_param(t_data *data, char *file)
+t_map	read_param(t_data *data, char *buf)
 {
 	t_map	map;
-	char	*buf;
 	char	*line;
 
-	buf = cub_strdup("", data);
-	data->fd = open(file, O_RDONLY);
-	error_check_exit(data->fd, "open: ", data);
-	data->i = 19;
 	while (data->i)
 	{
 		line = get_next_line(data->fd, data);
 		if (!line)
 			break ;
+		// if (!ft_strncmp(line, "\n", 2))
+		// {
+		// 	// printf("here\n");
+		// 	free(line);
+		// 	line = cub_strdup(" \n", data);
+		// }
+		// printf("|%s|\n", line);
 		buf = cub_strjoin_free(buf, line, data);
 		free(line);
 	}
+	// printf("%s\n", buf);
 	map.raw = ft_split(buf, '\n');
 	free(buf);
 	close(data->fd);
@@ -117,9 +120,15 @@ t_map	read_param(t_data *data, char *file)
 
 int	init_map(t_data *data, char *file)
 {
+	char	*buf;
+
 	init_vars(data);
 	check_extension(data, file);
-	data->map = read_param(data, file);
+	buf = cub_strdup("", data);
+	data->fd = open(file, O_RDONLY);
+	error_check_exit(data->fd, "open: ", data);
+	data->i = 19;
+	data->map = read_param(data, buf);
 	check_param(&(data->map), data);
 	return (0);
 }
