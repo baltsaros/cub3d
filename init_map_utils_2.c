@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/25 14:48:57 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 21:25:03 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	check_rows(char **map, t_data *data)
 		while (map[j][data->i] && check_charset(map[j][data->i], " \f\n\r\t\v"))
 			++data->i;
 		if ((map[j][data->i] && map[j][data->i] != '1')
-			|| !map[j][data->i])
-			error_exit(data, "Unclosed map: rows", 1);
+			|| (!map[j][data->i] && !closed))
+			error_exit(data, "Unclosed map: rows1", 1);
 		while (map[j][data->i])
 		{
 			closed = check_wall(map[j][data->i], closed);
@@ -90,7 +90,7 @@ void	check_rows(char **map, t_data *data)
 			data->i++;
 		}
 		if (!closed)
-			error_exit(data, "Unclosed map: rows", 1);
+			error_exit(data, "Unclosed map: rows2", 1);
 		++j;
 	}
 }

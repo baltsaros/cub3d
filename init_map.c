@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/25 21:03:51 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 21:20:23 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,17 +100,14 @@ t_map	read_param(t_data *data, char *buf)
 		line = get_next_line(data->fd, data);
 		if (!line)
 			break ;
-		// if (!ft_strncmp(line, "\n", 2))
-		// {
-		// 	// printf("here\n");
-		// 	free(line);
-		// 	line = cub_strdup(" \n", data);
-		// }
-		// printf("|%s|\n", line);
+		if (!ft_strncmp(line, "\n", 1))
+		{
+			free(line);
+			line = cub_strdup(" \n", data);
+		}
 		buf = cub_strjoin_free(buf, line, data);
 		free(line);
 	}
-	// printf("%s\n", buf);
 	map.raw = ft_split(buf, '\n');
 	free(buf);
 	close(data->fd);

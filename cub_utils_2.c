@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/25 21:01:34 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 21:08:12 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strcmp(char *s1, char *s2)
 
 char	*get_next_line(int fd, t_data *data)
 {
-	char	buf[1];
+	char	buf[2];
 	char	*line;
 	ssize_t	r_bytes;
 
@@ -34,6 +34,7 @@ char	*get_next_line(int fd, t_data *data)
 	while (r_bytes > 0)
 	{
 		r_bytes = read(fd, buf, 1);
+		buf[1] = '\0';
 		if (r_bytes < 0)
 		{
 			free(line);
@@ -47,6 +48,8 @@ char	*get_next_line(int fd, t_data *data)
 		}
 		line = cub_charjoin_free(line, buf[0], data);
 		alloc_check_small(line, data);
+		if (buf[0] == '\n')
+			break ;
 	}
 	return (line);
 }

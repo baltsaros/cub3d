@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/25 20:49:33 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 21:26:46 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	check_chars(char **raw, t_data *data)
 				error_exit(data, "Invalid character on the map", 1);
 			++i;
 		}
-		// if (!contain_alnum(raw[j]))
-		// 	error_exit(data, "Empty line inside a map!", 1);
 		++j;
 	}
 }
@@ -126,7 +124,6 @@ size_t	check_lines(char **map, size_t j, t_data *data)
 	return (start);
 }
 
-
 // copying map form raw data
 void	copy_map(char **raw, t_data *data)
 {
@@ -134,16 +131,8 @@ void	copy_map(char **raw, t_data *data)
 	size_t	i;
 	size_t	len;
 
-	// for (int i = 0; raw[i]; ++i)
-	// 	printf("%d: %s\n", i, raw[i]);
 	data->j++;
 	j = check_lines(raw, data->j, data);
-	// if (!raw[j])
-	// 	error_exit(data, "There is no map!", 1);
-	// while (raw[j] && !ft_strchr(raw[j], '1'))
-	// 	++j;
-	// if (!raw[j])
-	// 	error_exit(data, "Invalid map!", 1);
 	find_mapsize(raw, j, data);
 	i = 0;
 	data->map.map = cub_malloc(sizeof(char *) * (data->map.height + 1), data);
