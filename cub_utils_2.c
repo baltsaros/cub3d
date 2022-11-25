@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/25 21:08:12 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 23:28:14 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
+static void	gnl_check(int r, int fd, char *line, t_data *data)
+{
+	if (r < 0)
+	{
+		free(line);
+		close(fd);
+		error_check_exit(r, "read: ", data);
+	}
+}
+
+// simplified gnl that reads char by char
 char	*get_next_line(int fd, t_data *data)
 {
 	char	buf[2];
@@ -35,12 +46,7 @@ char	*get_next_line(int fd, t_data *data)
 	{
 		r_bytes = read(fd, buf, 1);
 		buf[1] = '\0';
-		if (r_bytes < 0)
-		{
-			free(line);
-			close(data->fd);
-			error_check_exit(r_bytes, "read: ", data);
-		}
+		gnl_check(r_bytes, fd, line, data);
 		if (!r_bytes)
 		{
 			data->i = 0;
@@ -54,6 +60,7 @@ char	*get_next_line(int fd, t_data *data)
 	return (line);
 }
 
+// check whether char c is present in charset
 int	check_charset(char c, char *charset)
 {
 	unsigned int	i;
@@ -68,4 +75,31 @@ int	check_charset(char c, char *charset)
 		++i;
 	}
 	return (0);
+}
+
+// simplified atoi that checks isdigit and int max
+// if there are invalid characters, set error flag set to 1
+int	ft_atoi_er(const char *str, int *error)
+{
+	int		i;
+	int		j;
+	long	n;
+
+	i = 0;
+	n = 0;
+	j = i;
+	while (str[j])
+	{
+		if (str[j] < 48 || str[j] > 57)
+			*error = 1;
+		++j;
+	}
+	while (str[i] >= 48 && str[i] <= 57)
+	{
+		n = n * 10 + str[i] - '0';
+		++i;
+		if (n > INT_MAX)
+			*error = 1;
+	}
+	return (n);
 }

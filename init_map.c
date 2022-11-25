@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/25 21:20:23 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 23:37:39 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,34 +42,6 @@ void	check_extension(t_data *data, char *file)
 		error_exit(data, "Invalid map extension", 0);
 }
 
-void	check_num(char **str, int *array, t_data *data)
-{
-	size_t	i;
-	int		error;
-
-	i = 0;
-	error = 0;
-	while (str[i] && i < 3)
-	{
-		array[i] = ft_atoi_er(str[i], &error) % 256;
-		if (error)
-			error_exit(data, "Invalid color parameter", 1);
-		++i;
-	}
-	if (str[i])
-		error_exit(data, "Invalid color parameter", 1);
-}
-
-void	check_colors(t_map *map, t_data *data)
-{
-	map->f_spl = ft_split(map->f, ',');
-	alloc_check_big(map->f_spl, data);
-	map->c_spl = ft_split(map->c, ',');
-	alloc_check_big(map->c_spl, data);
-	check_num(map->f_spl, map->floor, data);
-	check_num(map->c_spl, map->ceiling, data);
-}
-
 void	check_param(t_map *map, t_data *data)
 {
 	data->j = 0;
@@ -86,6 +58,9 @@ void	check_param(t_map *map, t_data *data)
 		|| !map->ea || !map->f || !map->c)
 		error_exit(data, "Invalid parameter(s)", 1);
 	check_colors(map, data);
+	// for (int i = 0; i < 3; ++i) {
+	// 	printf("floor: %d\nceiling: %d\n", data->map.floor[i], data->map.ceiling[i]);
+	// }
 	copy_map(map->raw, data);
 	check_map(map, data);
 }
@@ -109,9 +84,9 @@ t_map	read_param(t_data *data, char *buf)
 		free(line);
 	}
 	map.raw = ft_split(buf, '\n');
+	alloc_check_big(map.raw, data);
 	free(buf);
 	close(data->fd);
-	alloc_check_big(map.raw, data);
 	return (map);
 }
 

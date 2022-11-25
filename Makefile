@@ -35,6 +35,7 @@ SRCS		=	cub3d.c \
 				init_map_utils_1.c \
 				init_map_utils_2.c \
 				init_map_utils_3.c \
+				init_map_utils_4.c \
 				draw_all.c \
 				minimap.c \
 				minimap_utils.c \
@@ -50,7 +51,6 @@ SRCS		=	cub3d.c \
 				move_utils.c \
 				exit.c \
 				draw_wall_utils.c \
-				ft_atoi_er.c \
 				door.c
 
 HEADER		= cub3d.h
