@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:19:11 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 13:47:58 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 16:36:06 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ void	free_images(t_data *data)
 		mlx_destroy_image(data->mlx, data->ea_text.img.img_ptr);
 	if (data->door_text.img.img_ptr != NULL)
 		mlx_destroy_image(data->mlx, data->door_text.img.img_ptr);
+	if (data->sprite_1.img.img_ptr != NULL)
+		mlx_destroy_image(data->mlx, data->sprite_1.img.img_ptr);
+	if (data->sprite_2.img.img_ptr != NULL)
+		mlx_destroy_image(data->mlx, data->sprite_2.img.img_ptr);
+	if (data->sprite_3.img.img_ptr != NULL)
+		mlx_destroy_image(data->mlx, data->sprite_3.img.img_ptr);
 }
 
 int	ft_exit(t_data *data)

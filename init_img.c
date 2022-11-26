@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:01:28 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 00:59:50 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 16:35:27 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	init_img_null(t_data *data)
 	data->ea_text.img.img_ptr = NULL;
 	data->we_text.img.img_ptr = NULL;
 	data->door_text.img.img_ptr = NULL;
+	data->sprite_1.img.img_ptr = NULL;
+	data->sprite_2.img.img_ptr = NULL;
+	data->sprite_3.img.img_ptr = NULL;
 }
 
 int	init_img(t_data *data)
