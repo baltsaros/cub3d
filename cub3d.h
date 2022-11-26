@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 01:15:21 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 01:42:13 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -409,7 +409,6 @@ void	move(t_data *data);
 
 /* player.c */
 int		is_player(char c);
-void	init_player_pos(t_data *data, int height, int width);
 void	init_player_values(t_data *data);
 
 /* ray.c */

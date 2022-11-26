@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 08:03:01 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 01:42:01 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,6 @@ int	is_player(char c)
 	return (1);
 }
 
-void	init_player_pos(t_data *data, int height, int width)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i != height)
-	{
-		j = 0;
-		while (j != width)
-		{
-			if (!is_player(data->map.map[i][j]))
-			{
-				data->player_s.pos_x = (j * SQUARE_SIZE)
-					+ (SQUARE_SIZE / 2) - (PSIZE / 2);
-				data->player_s.pos_y = (i * SQUARE_SIZE)
-					+ (SQUARE_SIZE / 2) - (PSIZE / 2);
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
 void	init_player_values(t_data *data)
 {
 	data->player_s.pos_x = 0;
@@ -50,7 +26,10 @@ void	init_player_values(t_data *data)
 	data->player_s.p_ang = data->map.angle;
 	data->player_s.delta_x = cos(degtorad(data->player_s.p_ang));
 	data->player_s.delta_y = -sin(degtorad(data->player_s.p_ang));
-	init_player_pos(data, data->map.height, data->map.width);
+	data->player_s.pos_y = (data->map.coord[1] * SQUARE_SIZE)
+		+ (SQUARE_SIZE / 2) - (PSIZE / 2);
+	data->player_s.pos_x = (data->map.coord[0] * SQUARE_SIZE)
+		+ (SQUARE_SIZE / 2) - (PSIZE / 2);
 	data->player_s.speed = 10;
 	data->player_s.rot_speed = 5;
 	data->player_s.pos_win_x = data->minimap_s.width / 2 - PSIZE / 2;
