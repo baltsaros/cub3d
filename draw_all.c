@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 19:21:30 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 20:12:02 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	draw_all(t_data *data)
 	draw_map(data, data->minimap_s.mmap, data->minimap.basic_color);
 	raycast(data, data->ray_calcul);
 	
-	draw_sprites(data);
+	draw_sprites(data, data->wall_drawing, data->ray_calcul);
 
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->background.img_ptr, 0, 0);

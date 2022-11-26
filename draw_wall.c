@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:18:08 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 15:04:34 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 19:45:24 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,8 @@ void	draw_vertical_door(t_data *data, t_wall_drawing *wall,
 
 void	init_calculate_wall(t_data *data, t_ray_calcul *ray, int pos)
 {
-	data->wall_drawing.distproj = (WIDTH / 2)
-		/ tan(degtorad(FIELD_OF_VIEW / 2));
 	data->wall_drawing.wallheight = (SQUARE_SIZE / ray->dish)
-		* data->wall_drawing.distproj;
+		* data->distProj;
 	data->wall_drawing.begin.x = (float)ray->r;
 	data->wall_drawing.begin.y = (HEIGHT / 2)
 		- (data->wall_drawing.wallheight / 2);

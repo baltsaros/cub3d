@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 17:54:12 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 19:44:52 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	hook_manager(t_data *data)
 	data->keyboard.d = 0;
 	data->keyboard.right = 0;
 	data->keyboard.left = 0;
+	data->distProj = (WIDTH / 2)
+		/ tan(degtorad(FIELD_OF_VIEW / 2));
 	mlx_hook(data->win, KEYPRESS, KEYPRESSMASK, key_press, data);
 	mlx_hook(data->win, KEYRELEASE, KEYRELEASEMASK, key_release, data);
 	mlx_hook(data->win, MOUSEMOVE, BUTTONMOTION, mouse_hook, data);

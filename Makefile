@@ -53,7 +53,8 @@ SRCS		=	cub3d.c \
 				draw_wall_utils.c \
 				door.c \
 				error.c \
-				sprites.c
+				sprites.c \
+				sprites_check.c
 
 HEADER		= cub3d.h
 

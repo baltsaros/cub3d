@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 19:36:56 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 00:02:47 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,6 @@ typedef struct s_ray_calcul
 
 typedef struct s_wall_drawing
 {
-	float	distproj;
 	float	wallheight;
 	float	ty;
 	float	tx_step;
@@ -180,8 +179,11 @@ typedef struct s_object
 	t_img		*sprite;
 	int			width;
 	int			height;
-	t_fpoint	pos;
+	t_fpoint	fpos;
+	t_point		pos;
 	float		distance;
+	float		dis_x;
+	float		dis_y;
 } t_object;
 
 typedef struct s_player
@@ -269,6 +271,7 @@ typedef struct s_data
 	t_text			sprite_2;
 	t_text			sprite_3;
 	t_keyboard		keyboard;
+	float			distProj;
 }	t_data;
 
 /* ************************************************************************** */
@@ -440,9 +443,13 @@ int		adapt_distance(t_ray_calcul *ray, int posH, int posV);
 void	fisheye_fix(t_data *data, t_ray_calcul *ray);
 void	raycast(t_data *data, t_ray_calcul ray);
 
+/* sprites_check.c */
+void	cast_ray_in_dir(t_data *data, t_ray_calcul *ray, t_object *soldier, float Tan);
+
 /* sprites.c */
 int 	load_sprites_textures(t_data *data);
-void	draw_sprites(t_data *data);
+void	draw_sprites(t_data *data, t_wall_drawing wall,
+	t_ray_calcul ray);
 
 /* vertical_wall.c */
 void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int index);
