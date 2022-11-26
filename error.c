@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 00:50:25 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 00:59:28 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 01:01:44 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    check_errors(t_data *data, int ret)
     else if (ret == ERROR_TEXT_PTR)
     {
         write(2, "Cub3d: ", 7);
-        write(2, "load textures failed\n", 21);
+        write(2, "loading textures failed\n", 24);
     }
     else if (ret == ERROR_BAD_EXT)
     {
