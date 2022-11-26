@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 13:35:43 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 14:51:54 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,49 +52,55 @@ void	check_param(t_map *map, t_data *data)
 	map->so = find_param(map->raw, "SO", data);
 	map->we = find_param(map->raw, "WE", data);
 	map->ea = find_param(map->raw, "EA", data);
-	map->f = find_param(map->raw, "F", data);
-	map->c = find_param(map->raw, "C", data);
+	map->f = find_param_color(map->raw, "F", data);
+	map->c = find_param_color(map->raw, "C", data);
 	if (!map->no || !map->so || !map->we
 		|| !map->ea || !map->f || !map->c)
 		error_exit(data, "Invalid parameter(s)", 1);
-	map->f_spl = ft_split(map->f, ',');
-	map->c_spl = ft_split(map->c, ',');
-	alloc_check_big(map->f_spl, data);
-	alloc_check_big(map->c_spl, data);
+	check_colors(map, data);
+	// for (int i = 0; i < 3; ++i) {
+	// 	printf("floor: %d\nceiling: %d\n", data->map.floor[i], data->map.ceiling[i]);
+	// }
 	copy_map(map->raw, data);
 	check_map(map, data);
 }
 
-t_map	read_param(t_data *data, char *file)
+t_map	read_param(t_data *data, char *buf)
 {
 	t_map	map;
-	char	*buf;
 	char	*line;
 
-	buf = cub_strdup("", data);
-	data->fd = open(file, O_RDONLY);
-	error_check_exit(data->fd, "open: ", data);
-	data->i = 19;
 	while (data->i)
 	{
 		line = get_next_line(data->fd, data);
 		if (!line)
 			break ;
+		if (!ft_strncmp(line, "\n", 1))
+		{
+			free(line);
+			line = cub_strdup(" \n", data);
+		}
 		buf = cub_strjoin_free(buf, line, data);
 		free(line);
 	}
 	map.raw = ft_split(buf, '\n');
+	alloc_check_big(map.raw, data);
 	free(buf);
 	close(data->fd);
-	alloc_check_big(map.raw, data);
 	return (map);
 }
 
 int	init_map(t_data *data, char *file)
 {
+	char	*buf;
+
 	init_vars(data);
 	check_extension(data, file);
-	data->map = read_param(data, file);
+	buf = cub_strdup("", data);
+	data->fd = open(file, O_RDONLY);
+	error_check_exit(data->fd, "open: ", data);
+	data->i = 19;
+	data->map = read_param(data, buf);
 	check_param(&(data->map), data);
 	return (0);
 }

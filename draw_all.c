@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 17:37:52 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/25 23:34:20 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,18 @@ void	init_background(t_data *data)
 	t_point	begin;
 	t_point	end;
 
-	color_ceiling = create_trgb(0,
-			ft_atoi(data->map.c_spl[0]),
-			ft_atoi(data->map.c_spl[1]),
-			ft_atoi(data->map.c_spl[2]));
-	color_floor = create_trgb(0,
-			ft_atoi(data->map.f_spl[0]),
-			ft_atoi(data->map.f_spl[1]),
-			ft_atoi(data->map.f_spl[2]));
+	color_ceiling = create_trgb(0, data->map.ceiling[0],
+			data->map.ceiling[1], data->map.ceiling[2]);
+	color_floor = create_trgb(0, data->map.floor[0],
+			data->map.floor[1], data->map.floor[2]);
+	// color_ceiling = create_trgb(0,
+	// 		ft_atoi(data->map.c_spl[0]),
+	// 		ft_atoi(data->map.c_spl[1]),
+	// 		ft_atoi(data->map.c_spl[2]));
+	// color_floor = create_trgb(0,
+	// 		ft_atoi(data->map.f_spl[0]),
+	// 		ft_atoi(data->map.f_spl[1]),
+	// 		ft_atoi(data->map.f_spl[2]));
 	begin.x = 0;
 	begin.y = HEIGHT / 2;
 	end.x = WIDTH;

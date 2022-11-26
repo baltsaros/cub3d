@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 10:48:12 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 20:38:00 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	draw_square_coord(t_data *data, int color, int x, int y)
 		j = 0;
 		while (j != PSIZE)
 		{
-			mlx_pixel_put_img(&data->minimap, x + j, y + i, color);
+			mlx_pixel_put_img(&data->minimap, y + i, x + j, color);
 			j++;
 		}
 		i++;
@@ -60,7 +60,7 @@ void	draw_dir(t_data *data, int color)
 	y = data->player_s.pos_win_y + PSIZE / 2;
 	while (j < 20)
 	{
-		mlx_pixel_put_img(&data->minimap, y, x, color);
+		mlx_pixel_put_img(&data->minimap, x, y, color);
 		x += data->player_s.delta_x;
 		y += data->player_s.delta_y;
 		++j;
