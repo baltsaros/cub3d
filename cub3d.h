@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 17:25:52 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 17:54:19 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,6 +335,8 @@ void	draw_square_from(t_img img, int color, t_point begin, t_point end);
 
 /* draw_wall_utils.c */
 float	dis_calcul(t_data *data, float ra, float ry, float rx);
+int		is_within_maps(int my, int mx, int height, int width);
+int		is_wall(char c);
 
 /* draw_wall.c */
 void	draw_a_wall(t_data *data, t_wall_drawing *wall,
@@ -368,7 +370,7 @@ int		mouse_hook(int x, int y, t_data *data);
 int		key_hook_manager(t_data *data);
 
 /* horizontal_wall.c */
-void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof);
+void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int index);
 int		check_up(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_down(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
@@ -428,17 +430,17 @@ char	*memcpy_offset(void *dest, const void *src, size_t n, size_t offset);
 void	collisions_calculs_up_down(t_data *data, t_ray_calcul *collisions);
 void	collisions_calculs_right(t_data *data, t_ray_calcul *collisions);
 void	collisions_calculs_left(t_data *data, t_ray_calcul *collisions);
+double	set_mult(t_data *data, int dir);
 
 /* move.c */
-void	move_up(t_data *data, t_ray_calcul *collisions);
-void	move_down(t_data *data, t_ray_calcul *collisions);
-void	move_right(t_data *data, t_ray_calcul *collisions);
-void	move_left(t_data *data, t_ray_calcul *collisions);
+void	move_up(t_data *data, t_ray_calcul *collisions, double mult);
+void	move_down(t_data *data, t_ray_calcul *collisions, double mult);
+void	move_right(t_data *data, t_ray_calcul *collisions, double mult);
+void	move_left(t_data *data, t_ray_calcul *collisions, double mult);
 void	move(t_data *data);
 
 /* player.c */
 int		is_player(char c);
-void	init_player_pos(t_data *data, int height, int width);
 void	init_player_values(t_data *data);
 
 /* ray.c */
@@ -451,7 +453,7 @@ int 	load_sprites_textures(t_data *data);
 void	draw_sprites(t_data *data, t_wall_drawing wall);
 
 /* vertical_wall.c */
-void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof);
+void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int index);
 int		check_right(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_left(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan);

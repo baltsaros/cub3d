@@ -6,26 +6,22 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:35:14 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 01:09:14 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 01:49:54 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof)
+void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int index)
 {
-	while ((size_t)dof < data->map.width)
+	while ((size_t)index < data->map.width)
 	{
 		ray->mx = (int)(ray->rx) / SQUARE_SIZE;
 		ray->my = (int)(ray->ry) / SQUARE_SIZE;
-		if (ray->my >= 0 && ray->mx >= 0
-			&& ray->my < (int)data->map.height
-			&& ray->mx < (int)data->map.width
-			&& data->map.map[ray->my][ray->mx] != '0'
-			&& data->map.map[ray->my][ray->mx] != 'C'
-			&& is_player(data->map.map[ray->my][ray->mx]))
+		if (is_within_maps(ray->my, ray->mx, data->map.height, data->map.width)
+			&& is_wall(data->map.map[ray->my][ray->mx]))
 		{
-			dof = data->map.width;
+			index = data->map.width;
 			ray->disv = dis_calcul(data, ray->ra, ray->ry, ray->rx);
 			if (data->map.map[ray->my][ray->mx] == 'D')
 				ray->is_door_v = 1;
@@ -34,7 +30,7 @@ void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof)
 		{
 			ray->rx += ray->xo;
 			ray->ry += ray->yo;
-			dof++;
+			index++;
 		}
 	}
 }
@@ -61,10 +57,10 @@ int	check_left(t_data *data, t_ray_calcul *ray, float Tan)
 
 int	check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan)
 {
-	int	dof;
+	int	index;
 	int	ret;
 
-	dof = 0;
+	index = 0;
 	ret = 0;
 	ray->disv = 100000;
 	if (cos(degtorad(ray->ra)) > 0.001)
@@ -75,9 +71,9 @@ int	check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan)
 	{
 		ray->rx = data->player_s.pos_x;
 		ray->ry = data->player_s.pos_y;
-		dof = (int)data->map.width;
+		index = (int)data->map.width;
 		ret = UNDEFINED;
 	}
-	calculate_vertical_distance(data, ray, dof);
+	calculate_vertical_distance(data, ray, index);
 	return (ret);
 }
