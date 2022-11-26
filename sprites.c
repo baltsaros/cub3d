@@ -6,13 +6,13 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:28:39 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 16:34:37 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 16:39:35 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int load_sprites_textures(t_data *data)
+int	load_sprites_textures(t_data *data)
 {
     data->sprite_1.img.img_ptr = mlx_xpm_file_to_image(data->mlx,
             "./textures/sprite_1.xpm",
