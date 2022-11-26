@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/25 23:28:14 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 14:52:10 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,20 @@ int	check_charset(char c, char *charset)
 int	ft_atoi_er(const char *str, int *error)
 {
 	int		i;
-	int		j;
 	long	n;
 
 	i = 0;
 	n = 0;
-	j = i;
-	while (str[j])
+	if  (!str)
 	{
-		if (str[j] < 48 || str[j] > 57)
+		*error = 1;
+		return (0);
+	}
+	while (str[i])
+	{
+		if (str[i] < 48 || str[i] > 57)
 			*error = 1;
-		++j;
+		++i;
 	}
 	while (str[i] >= 48 && str[i] <= 57)
 	{
