@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 18:25:50 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/25 23:34:20 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 17:26:35 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int	draw_all(t_data *data)
 		* sizeof(int));
 	draw_map(data, data->minimap_s.mmap, data->minimap.basic_color);
 	raycast(data, data->ray_calcul);
+	
+	draw_sprites(data, data->wall_drawing);
+
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->background.img_ptr, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->walls.img_ptr, 0, 0);
