@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/24 13:36:19 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 00:55:53 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,20 @@ void	hook_manager(t_data *data)
 
 int	launcher(t_data *data)
 {
+	int	ret;
+
 	data->mlx = mlx_init();
 	check_mlx(data->mlx, data);
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
 	check_win(data);
 	init_minimap(data);
 	init_player_values(data);
-	if (load_textures(data))
-		leave(data, EXIT_FAILURE);
-	if (init_img(data))
-		leave(data, EXIT_FAILURE);
+	ret = load_textures(data);
+	if (ret != 0)
+		check_errors(data, ret);
+	ret = init_img(data);
+	if (ret != 0)
+		check_errors(data, ret);
 	init_background(data);
 	hook_manager(data);
 	return (EXIT_FAILURE);

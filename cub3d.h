@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/25 21:57:47 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 15:22:32 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,22 @@
 # define FIELD_OF_VIEW 	60
 
 /* North-South-East-West Flags */
-# define NORTH			1
-# define SOUTH			2
-# define EAST			3
-# define WEST			4
-# define ERROR_POS		100
+enum e_pos_flags
+{
+	NORTH			= 1,
+	SOUTH			= 2,
+	EAST			= 3,
+	WEST			= 4,
+	UNDEFINED		= 100
+};
+
+/* Errors flags */
+enum e_errors
+{
+	ERROR_IMG_PTR	= 2,
+	ERROR_TEXT_PTR	= 3,
+	ERROR_BAD_EXT	= 4
+};
 
 /* Mlx events and masks for hooks */
 enum e_hooks
@@ -319,6 +330,9 @@ int		error_check_noexit(int input, char *str);
 void	error_exit(t_data *data, char *msg, int param);
 void	check_mlx(void *mlx, t_data *data);
 void	check_win(t_data *data);
+
+/* error.c */
+void    check_errors(t_data *data, int ret);
 
 /* exit.c */
 void	free_images(t_data *data);
