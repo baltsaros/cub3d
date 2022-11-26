@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 19:30:03 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 19:36:56 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,7 +329,6 @@ void	draw_square_from(t_img img, int color, t_point begin, t_point end);
 float	dis_calcul(t_data *data, float ra, float ry, float rx);
 int		is_within_maps(int my, int mx, int height, int width);
 int		is_wall(char c);
-int		is_not_wall(char c);
 
 /* draw_wall.c */
 void	draw_a_wall(t_data *data, t_wall_drawing *wall,

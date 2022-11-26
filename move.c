@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:15:12 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 19:34:06 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 19:36:36 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	move_up(t_data *data, t_ray_calcul *collisions, double mult)
 {
-	if (is_not_wall(data->map.map
+	if (!is_wall(data->map.map
 		[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo]))
 	{
 		data->minimap_s.position.x += data->player_s.delta_x
@@ -22,7 +22,7 @@ void	move_up(t_data *data, t_ray_calcul *collisions, double mult)
 		data->player_s.pos_x += data->player_s.speed
 			* data->player_s.delta_x * mult;
 	}
-	if (is_not_wall(data->map.map
+	if (!is_wall(data->map.map
 		[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE]))
 	{
 		data->minimap_s.position.y += data->player_s.delta_y
@@ -34,7 +34,7 @@ void	move_up(t_data *data, t_ray_calcul *collisions, double mult)
 
 void	move_down(t_data *data, t_ray_calcul *collisions, double mult)
 {
-	if (is_not_wall(data->map.map
+	if (!is_wall(data->map.map
 		[collisions->ipy / SQUARE_SIZE][collisions->ipx_sub_xo]))
 	{
 		data->player_s.pos_x -= data->player_s.speed
@@ -42,7 +42,7 @@ void	move_down(t_data *data, t_ray_calcul *collisions, double mult)
 		data->minimap_s.position.x -= data->player_s.delta_x
 			* data->minimap_s.step * mult;
 	}
-	if (is_not_wall(data->map.map
+	if (!is_wall(data->map.map
 		[collisions->ipy_sub_yo][collisions->ipx / SQUARE_SIZE]))
 	{
 		data->player_s.pos_y -= data->player_s.speed
@@ -54,7 +54,7 @@ void	move_down(t_data *data, t_ray_calcul *collisions, double mult)
 
 void	move_right(t_data *data, t_ray_calcul *collisions, double mult)
 {
-	if (is_not_wall(data->map.map
+	if (!is_wall(data->map.map
 		[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo]))
 	{
 		data->player_s.pos_x -= data->player_s.speed
@@ -62,7 +62,7 @@ void	move_right(t_data *data, t_ray_calcul *collisions, double mult)
 		data->minimap_s.position.x -= data->player_s.delta_y
 			* data->minimap_s.step * mult;
 	}
-	if (is_not_wall(data->map.map
+	if (!is_wall(data->map.map
 		[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE]))
 	{
 		data->player_s.pos_y -= data->player_s.speed
@@ -74,7 +74,7 @@ void	move_right(t_data *data, t_ray_calcul *collisions, double mult)
 
 void	move_left(t_data *data, t_ray_calcul *collisions, double mult)
 {
-	if (is_not_wall(data->map.map
+	if (!is_wall(data->map.map
 		[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo]))
 	{
 		data->player_s.pos_x -= data->player_s.speed
@@ -82,7 +82,7 @@ void	move_left(t_data *data, t_ray_calcul *collisions, double mult)
 		data->minimap_s.position.x -= -data->player_s.delta_y
 			* data->minimap_s.step * mult;
 	}
-	if (is_not_wall(data->map.map
+	if (!is_wall(data->map.map
 		[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE]))
 	{
 		data->player_s.pos_y -= data->player_s.speed

@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:14:04 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 19:30:51 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 19:37:01 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,4 @@ int	is_within_maps(int my, int mx, int height, int width)
 int	is_wall(char c)
 {
 	return (c != '0' && c != 'C' && c != 'P' && is_player(c));
-}
-
-int	is_not_wall(char c)
-{
-	return (c == '0' || c == 'C' || c == 'P' || !is_player(c));
 }
