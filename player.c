@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 17:47:18 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 17:50:11 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_player_values(t_data *data)
 		+ (SQUARE_SIZE / 2) - (PSIZE / 2);
 	data->player_s.pos_x = (data->map.coord[0] * SQUARE_SIZE)
 		+ (SQUARE_SIZE / 2) - (PSIZE / 2);
-	data->player_s.speed = 12;
+	data->player_s.speed = 9;
 	x = ((float)data->player_s.speed * 100.0) / SQUARE_SIZE;
 	data->minimap_s.step = (1 * x) / 100;
 	data->player_s.rot_speed = 5;
