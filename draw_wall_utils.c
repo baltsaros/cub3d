@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:14:04 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 19:29:51 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 19:30:51 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ int	is_wall(char c)
 
 int	is_not_wall(char c)
 {
-	return (c == '0' || c == 'C' || c == 'P');
+	return (c == '0' || c == 'C' || c == 'P' || !is_player(c));
 }

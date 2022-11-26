@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:49:59 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/25 20:38:00 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 19:35:08 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	draw_map(t_data *data, char **map, int color)
 			else if (data->i == 7 && j == 7 && map[py + j][px + data->i])
 				draw_square_coord(data, RED, j * PSIZE, data->i * PSIZE);
 			else if (map[py + j][px + data->i]
-				&& check_charset(map[py + j][px + data->i], "0NEWS"))
+				&& check_charset(map[py + j][px + data->i], "0NEWSP"))
 				draw_square_coord(data, GRAY, j * PSIZE, data->i * PSIZE);
 			++data->i;
 		}
