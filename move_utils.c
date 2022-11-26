@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:57:43 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/17 17:33:09 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 13:14:13 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,22 @@ void	collisions_calculs_left(t_data *data, t_ray_calcul *collisions)
 	collisions->ipx_add_xo = (collisions->ipx + xo) / SQUARE_SIZE;
 	collisions->ipy = data->player_s.pos_y;
 	collisions->ipy_add_yo = (collisions->ipy + yo) / SQUARE_SIZE;
+}
+
+double	set_mult(t_data *data, int dir)
+{
+	if (dir == 0)
+	{
+		if (data->keyboard.a || data->keyboard.d)
+			return (sqrt(2) / 2);
+		else
+			return (1.0);
+	}
+	else
+	{
+		if (data->keyboard.w || data->keyboard.s)
+			return (sqrt(2) / 2);
+		else
+			return (1.0);
+	}
 }

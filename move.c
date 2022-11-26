@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:15:12 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 14:12:36 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 13:13:28 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	move_up(t_data *data, t_ray_calcul *collisions)
+void	move_up(t_data *data, t_ray_calcul *collisions, double mult)
 {
 	if (data->map.map
 		[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo] == '0'
@@ -24,7 +24,7 @@ void	move_up(t_data *data, t_ray_calcul *collisions)
 		data->minimap_s.position.x += data->player_s.delta_x
 			* data->minimap_s.step;
 		data->player_s.pos_x += data->player_s.speed
-			* data->player_s.delta_x;
+			* data->player_s.delta_x * mult;
 	}
 	if (data->map.map
 		[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE] == '0'
@@ -36,11 +36,11 @@ void	move_up(t_data *data, t_ray_calcul *collisions)
 		data->minimap_s.position.y += data->player_s.delta_y
 			* data->minimap_s.step;
 		data->player_s.pos_y += data->player_s.speed
-			* data->player_s.delta_y;
+			* data->player_s.delta_y * mult;
 	}
 }
 
-void	move_down(t_data *data, t_ray_calcul *collisions)
+void	move_down(t_data *data, t_ray_calcul *collisions, double mult)
 {
 	if (data->map.map
 		[collisions->ipy / SQUARE_SIZE][collisions->ipx_sub_xo] == '0'
@@ -50,7 +50,7 @@ void	move_down(t_data *data, t_ray_calcul *collisions)
 			[collisions->ipy / SQUARE_SIZE][collisions->ipx_sub_xo]))
 	{
 		data->player_s.pos_x -= data->player_s.speed
-			* data->player_s.delta_x;
+			* data->player_s.delta_x * mult;
 		data->minimap_s.position.x -= data->player_s.delta_x
 			* data->minimap_s.step;
 	}
@@ -62,13 +62,13 @@ void	move_down(t_data *data, t_ray_calcul *collisions)
 			[collisions->ipy_sub_yo][collisions->ipx / SQUARE_SIZE]))
 	{
 		data->player_s.pos_y -= data->player_s.speed
-			* data->player_s.delta_y;
+			* data->player_s.delta_y * mult;
 		data->minimap_s.position.y -= data->player_s.delta_y
 			* data->minimap_s.step;
 	}
 }
 
-void	move_right(t_data *data, t_ray_calcul *collisions)
+void	move_right(t_data *data, t_ray_calcul *collisions, double mult)
 {
 	if (data->map.map
 		[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo] == '0'
@@ -78,7 +78,7 @@ void	move_right(t_data *data, t_ray_calcul *collisions)
 			[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo]))
 	{
 		data->player_s.pos_x -= data->player_s.speed
-			* data->player_s.delta_y;
+			* data->player_s.delta_y * mult;
 		data->minimap_s.position.x -= data->player_s.delta_y
 			* data->minimap_s.step;
 	}
@@ -90,13 +90,13 @@ void	move_right(t_data *data, t_ray_calcul *collisions)
 			[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE]))
 	{
 		data->player_s.pos_y -= data->player_s.speed
-			* -data->player_s.delta_x;
+			* -data->player_s.delta_x * mult;
 		data->minimap_s.position.y -= -data->player_s.delta_x
 			* data->minimap_s.step;
 	}
 }
 
-void	move_left(t_data *data, t_ray_calcul *collisions)
+void	move_left(t_data *data, t_ray_calcul *collisions, double mult)
 {
 	if (data->map.map
 		[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo] == '0'
@@ -106,7 +106,7 @@ void	move_left(t_data *data, t_ray_calcul *collisions)
 			[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo]))
 	{
 		data->player_s.pos_x -= data->player_s.speed
-			* -data->player_s.delta_y;
+			* -data->player_s.delta_y * mult;
 		data->minimap_s.position.x -= -data->player_s.delta_y
 			* data->minimap_s.step;
 	}
@@ -118,7 +118,7 @@ void	move_left(t_data *data, t_ray_calcul *collisions)
 			[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE]))
 	{
 		data->player_s.pos_y -= data->player_s.speed
-			* data->player_s.delta_x;
+			* data->player_s.delta_x * mult;
 		data->minimap_s.position.y -= data->player_s.delta_x
 			* data->minimap_s.step;
 	}
@@ -127,27 +127,25 @@ void	move_left(t_data *data, t_ray_calcul *collisions)
 void	move(t_data *data)
 {
 	t_ray_calcul	collisions;
-
+	
 	if (data->keyboard.w ^ data->keyboard.s)
 	{
 		collisions_calculs_up_down(data, &collisions);
-		if (data->keyboard.w && !data->keyboard.d && !data->keyboard.a)
-			move_up(data, &collisions);
-		if (data->keyboard.s && !data->keyboard.d && !data->keyboard.a)
-			move_down(data, &collisions);
+		if (data->keyboard.w)
+			move_up(data, &collisions, set_mult(data, 0));
+		if (data->keyboard.s)
+			move_down(data, &collisions, set_mult(data, 0));
 	}
 	if (data->keyboard.d
-		&& !data->keyboard.a
-		&& !data->keyboard.w && !data->keyboard.s)
+		&& !data->keyboard.a)
 	{
 		collisions_calculs_right(data, &collisions);
-		move_right(data, &collisions);
+		move_right(data, &collisions, set_mult(data, 1));
 	}
 	else if (data->keyboard.a
-		&& !data->keyboard.d
-		&& !data->keyboard.w && !data->keyboard.s)
+		&& !data->keyboard.d)
 	{
 		collisions_calculs_left(data, &collisions);
-		move_left(data, &collisions);
+		move_left(data, &collisions, set_mult(data, 1));
 	}
 }

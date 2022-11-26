@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 01:51:01 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 13:11:31 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -399,12 +399,13 @@ char	*memcpy_offset(void *dest, const void *src, size_t n, size_t offset);
 void	collisions_calculs_up_down(t_data *data, t_ray_calcul *collisions);
 void	collisions_calculs_right(t_data *data, t_ray_calcul *collisions);
 void	collisions_calculs_left(t_data *data, t_ray_calcul *collisions);
+double	set_mult(t_data *data, int dir);
 
 /* move.c */
-void	move_up(t_data *data, t_ray_calcul *collisions);
-void	move_down(t_data *data, t_ray_calcul *collisions);
-void	move_right(t_data *data, t_ray_calcul *collisions);
-void	move_left(t_data *data, t_ray_calcul *collisions);
+void	move_up(t_data *data, t_ray_calcul *collisions, double mult);
+void	move_down(t_data *data, t_ray_calcul *collisions, double mult);
+void	move_right(t_data *data, t_ray_calcul *collisions, double mult);
+void	move_left(t_data *data, t_ray_calcul *collisions, double mult);
 void	move(t_data *data);
 
 /* player.c */
