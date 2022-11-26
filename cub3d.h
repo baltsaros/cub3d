@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 00:57:49 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 01:09:00 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,14 @@
 # define FIELD_OF_VIEW 	60
 
 /* North-South-East-West Flags */
-# define NORTH			1
-# define SOUTH			2
-# define EAST			3
-# define WEST			4
-# define ERROR_POS		100
+enum e_pos_flags
+{
+	NORTH			= 1,
+	SOUTH			= 2,
+	EAST			= 3,
+	WEST			= 4,
+	UNDEFINED		= 100
+};
 
 /* Errors flags */
 enum e_errors

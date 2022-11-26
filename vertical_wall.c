@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertical_wall.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:35:14 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/21 19:32:13 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 01:09:14 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan)
 		ray->rx = data->player_s.pos_x;
 		ray->ry = data->player_s.pos_y;
 		dof = (int)data->map.width;
-		ret = ERROR_POS;
+		ret = UNDEFINED;
 	}
 	calculate_vertical_distance(data, ray, dof);
 	return (ret);
