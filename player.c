@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 15:29:58 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 17:47:18 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ void	init_player_values(t_data *data)
 	data->player_s.pos_x = (data->map.coord[0] * SQUARE_SIZE)
 		+ (SQUARE_SIZE / 2) - (PSIZE / 2);
 	data->player_s.speed = 12;
-	x = (data->player_s.speed * 100) / SQUARE_SIZE;
-	// printf("step: %d\n", data->player_s.speed);
+	x = ((float)data->player_s.speed * 100.0) / SQUARE_SIZE;
 	data->minimap_s.step = (1 * x) / 100;
-	// printf("x:%f\nmspeed: %f\n", x, data->minimap_s.step);
 	data->player_s.rot_speed = 5;
 	data->player_s.pos_win_x = data->minimap_s.width / 2 - PSIZE / 2;
 	data->player_s.pos_win_y = data->minimap_s.height / 2 - PSIZE / 2;
