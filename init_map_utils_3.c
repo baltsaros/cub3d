@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/24 07:55:33 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 14:53:01 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,36 @@ void	check_direction(t_data *data)
 	else if (data->map.dir == 'S')
 		data->map.angle = 270;
 	data->player_s.p_ang = data->map.angle;
+}
+
+// check that ceiling and floor color paramenters are digits
+void	check_num(char **str, int *array, t_data *data)
+{
+	size_t	i;
+	int		error;
+
+	i = 0;
+	error = 0;
+	while (i < 3)
+	{
+		if (!str[i])
+			error_exit(data, "Invalid color parameter", 1);
+		array[i] = ft_atoi_er(str[i], &error) % 256;
+		if (error)
+			error_exit(data, "Invalid color parameter", 1);
+		++i;
+	}
+}
+
+// retrieve floor and ceiling color parameters
+void	check_colors(t_map *map, t_data *data)
+{
+	map->f_spl = ft_split(map->f, ',');
+	alloc_check_big(map->f_spl, data);
+	map->c_spl = ft_split(map->c, ',');
+	alloc_check_big(map->c_spl, data);
+	check_num(map->f_spl, map->floor, data);
+	check_num(map->c_spl, map->ceiling, data);
 }
 
 // print map with its parameters
