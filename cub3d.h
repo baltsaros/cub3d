@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 17:54:19 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 19:30:03 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,15 +181,7 @@ typedef struct s_object
 	int			width;
 	int			height;
 	t_fpoint	pos;
-	float		z;
-	float		sx;
-	float		sy;
-	float		sz;
-	float		cs;
-	float		sn;
-	float		a;
-	float		b;
-	int			scale;
+	float		distance;
 } t_object;
 
 typedef struct s_player
@@ -337,6 +329,7 @@ void	draw_square_from(t_img img, int color, t_point begin, t_point end);
 float	dis_calcul(t_data *data, float ra, float ry, float rx);
 int		is_within_maps(int my, int mx, int height, int width);
 int		is_wall(char c);
+int		is_not_wall(char c);
 
 /* draw_wall.c */
 void	draw_a_wall(t_data *data, t_wall_drawing *wall,
@@ -450,7 +443,7 @@ void	raycast(t_data *data, t_ray_calcul ray);
 
 /* sprites.c */
 int 	load_sprites_textures(t_data *data);
-void	draw_sprites(t_data *data, t_wall_drawing wall);
+void	draw_sprites(t_data *data);
 
 /* vertical_wall.c */
 void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int index);

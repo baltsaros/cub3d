@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:28:39 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 17:40:15 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 19:22:46 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,62 +63,24 @@ void	init_obj_pos(t_data *data, t_object *soldier)
 	} 
 }
 
-void	draw_sprite(t_data *data, t_object *soldier, t_wall_drawing *wall)
-{
-	int	x;
-	int	y;
-	
-	x = soldier->sx - soldier->scale;
-	y = 0;
-	wall->tx = 0;
-	wall->ty_step = (float)(SQUARE_SIZE / 2) / (float)soldier->scale;
-	wall->tx_step = ((float)(SQUARE_SIZE / 2) - 0.5) / (float)soldier->scale;
+// void	draw_sprite(t_data *data, t_object *soldier, t_wall_drawing *wall)
+// {
+// }
 
-	int	color = 0xFFC0CB;
-
-	printf("sx: %f\n", soldier->sx);
-	printf("sy: %f\n", soldier->sy);
-	printf("scale: %d\n", soldier->scale);
-	printf("x: %d\n", x);
-
-	while (x < soldier->sx + soldier->scale)
-	{
-		wall->ty = (float)(SQUARE_SIZE / 2) - 1.0;
-		y = 0;
-		while (y < soldier->scale)
-		{
-			mlx_pixel_put_img(&data->walls, x, y, color);
-			wall->ty -= wall->ty_step;
-			if (wall->ty < 0)
-				wall->ty = 0;
-			y++;
-		}
-		wall->tx += wall->tx_step;
-		x++;
-	}
-}
-
-void	draw_sprites(t_data *data, t_wall_drawing wall)
+void	draw_sprites(t_data *data)
 {
 	t_object	soldier;
 
 	init_obj_pos(data, &soldier);
-	soldier.z = 20;
-	soldier.sx = soldier.pos.x;
-	soldier.sy = soldier.pos.y;
-	soldier.sz = soldier.z;
-	soldier.cs = cos(degtorad(data->player_s.p_ang));
-	soldier.sn = sin(degtorad(data->player_s.p_ang));
-	soldier.a = soldier.sy * soldier.cs + soldier.sx * soldier.sn;
-	soldier.b =  soldier.sx * soldier.cs - soldier.sy * soldier.sn;
-	soldier.sx = soldier.a;
-	soldier.sy = soldier.b;
-	soldier.sx = (soldier.sx * 108.0 / soldier.sy) + (WIDTH / 2);
-	soldier.sy = (soldier.sz * 108.0 / soldier.sy) + (HEIGHT / 2);
-	soldier.scale = (SQUARE_SIZE / 2) * HEIGHT / soldier.b;
-	if (soldier.scale < 0)
-		soldier.scale = 0;
-	if (soldier.scale > WIDTH)
-		soldier.scale = WIDTH;
-	draw_sprite(data, &soldier, &wall);
+	soldier.distance = sqrt(pow((soldier.pos.x - data->player_s.pos_x), 2)
+		+ pow((soldier.pos.y - data->player_s.pos_y), 2));
+
+	printf("distance: %f\n", soldier.distance);
+
+	data->wall_drawing.distproj = (WIDTH / 2)
+		/ tan(degtorad(FIELD_OF_VIEW / 2));
+	data->wall_drawing.wallheight = (SQUARE_SIZE / soldier.distance)
+		* data->wall_drawing.distproj;
+
+	printf("wallheight: %f\n",  data->wall_drawing.wallheight);
 }
