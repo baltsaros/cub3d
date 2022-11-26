@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:15:12 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 13:13:28 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 15:07:49 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	move_up(t_data *data, t_ray_calcul *collisions, double mult)
 			[collisions->ipy / SQUARE_SIZE][collisions->ipx_add_xo]))
 	{
 		data->minimap_s.position.x += data->player_s.delta_x
-			* data->minimap_s.step;
+			* data->minimap_s.step * mult;
 		data->player_s.pos_x += data->player_s.speed
 			* data->player_s.delta_x * mult;
 	}
@@ -34,7 +34,7 @@ void	move_up(t_data *data, t_ray_calcul *collisions, double mult)
 			[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE]))
 	{
 		data->minimap_s.position.y += data->player_s.delta_y
-			* data->minimap_s.step;
+			* data->minimap_s.step * mult;
 		data->player_s.pos_y += data->player_s.speed
 			* data->player_s.delta_y * mult;
 	}
@@ -52,7 +52,7 @@ void	move_down(t_data *data, t_ray_calcul *collisions, double mult)
 		data->player_s.pos_x -= data->player_s.speed
 			* data->player_s.delta_x * mult;
 		data->minimap_s.position.x -= data->player_s.delta_x
-			* data->minimap_s.step;
+			* data->minimap_s.step * mult;
 	}
 	if (data->map.map
 		[collisions->ipy_sub_yo][collisions->ipx / SQUARE_SIZE] == '0'
@@ -64,7 +64,7 @@ void	move_down(t_data *data, t_ray_calcul *collisions, double mult)
 		data->player_s.pos_y -= data->player_s.speed
 			* data->player_s.delta_y * mult;
 		data->minimap_s.position.y -= data->player_s.delta_y
-			* data->minimap_s.step;
+			* data->minimap_s.step * mult;
 	}
 }
 
@@ -80,7 +80,7 @@ void	move_right(t_data *data, t_ray_calcul *collisions, double mult)
 		data->player_s.pos_x -= data->player_s.speed
 			* data->player_s.delta_y * mult;
 		data->minimap_s.position.x -= data->player_s.delta_y
-			* data->minimap_s.step;
+			* data->minimap_s.step * mult;
 	}
 	if (data->map.map
 		[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE] == '0'
@@ -92,7 +92,7 @@ void	move_right(t_data *data, t_ray_calcul *collisions, double mult)
 		data->player_s.pos_y -= data->player_s.speed
 			* -data->player_s.delta_x * mult;
 		data->minimap_s.position.y -= -data->player_s.delta_x
-			* data->minimap_s.step;
+			* data->minimap_s.step * mult;
 	}
 }
 
@@ -108,7 +108,7 @@ void	move_left(t_data *data, t_ray_calcul *collisions, double mult)
 		data->player_s.pos_x -= data->player_s.speed
 			* -data->player_s.delta_y * mult;
 		data->minimap_s.position.x -= -data->player_s.delta_y
-			* data->minimap_s.step;
+			* data->minimap_s.step * mult;
 	}
 	if (data->map.map
 		[collisions->ipy_add_yo][collisions->ipx / SQUARE_SIZE] == '0'
@@ -120,7 +120,7 @@ void	move_left(t_data *data, t_ray_calcul *collisions, double mult)
 		data->player_s.pos_y -= data->player_s.speed
 			* data->player_s.delta_x * mult;
 		data->minimap_s.position.y -= data->player_s.delta_x
-			* data->minimap_s.step;
+			* data->minimap_s.step * mult;
 	}
 }
 
