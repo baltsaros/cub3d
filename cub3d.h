@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 01:42:13 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 01:51:01 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,7 +346,7 @@ int		mouse_hook(int x, int y, t_data *data);
 int		key_hook_manager(t_data *data);
 
 /* horizontal_wall.c */
-void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof);
+void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int index);
 int		check_up(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_down(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
@@ -417,7 +417,7 @@ void	fisheye_fix(t_data *data, t_ray_calcul *ray);
 void	raycast(t_data *data, t_ray_calcul ray);
 
 /* vertical_wall.c */
-void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof);
+void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int index);
 int		check_right(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_left(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan);
