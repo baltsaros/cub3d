@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:16:23 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 15:17:33 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/26 15:29:58 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_player(char c)
 
 void	init_player_values(t_data *data)
 {
-	// float	x;
+	float	x;
 
 	data->player_s.pos_x = 0;
 	data->player_s.pos_y = 0;
@@ -32,10 +32,10 @@ void	init_player_values(t_data *data)
 		+ (SQUARE_SIZE / 2) - (PSIZE / 2);
 	data->player_s.pos_x = (data->map.coord[0] * SQUARE_SIZE)
 		+ (SQUARE_SIZE / 2) - (PSIZE / 2);
-	data->player_s.speed = 10;
-	// x = (data->player_s.speed * 100) / SQUARE_SIZE;
+	data->player_s.speed = 12;
+	x = (data->player_s.speed * 100) / SQUARE_SIZE;
 	// printf("step: %d\n", data->player_s.speed);
-	// data->minimap_s.step = (PSIZE * x) / 100;
+	data->minimap_s.step = (1 * x) / 100;
 	// printf("x:%f\nmspeed: %f\n", x, data->minimap_s.step);
 	data->player_s.rot_speed = 5;
 	data->player_s.pos_win_x = data->minimap_s.width / 2 - PSIZE / 2;
