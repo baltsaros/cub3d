@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 23:31:19 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 23:55:30 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,6 +328,11 @@ void	open_close_door(t_data *data, t_ray_calcul ray);
 void	init_background(t_data *data);
 int		draw_all(t_data *data);
 
+/* draw_sprites.c */
+void	draw_sprite_y(t_data *data, t_text text, t_wall_drawing *wall, t_object *soldier);
+void	draw_sprite_x(t_data *data, t_text text, t_wall_drawing *wall, t_object *soldier);
+void	init_draw_sprite(t_data *data, t_object	*soldier, t_wall_drawing *wall);
+
 /* draw_utils.c */
 int		create_trgb(int t, int r, int g, int b);
 int		get_pixel(t_img img, int y, int x);
@@ -455,6 +460,8 @@ int		init_depth(t_data *data);
 
 /* sprites.c */
 int		load_sprites_textures(t_data *data);
+void	init_obj_pos(t_data *data, t_object *soldier);
+int		init_depth(t_data *data);
 void	draw_sprites(t_data *data);
 
 /* vertical_wall.c */

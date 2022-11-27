@@ -54,7 +54,7 @@ SRCS		=	cub3d.c \
 				door.c \
 				error.c \
 				sprites.c \
-				sprites_2.c
+				draw_sprites.c
 
 HEADER		= cub3d.h
 
