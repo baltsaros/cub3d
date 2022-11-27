@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 17:51:07 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 22:08:37 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,18 @@ typedef struct s_keyboard
 	int	right;
 	int	left;
 }	t_keyboard;
+
+/* struct for objects */
+typedef struct s_object
+{
+	t_fpoint	fpos;
+	t_point		pos;
+	t_fpoint	fdis;
+	float		distance;
+	float		tmp;
+	float		q;
+	t_fpoint	screen;
+}	t_object;
 
 /* Struct for map values */
 typedef struct s_map
@@ -434,14 +446,10 @@ void	fisheye_fix(t_data *data, t_ray_calcul *ray);
 void	raycast(t_data *data, t_ray_calcul ray);
 
 /* sprites_2.c */
-void	calculate_horizontal_sprite(t_data *data, t_ray_calcul *ray, int index);
-int		check_horizontal_sprite(t_data *data, t_ray_calcul *ray, float Tan);
-void	calculate_vertical_sprite(t_data *data, t_ray_calcul *ray, int index);
-int		check_vertical_sprite(t_data *data, t_ray_calcul *ray, float Tan);
 
 /* sprites.c */
 int		load_sprites_textures(t_data *data);
-void	raycast_sprites(t_data *data, t_ray_calcul ray);
+void	draw_sprites(t_data *data);
 
 /* vertical_wall.c */
 void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int index);

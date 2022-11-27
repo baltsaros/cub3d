@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:28:39 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 17:53:46 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 22:13:38 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,74 +38,75 @@ int	load_sprites_textures(t_data *data)
     return (EXIT_SUCCESS);
 }
 
-int	adapt_distance_sprite(t_ray_calcul *ray, int posH, int posV)
+void	init_obj_pos(t_data *data, t_object *soldier)
 {
-	if (ray->disv < ray->dish)
+	int	y;
+	int	x;
+
+	y = 0;
+	while ((size_t)y < data->map.height)
 	{
-		ray->rx = ray->vx;
-		ray->ry = ray->vy;
-		ray->dish = ray->disv;
-		ray->is_sprite_h = ray->is_sprite_v;
-		return (posV);
+		x = 0;
+		while ((size_t)x < data->map.width)
+		{
+			if (data->map.map[y][x] == 'P')
+			{
+				soldier->pos.y = y;
+				soldier->pos.x = x;
+				soldier->fpos.y = (y * SQUARE_SIZE) + (SQUARE_SIZE / 2);
+				soldier->fpos.x = (x * SQUARE_SIZE) + (SQUARE_SIZE / 2);
+			}
+			x++;
+		}
+		y++;
 	}
-	return (posH);
 }
 
-void	draw_vertical_sprite(t_data *data, t_wall_drawing *wall,
-		t_ray_calcul *ray, int pos)
+void	init_draw_sprite(t_data *data, t_object	*soldier, t_wall_drawing *wall)
 {
-	wall->ty = 0;
-	wall->ty_step = (float)data->sprite_1.height / (float)wall->wallheight;
-	if (pos == NORTH || pos == SOUTH)
-		wall->tx = (int)(ray->rx) % data->sprite_1.width;
-	else
-		wall->tx = (int)(ray->ry) % data->sprite_1.width;
-	if (data->anim < 30)
-		draw_a_wall(data, wall, data->sprite_1);
-	else if (data->anim < 60)
-		draw_a_wall(data, wall, data->sprite_2);
-	else if (data->anim < 90)
-		draw_a_wall(data, wall, data->sprite_3);
+	int	y;
+	int	y_max;
+	int	x;
+	int	x_max;
+
+	y = soldier->screen.y - (wall->wallheight / 2);
+	y_max = soldier->screen.y + (wall->wallheight / 2);
+	x = soldier->screen.x - (wall->wallheight / 2);
+	x_max = soldier->screen.x + (wall->wallheight / 2);
+	int	color = 0xEE82EE;
+	while (x != x_max)
+	{
+		y = soldier->screen.y - (wall->wallheight / 2);
+		while (y != y_max)
+		{
+			if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+				mlx_pixel_put_img(&data->walls, x, y, color);
+			y++;
+		}
+		x++;
+	}
 }
 
-void	init_calculate_sprite(t_data *data, t_ray_calcul *ray, int pos)
+void	draw_sprites(t_data *data)
 {
+	t_object	soldier;
+	
+	init_obj_pos(data, &soldier);
+	soldier.fdis.x = soldier.fpos.x - data->player_s.pos_x;
+	soldier.fdis.y = soldier.fpos.y - data->player_s.pos_y;
+	soldier.distance = sqrt(pow(soldier.fdis.x, 2) + pow(soldier.fdis.y, 2));
+	soldier.tmp = (atan2(-soldier.fdis.y, soldier.fdis.x) * (180 / M_PI));
+	soldier.tmp = fixang(soldier.tmp);
+	soldier.q = data->player_s.p_ang + (FIELD_OF_VIEW / 2) - soldier.tmp;
+	if (soldier.tmp > 270 && data->player_s.p_ang < 90)
+		soldier.q = data->player_s.p_ang + (FIELD_OF_VIEW / 2) - soldier.tmp + 360;
+	if (data->player_s.p_ang > 270 && soldier.tmp < 90)
+		soldier.q = data->player_s.p_ang + (FIELD_OF_VIEW / 2) - soldier.tmp - 360;
+	soldier.screen.x = soldier.q * (WIDTH / FIELD_OF_VIEW);
+	soldier.screen.y = (HEIGHT / 2);
 	data->wall_drawing.distproj = (WIDTH / 2)
 		/ tan(degtorad(FIELD_OF_VIEW / 2));
-	data->wall_drawing.wallheight = (SQUARE_SIZE / ray->dish)
+	data->wall_drawing.wallheight = (SQUARE_SIZE / soldier.distance)
 		* data->wall_drawing.distproj;
-	data->wall_drawing.begin.x = (float)ray->r;
-	data->wall_drawing.begin.y = (HEIGHT / 2)
-		- (data->wall_drawing.wallheight / 2);
-	data->wall_drawing.end.x = data->wall_drawing.begin.x;
-	data->wall_drawing.end.y = data->wall_drawing.begin.y
-		+ data->wall_drawing.wallheight;
-	draw_vertical_sprite(data, &data->wall_drawing, ray, pos);
-}
-
-void	raycast_sprites(t_data *data, t_ray_calcul ray)
-{
-	float	tan_c;
-	int		posh;
-	int		posv;
-	int		pos;
-
-	ray.r = 0;
-	ray.ra = fixang(data->player_s.p_ang + 30);
-	while (ray.r < WIDTH)
-	{
-		ray.is_sprite_h = 0;
-		ray.is_sprite_v = 0;
-		tan_c = tan(degtorad(ray.ra));
-		posv = check_vertical_sprite(data, &ray, tan_c);
-		ray.vx = ray.rx;
-		ray.vy = ray.ry;
-		posh = check_horizontal_sprite(data, &ray, (1.0 / tan_c));
-		pos = adapt_distance_sprite(&ray, posh, posv);
-		fisheye_fix(data, &ray);
-		if (ray.is_sprite_h)
-			init_calculate_sprite(data, &ray, pos);
-		ray.ra = fixang(ray.ra - ((float)FIELD_OF_VIEW / (float)WIDTH));
-		ray.r++;
-	}
+	init_draw_sprite(data, &soldier, &data->wall_drawing);
 }
