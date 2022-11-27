@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:28:39 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 17:49:36 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 17:53:46 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,12 @@ void	draw_vertical_sprite(t_data *data, t_wall_drawing *wall,
 		wall->tx = (int)(ray->rx) % data->sprite_1.width;
 	else
 		wall->tx = (int)(ray->ry) % data->sprite_1.width;
-	draw_a_wall(data, wall, data->sprite_1);
+	if (data->anim < 30)
+		draw_a_wall(data, wall, data->sprite_1);
+	else if (data->anim < 60)
+		draw_a_wall(data, wall, data->sprite_2);
+	else if (data->anim < 90)
+		draw_a_wall(data, wall, data->sprite_3);
 }
 
 void	init_calculate_sprite(t_data *data, t_ray_calcul *ray, int pos)
