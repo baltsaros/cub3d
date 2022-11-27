@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 23:55:30 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 23:56:33 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -454,9 +454,6 @@ void	init_player_values(t_data *data);
 int		adapt_distance(t_ray_calcul *ray, int posH, int posV);
 void	fisheye_fix(t_data *data, t_ray_calcul *ray);
 void	raycast(t_data *data, t_ray_calcul ray);
-
-/* sprites_2.c */
-int		init_depth(t_data *data);
 
 /* sprites.c */
 int		load_sprites_textures(t_data *data);
