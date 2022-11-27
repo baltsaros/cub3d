@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 23:52:04 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 23:54:04 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 00:15:20 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,27 @@ void	draw_sprite_y(t_data *data, t_text text, t_wall_drawing *wall, t_object *so
 {
     int color;
     
+    if (wall->begin.y < 0)
+	{
+		wall->ty = (-wall->begin.y * wall->ty_step);
+		wall->begin.y = 0;
+	}
     while (wall->begin.y != wall->end.y
-		&& soldier->distance < data->depth[wall->begin.x])
+		&& soldier->distance < data->depth[wall->begin.x]
+        && wall->begin.y <= HEIGHT)
 	{
 		color = get_pixel(text.img, (int)wall->ty, (int)wall->tx);
-		if (wall->begin.x >= 0 && wall->begin.x < WIDTH && wall->begin.y >= 0 && wall->begin.y < HEIGHT)
+		if (wall->begin.x >= 0)
 			mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, color);
 		wall->begin.y++;
 		wall->ty += wall->ty_step;
-	}  
+	}
 }
 
 void	draw_sprite_x(t_data *data, t_text text, t_wall_drawing *wall, t_object *soldier)
 {	
 	wall->tx = 0;
-	while (wall->begin.x != wall->end.x)
+	while (wall->begin.x != wall->end.x && wall->begin.x <= WIDTH)
 	{
 		wall->begin.y = soldier->screen.y - (wall->wallheight / 2);
 		wall->ty = 0;
