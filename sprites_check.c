@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 20:06:35 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 00:02:42 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 01:57:53 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,22 @@ void	check_sprites(t_data *data, t_ray_calcul *ray, int index)
 
 void	check_up_sprite(t_data *data, t_ray_calcul *ray, t_object *soldier, float Tan)
 {
-	(void)data;
-	(void)ray;
 	(void)soldier;
-	(void)Tan;
+	ray->ry = (((int)data->player_s.pos_y / SQUARE_SIZE) * SQUARE_SIZE)
+		- 0.0005;
+	ray->rx = (data->player_s.pos_y - ray->ry) * Tan + data->player_s.pos_x;
+	ray->yo = -SQUARE_SIZE;
+	ray->xo = -ray->yo * Tan;
 }
-
 
 void	check_down_sprite(t_data *data, t_ray_calcul *ray, t_object *soldier, float Tan)
 {
-	(void)data;
-	(void)ray;
 	(void)soldier;
-	(void)Tan;
-
-	ray->rx = data->player_s.pos_x;
-	ray->ry = data->player_s.pos_y;
+	ray->ry = (((int)data->player_s.pos_y / SQUARE_SIZE) * SQUARE_SIZE)
+		+ SQUARE_SIZE;
+	ray->rx = (data->player_s.pos_y - ray->ry) * Tan + data->player_s.pos_x;
+	ray->yo = SQUARE_SIZE;
+	ray->xo = -ray->yo * Tan;
 }
 
 void	cast_ray_in_dir(t_data *data, t_ray_calcul *ray, t_object *soldier, float Tan)
@@ -68,14 +68,7 @@ void	cast_ray_in_dir(t_data *data, t_ray_calcul *ray, t_object *soldier, float T
 		ray->ry = data->player_s.pos_y;
 		index = (int)data->map.height;
 	}
-	
+	printf("ry: %f\n", ray->ry);
+	printf("rx: %f\n", ray->rx);
 	check_sprites(data, ray, index);
-
-	// printf("x: %f\n", data->player_s.pos_x + data->distProj);
-	// printf("y: %f\n", data->player_s.pos_y + data->distProj);
-
-	// printf("pos_x: %d\n", soldier->pos.x);
-	// printf("pos_y: %d\n", soldier->pos.y);
-	// printf("mx: %d\n", ray->mx);
-	// printf("my: %d\n", ray->my);
 }

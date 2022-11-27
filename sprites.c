@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:28:39 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 23:42:33 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 01:53:00 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,33 +74,15 @@ void	draw_vertical_sprite(t_data *data, t_wall_drawing *wall,
 	wall->end.x = wall->begin.x;
 	wall->end.y = wall->begin.y
 		+ wall->wallheight;
-	// wall->ty = 0;
-	// wall->ty_step = (float)data->sprite_1.height / (float)wall->wallheight;
-	// wall->tx = (int)(ray->rx) % data->sprite_1.width;
-
-	// draw_a_wall(data, wall, data->sprite_1);
-	int	color;
-
-	if (wall->begin.y < 0)
-	{
-		// wall->ty = (-wall->begin.y * wall->ty_step);
-		wall->begin.y = 0;
-	}
-	while (wall->begin.y != wall->end.y && wall->begin.y <= HEIGHT)
-	{
-		// color = get_pixel(text.img, (int)wall->ty, (int)wall->tx);
-		color = 0xFFC0CB;
-		mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y,
-			color);
-		wall->begin.y++;
-		// wall->ty += wall->ty_step;
-	}
+	wall->ty = 0;
+	wall->ty_step = (float)data->sprite_1.height / (float)wall->wallheight;
+	wall->tx = (int)(ray->rx) % data->sprite_1.width;
+	draw_a_wall(data, wall, data->sprite_1);
 }
 
 void	draw_sprites(t_data *data, t_wall_drawing wall,
 		t_ray_calcul ray)
 {
-	(void)wall;
 	t_object	soldier;
 
 	init_obj_pos(data, &soldier);
@@ -109,17 +91,13 @@ void	draw_sprites(t_data *data, t_wall_drawing wall,
 	soldier.distance = sqrt(pow(soldier.dis_x, 2) + pow(soldier.dis_y, 2));
 	wall.wallheight = (SQUARE_SIZE / soldier.distance)
 		* data->distProj;
-
 	ray.r = 0;
 	ray.ra = fixang(data->player_s.p_ang + 30);
 	while (ray.r < WIDTH)
-	{
-		// printf("test_x: %f\n", data->player_s.pos_x + test - WIDTH)
-		
+	{	
 		cast_ray_in_dir(data, &ray, &soldier, (1.0 / tan(degtorad(ray.ra))));
-
-		// if (ray.my == soldier.pos.y && ray.mx == soldier.pos.x)
-		// 	draw_vertical_sprite(data, &wall, &ray);
+		if (ray.my == soldier.pos.y && ray.mx == soldier.pos.x)
+			draw_vertical_sprite(data, &wall, &ray);
 		ray.ra = fixang(ray.ra - ((float)FIELD_OF_VIEW / (float)WIDTH));
 		ray.r++;
 	}
