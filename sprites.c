@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:28:39 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 22:42:52 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 22:44:30 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,9 @@ void	draw_sprites(t_data *data)
 	soldier.tmp = fixang(soldier.tmp);
 	soldier.q = data->player_s.p_ang + (FIELD_OF_VIEW / 2) - soldier.tmp;
 	if (soldier.tmp > 270 && data->player_s.p_ang < 90)
-		soldier.q = data->player_s.p_ang + (FIELD_OF_VIEW / 2) - soldier.tmp + 360;
+		soldier.q += 360;
 	if (data->player_s.p_ang > 270 && soldier.tmp < 90)
-		soldier.q = data->player_s.p_ang + (FIELD_OF_VIEW / 2) - soldier.tmp - 360;
+		soldier.q -= 360;
 	soldier.screen.x = soldier.q * (WIDTH / FIELD_OF_VIEW);
 	soldier.screen.y = (HEIGHT / 2);
 	data->wall_drawing.distproj = (WIDTH / 2)
