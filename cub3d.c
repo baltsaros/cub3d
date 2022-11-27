@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 15:06:11 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/27 16:15:22 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ int	launcher(t_data *data)
 	init_minimap(data);
 	init_player_values(data);
 	ret = load_textures(data);
+	if (ret != 0)
+		check_errors(data, ret);
+	ret = load_sprites_textures(data);
 	if (ret != 0)
 		check_errors(data, ret);
 	ret = init_img(data);

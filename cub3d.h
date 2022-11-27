@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 15:34:53 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 16:14:57 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -426,6 +426,9 @@ void	init_player_values(t_data *data);
 int		adapt_distance(t_ray_calcul *ray, int posH, int posV);
 void	fisheye_fix(t_data *data, t_ray_calcul *ray);
 void	raycast(t_data *data, t_ray_calcul ray);
+
+/* sprites.c */
+int		load_sprites_textures(t_data *data);
 
 /* vertical_wall.c */
 void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int index);
