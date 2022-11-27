@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 22:08:37 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 22:34:45 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ typedef struct s_wall_drawing
 	float	ty;
 	float	ty_step;
 	float	tx;
+	float	tx_step;
 	t_point	begin;
 	t_point	end;
 }	t_wall_drawing;
