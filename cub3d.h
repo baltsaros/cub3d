@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 22:34:45 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 23:31:19 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ enum e_errors
 {
 	ERROR_IMG_PTR	= 2,
 	ERROR_TEXT_PTR	= 3,
-	ERROR_BAD_EXT	= 4
+	ERROR_BAD_EXT	= 4,
+	ERROR_FAILED_M	= 5
 };
 
 /* Mlx events and masks for hooks */
@@ -220,6 +221,7 @@ typedef struct s_object
 	float		distance;
 	float		tmp;
 	float		q;
+	float		b;
 	t_fpoint	screen;
 }	t_object;
 
@@ -275,6 +277,8 @@ typedef struct s_data
 	t_text			sprite_3;
 	t_keyboard		keyboard;
 	int				anim;
+	int				*depth;
+	int				is_depth_allocated;
 }	t_data;
 
 /* ************************************************************************** */
@@ -447,6 +451,7 @@ void	fisheye_fix(t_data *data, t_ray_calcul *ray);
 void	raycast(t_data *data, t_ray_calcul ray);
 
 /* sprites_2.c */
+int		init_depth(t_data *data);
 
 /* sprites.c */
 int		load_sprites_textures(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:28:39 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 22:44:30 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 23:42:15 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	draw_sprite(t_data *data, t_text text, t_wall_drawing *wall, t_object *sold
 	{
 		wall->begin.y = soldier->screen.y - (wall->wallheight / 2);
 		wall->ty = 0;
-		while (wall->begin.y != wall->end.y)
+		while (wall->begin.y != wall->end.y
+			&& soldier->distance < data->depth[wall->begin.x])
 		{
 			color = get_pixel(text.img, (int)wall->ty, (int)wall->tx);
 			if (wall->begin.x >= 0 && wall->begin.x < WIDTH && wall->begin.y >= 0 && wall->begin.y < HEIGHT)
