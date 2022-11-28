@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/28 12:55:55 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 17:01:41 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	check_num(char **str, int *array, t_data *data)
 			error_exit(data, "Invalid color parameter", 1);
 		++i;
 	}
+	if (str[i])
+		error_exit(data, "Invalid color parameter", 1);
 }
 
 // retrieve floor and ceiling color parameters
