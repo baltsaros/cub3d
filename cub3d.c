@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 23:20:58 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 12:56:00 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	launcher(t_data *data)
 	ret = init_img(data);
 	if (ret != 0)
 		check_errors(data, ret);
-	init_background(data);
 	hook_manager(data);
 	return (EXIT_FAILURE);
 }

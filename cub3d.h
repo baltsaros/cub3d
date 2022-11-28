@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 23:56:33 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 12:56:50 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,6 @@ typedef struct s_data
 	int				old_x;
 	char			*s_tmp;
 	int				fd;
-	t_img			background;
 	t_map			map;
 	t_player		player_s;
 	t_minimap		minimap_s;

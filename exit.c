@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:19:11 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 23:19:19 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 12:57:30 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	free_images(t_data *data)
 		mlx_destroy_image(data->mlx, data->walls.img_ptr);
 	if (data->minimap.img_ptr != NULL)
 		mlx_destroy_image(data->mlx, data->minimap.img_ptr);
-	if (data->background.img_ptr != NULL)
-		mlx_destroy_image(data->mlx, data->background.img_ptr);
 	if (data->no_text.img.img_ptr != NULL)
 		mlx_destroy_image(data->mlx, data->no_text.img.img_ptr);
 	if (data->so_text.img.img_ptr != NULL)
