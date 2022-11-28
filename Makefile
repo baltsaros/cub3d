@@ -88,7 +88,6 @@ norm:
 clean:
 			@echo "$(C_RED_B)Deleting cub3d o-files...$(C_RESET)";
 			@make -C ./libft clean
-			@make -C $(MLX_DIR) clean
 			@$(RM) $(OBJS)
 			@$(RMF) $(OBJ_DIR)
 			@echo "$(C_RED_B)Cub3d o-files have been deleted!$(C_RESET)";
