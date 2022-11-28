@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 00:45:13 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:53:30 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,22 @@
 # define FIELD_OF_VIEW 	60
 
 /* North-South-East-West Flags */
-# define NORTH			1
-# define SOUTH			2
-# define EAST			3
-# define WEST			4
-# define ERROR_POS		100
+enum e_pos_flags
+{
+	NORTH			= 1,
+	SOUTH			= 2,
+	EAST			= 3,
+	WEST			= 4,
+	UNDEFINED		= 100
+};
+
+/* Errors flags */
+enum e_errors
+{
+	ERROR_IMG_PTR	= 2,
+	ERROR_TEXT_PTR	= 3,
+	ERROR_BAD_EXT	= 4
+};
 
 /* Mlx events and masks for hooks */
 enum e_hooks
@@ -212,6 +223,8 @@ typedef struct s_map
 	char	*c;
 	char	**f_spl;
 	char	**c_spl;
+	int		floor[3];
+	int		ceiling[3];
 	char	**map;
 	int		coord[2];
 	int		door[2];
@@ -278,6 +291,7 @@ char	*cub_strdup(const char *s, t_data *data);
 int		ft_strcmp(char *s1, char *s2);
 char	*get_next_line(int fd, t_data *data);
 int		check_charset(char c, char *charset);
+int		ft_atoi_er(const char *str, int *error);
 
 /* cub3d.c */
 void	hook_manager(t_data *data);
@@ -303,6 +317,8 @@ void	draw_square_from(t_img img, int color, t_point begin, t_point end);
 
 /* draw_wall_utils.c */
 float	dis_calcul(t_data *data, float ra, float ry, float rx);
+int		is_within_maps(int my, int mx, int height, int width);
+int		is_wall(char c);
 
 /* draw_wall.c */
 void	draw_a_wall(t_data *data, t_wall_drawing *wall,
@@ -320,6 +336,9 @@ void	error_exit(t_data *data, char *msg, int param);
 void	check_mlx(void *mlx, t_data *data);
 void	check_win(t_data *data);
 
+/* error.c */
+void    check_errors(t_data *data, int ret);
+
 /* exit.c */
 void	free_images(t_data *data);
 int		ft_exit(t_data *data);
@@ -332,7 +351,7 @@ void	rotate_fov(int keycode, t_data *data);
 int		key_hook_manager(t_data *data);
 
 /* horizontal_wall.c */
-void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int dof);
+void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int index);
 int		check_up(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_down(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
@@ -346,7 +365,7 @@ int		load_textures(t_data *data);
 
 /* init_map_utils_1.c */
 void	check_chars(char **raw, t_data *data);
-char	*find_param(char **raw, char *param, t_data *data);
+size_t	check_lines(char **map, size_t j, t_data *data);
 void	find_mapsize(char **raw, int j, t_data *data);
 void	copy_map(char **raw, t_data *data);
 void	check_map(t_map *map, t_data *data);
@@ -361,7 +380,14 @@ void	check_columns(char **map, t_data *data);
 /* init_map_utils_3.c */
 void	check_player(char **map, t_data *data);
 void	check_direction(t_data *data);
+void	check_num(char **str, int *array, t_data *data);
+void	check_colors(t_map *map, t_data *data);
 void	print_map(t_data *data, char **map);
+
+/* init_map_utils_4.c */
+char	*find_param(char **raw, char *param, t_data *data);
+char	*find_param_color(char **raw, char *param, t_data *data);
+
 
 /* init_map.c */
 void	init_vars(t_data *data);
@@ -388,17 +414,17 @@ int		mouse_hook(int x, int y, t_data *data);
 void	collisions_calculs_up_down(t_data *data, t_ray_calcul *collisions);
 void	collisions_calculs_right(t_data *data, t_ray_calcul *collisions);
 void	collisions_calculs_left(t_data *data, t_ray_calcul *collisions);
+double	set_mult(t_data *data, int dir);
 
 /* move.c */
-void	move_up(t_data *data, t_ray_calcul *collisions);
-void	move_down(t_data *data, t_ray_calcul *collisions);
-void	move_right(t_data *data, t_ray_calcul *collisions);
-void	move_left(t_data *data, t_ray_calcul *collisions);
+void	move_up(t_data *data, t_ray_calcul *collisions, double mult);
+void	move_down(t_data *data, t_ray_calcul *collisions, double mult);
+void	move_right(t_data *data, t_ray_calcul *collisions, double mult);
+void	move_left(t_data *data, t_ray_calcul *collisions, double mult);
 void	move(t_data *data);
 
 /* player.c */
 int		is_player(char c);
-void	init_player_pos(t_data *data, int height, int width);
 void	init_player_values(t_data *data);
 
 /* ray.c */
@@ -407,7 +433,7 @@ void	fisheye_fix(t_data *data, t_ray_calcul *ray);
 void	raycast(t_data *data, t_ray_calcul ray);
 
 /* vertical_wall.c */
-void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int dof);
+void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int index);
 int		check_right(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_left(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_vertical_wall(t_data *data, t_ray_calcul *ray, float Tan);

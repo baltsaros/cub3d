@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/24 13:39:04 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/25 21:58:12 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // utils for check_param //
 ///////////////////////////
 // check the map for invalid characters
+
 void	check_chars(char **raw, t_data *data)
 {
 	size_t	j;
@@ -33,29 +34,6 @@ void	check_chars(char **raw, t_data *data)
 		}
 		++j;
 	}
-}
-
-// find a certain parameter from map input
-char	*find_param(char **raw, char *param, t_data *data)
-{
-	size_t	i;
-	size_t	len;
-	char	**tmp;
-	char	*ret;
-
-	i = 0;
-	len = ft_strlen(param);
-	while (raw[i] && ft_strncmp(raw[i], param, len))
-		++i;
-	if (!raw[i])
-		return (NULL);
-	if (i > data->j)
-		data->j = i;
-	tmp = ft_split(raw[i], ' ');
-	alloc_check_big(tmp, data);
-	ret = cub_strdup(tmp[1], data);
-	cub_free(tmp);
-	return (ret);
 }
 
 // count lines in the map
@@ -77,6 +55,27 @@ void	find_mapsize(char **raw, int j, t_data *data)
 	data->map.height = h;
 }
 
+size_t	check_lines(char **map, size_t j, t_data *data)
+{
+	size_t	start;
+
+	start = 0;
+	while (map[j] && !ft_strchr(map[j], '1'))
+		++j;
+	start = j;
+	if (!map[j])
+		error_exit(data, "There is no map!", 1);
+	while (map[j] && ft_strchr(map[j], '1'))
+		++j;
+	while (map[j])
+	{
+		if (ft_strchr(map[j], '1'))
+			error_exit(data, "Empty line inside the map!", 1);
+		++j;
+	}
+	return (start);
+}
+
 // copying map form raw data
 void	copy_map(char **raw, t_data *data)
 {
@@ -85,13 +84,7 @@ void	copy_map(char **raw, t_data *data)
 	size_t	len;
 
 	data->j++;
-	j = data->j;
-	if (!raw[j])
-		error_exit(data, "There is no map!", 1);
-	while (raw[j] && !ft_strchr(raw[j], '1'))
-		++j;
-	if (!raw[j])
-		error_exit(data, "Invalid map!", 1);
+	j = check_lines(raw, data->j, data);
 	find_mapsize(raw, j, data);
 	i = 0;
 	data->map.map = cub_malloc(sizeof(char *) * (data->map.height + 1), data);

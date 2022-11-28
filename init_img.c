@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:01:28 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/22 17:21:36 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/26 00:59:50 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	init_img(t_data *data)
 			data->minimap_s.width + 16, data->minimap_s.height + 16);
 	if (!data->background.img_ptr || !data->walls.img_ptr
 		|| !data->minimap.img_ptr)
-		return (1);
+		return (ERROR_IMG_PTR);
 	data->background.addr = mlx_get_data_addr(data->background.img_ptr,
 			&data->background.bpp, &data->background.line_length,
 			&data->background.endian);
@@ -43,7 +43,7 @@ int	init_img(t_data *data)
 	data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr,
 			&data->minimap.bpp, &data->minimap.line_length,
 			&data->minimap.endian);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	is_xpm(char *str)
@@ -85,11 +85,11 @@ int	load_textures(t_data *data)
 	if (is_xpm(data->map.no) || is_xpm(data->map.so)
 		|| is_xpm(data->map.ea) || is_xpm(data->map.we)
 		|| is_xpm("./textures/door.xpm"))
-		return (1);
+		return (ERROR_BAD_EXT);
 	mlx_xpm_init(data);
 	if (!data->no_text.img.img_ptr || !data->so_text.img.img_ptr
 		|| !data->ea_text.img.img_ptr || !data->we_text.img.img_ptr)
-		return (1);
+		return (ERROR_TEXT_PTR);
 	data->no_text.img.addr = mlx_get_data_addr(data->no_text.img.img_ptr,
 			&data->no_text.img.bpp, &data->no_text.img.line_length,
 			&data->no_text.img.endian);
@@ -105,5 +105,5 @@ int	load_textures(t_data *data)
 	data->door_text.img.addr = mlx_get_data_addr(data->door_text.img.img_ptr,
 			&data->door_text.img.bpp, &data->door_text.img.line_length,
 			&data->door_text.img.endian);
-	return (0);
+	return (EXIT_SUCCESS);
 }
