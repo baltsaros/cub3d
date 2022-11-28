@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/28 15:06:09 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 15:19:11 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,9 +341,9 @@ void	init_background(t_data *data);
 int		draw_all(t_data *data);
 
 /* draw_sprites.c */
-void	draw_sprite_y(t_data *data, t_text text, t_wall_drawing *wall, t_object *soldier);
-void	draw_sprite_x(t_data *data, t_text text, t_wall_drawing *wall, t_object *soldier);
-void	init_draw_sprite(t_data *data, t_object	*soldier, t_wall_drawing *wall);
+void	draw_sprite_y(t_data *data, t_text text, t_wall_drawing *wall);
+void	draw_sprite_x(t_data *data, t_text text, t_wall_drawing *wall, t_object *obj);
+void	init_draw_sprite(t_data *data, t_object	*obj, t_wall_drawing *wall);
 
 /* draw_utils.c */
 int		create_trgb(int t, int r, int g, int b);

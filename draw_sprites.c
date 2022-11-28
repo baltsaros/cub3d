@@ -6,13 +6,13 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 23:52:04 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/28 13:28:08 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 15:19:21 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_sprite_y(t_data *data, t_text text, t_wall_drawing *wall, t_object *soldier)
+void	draw_sprite_y(t_data *data, t_text text, t_wall_drawing *wall)
 {
     int color;
     
@@ -22,7 +22,6 @@ void	draw_sprite_y(t_data *data, t_text text, t_wall_drawing *wall, t_object *so
 		wall->begin.y = 0;
 	}
     while (wall->begin.y != wall->end.y
-		&& soldier->distance < data->depth[wall->begin.x]
         && wall->begin.y <= HEIGHT)
 	{
 		color = get_pixel(text.img, (int)wall->ty, (int)wall->tx);
@@ -33,30 +32,31 @@ void	draw_sprite_y(t_data *data, t_text text, t_wall_drawing *wall, t_object *so
 	}
 }
 
-void	draw_sprite_x(t_data *data, t_text text, t_wall_drawing *wall, t_object *soldier)
+void	draw_sprite_x(t_data *data, t_text text, t_wall_drawing *wall, t_object *obj)
 {	
 	wall->tx = 0;
 	while (wall->begin.x != wall->end.x && wall->begin.x <= WIDTH)
 	{
-		wall->begin.y = soldier->screen.y - (wall->wallheight / 2);
+		wall->begin.y = obj->screen.y - (wall->wallheight / 2);
 		wall->ty = 0;
-		draw_sprite_y(data, text, wall, soldier);
+		if (obj->distance < data->depth[wall->begin.x])
+			draw_sprite_y(data, text, wall);
 		wall->begin.x++;
 		wall->tx += wall->tx_step;
 	}
 }
 
-void	init_draw_sprite(t_data *data, t_object	*soldier, t_wall_drawing *wall)
+void	init_draw_sprite(t_data *data, t_object	*obj, t_wall_drawing *wall)
 {
-	wall->end.y = soldier->screen.y + (wall->wallheight / 2);
-	wall->begin.x = soldier->screen.x - (wall->wallheight / 2);
-	wall->end.x = soldier->screen.x + (wall->wallheight / 2);
+	wall->end.y = obj->screen.y + (wall->wallheight / 2);
+	wall->begin.x = obj->screen.x - (wall->wallheight / 2);
+	wall->end.x = obj->screen.x + (wall->wallheight / 2);
 	wall->tx_step = (float)data->sprite_1.width / (float)wall->wallheight;
 	wall->ty_step = (float)data->sprite_1.height / (float)wall->wallheight;
 	if (data->anim < 30)
-		draw_sprite_x(data, data->sprite_1, wall, soldier);
+		draw_sprite_x(data, data->sprite_1, wall, obj);
 	else if (data->anim < 60)
-		draw_sprite_x(data, data->sprite_2, wall, soldier);
+		draw_sprite_x(data, data->sprite_2, wall, obj);
 	else if (data->anim < 90)
-		draw_sprite_x(data, data->sprite_3, wall, soldier);
+		draw_sprite_x(data, data->sprite_3, wall, obj);
 }
