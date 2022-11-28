@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/28 12:55:18 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 16:06:28 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,16 @@ int	ft_atoi_er(const char *str, int *error)
 		*error = 1;
 		return (0);
 	}
-	while (str[i] >= 48 && str[i] <= 57)
+	while (str[i])
 	{
 		if (str[i] < 48 || str[i] > 57)
 			*error = 1;
+		++i;
+	}
+	i = 0;
+	while (str[i]
+		&& str[i] >= 48 && str[i] <= 57)
+	{
 		n = n * 10 + str[i] - '0';
 		i++;
 		if (n > INT_MAX)
