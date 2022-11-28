@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/28 13:05:28 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 15:06:09 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,28 @@ typedef struct s_wall_drawing
 	t_point	end;
 }	t_wall_drawing;
 
+/* struct for objects */
+typedef struct s_object
+{
+	t_fpoint	fpos;
+	t_point		pos;
+	t_fpoint	fdis;
+	float		distance;
+	float		tmp;
+	float		q;
+	float		b;
+	t_fpoint	screen;
+}	t_object;
+
+/* struct for storing value for quicksort */
+typedef struct s_quicksort
+{
+	int			i;
+	int			j;
+	int			pivot;
+	t_object	tmp;
+}	t_quicksort;
+
 /* Structs for player and minimap positions */
 typedef struct s_player
 {
@@ -211,19 +233,6 @@ typedef struct s_keyboard
 	int	right;
 	int	left;
 }	t_keyboard;
-
-/* struct for objects */
-typedef struct s_object
-{
-	t_fpoint	fpos;
-	t_point		pos;
-	t_fpoint	fdis;
-	float		distance;
-	float		tmp;
-	float		q;
-	float		b;
-	t_fpoint	screen;
-}	t_object;
 
 /* Struct for map values */
 typedef struct s_map
@@ -278,6 +287,10 @@ typedef struct s_data
 	int				anim;
 	int				*depth;
 	int				is_depth_allocated;
+	int				nb_objs;
+	t_object		*objs;
+	int				is_objs_allocated;
+	t_quicksort		quick;
 }	t_data;
 
 /* ************************************************************************** */
@@ -421,6 +434,12 @@ void	check_param(t_map *map, t_data *data);
 t_map	read_param(t_data *data, char *file);
 int		init_map(t_data *data, char *file);
 
+/* init_sprites.c */
+int		init_nbr_objs(t_data *data);
+void	init_obj_pos(t_data *data);
+void    draw_sprites(t_data *data);
+int 	init_sprites(t_data *data);
+
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
 void	draw_mm_background(t_data *data, int color);
@@ -449,6 +468,10 @@ void	move(t_data *data);
 int		is_player(char c);
 void	init_player_values(t_data *data);
 
+/* quicksort.c */
+void    quicksort_2(t_data *data, t_quicksort quick, int first, int last);
+void    quicksort(t_data *data, t_quicksort quick, int first, int last);
+
 /* ray.c */
 int		adapt_distance(t_ray_calcul *ray, int posH, int posV);
 void	fisheye_fix(t_data *data, t_ray_calcul *ray);
@@ -456,9 +479,8 @@ void	raycast(t_data *data, t_ray_calcul ray);
 
 /* sprites.c */
 int		load_sprites_textures(t_data *data);
-int		init_obj_pos(t_data *data, t_object *soldier);
 int		init_depth(t_data *data);
-void	draw_sprites(t_data *data);
+void	draw_a_sprite(t_data *data, t_object obj);
 
 /* vertical_wall.c */
 void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int index);

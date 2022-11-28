@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:28:39 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/28 13:06:29 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 15:08:04 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,32 +38,6 @@ int	load_sprites_textures(t_data *data)
     return (EXIT_SUCCESS);
 }
 
-int	init_obj_pos(t_data *data, t_object *soldier)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while ((size_t)y < data->map.height)
-	{
-		x = 0;
-		while ((size_t)x < data->map.width)
-		{
-			if (data->map.map[y][x] == 'P')
-			{
-				soldier->pos.y = y;
-				soldier->pos.x = x;
-				soldier->fpos.y = (y * SQUARE_SIZE) + (SQUARE_SIZE / 2);
-				soldier->fpos.x = (x * SQUARE_SIZE) + (SQUARE_SIZE / 2);
-				return (1);
-			}
-			x++;
-		}
-		y++;
-	}
-	return (0);
-}
-
 int	init_depth(t_data *data)
 {
 	int	i;
@@ -81,30 +55,20 @@ int	init_depth(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-void	draw_sprites(t_data *data)
+void	draw_a_sprite(t_data *data, t_object obj)
 {
-	int			ret;
-	t_object	soldier;
-	
-	ret = init_obj_pos(data, &soldier);
-	if (ret)
-	{
-		soldier.fdis.x = soldier.fpos.x - data->player_s.pos_x;
-		soldier.fdis.y = soldier.fpos.y - data->player_s.pos_y;
-		soldier.distance = sqrt(pow(soldier.fdis.x, 2) + pow(soldier.fdis.y, 2));
-		soldier.tmp = (atan2(-soldier.fdis.y, soldier.fdis.x) * (180 / M_PI));
-		soldier.tmp = fixang(soldier.tmp);
-		soldier.q = data->player_s.p_ang + (FIELD_OF_VIEW / 2) - soldier.tmp;
-		if (soldier.tmp > 270 && data->player_s.p_ang < 90)
-			soldier.q += 360;
-		if (data->player_s.p_ang > 270 && soldier.tmp < 90)
-			soldier.q -= 360;
-		soldier.screen.x = soldier.q * (WIDTH / FIELD_OF_VIEW);
-		soldier.screen.y = (HEIGHT / 2);
-		data->wall_drawing.distproj = (WIDTH / 2)
-			/ tan(degtorad(FIELD_OF_VIEW / 2));
-		data->wall_drawing.wallheight = (SQUARE_SIZE / soldier.distance)
-			* data->wall_drawing.distproj;
-		init_draw_sprite(data, &soldier, &data->wall_drawing);	
-	}
+	obj.tmp = (atan2(-obj.fdis.y, obj.fdis.x) * (180 / M_PI));
+	obj.tmp = fixang(obj.tmp);
+	obj.q = data->player_s.p_ang + (FIELD_OF_VIEW / 2) - obj.tmp;
+	if (obj.tmp > 270 && data->player_s.p_ang < 90)
+		obj.q += 360;
+	if (data->player_s.p_ang > 270 && obj.tmp < 90)
+		obj.q -= 360;
+	obj.screen.x = obj.q * (WIDTH / FIELD_OF_VIEW);
+	obj.screen.y = (HEIGHT / 2);
+	data->wall_drawing.distproj = (WIDTH / 2)
+		/ tan(degtorad(FIELD_OF_VIEW / 2));
+	data->wall_drawing.wallheight = (SQUARE_SIZE / obj.distance)
+		* data->wall_drawing.distproj;
+	init_draw_sprite(data, &obj, &data->wall_drawing);	
 }

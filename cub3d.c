@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:03:00 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/28 12:56:00 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 14:26:54 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ int	launcher(t_data *data)
 	ret = init_depth(data);
 	if (ret != 0)
 		check_errors(data, ret);
+	ret = init_sprites(data);
+	if (ret != 0)
+		check_errors(data, ret);
 	ret = load_textures(data);
 	if (ret != 0)
 		check_errors(data, ret);
@@ -65,6 +68,7 @@ int	main(int argc, char *argv[])
 		error_exit(&data, "Invalid amount of arguments", 0);
 	init_img_null(&data);
 	data.is_depth_allocated = 0;
+	data.is_objs_allocated = 0;
 	init_map(&data, argv[1]);
 	ret = launcher(&data);
 	leave(&data, ret);

@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:19:11 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/28 12:57:30 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 14:27:26 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	ft_exit(t_data *data)
 	cub_free_all(data);
 	if (data->is_depth_allocated)
 		free(data->depth);
+	if (data->is_objs_allocated)
+		free(data->objs);
 	exit(EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }
@@ -60,5 +62,7 @@ void	leave(t_data *data, int ret)
 	cub_free_all(data);
 	if (data->is_depth_allocated)
 		free(data->depth);
+	if (data->is_objs_allocated)
+		free(data->objs);
 	exit(ret);
 }
