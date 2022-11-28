@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 00:50:25 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 01:01:44 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 23:22:35 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void    check_errors(t_data *data, int ret)
     {
         write(2, "Cub3d: ", 7);
         write(2, "wrong texture extension\n", 24);
+    }
+    else if (ret == ERROR_FAILED_M)
+    {
+        write(2, "Cub3d: ", 7);
+        write(2, "malloc failed\n", 14);
     }
     leave(data, EXIT_FAILURE);
 }

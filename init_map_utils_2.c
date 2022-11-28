@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/25 21:25:03 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/27 17:45:25 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int	check_wall(char c, int state)
 // check if all gapes inside a map are closed
 void	check_gap(char **map, size_t i, size_t j, t_data *data)
 {
-	if (j > 0 && map[j - 1][i] && check_charset(map[j - 1][i], "0NEWSD"))
+	if (j > 0 && map[j - 1][i] && check_charset(map[j - 1][i], "0NEWSDP"))
 		error_exit(data, "Unclosed map: gap", 1);
-	if (map[j + 1] && map[j + 1][i] && check_charset(map[j + 1][i], "0NEWSD"))
+	if (map[j + 1] && map[j + 1][i] && check_charset(map[j + 1][i], "0NEWSDP"))
 		error_exit(data, "Unclosed map: gap", 1);
-	if (i > 0 && map[j][i - 1] && check_charset(map[j][i - 1], "0NEWSD"))
+	if (i > 0 && map[j][i - 1] && check_charset(map[j][i - 1], "0NEWSDP"))
 		error_exit(data, "Unclosed map: gap", 1);
-	if (map[j][i + 1] && check_charset(map[j][i + 1], "0NEWSD"))
+	if (map[j][i + 1] && check_charset(map[j][i + 1], "0NEWSDP"))
 		error_exit(data, "Unclosed map: gap", 1);
 }
 

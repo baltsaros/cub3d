@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:01:28 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 00:59:50 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 12:58:13 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_img_null(t_data *data)
 {
-	data->background.img_ptr = NULL;
 	data->walls.img_ptr = NULL;
 	data->minimap.img_ptr = NULL;
 	data->no_text.img.img_ptr = NULL;
@@ -22,20 +21,18 @@ void	init_img_null(t_data *data)
 	data->ea_text.img.img_ptr = NULL;
 	data->we_text.img.img_ptr = NULL;
 	data->door_text.img.img_ptr = NULL;
+	data->sprite_1.img.img_ptr = NULL;
+	data->sprite_2.img.img_ptr = NULL;
+	data->sprite_3.img.img_ptr = NULL;
 }
 
 int	init_img(t_data *data)
 {
-	data->background.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->walls.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->minimap.img_ptr = mlx_new_image(data->mlx,
 			data->minimap_s.width + 16, data->minimap_s.height + 16);
-	if (!data->background.img_ptr || !data->walls.img_ptr
-		|| !data->minimap.img_ptr)
+	if (!data->walls.img_ptr || !data->minimap.img_ptr)
 		return (ERROR_IMG_PTR);
-	data->background.addr = mlx_get_data_addr(data->background.img_ptr,
-			&data->background.bpp, &data->background.line_length,
-			&data->background.endian);
 	data->walls.addr = mlx_get_data_addr(data->walls.img_ptr,
 			&data->walls.bpp, &data->walls.line_length,
 			&data->walls.endian);

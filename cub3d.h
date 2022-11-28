@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/28 16:53:30 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 17:35:42 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ enum e_errors
 {
 	ERROR_IMG_PTR	= 2,
 	ERROR_TEXT_PTR	= 3,
-	ERROR_BAD_EXT	= 4
+	ERROR_BAD_EXT	= 4,
+	ERROR_FAILED_M	= 5
 };
 
 /* Mlx events and masks for hooks */
@@ -162,6 +163,8 @@ typedef struct s_ray_calcul
 	int		ipy_sub_yo;
 	int		is_door_v;
 	int		is_door_h;
+	int		is_sprite_v;
+	int		is_sprite_h;
 }	t_ray_calcul;
 
 typedef struct s_wall_drawing
@@ -171,9 +174,32 @@ typedef struct s_wall_drawing
 	float	ty;
 	float	ty_step;
 	float	tx;
+	float	tx_step;
 	t_point	begin;
 	t_point	end;
 }	t_wall_drawing;
+
+/* struct for objects */
+typedef struct s_object
+{
+	t_fpoint	fpos;
+	t_point		pos;
+	t_fpoint	fdis;
+	float		distance;
+	float		tmp;
+	float		q;
+	float		b;
+	t_fpoint	screen;
+}	t_object;
+
+/* struct for storing value for quicksort */
+typedef struct s_quicksort
+{
+	int			i;
+	int			j;
+	int			pivot;
+	t_object	tmp;
+}	t_quicksort;
 
 /* Structs for player and minimap positions */
 typedef struct s_player
@@ -245,7 +271,6 @@ typedef struct s_data
 	int				old_x;
 	char			*s_tmp;
 	int				fd;
-	t_img			background;
 	t_map			map;
 	t_player		player_s;
 	t_minimap		minimap_s;
@@ -258,7 +283,17 @@ typedef struct s_data
 	t_text			ea_text;
 	t_text			we_text;
 	t_text			door_text;
+	t_text			sprite_1;
+	t_text			sprite_2;
+	t_text			sprite_3;
 	t_keyboard		keyboard;
+	int				anim;
+	int				*depth;
+	int				is_depth_allocated;
+	int				nb_objs;
+	t_object		*objs;
+	int				is_objs_allocated;
+	t_quicksort		quick;
 }	t_data;
 
 /* ************************************************************************** */
@@ -307,6 +342,11 @@ void	open_close_door(t_data *data, t_ray_calcul ray);
 /* draw_all.c */
 void	init_background(t_data *data);
 int		draw_all(t_data *data);
+
+/* draw_sprites.c */
+void	draw_sprite_y(t_data *data, t_text text, t_wall_drawing *wall);
+void	draw_sprite_x(t_data *data, t_text text, t_wall_drawing *wall, t_object *obj);
+void	init_draw_sprite(t_data *data, t_object	*obj, t_wall_drawing *wall);
 
 /* draw_utils.c */
 int		create_trgb(int t, int r, int g, int b);
@@ -396,6 +436,12 @@ void	check_param(t_map *map, t_data *data);
 t_map	read_param(t_data *data, char *file);
 int		init_map(t_data *data, char *file);
 
+/* init_sprites.c */
+int		init_nbr_objs(t_data *data);
+void	init_obj_pos(t_data *data);
+void    draw_sprites(t_data *data);
+int 	init_sprites(t_data *data);
+
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
 void	draw_mm_background(t_data *data, int color);
@@ -427,10 +473,19 @@ void	move(t_data *data);
 int		is_player(char c);
 void	init_player_values(t_data *data);
 
+/* quicksort.c */
+void    quicksort_2(t_data *data, t_quicksort quick, int first, int last);
+void    quicksort(t_data *data, t_quicksort quick, int first, int last);
+
 /* ray.c */
 int		adapt_distance(t_ray_calcul *ray, int posH, int posV);
 void	fisheye_fix(t_data *data, t_ray_calcul *ray);
 void	raycast(t_data *data, t_ray_calcul ray);
+
+/* sprites.c */
+int		load_sprites_textures(t_data *data);
+int		init_depth(t_data *data);
+void	draw_a_sprite(t_data *data, t_object obj);
 
 /* vertical_wall.c */
 void	calculate_vertical_distance(t_data *data, t_ray_calcul *ray, int index);

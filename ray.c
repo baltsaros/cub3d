@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:09:32 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/18 20:11:31 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/27 23:29:01 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	raycast(t_data *data, t_ray_calcul ray)
 		pos = adapt_distance(&ray, posh, posv);
 		fisheye_fix(data, &ray);
 		init_calculate_wall(data, &ray, pos);
+		data->depth[ray.r] = ray.dish;
 		ray.ra = fixang(ray.ra - ((float)FIELD_OF_VIEW / (float)WIDTH));
 		ray.r++;
 	}
