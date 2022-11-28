@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 23:52:04 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/28 00:15:20 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 13:28:08 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	draw_sprite_y(t_data *data, t_text text, t_wall_drawing *wall, t_object *so
         && wall->begin.y <= HEIGHT)
 	{
 		color = get_pixel(text.img, (int)wall->ty, (int)wall->tx);
-		if (wall->begin.x >= 0)
+		if (wall->begin.x >= 0 && color >= 0)
 			mlx_pixel_put_img(&data->walls, wall->begin.x, wall->begin.y, color);
 		wall->begin.y++;
 		wall->ty += wall->ty_step;
