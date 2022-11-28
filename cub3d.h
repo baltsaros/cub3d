@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/28 12:56:50 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/28 13:05:28 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -456,7 +456,7 @@ void	raycast(t_data *data, t_ray_calcul ray);
 
 /* sprites.c */
 int		load_sprites_textures(t_data *data);
-void	init_obj_pos(t_data *data, t_object *soldier);
+int		init_obj_pos(t_data *data, t_object *soldier);
 int		init_depth(t_data *data);
 void	draw_sprites(t_data *data);
 
