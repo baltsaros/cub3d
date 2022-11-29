@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/28 16:06:28 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:19:51 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ft_atoi_er(const char *str, int *error)
 
 	i = 0;
 	n = 0;
-	if  (!str)
+	if (!str)
 	{
 		*error = 1;
 		return (0);

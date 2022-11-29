@@ -6,13 +6,14 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:36:36 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/27 17:32:14 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:15:45 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int index)
+void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray,
+		int index)
 {
 	while ((size_t)index < data->map.height)
 	{

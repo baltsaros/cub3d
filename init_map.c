@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/26 14:51:54 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/29 15:14:56 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,6 @@ void	check_param(t_map *map, t_data *data)
 		|| !map->ea || !map->f || !map->c)
 		error_exit(data, "Invalid parameter(s)", 1);
 	check_colors(map, data);
-	// for (int i = 0; i < 3; ++i) {
-	// 	printf("floor: %d\nceiling: %d\n", data->map.floor[i], data->map.ceiling[i]);
-	// }
 	copy_map(map->raw, data);
 	check_map(map, data);
 }
