@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 23:52:04 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/28 15:44:20 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/29 14:59:36 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ void	init_draw_sprite(t_data *data, t_object	*obj, t_wall_drawing *wall)
 		draw_sprite_x(data, data->sprite_1, wall, obj);
 	else if (data->anim < 60)
 		draw_sprite_x(data, data->sprite_2, wall, obj);
-	else if (data->anim < 90)
+	else if (data->anim <= 90)
 		draw_sprite_x(data, data->sprite_3, wall, obj);
 }
