@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/29 15:42:11 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:36:47 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -457,6 +457,7 @@ char	*memcpy_offset(void *dest, const void *src, size_t n, size_t offset);
 
 /* mouse_hooks.c */
 int		mouse_hook(int x, int y, t_data *data);
+void	mouse_management(t_data *data);
 
 /* move_utils.c */
 void	collisions_calculs_up_down(t_data *data, t_ray_calcul *collisions);

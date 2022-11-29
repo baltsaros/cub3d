@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/29 16:14:43 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:36:35 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,7 @@ void	rotate_fov(int keycode, t_data *data)
 
 int	key_hook_manager(t_data *data)
 {
-	if (data->keyboard.shift)
-		mlx_mouse_show();
-	else
-	{
-		mlx_mouse_hide();
-		mlx_mouse_move(data->win, WIDTH / 2, HEIGHT / 2);
-	}
+	mouse_management(data);
 	if (data->keyboard.w || data->keyboard.a
 		|| data->keyboard.s || data->keyboard.d)
 		move(data);
