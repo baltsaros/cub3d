@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/29 15:31:06 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:42:11 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -429,6 +429,7 @@ void	print_map(t_data *data, char **map);
 /* init_map_utils_4.c */
 char	*find_param(char **raw, char *param, t_data *data);
 char	*find_param_color(char **raw, char *param, t_data *data);
+size_t	skip_wspace(char **map, size_t j, size_t i);
 
 /* init_map.c */
 void	init_vars(t_data *data);

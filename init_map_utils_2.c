@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/27 17:45:25 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:33:52 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,7 @@ void	check_rows(char **map, t_data *data)
 	closed = 1;
 	while (map[j])
 	{
-		data->i = 0;
-		while (map[j][data->i] && check_charset(map[j][data->i], " \f\n\r\t\v"))
-			++data->i;
+		data->i = skip_wspace(map, j, 0);
 		if ((map[j][data->i] && map[j][data->i] != '1')
 			|| (!map[j][data->i] && !closed))
 			error_exit(data, "Unclosed map: rows1", 1);
