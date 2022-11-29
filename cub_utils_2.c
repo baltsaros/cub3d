@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_utils_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/29 15:19:51 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:28:00 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,20 +91,18 @@ int	ft_atoi_er(const char *str, int *error)
 		*error = 1;
 		return (0);
 	}
+	i = 0;
 	while (str[i])
 	{
-		if (str[i] < 48 || str[i] > 57)
+		if (str[i] >= 48 && str[i] <= 57)
+		{
+			n = n * 10 + str[i] - '0';
+			if (n > INT_MAX)
+				*error = 1;	
+		}
+		else
 			*error = 1;
-		++i;
-	}
-	i = 0;
-	while (str[i]
-		&& str[i] >= 48 && str[i] <= 57)
-	{
-		n = n * 10 + str[i] - '0';
 		i++;
-		if (n > INT_MAX)
-			*error = 1;
 	}
 	return (n);
 }

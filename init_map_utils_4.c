@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_map_utils_4c                                  :+:      :+:    :+:   */
+/*   init_map_utils_4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/29 15:14:35 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:33:32 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,12 @@ char	*find_param_color(char **raw, char *param, t_data *data)
 		return (NULL);
 	ret = cub_strdup(raw[j] + i, data);
 	return (ret);
+}
+
+size_t	skip_wspace(char **map, size_t j, size_t i)
+{
+	while (map[j][i] && check_charset(map[j][i],
+		" \f\n\r\t\v"))
+		++i;
+	return (i);
 }
