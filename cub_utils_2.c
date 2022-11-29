@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/29 15:28:00 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/29 15:41:18 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	ft_atoi_er(const char *str, int *error)
 		{
 			n = n * 10 + str[i] - '0';
 			if (n > INT_MAX)
-				*error = 1;	
+				*error = 1;
 		}
 		else
 			*error = 1;
