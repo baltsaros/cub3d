@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/24 13:48:03 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/29 16:36:35 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	key_press(int keycode, t_data *data)
 		data->keyboard.left = 1;
 	if (keycode == SPACE)
 		open_close_door(data, data->ray_calcul);
+	if (keycode == SHIFT)
+		data->keyboard.shift = 1;
 	return (0);
 }
 
@@ -47,6 +49,8 @@ int	key_release(int keycode, t_data *data)
 		data->keyboard.right = 0;
 	if (keycode == LEFT)
 		data->keyboard.left = 0;
+	if (keycode == SHIFT)
+		data->keyboard.shift = 0;
 	return (0);
 }
 
@@ -68,32 +72,9 @@ void	rotate_fov(int keycode, t_data *data)
 	}
 }
 
-int	mouse_hook(int x, int y, t_data *data)
-{
-	int	dif;
-
-	if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
-		return (0);
-	if (!data->old_x)
-		data->old_x = x;
-	dif = abs(data->old_x - x);
-	if (WIDTH - x > data->x && dif > 5)
-	{
-		data->old_x = x;
-		rotate_fov(RIGHT, data);
-		data->x += 5;
-	}
-	else if (dif > 5)
-	{
-		data->old_x = x;
-		rotate_fov(LEFT, data);
-		data->x -= 5;
-	}
-	return (0);
-}
-
 int	key_hook_manager(t_data *data)
 {
+	mouse_management(data);
 	if (data->keyboard.w || data->keyboard.a
 		|| data->keyboard.s || data->keyboard.d)
 		move(data);
