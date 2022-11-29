@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/25 21:58:24 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/29 15:14:35 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,3 @@ char	*find_param_color(char **raw, char *param, t_data *data)
 	ret = cub_strdup(raw[j] + i, data);
 	return (ret);
 }
-

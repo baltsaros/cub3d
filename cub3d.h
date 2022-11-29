@@ -6,7 +6,7 @@
 /*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:11:16 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/28 15:19:11 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:21:46 by mthiry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,7 +342,8 @@ int		draw_all(t_data *data);
 
 /* draw_sprites.c */
 void	draw_sprite_y(t_data *data, t_text text, t_wall_drawing *wall);
-void	draw_sprite_x(t_data *data, t_text text, t_wall_drawing *wall, t_object *obj);
+void	draw_sprite_x(t_data *data, t_text text, t_wall_drawing *wall,
+			t_object *obj);
 void	init_draw_sprite(t_data *data, t_object	*obj, t_wall_drawing *wall);
 
 /* draw_utils.c */
@@ -374,7 +375,7 @@ void	check_mlx(void *mlx, t_data *data);
 void	check_win(t_data *data);
 
 /* error.c */
-void    check_errors(t_data *data, int ret);
+void	check_errors(t_data *data, int ret);
 
 /* exit.c */
 void	free_images(t_data *data);
@@ -389,7 +390,8 @@ int		mouse_hook(int x, int y, t_data *data);
 int		key_hook_manager(t_data *data);
 
 /* horizontal_wall.c */
-void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray, int index);
+void	calculate_horizontal_distance(t_data *data, t_ray_calcul *ray,
+			int index);
 int		check_up(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_down(t_data *data, t_ray_calcul *ray, float Tan);
 int		check_horizontal_wall(t_data *data, t_ray_calcul *ray, float Tan);
@@ -426,7 +428,6 @@ void	print_map(t_data *data, char **map);
 char	*find_param(char **raw, char *param, t_data *data);
 char	*find_param_color(char **raw, char *param, t_data *data);
 
-
 /* init_map.c */
 void	init_vars(t_data *data);
 void	check_extension(t_data *data, char *file);
@@ -437,8 +438,8 @@ int		init_map(t_data *data, char *file);
 /* init_sprites.c */
 int		init_nbr_objs(t_data *data);
 void	init_obj_pos(t_data *data);
-void    draw_sprites(t_data *data);
-int 	init_sprites(t_data *data);
+void	draw_sprites(t_data *data);
+int		init_sprites(t_data *data);
 
 /* minimap.c */
 void	draw_square_coord(t_data *data, int color, int x, int y);
@@ -469,8 +470,8 @@ int		is_player(char c);
 void	init_player_values(t_data *data);
 
 /* quicksort.c */
-void    quicksort_2(t_data *data, t_quicksort quick, int first, int last);
-void    quicksort(t_data *data, t_quicksort quick, int first, int last);
+void	quicksort_2(t_data *data, t_quicksort quick, int first, int last);
+void	quicksort(t_data *data, t_quicksort quick, int first, int last);
 
 /* ray.c */
 int		adapt_distance(t_ray_calcul *ray, int posH, int posV);
