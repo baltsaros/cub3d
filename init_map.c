@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/30 07:59:53 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/30 11:33:51 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	check_param(t_map *map, t_data *data)
 	map->so = find_param(map->raw, "SO", data);
 	map->we = find_param(map->raw, "WE", data);
 	map->ea = find_param(map->raw, "EA", data);
-	map->f = find_param_color(map->raw, "F", data);
-	map->c = find_param_color(map->raw, "C", data);
+	map->f = find_param(map->raw, "F", data);
+	map->c = find_param(map->raw, "C", data);
 	if (!map->no || !map->so || !map->we
 		|| !map->ea || !map->f || !map->c)
 		error_exit(data, "Invalid parameter(s)", 1);
