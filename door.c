@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 22:18:43 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/23 01:10:09 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/30 10:51:39 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,26 @@ int	is_close(t_data *data, int my, int mx)
 
 int	close_door(t_data *data, int my, int mx)
 {
-	if (data->map.map[my - 1][mx] == 'C' && is_close(data, my - 1, mx))
+	if (my - 1 >= 0 && data->map.map[my - 1][mx] == 'C'
+		&& is_close(data, my - 1, mx))
 	{
 		data->map.map[my - 1][mx] = 'D';
 		return (1);
 	}
-	if (data->map.map[my + 1][mx] == 'C' && is_close(data, my + 1, mx))
+	if (data->map.map[my + 1] && data->map.map[my + 1][mx] == 'C'
+		&& is_close(data, my + 1, mx))
 	{
 		data->map.map[my + 1][mx] = 'D';
 		return (1);
 	}
-	if (data->map.map[my][mx - 1] == 'C' && is_close(data, my, mx - 1))
+	if (mx - 1 >= 0 && data->map.map[my][mx - 1] == 'C'
+		&& is_close(data, my, mx - 1))
 	{
 		data->map.map[my][mx - 1] = 'D';
 		return (1);
 	}
-	if (data->map.map[my][mx + 1] == 'C' && is_close(data, my, mx + 1))
+	if (data->map.map[my][mx + 1] && data->map.map[my][mx + 1] == 'C'
+		&& is_close(data, my, mx + 1))
 	{
 		data->map.map[my][mx + 1] = 'D';
 		return (1);
