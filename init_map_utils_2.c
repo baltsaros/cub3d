@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:09:01 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/29 15:33:52 by abuzdin          ###   ########.fr       */
+/*   Updated: 2022/11/30 07:59:38 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	check_door(char **map, size_t i, size_t j, t_data *data)
 	wall = 0;
 	data->map.door[0] = i;
 	data->map.door[1] = j;
+	data->door = 1;
 	if (!i || !j || !map[j + 1][i] || !map[j][i + 1])
 		error_exit(data, "Incorrect door placement", 1);
 	if (map[j - 1][i] == '1')

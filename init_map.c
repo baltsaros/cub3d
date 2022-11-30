@@ -6,7 +6,7 @@
 /*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:13:40 by mthiry            #+#    #+#             */
-/*   Updated: 2022/11/29 15:14:56 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/30 07:59:53 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_vars(t_data *data)
 	data->map.height = 0;
 	data->x = WIDTH / 2;
 	data->old_x = 0;
+	data->door = 0;
 }
 
 void	check_extension(t_data *data, char *file)

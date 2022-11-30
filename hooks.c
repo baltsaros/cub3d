@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthiry <mthiry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abuzdin <abuzdin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:55:14 by abuzdin           #+#    #+#             */
-/*   Updated: 2022/11/29 16:36:35 by mthiry           ###   ########.fr       */
+/*   Updated: 2022/11/30 08:00:23 by abuzdin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	key_press(int keycode, t_data *data)
 		data->keyboard.right = 1;
 	if (keycode == LEFT)
 		data->keyboard.left = 1;
-	if (keycode == SPACE)
+	if (keycode == SPACE && data->door)
 		open_close_door(data, data->ray_calcul);
 	if (keycode == SHIFT)
 		data->keyboard.shift = 1;
